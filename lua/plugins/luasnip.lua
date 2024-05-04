@@ -1,0 +1,1 @@
+require("luasnip").config.setup({})
