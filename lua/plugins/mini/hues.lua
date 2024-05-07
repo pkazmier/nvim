@@ -12,6 +12,9 @@ M.apply_custom_highlights = function(opts)
     vim.api.nvim_set_hl(0, name, data)
   end
 
+  -- I prefer bold headlines and titles
+  hi("Title", { fg = p.accent, bg = nil, bold = true })
+
   -- I prefer italic fonts as I use fonts with beautiful italics.
   -- Some examples: Operator Mono, Berkeley Mono, PragmataPro, Radon
   hi("Comment",                    { fg = p.fg_mid2, bg = nil, italic = true })
