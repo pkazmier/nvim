@@ -85,6 +85,7 @@ nmap(L"nr",  C"ZkIndex",                                          "Refresh index
 nmap(L"ns",  C"ZkNotes { sort = { 'created' } }",                 "Search")
 nmap(L"nt",  C"ZkTags",                                           "Tags")
 nmap(L"ql",  C"lua MiniSessions.select()",                        "Load session")
+nmap(L"qq",  C"qa",                                               "Quit all")
 nmap(L"qs",  C"lua require('plugins.mini.sessions').save()",      "Save session")
 nmap(L's"',  C"Pick registers",                                   "Search registers")
 nmap(L"sB",  C"Pick buf_lines scope='all'",                       "Search all buffers")
