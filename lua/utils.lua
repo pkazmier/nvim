@@ -10,12 +10,12 @@ M.icons = {
   },
 }
 
-M.export_minihues_theme = function(dir)
+M.export_minihues_theme = function()
   local ok, theme_name = pcall(vim.fn.input, {
     prompt = "Enter name for color scheme: minihues-",
     cancelreturn = false,
   })
-  if not ok or res == false then
+  if not ok or theme_name == false then
     return nil
   end
   theme_name = "minihues-" .. theme_name
