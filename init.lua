@@ -44,7 +44,7 @@ now(load("autocmds"))
 -- Mini.nvim ================================================================
 add({ name = "mini.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
 
-now(cmd("colorscheme minihues-nord"))
+now(cmd("colorscheme minihues-green"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.notify"))
