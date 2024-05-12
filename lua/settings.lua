@@ -30,7 +30,7 @@ vim.opt.formatoptions       = "jcroqlnt"
 vim.opt.grepformat          = "%f:%l:%c:%m"
 vim.opt.grepprg             = "rg --vimgrep"
 vim.opt.inccommand          = "split"
-vim.opt.listchars           = { tab="» ", trail="·", nbsp="␣" }
+vim.opt.listchars           = { tab="  ", trail="·", nbsp="␣" }
 vim.opt.scrolloff           = 4
 vim.opt.sessionoptions      = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 vim.opt.shiftround          = true
