@@ -18,16 +18,17 @@ M.export_minihues_theme = function()
   if not ok or theme_name == false then
     return nil
   end
-  theme_name = "minihues-" .. theme_name
+  local filename = "minihues-" .. theme_name
   local p = require("mini.hues").make_palette({})
-  H.render(H.minihues_path(theme_name), H.minihues_template, theme_name, vim.inspect(H.minihues_opts(p)))
+  H.render(H.minihues_path(filename), H.minihues_template, filename, vim.inspect(H.minihues_opts(p)))
   vim.cmd("split")
-  H.render(H.wezterm_path(theme_name), H.wezterm_template, theme_name, vim.inspect(H.wezterm_opts(p)))
+  local display_name = "MiniHues - " .. theme_name
+  H.render(H.wezterm_path(filename), H.wezterm_template, display_name, vim.inspect(H.wezterm_opts(p)))
 end
 
 H.wezterm_path = function(theme_name)
   local dir = os.getenv("WEZTERM_CONFIG_DIR")
-  return string.format("%s/color-%s.lua", dir, theme_name)
+  return string.format("%s/colorschemes/%s.lua", dir, theme_name)
 end
 
 H.minihues_path = function(theme_name)
@@ -51,13 +52,14 @@ require("plugins.mini.hues").apply_custom_highlights(opts)
 H.wezterm_template = [[local M = {}
 local name = "%s"
 
-M.activate = function(config, opts)
-  config.color_scheme = name
+M.init = function()
+  return name
 end
 
-M.init = function(config, opts)
+M.activate = function(config)
   config.color_schemes = config.color_schemes or {}
   config.color_schemes[name] = %s
+  config.color_scheme = name
 end
 
 return M
