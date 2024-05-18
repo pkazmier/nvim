@@ -21,7 +21,6 @@ imap("<C-k>",      C"lua vim.lsp.buf.signature_help()",             "Signature h
 tmap("<Esc><Esc>", "<C-\\><C-n>",                                   "Exit terminal mode")
 nmap("-",          C"lua require('plugins.mini.files').bufdir()",   "File explorer (buf)")
 nmap("H",          C"lua MiniBracketed.buffer('backward')",         "Prev buffer")
-nmap("K",          C"lua vim.lsp.buf.hover()",                      "Hover documentation")
 nmap("L",          C"lua MiniBracketed.buffer('forward')",          "Next buffer")
 nmap("gD",         C"Pick lsp scope='declaration'",                 "Goto declaration")
 nmap("gd",         C"Pick lsp scope='definition'",                  "Goto definition")
@@ -35,6 +34,7 @@ nmap([[\C]],       C"lua require('reticle').toggle_cursorcolumn()", "Toggle 'cur
 nmap([[\f]],       C"FormatToggle",                                 "Toggle auto-format")
 -- Cannot use <Cmd> or mini.map will not refresh.
 nmap([[\h]],       ":let v:hlsearch = 1 - v:hlsearch<CR>",          "Toggle hlsearch")
+nmap([[\i]],       C"lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())", "Toggle inlay hints")
 
 -- Leader mappings ==========================================================
 nmap(L" ",   C"Pick files",                                       "Find files")

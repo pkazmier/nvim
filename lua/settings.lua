@@ -14,17 +14,14 @@ vim.opt.cursorline          = true
 vim.opt.confirm             = true
 vim.opt.completeopt         = "menuone,noinsert"
 vim.opt.expandtab           = true
-vim.opt.fillchars           = { foldopen="", foldclose="", fold=" ", foldsep=" ", diff="╱", eob=" " }
+vim.opt.fillchars           = { foldopen=" ", foldclose="", fold=" ", foldsep=" ", diff="╱", eob=" " }
 
--- TODO: Remove after 0.10 comes out
+-- vim.opt.foldcolumn          = "auto"
 vim.opt.foldexpr            = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel           = 99
 vim.opt.foldmethod          = "expr"
 vim.opt.foldnestmax         = 10
-
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
-end
+vim.opt.foldtext            = ""
 
 vim.opt.formatoptions       = "jcroqlnt"
 vim.opt.grepformat          = "%f:%l:%c:%m"
@@ -40,7 +37,6 @@ vim.opt.shortmess:append({ S=true, W=true, I=true, c=true, C=true })
 
 vim.opt.splitbelow          = true
 vim.opt.splitright          = true
-vim.opt.termguicolors       = true
 vim.opt.textwidth           = 78
 -- vim.opt.timeoutlen       = 300
 -- vim.opt.updatetime       = 250

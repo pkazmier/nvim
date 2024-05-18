@@ -2,9 +2,6 @@
 -- Initialization ===========================================================
 _G.Config = {}
 
--- TODO: remove with nvim 0.10
-vim.uv = vim.uv or vim.loop
-
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath("data") .. "/site/"
 local mini_path = path_package .. "pack/deps/start/mini.nvim"

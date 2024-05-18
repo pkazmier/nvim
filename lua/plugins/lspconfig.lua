@@ -6,6 +6,16 @@ for name, icon in pairs(utils.icons.diagnostics) do
   vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 end
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable()
+    end
+  end,
+})
+
 vim.diagnostic.config({
   float = { border = "single" },
   underline = true,
@@ -14,10 +24,6 @@ vim.diagnostic.config({
     spacing = 4,
     source = "if_many",
     prefix = "●",
-    -- TODO: nvim 0.10
-    -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-    -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-    -- prefix = "icons",
   },
   severity_sort = true,
   signs = {
@@ -31,7 +37,21 @@ vim.diagnostic.config({
 })
 
 local servers = {
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = false,
+          parameterNames = false,
+          rangeVariableTypes = true,
+        },
+      },
+    },
+  },
   marksman = {},
   basedpyright = {
     settings = {
