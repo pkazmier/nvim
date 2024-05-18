@@ -68,6 +68,9 @@ local servers = {
   lua_ls = {
     settings = {
       Lua = {
+        hint = {
+          enable = true,
+        },
         completion = {
           callSnippet = "Replace",
         },
