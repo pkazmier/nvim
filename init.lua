@@ -107,19 +107,10 @@ later(load("nvim-treesitter/nvim-treesitter-context", {
   setup = {},
 }))
 
-later(load("L3MON4D3/LuaSnip", {
-  add = { hooks = {
-    post_checkout = function()
-      os.execute("make install_jsregexp")
-    end,
-  } },
-}))
-
 later(load("hrsh7th/nvim-cmp", {
   init = "plugins.cmp",
   add = {
     depends = {
-      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
