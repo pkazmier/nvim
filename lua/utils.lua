@@ -22,7 +22,7 @@ M.export_minihues_theme = function()
   local p = require("mini.hues").make_palette({})
   H.render(H.minihues_path(filename), H.minihues_template, filename, vim.inspect(H.minihues_opts(p)))
   vim.cmd("split")
-  local display_name = "MiniHues - " .. theme_name
+  local display_name = "MiniHues " .. theme_name:gsub("^%l", string.upper)
   H.render(H.wezterm_path(filename), H.wezterm_template, display_name, vim.inspect(H.wezterm_opts(p)))
 end
 
