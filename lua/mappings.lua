@@ -35,6 +35,7 @@ nmap([[\f]],       C"FormatToggle",                                 "Toggle auto
 -- Cannot use <Cmd> or mini.map will not refresh.
 nmap([[\h]],       ":let v:hlsearch = 1 - v:hlsearch<CR>",          "Toggle hlsearch")
 nmap([[\i]],       C"lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())", "Toggle inlay hints")
+nmap("<C-w>m",     C"lua MiniMisc.zoom()",                          "Zoom buffer")
 
 -- Leader mappings ==========================================================
 nmap(L" ",   C"Pick files",                                       "Find files")
