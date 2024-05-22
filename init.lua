@@ -48,7 +48,7 @@ now(load("plugins.mini.notify"))
 now(load("plugins.mini.sessions"))
 now(load("plugins.mini.starter"))
 now(load("plugins.mini.statusline"))
-now(load("mini.tabline", { setup = { tabpage_section = "right" } }))
+now(load("mini.tabline", { setup = {} }))
 
 later(load("mini.align",      { setup = {} }))
 later(load("mini.animate",    { setup = {} }))
