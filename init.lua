@@ -92,7 +92,6 @@ later(load("plugins.mini.map"))
 
 later(load("windwp/nvim-autopairs",              { setup = {} }))
 later(load("tummetott/reticle.nvim",             { init = "plugins.reticle" }))
--- later(load("lewis6991/gitsigns.nvim",            { init = "plugins.gitsigns" }))
 later(load("zk-org/zk-nvim",                     { init = "plugins.zk" }))
 later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
