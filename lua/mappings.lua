@@ -10,7 +10,7 @@ end
 local imap = function (...) map("i", ...) end
 local nmap = function (...) map("n", ...) end
 local tmap = function (...) map("t", ...) end
-local xmap = function (...) map("x", ...) end
+local nxmap = function (...) map({"n", "x"}, ...) end
 
 local L = function (key) return "<leader>" .. key end
 local C = function (cmd) return "<Cmd>" .. cmd .. "<CR>" end
@@ -63,6 +63,7 @@ nmap(L"gfm", C"Pick git_files scope='modified'",                  "Find modified
 nmap(L"gfu", C"Pick git_files scope='untracked'",                 "Find untracked files")
 nmap(L"go",  C"lua MiniDiff.toggle_overlay()",                    "Toggle diff")
 nmap(L"gq",  C"lua require('plugins.mini.diff').to_qf()",         "Quickfix diffs")
+nxmap(L"gs", C"lua MiniGit.show_at_cursor()",                     "MiniGit show at cursor")
 nmap(L"mc",  C"lua MiniMap.close()",                              "Close")
 nmap(L"mf",  C"lua MiniMap.toggle_focus()",                       "Open")
 nmap(L"mr",  C"lua MiniMap.refresh()",                            "Refresh")

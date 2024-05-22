@@ -12,7 +12,8 @@ require("mini.statusline").setup({
     active = function()
       -- stylua: ignore start
       local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-      local git           = MiniStatusline.section_git({ trunc_width = 60 })
+      local git           = MiniStatusline.section_git({ trunc_width = 40 })
+      local diff          = MiniStatusline.section_diff({ trunc_width = 60 })
       local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 60 })
       local filetype      = H.section_filetype({ trunc_width = 70 })
       local location      = H.section_location({ trunc_width = 120 })
@@ -27,7 +28,7 @@ require("mini.statusline").setup({
       -- sections, etc.)
       return MiniStatusline.combine_groups({
         { hl = mode_hl,                   strings = { mode:upper() } },
-        { hl = 'MiniStatuslineDevinfo',   strings = { git } },
+        { hl = 'MiniStatuslineDevinfo',   strings = { git, diff } },
         '%<', -- Mark general truncate point
         { hl = 'MiniStatuslineDirectory', strings = { pathname } },
         '%=', -- End left alignment
