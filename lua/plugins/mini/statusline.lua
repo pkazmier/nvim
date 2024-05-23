@@ -15,6 +15,7 @@ require("mini.statusline").setup({
       local git           = MiniStatusline.section_git({ trunc_width = 40 })
       local diff          = MiniStatusline.section_diff({ trunc_width = 60 })
       local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 60 })
+      local lsp           = MiniStatusline.section_lsp({ trunc_width = 40 })
       local filetype      = H.section_filetype({ trunc_width = 70 })
       local location      = H.section_location({ trunc_width = 120 })
       local search        = H.section_searchcount({ trunc_width = 80 })
@@ -32,7 +33,7 @@ require("mini.statusline").setup({
         '%<', -- Mark general truncate point
         { hl = 'MiniStatuslineDirectory', strings = { pathname } },
         '%=', -- End left alignment
-        { hl = 'MiniStatuslineFileinfo',  strings = { filetype, diagnostics } },
+        { hl = 'MiniStatuslineFileinfo',  strings = { filetype, diagnostics, lsp } },
         { hl = mode_hl,                   strings = { search .. location } },
       })
       -- stylua: ignore end
