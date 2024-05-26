@@ -89,6 +89,7 @@ nmap(L"np",  C"ZkPriorMeetings",                                  "Prior meeting
 nmap(L"nr",  C"ZkIndex",                                          "Refresh index")
 nmap(L"ns",  C"ZkNotes { sort = { 'created' } }",                 "Search")
 nmap(L"nt",  C"ZkTags",                                           "Tags")
+nmap(L"qd",  C"lua require('plugins.mini.sessions').delete()",    "Delete session")
 nmap(L"ql",  C"lua MiniSessions.select()",                        "Load session")
 nmap(L"qq",  C"qa",                                               "Quit all")
 nmap(L"qs",  C"lua require('plugins.mini.sessions').save()",      "Save session")

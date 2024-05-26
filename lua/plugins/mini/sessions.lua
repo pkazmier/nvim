@@ -10,6 +10,13 @@ M.save = function()
   end
 end
 
+M.delete = function()
+  local res = H.get_session_from_user("Delete session: ")
+  if res ~= nil then
+    MiniSessions.delete(res, { force = true })
+  end
+end
+
 -- For autocompletion of session name
 Config._session_complete = function(arg_lead)
   return vim.tbl_filter(function(x)
