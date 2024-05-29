@@ -1,7 +1,7 @@
 require("render-markdown").setup({
   render_modes = { "n", "c", "i" },
   bullets = { "➤" },
-  headings = { " ◉ ", " ○ ", " ✸ ", " ✿ " },
+  headings = { "◉ ", "○ ", "✸ ", "✿ " },
   highlights = {
     heading = {
       backgrounds = { "CursorLine" },
