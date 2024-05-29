@@ -2,7 +2,13 @@ local hipatterns = require("mini.hipatterns")
 
 require("mini.hipatterns").setup({
   highlighters = {
+    -- Hex colors
     hex_color = hipatterns.gen_highlighter.hex_color(),
+
+    -- Conventional Commit breaking change
+    breaking = { pattern = "%w+%(?%w*%)?!:", group = "MiniHipatternsFixme" },
+
+    -- TODO/FIXME/HACK/NOTE
     fixme = { pattern = "() FIXME():", group = "MiniHipatternsFixme" },
     hack = { pattern = "() HACK():", group = "MiniHipatternsHack" },
     todo = { pattern = "() TODO():", group = "MiniHipatternsTodo" },

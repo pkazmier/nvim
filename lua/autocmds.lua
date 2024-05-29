@@ -25,3 +25,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.minianimate_disable = true
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup("kaz-enable-minihipatterns", { clear = true }),
+  pattern = { "minideps-confirm" },
+  desc = "Enable MiniHipatterns in MiniDeps confirm buffers",
+  callback = function()
+    MiniHipatterns.enable()
+  end,
+})
