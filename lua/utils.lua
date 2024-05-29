@@ -32,7 +32,7 @@ H.wezterm_path = function(theme_name)
 end
 
 H.minihues_path = function(theme_name)
-  local dir = string.format("~/.config/%s/colors", os.getenv("NVIM_APPNAME"))
+  local dir = string.format("~/.config/%s/colors", os.getenv("NVIM_APPNAME") or "nvim")
   return string.format("%s/%s.lua", dir, theme_name)
 end
 
