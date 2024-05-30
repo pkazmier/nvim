@@ -15,6 +15,9 @@ M.apply_custom_highlights = function(opts)
   -- I prefer bold headlines and titles
   hi("Title", { fg = p.accent, bg = nil, bold = true })
 
+  -- Better markdown code block compat w/ mini.hues
+  hi("KazCodeBlock", { bg = p.bg_edge })
+
   -- I prefer italic fonts as I use fonts with beautiful italics.
   -- Some examples: Operator Mono, Berkeley Mono, PragmataPro, Radon
   hi("Comment",                    { fg = p.fg_mid2, bg = nil,         italic = true })

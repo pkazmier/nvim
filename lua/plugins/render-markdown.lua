@@ -6,6 +6,6 @@ require("render-markdown").setup({
     heading = {
       backgrounds = { "CursorLine" },
     },
-    code = "Ignore",
+    code = "KazCodeBlock",
   },
 })
