@@ -1,15 +1,6 @@
 local M = {}
 local H = {}
 
-M.icons = {
-  diagnostics = {
-    Error = " ",
-    Warn = " ",
-    Hint = " ",
-    Info = " ",
-  },
-}
-
 M.export_minihues_theme = function()
   local ok, theme_name = pcall(vim.fn.input, {
     prompt = "Enter name for color scheme: minihues-",

@@ -1,10 +1,4 @@
-local utils = require("utils")
 require("neodev").setup()
-
-for name, icon in pairs(utils.icons.diagnostics) do
-  name = "DiagnosticSign" .. name
-  vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
@@ -26,14 +20,6 @@ vim.diagnostic.config({
     prefix = "●",
   },
   severity_sort = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = utils.icons.diagnostics.Error,
-      [vim.diagnostic.severity.WARN] = utils.icons.diagnostics.Warn,
-      [vim.diagnostic.severity.HINT] = utils.icons.diagnostics.Hint,
-      [vim.diagnostic.severity.INFO] = utils.icons.diagnostics.Info,
-    },
-  },
 })
 
 local servers = {
@@ -87,8 +73,17 @@ vim.list_extend(ensure_installed, {
   "isort",
   "markdownlint",
 })
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+capabilities = vim.tbl_deep_extend("force", capabilities, {
+  workspace = {
+    fileOperations = {
+      didRename = true,
+      willRename = true,
+    },
+  },
+})
 
 require("mason").setup()
 require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
