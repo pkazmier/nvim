@@ -44,7 +44,7 @@ end
 
 H.toggle_dotfiles = function()
   show_dotfiles = not show_dotfiles
-  local new_filter = H.show_dotfiles and H.filter_show or H.filter_hide
+  local new_filter = show_dotfiles and H.filter_show or H.filter_hide
   MiniFiles.refresh({ content = { filter = new_filter } })
 end
 
