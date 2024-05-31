@@ -47,7 +47,7 @@ H.isnt_normal_buffer = function()
 end
 
 H.has_no_lsp_attached = function()
-  return #vim.lsp.get_active_clients() == 0
+  return #vim.lsp.get_clients() == 0
 end
 
 H.get_filetype_icon = function()
