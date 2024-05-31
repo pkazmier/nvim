@@ -33,7 +33,7 @@ M.bufdir = function()
   MiniFiles.open(vim.api.nvim_buf_get_name(0), true)
 end
 
-local show_dotfiles = true
+H.show_dotfiles = true
 H.filter_show = function(_)
   return true
 end
@@ -43,7 +43,7 @@ H.filter_hide = function(fs_entry)
 end
 
 H.toggle_dotfiles = function()
-  show_dotfiles = not show_dotfiles
+  H.show_dotfiles = not H.show_dotfiles
   local new_filter = H.show_dotfiles and H.filter_show or H.filter_hide
   MiniFiles.refresh({ content = { filter = new_filter } })
 end
