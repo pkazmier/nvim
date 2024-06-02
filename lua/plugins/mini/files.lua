@@ -28,7 +28,8 @@ M.cwd = function()
 end
 
 M.bufdir = function()
-  MiniFiles.open(vim.api.nvim_buf_get_name(0), true)
+  local path = vim.bo.buftype ~= "nofile" and vim.api.nvim_buf_get_name(0) or nil
+  MiniFiles.open(path, true)
 end
 
 H.show_dotfiles = true

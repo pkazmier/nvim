@@ -2,15 +2,19 @@ local H = {}
 local starter = require("mini.starter")
 
 starter.setup({
+  -- Default values with exception of '-' as I use it to open mini.files.
+  query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_.",
+
   -- stylua: ignore
   items = {
     starter.sections.sessions(5, true),
-    starter.sections.recent_files(5, false, false),
+    starter.sections.recent_files(3, false, false),
     {
-      { name = "File explorer",   action = "lua MiniFiles.open()", section = "Builtin actions"},
-      { name = "Visited files",   action = "Pick visit_paths",     section = "Builtin actions"},
-      { name = "Edit new buffer", action = "enew",                 section = "Builtin actions"},
-      { name = "Quit Neovim",     action = "qall",                 section = "Builtin actions"},
+      { name = "Mason",         action = "Mason",            section = "Updaters"},
+      { name = "Update deps",   action = "DepsUpdate",       section = "Updaters"},
+      { name = "New buffer",    action = "enew",             section = "Builtin actions"},
+      { name = "Visited files", action = "Pick visit_paths", section = "Builtin actions"},
+      { name = "Quit Neovim",   action = "qall",             section = "Builtin actions"},
     },
   },
 
