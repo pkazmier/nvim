@@ -31,10 +31,12 @@ starter.setup({
     return banner .. H.pad(msg, n)
   end,
 
-  footer = function()
-    local ok, quote = pcall(H.fortune)
-    return ok and quote or nil
-  end,
+  -- Fortune slows startup by about 10ms ... ugh
+  -- footer = function()
+  --   local ok, quote = pcall(H.fortune)
+  --   return ok and quote or nil
+  -- end,
+  footer = "",
 })
 
 H.pad = function(str, n)

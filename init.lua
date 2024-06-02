@@ -44,11 +44,13 @@ add({ name = "mini.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
 now(cmd("colorscheme minihues-purple"))
 
 now(load("plugins.mini.basics"))
-now(load("plugins.mini.notify"))
 now(load("plugins.mini.sessions"))
 now(load("plugins.mini.starter"))
-now(load("plugins.mini.statusline"))
-now(load("mini.tabline", { setup = {} }))
+
+-- Testing if these three can be loaded later
+later(load("plugins.mini.notify"))
+later(load("plugins.mini.statusline"))
+later(load("mini.tabline", { setup = {} }))
 
 later(load("mini.align",      { setup = {} }))
 later(load("mini.animate",    { setup = {} }))
