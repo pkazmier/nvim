@@ -8,6 +8,7 @@ vim.g.have_nerd_font = true
 
 -- Option settings ==========================================================
 
+vim.opt.breakindentopt      = "list:-1"
 vim.opt.clipboard           = "unnamedplus"
 vim.opt.conceallevel        = 2
 vim.opt.cursorline          = true
