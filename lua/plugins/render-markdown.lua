@@ -6,6 +6,7 @@ require("render-markdown").setup({
     heading = {
       backgrounds = { "CursorLine" },
     },
+    bullet = "@markup.list",
     code = "KazCodeBlock",
   },
 })
