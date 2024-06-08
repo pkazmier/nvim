@@ -1,10 +1,19 @@
 local cmp = require("cmp")
 
+local winopts = {
+  border = "single",
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+}
+
 cmp.setup({
   snippet = {
     expand = function(args)
       vim.snippet.expand(args.body)
     end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(winopts),
+    documentation = cmp.config.window.bordered(winopts),
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-n>"] = cmp.mapping.select_next_item(),

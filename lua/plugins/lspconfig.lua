@@ -74,6 +74,11 @@ vim.list_extend(ensure_installed, {
   "markdownlint",
 })
 
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+}
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 capabilities = vim.tbl_deep_extend("force", capabilities, {
@@ -91,6 +96,7 @@ require("mason-lspconfig").setup({
   handlers = {
     function(server_name)
       local server = servers[server_name] or {}
+      server.handlers = vim.tbl_deep_extend("force", {}, handlers, server.handlers or {})
       server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
       require("lspconfig")[server_name].setup(server)
     end,
