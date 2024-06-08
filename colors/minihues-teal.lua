@@ -1,7 +1,7 @@
 local hues = require("mini.hues")
 local opts = {
-  background = "#172331",
-  foreground = "#c2c7cd",
+  background = "#12252e",
+  foreground = "#c0c8cc",
   accent = "azure",
 }
 hues.setup(opts)
