@@ -1,6 +1,6 @@
 require("conform").setup({
   notify_on_error = true,
-  format_on_save = function(bufnr)
+  format_after_save = function(bufnr)
     if vim.g.disable_autoformat then
       return
     end
@@ -20,7 +20,7 @@ require("conform").setup({
   },
 })
 
-vim.api.nvim_create_user_command("FormatToggle", function(args)
+vim.api.nvim_create_user_command("FormatToggle", function(_)
   vim.g.disable_autoformat = not vim.g.disable_autoformat
   local state = vim.g.disable_autoformat and "disabled" or "enabled"
   vim.notify("Auto-save " .. state)
