@@ -33,9 +33,13 @@ vim.api.nvim_create_autocmd({ "User" }, {
   group = vim.api.nvim_create_augroup("minipick-post-hooks", { clear = true }),
   desc = "Invoke post_hook for specific picker based on source.name.",
   callback = function(...)
-    local opts = MiniPick.get_picker_opts() or {}
-    local post_hook = hooks.post_hooks[opts.source.name] or function(...) end
-    post_hook(...)
+    local opts = MiniPick.get_picker_opts()
+    if opts then
+      local post_hook = hooks.post_hooks[opts.source.name] or function(...) end
+      post_hook(...)
+    else
+      vim.notify("MiniPick.get_picker_opts() returned nil")
+    end
   end,
 })
 
