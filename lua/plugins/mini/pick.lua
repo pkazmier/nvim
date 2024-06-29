@@ -58,7 +58,9 @@ hooks.pre_hooks.Colorschemes = function()
 end
 
 hooks.post_hooks.Colorschemes = function()
-  vim.cmd("colorscheme " .. selected_colorscheme)
+  vim.schedule(function()
+    vim.cmd("colorscheme " .. selected_colorscheme)
+  end)
 end
 
 MiniPick.registry.colorschemes = function()
