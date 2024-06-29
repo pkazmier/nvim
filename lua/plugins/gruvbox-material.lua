@@ -10,6 +10,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     local set_hl  = vim.fn["gruvbox_material#highlight"]
 
     set_hl("MiniPickPrompt",                 palette.blue,   config.float_style == "dim" and palette.bg_dim or palette.bg3)
+    set_hl("MiniFilesFile",                  palette.fg1,    palette.none)
     set_hl("MiniTablineCurrent",             palette.blue,   palette.bg3,            "bold")
     set_hl("MiniTablineHidden",              palette.grey2,  palette.bg3)
     set_hl("MiniTablineModifiedCurrent",     palette.bg2,    palette.blue,           "bold")
