@@ -41,7 +41,8 @@ now(load("autocmds"))
 -- Mini.nvim ================================================================
 add({ name = "mini.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
 
-now(cmd("colorscheme minihues-purple"))
+now(load("sainnhe/gruvbox-material", { init = "plugins.gruvbox-material" }))
+now(cmd("colorscheme gruvbox-material"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.sessions"))
