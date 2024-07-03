@@ -39,12 +39,13 @@ now(load("mappings"))
 now(load("autocmds"))
 
 -- Mini.nvim ================================================================
-add({ name = "mini.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
+add({ name = "mini.nvim" })
 
 now(load("sainnhe/gruvbox-material", { init = "plugins.gruvbox-material" }))
 now(cmd("colorscheme gruvbox-material"))
 
 now(load("plugins.mini.basics"))
+now(load("plugins.mini.icons"))
 now(load("plugins.mini.sessions"))
 now(load("plugins.mini.starter"))
 
