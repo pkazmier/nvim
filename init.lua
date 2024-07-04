@@ -40,9 +40,7 @@ now(load("autocmds"))
 
 -- Mini.nvim ================================================================
 add({ name = "mini.nvim" })
-
-now(load("sainnhe/gruvbox-material", { init = "plugins.gruvbox-material" }))
-now(cmd("colorscheme gruvbox-material"))
+now(cmd("colorscheme minihues-lavender"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.icons"))
@@ -100,6 +98,7 @@ later(load("zk-org/zk-nvim",                     { init = "plugins.zk" }))
 later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
 later(load("MeanderingProgrammer/markdown.nvim", { init = "plugins.render-markdown"}))
+later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
 
 later(load("nvim-treesitter/nvim-treesitter", {
   init = "plugins.treesitter",
