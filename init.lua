@@ -110,6 +110,22 @@ later(load("nvim-treesitter/nvim-treesitter-context", {
   setup = {},
 }))
 
+local build_codesnap = function(args)
+  vim.system({ "make", "-C", args.path }, { text = true }, function(r)
+    if r.stdout ~= "" then vim.notify(r.stdout, vim.log.levels.INFO) end
+    if r.stderr ~= "" then vim.notify(r.stderr, vim.log.levels.ERROR) end
+  end)
+end
+later(load("mistricky/codesnap.nvim", {
+  init = "plugins.codesnap",
+  add = {
+    hooks = {
+      post_install = build_codesnap,
+      post_checkout = build_codesnap,
+    },
+  },
+}))
+
 later(load("hrsh7th/nvim-cmp", {
   init = "plugins.cmp",
   add = {
