@@ -97,7 +97,7 @@ later(load("tummetott/reticle.nvim",             { init = "plugins.reticle" }))
 later(load("zk-org/zk-nvim",                     { init = "plugins.zk" }))
 later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
-later(load("MeanderingProgrammer/markdown.nvim", { init = "plugins.render-markdown"}))
+later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview"}))
 later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
 
 later(load("nvim-treesitter/nvim-treesitter", {
