@@ -2,8 +2,104 @@ require("markview").setup({
   modes = { "n", "i" },
   highlight_groups = {
     {
+      group_name = "red",
+      value = { bg = "#453244", fg = "#f38ba8" },
+    },
+    {
+      group_name = "red_fg",
+      value = { fg = "#f38ba8" },
+    },
+
+    {
+      group_name = "orange",
+      value = { bg = "#46393E", fg = "#fab387" },
+    },
+    {
+      group_name = "orange_fg",
+      value = { fg = "#fab387" },
+    },
+
+    {
+      group_name = "yellow",
+      value = { bg = "#464245", fg = "#f9e2af" },
+    },
+    {
+      group_name = "yellow_fg",
+      value = { fg = "#f9e2af" },
+    },
+
+    {
+      group_name = "green",
+      value = { bg = "#374243", fg = "#a6e3a1" },
+    },
+    {
+      group_name = "green_fg",
+      value = { fg = "#a6e3a1" },
+    },
+
+    {
+      group_name = "blue",
+      value = { bg = "#2E3D51", fg = "#74c7ec" },
+    },
+    {
+      group_name = "blue_fg",
+      value = { fg = "#74c7ec" },
+    },
+
+    {
+      group_name = "mauve",
+      value = { bg = "#393B54", fg = "#b4befe" },
+    },
+    {
+      type = "normal",
+      group_name = "mauve_fg",
+      value = { fg = "#b4befe" },
+    },
+    {
+      group_name = "grey",
+      value = { bg = "#7E839A", fg = "#313244" },
+    },
+    {
+      group_name = "grey_fg",
+      value = { fg = "#7E839A" },
+    },
+
+    {
       group_name = "dark",
       value = { link = "KazCodeBlock" },
+    },
+    {
+      group_name = "dark_2",
+      value = { bg = "#303030", fg = "#B4BEFE" },
+    },
+
+    {
+      group_name = "gradient_0",
+      value = { fg = "#6583b6" },
+    },
+    {
+      group_name = "gradient_1",
+      value = { fg = "#637dac" },
+    },
+    {
+      group_name = "gradient_2",
+      value = { fg = "#6177a2" },
+    },
+    {
+      group_name = "gradient_3",
+      value = { fg = "#5f7198" },
+    },
+    {
+      group_name = "gradient_4",
+      value = { fg = "#5d6c8e" },
+    },
+    {
+      group_name = "gradient_5",
+      value = { fg = "#5b6684" },
+    },
+    {
+      group_name = "gradient_6",
+      value = { fg = "#59607a" },
     },
     {
       group_name = "decorated_h1",
