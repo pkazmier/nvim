@@ -1,9 +1,4 @@
-require("mini.indentscope").setup({
-  -- symbol = "│",
-  options = {
-    try_as_border = true,
-  },
-})
+require("mini.indentscope").setup({})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
