@@ -99,6 +99,9 @@ later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
 later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview"}))
 later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
+later(load("sainnhe/everforest",                 { init = "plugins.everforest" }))
+later(load("sainnhe/edge",                       { init = "plugins.edge" }))
+later(load("sainnhe/sonokai",                    { init = "plugins.sonokai" }))
 
 later(load("nvim-treesitter/nvim-treesitter", {
   init = "plugins.treesitter",
