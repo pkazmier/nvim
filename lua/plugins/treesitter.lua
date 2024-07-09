@@ -15,6 +15,7 @@ require("nvim-treesitter.configs").setup({
     -- highlighting and disabled languages for indent.
     additional_vim_regex_highlighting = { "ruby" },
   },
+  textobjects = { enable = false },
   indent = {
     enable = true,
     disable = { "ruby", "markdown" },
