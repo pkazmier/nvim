@@ -1,5 +1,5 @@
 require("mini.jump2d").setup({
-  labels = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  labels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
   view = {
     dim = true,
     n_steps_ahead = 2,
