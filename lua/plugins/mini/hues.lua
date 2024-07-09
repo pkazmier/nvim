@@ -38,6 +38,9 @@ M.apply_custom_highlights = function(opts)
   hi("MiniHipatternsTodoBody",   { fg = p.blue,   bg = p.bg })
   hi("MiniHipatternsTodoColon",  { bg = p.blue,   fg = p.blue,   bold = true })
 
+  -- Bold matches in MiniPick as well.
+  hi("MiniPickMatchRanges",      { bg = nil, fg = p.cyan, bold = true})
+
   -- Highlight patterns for deemphasizing the directory name, so the
   -- filename is more prominent. Visually, this makes it faster to
   -- identify the name of the file.
