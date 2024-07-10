@@ -10,8 +10,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     local palette = vim.fn['everforest#get_palette'](config.background, config.colors_override)
     local set_hl  = vim.fn['everforest#highlight']
 
-    set_hl("KazCodeBlock",                   palette.none,   config.float_style == "dim" and palette.bg_dim or palette.bg3)
-    set_hl("MiniPickPrompt",                 palette.blue,   config.float_style == "dim" and palette.bg_dim or palette.bg3)
+    set_hl("KazCodeBlock",                   palette.none,   config.float_style == "dim" and palette.bg_dim or palette.bg2)
+    set_hl("MiniPickPrompt",                 palette.blue,   config.float_style == "dim" and palette.bg_dim or palette.bg2)
     set_hl("MiniPickMatchRanges",            palette.green,  palette.none,   "bold")
     set_hl("MiniFilesFile",                  palette.fg,     palette.none)
     set_hl("MiniTablineFill",                palette.none,   palette.bg1)

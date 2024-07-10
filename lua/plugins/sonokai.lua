@@ -1,4 +1,4 @@
-vim.g.sonokai_float_style = "dim"
+-- vim.g.sonokai_float_style = "dim"
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = vim.api.nvim_create_augroup("custom_highlights_sonokai", {}),
@@ -9,8 +9,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     local palette = vim.fn['sonokai#get_palette'](config.style, config.colors_override)
     local set_hl  = vim.fn['sonokai#highlight']
 
-    set_hl("KazCodeBlock",                   palette.none,     config.float_style == "dim" and palette.bg_dim or palette.bg3)
-    set_hl("MiniPickPrompt",                 palette.blue,     config.float_style == "dim" and palette.bg_dim or palette.bg3)
+    set_hl("KazCodeBlock",                   palette.none,     config.float_style == "dim" and palette.bg_dim or palette.bg2)
+    set_hl("MiniPickPrompt",                 palette.blue,     config.float_style == "dim" and palette.bg_dim or palette.bg2)
     set_hl("MiniPickMatchRanges",            palette.green,    palette.none,   "bold")
     set_hl("MiniFilesFile",                  palette.fg,       palette.none)
     set_hl("MiniTablineCurrent",             palette.blue,     palette.bg0,    "bold")
