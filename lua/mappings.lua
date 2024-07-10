@@ -10,6 +10,7 @@ end
 local imap = function (...) map("i", ...) end
 local nmap = function (...) map("n", ...) end
 local tmap = function (...) map("t", ...) end
+local nimap = function (...) map({"n", "i"}, ...) end
 local nxmap = function (...) map({"n", "x"}, ...) end
 
 local L = function (key) return "<leader>" .. key end
@@ -18,6 +19,7 @@ local C = function (cmd) return "<Cmd>" .. cmd .. "<CR>" end
 -- Basic mappings ===========================================================
 imap("jk",         "<esc>",                                         "Exit insert mode", { silent = true })
 imap("<C-k>",      C"lua vim.lsp.buf.signature_help()",             "Signature help")
+nimap("<A-Space>", C"normal ciw ",                                  "Just one space")
 tmap("<Esc><Esc>", "<C-\\><C-n>",                                   "Exit terminal mode")
 nmap("-",          C"lua require('plugins.mini.files').bufdir()",   "File explorer (buf)")
 nmap("H",          C"lua MiniBracketed.buffer('backward')",         "Prev buffer")
