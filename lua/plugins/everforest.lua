@@ -11,9 +11,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     local set_hl  = vim.fn['everforest#highlight']
 
     set_hl("KazCodeBlock",                   palette.none,   config.float_style == "dim" and palette.bg_dim or palette.bg2)
-    set_hl("MiniPickPrompt",                 palette.blue,   config.float_style == "dim" and palette.bg_dim or palette.bg2)
     set_hl("MiniPickMatchRanges",            palette.green,  palette.none,   "bold")
-    set_hl("MiniFilesFile",                  palette.fg,     palette.none)
     set_hl("MiniTablineFill",                palette.none,   palette.bg1)
     set_hl("MiniTablineCurrent",             palette.blue,   palette.bg0,    "bold")
     set_hl("MiniTablineHidden",              palette.grey2,  palette.bg2)
