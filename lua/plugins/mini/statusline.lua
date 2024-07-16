@@ -157,5 +157,6 @@ H.section_pathname = function(args)
   elseif args.filename_hl then
     file_hl = "%#" .. args.filename_hl .. "#"
   end
-  return dir .. file_hl .. file
+  local modified = vim.bo.modified and " [+]" or ""
+  return dir .. file_hl .. file .. modified
 end
