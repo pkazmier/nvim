@@ -2,19 +2,35 @@ require("catppuccin").setup({
   highlight_overrides = {
     all = function(colors)
       local overrides = {
-        CursorLineNr = { fg = colors.blue, style = { "bold" } },
-        Search = { bg = colors.mauve, fg = colors.base },
+        Headline = { style = { "bold" } },
+      }
+      for _, hl in ipairs({ "Headline", "rainbow" }) do
+        for i, c in ipairs({ "blue", "mauve", "teal", "green", "peach", "flamingo" }) do
+          overrides[hl .. i] = { fg = colors[c], style = { "bold" } }
+        end
+      end
+      return overrides
+    end,
+    -- This is a comment and for the love of ...
+    macchiato = function(colors)
+      local overrides = {
         CurSearch = { bg = colors.peach },
+        CursorLineNr = { fg = colors.blue, style = { "bold" } },
         FloatTitle = { fg = colors.mauve },
         Headline = { style = { "bold" } },
-        MsgArea = { fg = colors.overlay1 },
         IncSearch = { bg = colors.peach },
+        MsgArea = { fg = colors.overlay1 },
+        Search = { bg = colors.mauve, fg = colors.base },
+        TreesitterContextBottom = { sp = colors.overlay1, style = { "underline" } },
+        WinSeparator = { fg = colors.surface1, style = { "bold" } },
+
+        -- Mini customizations
         MiniClueDescGroup = { fg = colors.pink },
         MiniClueDescSingle = { fg = colors.sapphire },
         MiniClueNextKey = { fg = colors.text, style = { "bold" } },
 
-        MiniFilesFile = { fg = colors.overlay2 },
         MiniFilesCursorLine = { fg = colors.text, bg = "#171721", style = { "bold" } },
+        MiniFilesFile = { fg = colors.overlay2 },
         MiniFilesTitleFocused = { fg = colors.peach, style = { "bold" } },
 
         MiniIndentscopeSymbol = { fg = colors.sapphire },
@@ -25,23 +41,23 @@ require("catppuccin").setup({
 
         MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
+        MiniPickBorderText = { fg = colors.blue },
         MiniPickMatchCurrent = { fg = colors.text, bg = "#171721", style = { "bold" } },
         MiniPickMatchRanges = { fg = colors.text, style = { "bold" } },
         MiniPickNormal = { fg = colors.overlay2 },
         MiniPickPrompt = { fg = colors.mauve },
-        MiniPickBorderText = { fg = colors.blue },
 
-        MiniStarterSection = { fg = colors.mauve, style = { "bold" } },
-        MiniStarterItem = { fg = colors.overlay2, bg = nil },
         MiniStarterInactive = { fg = colors.overlay0, style = {} },
+        MiniStarterItem = { fg = colors.overlay2, bg = nil },
         MiniStarterItemBullet = { fg = colors.surface2 },
         MiniStarterItemPrefix = { fg = colors.text },
         MiniStarterQuery = { fg = colors.text, style = { "bold" } },
+        MiniStarterSection = { fg = colors.mauve, style = { "bold" } },
 
-        MiniStatuslineInactive = { fg = colors.overlay1, bg = colors.surface0 },
         MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
         MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
         MiniStatuslineFilenameModified = { fg = colors.blue, bg = colors.surface0, style = { "bold" } },
+        MiniStatuslineInactive = { fg = colors.overlay1, bg = colors.surface0 },
 
         MiniSurround = { fg = nil, bg = colors.yellow },
 
@@ -53,20 +69,7 @@ require("catppuccin").setup({
         MiniTablineModifiedVisible = { fg = colors.base, bg = colors.subtext0, style = { "bold" } },
         MiniTablineTabpagesection = { fg = colors.base, bg = colors.mauve, style = { "bold" } },
         MiniTablineVisible = { fg = colors.overlay1, bg = colors.surface0, style = { "bold" } },
-
-        WinSeparator = { fg = colors.surface1, style = { "bold" } },
-        TreesitterContextBottom = { sp = colors.overlay1, style = { "underline" } },
       }
-      for _, hl in ipairs({ "Headline", "rainbow" }) do
-        for i, c in ipairs({ "blue", "mauve", "teal", "green", "peach", "flamingo" }) do
-          overrides[hl .. i] = { fg = colors[c], style = { "bold" } }
-        end
-      end
-      return overrides
-    end,
-    -- This is a comment and for the love of ...
-    macchiato = function(colors)
-      local overrides = {}
       for _, hl in ipairs({ "Headline", "rainbow" }) do
         for i, c in ipairs({ "blue", "pink", "lavender", "green", "peach", "flamingo" }) do
           overrides[hl .. i] = { fg = colors[c], style = { "bold" } }
