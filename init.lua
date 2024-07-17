@@ -108,7 +108,7 @@ later(load("nvim-treesitter/nvim-treesitter", {
   init = "plugins.treesitter",
   add = { hooks = { post_checkout = cmd("TSUpdate") } },
 }))
-later(function() add("nvim-treesitter-textobjects") end)
+later(function() add("nvim-treesitter/nvim-treesitter-textobjects") end)
 
 later(load("nvim-treesitter/nvim-treesitter-context", {
   init = "treesitter-context",
