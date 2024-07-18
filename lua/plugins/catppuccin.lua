@@ -24,6 +24,9 @@ require("catppuccin").setup({
         TreesitterContextBottom = { sp = colors.overlay1, style = { "underline" } },
         WinSeparator = { fg = colors.surface1, style = { "bold" } },
 
+        -- Better markdown code block compat w/ mini.hues
+        KazCodeBlock = { bg = colors.crust },
+
         -- Mini customizations
         MiniClueDescGroup = { fg = colors.pink },
         MiniClueDescSingle = { fg = colors.sapphire },
@@ -32,6 +35,17 @@ require("catppuccin").setup({
         MiniFilesCursorLine = { fg = colors.text, bg = "#171721", style = { "bold" } },
         MiniFilesFile = { fg = colors.overlay2 },
         MiniFilesTitleFocused = { fg = colors.peach, style = { "bold" } },
+
+        -- Highlight patterns for highlighting the whole line and hiding colon.
+        -- See https://github.com/echasnovski/mini.nvim/discussions/783
+        MiniHipatternsFixmeBody = { fg = colors.red, bg = colors.base },
+        MiniHipatternsFixmeColon = { bg = colors.red, fg = colors.red, style = { "bold" } },
+        MiniHipatternsHackBody = { fg = colors.yellow, bg = colors.base },
+        MiniHipatternsHackColon = { bg = colors.yellow, fg = colors.yellow, style = { "bold" } },
+        MiniHipatternsNoteBody = { fg = colors.sky, bg = colors.base },
+        MiniHipatternsNoteColon = { bg = colors.sky, fg = colors.sky, style = { "bold" } },
+        MiniHipatternsTodoBody = { fg = colors.teal, bg = colors.base },
+        MiniHipatternsTodoColon = { bg = colors.teal, fg = colors.teal, style = { "bold" } },
 
         MiniIndentscopeSymbol = { fg = colors.sapphire },
 
