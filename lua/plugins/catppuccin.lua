@@ -49,6 +49,7 @@ require("catppuccin").setup({
 
         MiniIndentscopeSymbol = { fg = colors.sapphire },
 
+        MiniJump = { fg = colors.mantle, bg = colors.pink },
         MiniJump2dSpot = { fg = colors.peach },
         MiniJump2dSpotAhead = { fg = colors.mauve },
         MiniJump2dSpotUnique = { fg = colors.peach },
