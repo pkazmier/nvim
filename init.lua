@@ -40,7 +40,7 @@ now(load("autocmds"))
 
 -- Mini.nvim ================================================================
 add({ name = "mini.nvim" })
-now(load("catppuccin/nvim", { init = "plugins.catppuccin" }))
+now(load("catppuccin/nvim", { add = { name = "catppuccin" }, init = "plugins.catppuccin" }))
 now(cmd("colorscheme catppuccin-macchiato"))
 
 now(load("plugins.mini.basics"))
