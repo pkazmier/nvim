@@ -19,8 +19,8 @@ require("conform").setup({
     -- Conform can also run multiple formatters sequentially
     python = { "isort", "black" }, -- ruff doesn't support sort on format ... sigh
     -- Run *until* a formatter is found.
-    markdown = { { "prettierd", "prettier" } },
-    javascript = { { "prettierd", "prettier" } },
+    markdown = { "prettierd" },
+    javascript = { "prettierd" },
   },
 })
 
