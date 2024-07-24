@@ -32,7 +32,7 @@ require("catppuccin").setup({
         MiniClueDescSingle = { fg = colors.sapphire },
         MiniClueNextKey = { fg = colors.text, style = { "bold" } },
 
-        MiniFilesCursorLine = { fg = colors.text, bg = "#171721", style = { "bold" } },
+        MiniFilesCursorLine = { fg = nil, bg = colors.surface1, style = { "bold" } },
         MiniFilesFile = { fg = colors.overlay2 },
         MiniFilesTitleFocused = { fg = colors.peach, style = { "bold" } },
 
@@ -57,7 +57,7 @@ require("catppuccin").setup({
         MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
         MiniPickBorderText = { fg = colors.blue },
-        MiniPickMatchCurrent = { fg = colors.text, bg = "#171721", style = { "bold" } },
+        MiniPickMatchCurrent = { fg = nil, bg = colors.surface1, style = { "bold" } },
         MiniPickMatchRanges = { fg = colors.text, style = { "bold" } },
         MiniPickNormal = { fg = colors.overlay2 },
         MiniPickPrompt = { fg = colors.mauve },
