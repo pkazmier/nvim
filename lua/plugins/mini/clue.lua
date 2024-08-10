@@ -17,9 +17,9 @@ clue.setup({
     { mode = "n", keys = "g" },
     { mode = "x", keys = "g" },
 
-    -- `s` key
-    { mode = "n", keys = "s" },
-    { mode = "x", keys = "s" },
+    -- `S` key
+    { mode = "n", keys = "S" },
+    { mode = "x", keys = "S" },
 
     -- `[]` keys
     { mode = "n", keys = "[" },

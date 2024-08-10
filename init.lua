@@ -65,7 +65,6 @@ later(load("mini.jump",       { setup = {} }))
 later(load("mini.move",       { setup = {} }))
 later(load("mini.operators",  { setup = {} }))
 later(load("mini.splitjoin",  { setup = {} }))
-later(load("mini.surround",   { setup = {} }))
 later(load("mini.trailspace", { setup = {} }))
 later(load("mini.visits",     { setup = {} }))
 
@@ -77,9 +76,10 @@ later(load("plugins.mini.git"))
 later(load("plugins.mini.hipatterns"))
 later(load("plugins.mini.indentscope"))
 later(load("plugins.mini.jump2d"))
+later(load("plugins.mini.map"))
 later(load("plugins.mini.misc"))
 later(load("plugins.mini.pick"))
-later(load("plugins.mini.map"))
+later(load("plugins.mini.surround"))
 
 -- Mini.completion is too laggy due to the synchronous fallback. And, it
 -- doesn't support the Zk LSP server.
@@ -103,6 +103,7 @@ later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-mater
 later(load("sainnhe/everforest",                 { init = "plugins.everforest" }))
 later(load("sainnhe/edge",                       { init = "plugins.edge" }))
 later(load("sainnhe/sonokai",                    { init = "plugins.sonokai" }))
+later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
 
 later(load("nvim-treesitter/nvim-treesitter", {
   init = "plugins.treesitter",

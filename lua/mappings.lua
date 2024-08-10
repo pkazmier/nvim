@@ -27,7 +27,6 @@ nmap("L",          C"lua MiniBracketed.buffer('forward')",          "Next buffer
 nmap("gD",         C"Pick lsp scope='declaration'",                 "Goto declaration")
 nmap("gd",         C"Pick lsp scope='definition'",                  "Goto definition")
 nmap("gi",         C"Pick lsp scope='implementation'",              "Goto implementation")
--- "gr" used by mini.operators
 nmap("gR",         C"Pick lsp scope='references'",                  "Goto references")
 nmap("gy",         C"Pick lsp scope='type_definition'",             "Goto t[y]pe definition")
 nmap("z=",         C"Pick spellsuggest",                            "Spelling suggestions")

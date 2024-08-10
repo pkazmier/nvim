@@ -20,13 +20,13 @@ require("nvim-treesitter.configs").setup({
     enable = true,
     disable = { "ruby", "markdown" },
   },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<C-space>",
-      node_incremental = "<C-space>",
-      scope_incremental = false,
-      node_decremental = "<bs>",
-    },
-  },
+  -- incremental_selection = {
+  --   enable = true,
+  --   keymaps = {
+  --     init_selection = "<C-space>",
+  --     node_incremental = "<C-space>",
+  --     scope_incremental = false,
+  --     node_decremental = "<bs>",
+  --   },
+  -- },
 })
