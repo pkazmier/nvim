@@ -18,6 +18,9 @@ M.apply_custom_highlights = function(opts)
   -- Better markdown code block compat w/ mini.hues
   hi("KazCodeBlock", { bg = p.bg_edge })
 
+  -- Links to Comment by default, but that has italics
+  hi("LeapBackdrop", { link = "MiniJump2dDim" })
+
   -- I prefer italic fonts as I use fonts with beautiful italics.
   -- Some examples: Operator Mono, Berkeley Mono, PragmataPro, Radon
   hi("Comment",                    { fg = p.fg_mid2, bg = nil,         italic = true })

@@ -27,6 +27,11 @@ require("catppuccin").setup({
         -- Better markdown code block compat w/ mini.hues
         KazCodeBlock = { bg = colors.crust },
 
+        -- Links to Comment by default, but that has italics
+        LeapBackdrop = { link = "MiniJump2dDim" },
+        LeapLabel = { fg = colors.peach, style = { "bold" } },
+        -- LeapLabel = { fg = colors.base, bg = colors.peach, style = { "bold" } },
+
         -- Mini customizations
         MiniClueDescGroup = { fg = colors.pink },
         MiniClueDescSingle = { fg = colors.sapphire },

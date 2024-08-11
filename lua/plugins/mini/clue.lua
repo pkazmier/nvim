@@ -17,10 +17,6 @@ clue.setup({
     { mode = "n", keys = "g" },
     { mode = "x", keys = "g" },
 
-    -- `S` key
-    { mode = "n", keys = "S" },
-    { mode = "x", keys = "S" },
-
     -- `[]` keys
     { mode = "n", keys = "[" },
     { mode = "n", keys = "]" },
@@ -49,6 +45,8 @@ clue.setup({
   },
 
   clues = {
+    { mode = "n", keys = "gz", desc = "Surround" },
+
     -- Enhance this by adding descriptions for <Leader> mapping groups
     { mode = "n", keys = "<leader>b",  desc = "Buffers" },
     { mode = "n", keys = "<leader>c",  desc = "Code" },
