@@ -12,36 +12,26 @@ vim.ui.select = MiniPick.ui_select
 
 -- Keys should be a picker source.name. Value is a callback function that
 -- accepts same arguments as User autocommand callback.
-local hooks = {
-  pre_hooks = {},
-  post_hooks = {},
-}
+local pre_hooks = {}
+local post_hooks = {}
 
-vim.api.nvim_create_autocmd({ "User" }, {
-  pattern = "MiniPickStart",
-  group = vim.api.nvim_create_augroup("minipick-pre-hooks", { clear = true }),
-  desc = "Invoke pre_hook for specific picker based on source.name.",
-  callback = function(...)
-    local opts = MiniPick.get_picker_opts() or {}
-    local pre_hook = hooks.pre_hooks[opts.source.name] or function(...) end
-    pre_hook(...)
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "User" }, {
-  pattern = "MiniPickStop",
-  group = vim.api.nvim_create_augroup("minipick-post-hooks", { clear = true }),
-  desc = "Invoke post_hook for specific picker based on source.name.",
-  callback = function(...)
-    local opts = MiniPick.get_picker_opts()
-    if opts then
-      local post_hook = hooks.post_hooks[opts.source.name] or function(...) end
-      post_hook(...)
-    else
-      vim.notify("MiniPick.get_picker_opts() returned nil")
-    end
-  end,
-})
+local group = vim.api.nvim_create_augroup("minipick-hooks", { clear = true })
+local create_minipick_auto_command = function(pattern, desc, hooks)
+  vim.api.nvim_create_autocmd({ "User" }, {
+    pattern = pattern,
+    group = group,
+    desc = desc,
+    callback = function(...)
+      local opts = MiniPick.get_picker_opts()
+      if opts and opts.source then
+        local hook = hooks[opts.source.name] or function(...) end
+        hook(...)
+      end
+    end,
+  })
+end
+create_minipick_auto_command("MiniPickStart", "pre-hook for source.name", pre_hooks)
+create_minipick_auto_command("MiniPickStop", "post-hook for source.name", post_hooks)
 
 -- Neovim config picker =====================================================
 
@@ -53,11 +43,11 @@ end
 
 local selected_colorscheme -- Currently selected or original colorscheme
 
-hooks.pre_hooks.Colorschemes = function()
+pre_hooks.Colorschemes = function()
   selected_colorscheme = vim.g.colors_name
 end
 
-hooks.post_hooks.Colorschemes = function()
+post_hooks.Colorschemes = function()
   vim.schedule(function()
     vim.cmd("colorscheme " .. selected_colorscheme)
   end)
