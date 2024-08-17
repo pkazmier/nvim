@@ -1,6 +1,16 @@
 local H = {}
 local hipatterns = require("mini.hipatterns")
 
+local censor_extmark_opts = function(_, match, _)
+  local mask = string.rep("x", vim.fn.strchars(match))
+  return {
+    virt_text = { { mask, "Comment" } },
+    virt_text_pos = "overlay",
+    priority = 2000,
+    right_gravity = false,
+  }
+end
+
 require("mini.hipatterns").setup({
   highlighters = {
 
@@ -8,7 +18,7 @@ require("mini.hipatterns").setup({
     censor = {
       pattern = "password: ()%S+()",
       group = "",
-      extmark_opts = H.censor_extmark_opts,
+      extmark_opts = censor_extmark_opts,
     },
 
     -- Hex colors
@@ -34,16 +44,6 @@ require("mini.hipatterns").setup({
     -- stylua: ignore end
   },
 })
-
-H.censor_extmark_opts = function(_, match, _)
-  local mask = string.rep("x", vim.fn.strchars(match))
-  return {
-    virt_text = { { mask, "Comment" } },
-    virt_text_pos = "overlay",
-    priority = 2000,
-    right_gravity = false,
-  }
-end
 
 -- Setup custom hipatterns when editing lua/plugins/mini/hues.lua.
 vim.api.nvim_create_autocmd({ "FileType" }, {
