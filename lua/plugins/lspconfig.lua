@@ -46,6 +46,15 @@ local servers = {
       },
     },
   },
+  harper_ls = {
+    settings = {
+      ["harper-ls"] = {
+        linters = {
+          sentence_capitalization = false,
+        },
+      },
+    },
+  },
   ruff_lsp = {
     on_attach = function(client, _)
       client.server_capabilities.hoverProvider = false
