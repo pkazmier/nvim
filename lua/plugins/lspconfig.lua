@@ -1,4 +1,4 @@
-require("neodev").setup()
+require("lazydev").setup()
 
 -- vim.api.nvim_create_autocmd("LspAttach", {
 --   group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),

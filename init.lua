@@ -151,7 +151,7 @@ later(load("neovim/nvim-lspconfig", {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "folke/neodev.nvim"
+      "folke/lazydev.nvim"
     },
   },
 }))
