@@ -50,6 +50,7 @@ local servers = {
     settings = {
       ["harper-ls"] = {
         linters = {
+          spell_check = false,
           sentence_capitalization = false,
         },
       },
