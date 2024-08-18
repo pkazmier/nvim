@@ -35,7 +35,7 @@ map({"n"     }, "<C-w>m",     C"lua MiniMisc.zoom()",                          "
 -- Leader mappings ==========================================================
 map({"n"     }, L" ",   C"Pick files",                                       "Find files")
 map({"n"     }, L",",   C"Pick buffers",                                     "Switch buffer")
-map({"n"     }, L"/",   C"Pick buf_lines scope='current'",                   "Search buffer")
+map({"n"     }, L"/",   C"Pick buffer_lines_current",                        "Search buffer")
 map({"n"     }, L"ba",  C"b#",                                               "Alternate buffer")
 map({"n"     }, L"bd",  C"lua require('mini.bufremove').delete()",           "Delete buffer")
 map({"n"     }, L"bD",  C"%bd|e#|bd#",                                       "Delete other buffers")
