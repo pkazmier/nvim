@@ -53,7 +53,7 @@ local show_cur_buf_lines = function(buf_id, items, query, opts)
   local lines = vim.api.nvim_buf_get_lines(buf_id, 0, -1, false)
   local digit_prefixes = {}
   for i, l in ipairs(lines) do
-    local _, prefix_end, prefix = l:find("^(%d+│)")
+    local _, prefix_end, prefix = l:find("^(%s*%d+│)")
     if prefix_end ~= nil then
       digit_prefixes[i], lines[i] = prefix, l:sub(prefix_end + 1)
     end
@@ -61,7 +61,7 @@ local show_cur_buf_lines = function(buf_id, items, query, opts)
 
   vim.api.nvim_buf_set_lines(buf_id, 0, -1, false, lines)
   for i, pref in pairs(digit_prefixes) do
-    local opts = { virt_text = { { string.format("%8.8s", pref), "MiniPickNormal" } }, virt_text_pos = "inline" }
+    local opts = { virt_text = { { pref, "MiniPickNormal" } }, virt_text_pos = "inline" }
     vim.api.nvim_buf_set_extmark(buf_id, ns_digit_prefix, i - 1, 0, opts)
   end
 
@@ -75,7 +75,8 @@ local show_cur_buf_lines = function(buf_id, items, query, opts)
 end
 
 MiniPick.registry.buffer_lines_current = function()
-  MiniExtra.pickers.buf_lines({ scope = "current", preserve_order = true }, { source = { show = show_cur_buf_lines } })
+  local local_opts = { scope = "current", preserve_order = true } -- use preserve_order
+  MiniExtra.pickers.buf_lines(local_opts, { source = { show = show_cur_buf_lines } })
 end
 
 -- Colorscheme picker =======================================================
