@@ -2,7 +2,7 @@ local H = {}
 
 require("mini.notify").setup({
   content = { sort = H.filterout_lua_diagnosing },
-  window = { max_width_share = 0.5, config = { border = "single" } },
+  window = { max_width_share = 0.75, config = { border = "single" } },
 })
 
 -- FIXME: don't rely on the globals
