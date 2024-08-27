@@ -8,13 +8,6 @@ require("mini.files").setup({
 })
 
 vim.api.nvim_create_autocmd("User", {
-  pattern = "MiniFilesWindowOpen",
-  callback = function(args)
-    local win_id = args.data.win_id
-    vim.wo[win_id].foldmethod = "manual"
-  end,
-})
-vim.api.nvim_create_autocmd("User", {
   pattern = "MiniFilesBufferCreate",
   callback = function(args)
     local buf_id = args.data.buf_id
