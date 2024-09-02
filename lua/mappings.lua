@@ -60,6 +60,7 @@ map({"n"     }, L"gfg", C"Pick git_files",                                     "
 map({"n"     }, L"gfi", C"Pick git_files scope='ignored'",                     "Find ignored files")
 map({"n"     }, L"gfm", C"Pick git_files scope='modified'",                    "Find modified files")
 map({"n"     }, L"gfu", C"Pick git_files scope='untracked'",                   "Find untracked files")
+map({"n"     }, L"gg",  C"lua require('plugins.toggleterm').lazygit_toggle()", "Toggle Lazygit")
 map({"n"     }, L"gl",  C"Git hist",                                           "Git history")
 map({"n"     }, L"gL",  C"Git hist --all",                                     "Git history (all)")
 map({"n"     }, L"go",  C"lua MiniDiff.toggle_overlay()",                      "Toggle diff")
