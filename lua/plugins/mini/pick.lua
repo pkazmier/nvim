@@ -79,6 +79,23 @@ MiniPick.registry.buffer_lines_current = function()
   MiniExtra.pickers.buf_lines(local_opts, { source = { show = show_cur_buf_lines } })
 end
 
+local show_align_on_nul = function(buf_id, items, query, opts)
+  -- HACK: `items` is an array of strings with \0 byte separators
+  local original = vim.fn.strdisplaywidth
+  vim.fn.strdisplaywidth = string.len
+  items = MiniAlign.align_strings(items, {
+    justify_side = { "left", "right", "right" },
+    merge_delimiter = { "", " ", "", " ", "" },
+    split_pattern = "%z",
+  })
+  vim.fn.strdisplaywidth = original
+  MiniPick.default_show(buf_id, items, query, opts)
+end
+
+MiniPick.registry.grep_live_align = function()
+  MiniPick.builtin.grep_live({}, { source = { show = show_align_on_nul } })
+end
+
 -- Colorscheme picker =======================================================
 
 local selected_colorscheme -- Currently selected or original colorscheme
