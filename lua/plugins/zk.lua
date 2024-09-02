@@ -1,4 +1,3 @@
-local M = {}
 local H = {}
 local cmds = require("zk.commands")
 
@@ -103,5 +102,3 @@ H.recent_meetings = function(notes, field, regex)
   end
   return unique_notes
 end
-
-return M
