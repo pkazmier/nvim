@@ -47,6 +47,7 @@ local servers = {
     },
   },
   harper_ls = {
+    filetypes = { "markdown", "html" },
     settings = {
       ["harper-ls"] = {
         linters = {
