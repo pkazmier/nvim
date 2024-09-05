@@ -12,7 +12,10 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     local buf_id = args.data.buf_id
     vim.keymap.set("n", "g.", H.toggle_dotfiles, { buffer = buf_id, desc = "Toggle Hidden Files" })
-    MiniClue.ensure_buf_triggers(args.data.buf_id)
+    --
+    -- NOTE: Interfere's with the bookmark feature in mini.files.
+    -- MiniClue.ensure_buf_triggers(args.data.buf_id)
+    --
   end,
 })
 
