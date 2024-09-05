@@ -40,8 +40,8 @@ now(load("autocmds"))
 
 -- Mini.nvim ================================================================
 add({ name = "mini.nvim" })
-now(load("catppuccin/nvim", { add = { name = "catppuccin" }, init = "plugins.catppuccin" }))
-now(cmd("colorscheme catppuccin-macchiato"))
+now(load("sainnhe/gruvbox-material", { init = "plugins.gruvbox-material" }))
+now(cmd("colorscheme gruvbox-material"))
 
 now(load("plugins.mini.basics"))
 now(load("plugins.mini.icons"))
@@ -94,11 +94,11 @@ later(load("plugins.mini.surround"))
 -- Other plugins ============================================================
 
 later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview"}))
+later(load("catppuccin/nvim",                    { add = { name = "catppuccin" }, init = "plugins.catppuccin" }))
 later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
 later(load("sainnhe/edge",                       { init = "plugins.edge" }))
 later(load("sainnhe/everforest",                 { init = "plugins.everforest" }))
-later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
 later(load("sainnhe/sonokai",                    { init = "plugins.sonokai" }))
 later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
 later(load("tummetott/reticle.nvim",             { init = "plugins.reticle" }))

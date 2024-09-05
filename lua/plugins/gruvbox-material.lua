@@ -1,4 +1,5 @@
 vim.g.gruvbox_material_float_style = "dim"
+vim.g.gruvbox_material_background = "hard"
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", {}),
@@ -10,6 +11,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     local set_hl  = vim.fn["gruvbox_material#highlight"]
 
     set_hl("KazCodeBlock",                   palette.none,   config.float_style == "dim" and palette.bg_dim or palette.bg2)
+    set_hl("LeapBackdrop",                   palette.bg5,    palette.none)
+    set_hl("LeapLabel",                      palette.orange, palette.none,           "bold")
     set_hl("MiniPickMatchRanges",            palette.green,  palette.none,           "bold")
     set_hl("MiniTablineCurrent",             palette.blue,   palette.bg0,            "bold")
     set_hl("MiniTablineHidden",              palette.grey2,  palette.bg_statusline2)
