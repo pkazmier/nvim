@@ -24,6 +24,10 @@ require("catppuccin").setup({
         TreesitterContextBottom = { sp = colors.overlay1, style = { "underline" } },
         WinSeparator = { fg = colors.surface1, style = { "bold" } },
 
+        ["@string.special.symbol"] = { link = "Special" },
+        ["@string.documentation"] = { fg = colors.pink },
+        ["@constructor.lua"] = { fg = colors.pink },
+
         -- Better markdown code block compat w/ mini.hues
         KazCodeBlock = { bg = colors.crust },
 
