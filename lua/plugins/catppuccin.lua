@@ -1,8 +1,67 @@
 require("catppuccin").setup({
   highlight_overrides = {
-    all = function(colors)
+    mocha = function(colors)
       local overrides = {
         Headline = { style = { "bold" } },
+        FloatTitle = { fg = colors.sky },
+        WinSeparator = { fg = colors.surface1, style = { "bold" } },
+        CursorLineNr = { fg = colors.lavendar, style = { "bold" } },
+        KazCodeBlock = { bg = colors.mantle },
+        LeapBackdrop = { link = "MiniJump2dDim" },
+        LeapLabel = { fg = colors.sapphire, style = { "bold" } },
+        MsgArea = { fg = colors.overlay2 },
+        CmpItemAbbrMatch = { fg = colors.sky, style = { "bold" } },
+        CmpItemAbbrMatchFuzzy = { fg = colors.sky, style = { "bold" } },
+
+        -- Mini customizations
+        MiniClueDescGroup = { fg = colors.mauve },
+        MiniClueDescSingle = { fg = colors.sapphire },
+        MiniClueNextKey = { fg = colors.text, style = { "bold" } },
+        MiniClueNextKeyWithPostkeys = { fg = colors.red, style = { "bold" } },
+
+        MiniFilesCursorLine = { fg = nil, bg = colors.surface0, style = { "bold" } },
+        MiniFilesFile = { fg = colors.overlay2 },
+        MiniFilesTitleFocused = { fg = colors.sky, style = { "bold" } },
+
+        MiniHipatternsFixmeBody = { fg = colors.red, bg = colors.base },
+        MiniHipatternsFixmeColon = { bg = colors.red, fg = colors.red, style = { "bold" } },
+        MiniHipatternsHackBody = { fg = colors.yellow, bg = colors.base },
+        MiniHipatternsHackColon = { bg = colors.yellow, fg = colors.yellow, style = { "bold" } },
+        MiniHipatternsNoteBody = { fg = colors.sky, bg = colors.base },
+        MiniHipatternsNoteColon = { bg = colors.sky, fg = colors.sky, style = { "bold" } },
+        MiniHipatternsTodoBody = { fg = colors.teal, bg = colors.base },
+        MiniHipatternsTodoColon = { bg = colors.teal, fg = colors.teal, style = { "bold" } },
+
+        MiniIndentscopeSymbol = { fg = colors.sapphire },
+
+        MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
+
+        MiniPickMatchCurrent = { fg = nil, bg = colors.surface0, style = { "bold" } },
+        MiniPickMatchRanges = { fg = colors.sky, style = { "bold" } },
+        MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
+
+        MiniStarterInactive = { fg = colors.surface2, style = {} },
+        MiniStarterItem = { fg = colors.overlay2, bg = nil },
+        MiniStarterItemBullet = { fg = colors.surface2 },
+        MiniStarterItemPrefix = { fg = colors.sky },
+        MiniStarterQuery = { fg = colors.sky, style = { "bold" } },
+        MiniStarterSection = { fg = colors.mauve, style = { "bold" } },
+
+        MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
+        MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
+        MiniStatuslineFilenameModified = { fg = colors.blue, bg = colors.surface0, style = { "bold" } },
+        MiniStatuslineInactive = { fg = colors.overlay1, bg = colors.surface0 },
+
+        MiniSurround = { fg = nil, bg = colors.yellow },
+
+        MiniTablineCurrent = { fg = colors.sky, bg = colors.base, style = { "bold" } },
+        MiniTablineFill = { bg = colors.mantle },
+        MiniTablineHidden = { fg = colors.overlay1, bg = colors.surface0 },
+        MiniTablineModifiedCurrent = { fg = colors.base, bg = colors.sky, style = { "bold" } },
+        MiniTablineModifiedHidden = { fg = colors.base, bg = colors.subtext0 },
+        MiniTablineModifiedVisible = { fg = colors.base, bg = colors.subtext0, style = { "bold" } },
+        MiniTablineTabpagesection = { fg = colors.base, bg = colors.mauve, style = { "bold" } },
+        MiniTablineVisible = { fg = colors.overlay1, bg = colors.surface0, style = { "bold" } },
       }
       for _, hl in ipairs({ "Headline", "rainbow" }) do
         for i, c in ipairs({ "blue", "mauve", "teal", "green", "peach", "flamingo" }) do
@@ -16,8 +75,6 @@ require("catppuccin").setup({
       local overrides = {
         CurSearch = { bg = colors.peach },
         CursorLineNr = { fg = colors.blue, style = { "bold" } },
-        FloatTitle = { fg = colors.mauve },
-        Headline = { style = { "bold" } },
         IncSearch = { bg = colors.peach },
         MsgArea = { fg = colors.overlay1 },
         Search = { bg = colors.mauve, fg = colors.base },
@@ -25,7 +82,6 @@ require("catppuccin").setup({
         WinSeparator = { fg = colors.surface1, style = { "bold" } },
 
         ["@string.special.symbol"] = { link = "Special" },
-        ["@string.documentation"] = { fg = colors.pink },
         ["@constructor.lua"] = { fg = colors.pink },
 
         -- Better markdown code block compat w/ mini.hues
@@ -34,12 +90,12 @@ require("catppuccin").setup({
         -- Links to Comment by default, but that has italics
         LeapBackdrop = { link = "MiniJump2dDim" },
         LeapLabel = { fg = colors.peach, style = { "bold" } },
-        -- LeapLabel = { fg = colors.base, bg = colors.peach, style = { "bold" } },
 
         -- Mini customizations
         MiniClueDescGroup = { fg = colors.pink },
         MiniClueDescSingle = { fg = colors.sapphire },
         MiniClueNextKey = { fg = colors.text, style = { "bold" } },
+        MiniClueNextKeyWithPostkeys = { fg = colors.red, style = { "bold" } },
 
         MiniFilesCursorLine = { fg = nil, bg = colors.surface1, style = { "bold" } },
         MiniFilesFile = { fg = colors.overlay2 },
@@ -68,8 +124,8 @@ require("catppuccin").setup({
         MiniPickBorderText = { fg = colors.blue },
         MiniPickMatchCurrent = { fg = nil, bg = colors.surface1, style = { "bold" } },
         MiniPickMatchRanges = { fg = colors.text, style = { "bold" } },
-        MiniPickNormal = { fg = colors.overlay2 },
-        MiniPickPrompt = { fg = colors.mauve },
+        MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
+        MiniPickPrompt = { fg = colors.sky },
 
         MiniStarterInactive = { fg = colors.overlay0, style = {} },
         MiniStarterItem = { fg = colors.overlay2, bg = nil },
