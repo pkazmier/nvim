@@ -45,7 +45,7 @@ require("catppuccin").setup({
         MiniStarterItemBullet = { fg = colors.surface2 },
         MiniStarterItemPrefix = { fg = colors.sky },
         MiniStarterQuery = { fg = colors.sky, style = { "bold" } },
-        MiniStarterSection = { fg = colors.mauve, style = { "bold" } },
+        MiniStarterSection = { fg = colors.green, style = { "bold" } },
 
         MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
         MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
