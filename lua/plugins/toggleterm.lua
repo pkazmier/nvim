@@ -8,6 +8,7 @@ require("toggleterm").setup({
     local opts = { buffer = term.bufnr }
     vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
   end,
+  shading_factor = -20,
 })
 
 M.lazygit_toggle = function()
