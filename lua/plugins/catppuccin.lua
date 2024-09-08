@@ -33,15 +33,15 @@ require("catppuccin").setup({
     mocha = function(colors)
       local overrides = {
         Headline = { style = { "bold" } },
-        FloatTitle = { fg = colors.sky },
+        FloatTitle = { fg = colors.green },
         WinSeparator = { fg = colors.surface1, style = { "bold" } },
         CursorLineNr = { fg = colors.lavender, style = { "bold" } },
         KazCodeBlock = { bg = colors.mantle },
         LeapBackdrop = { link = "MiniJump2dDim" },
         LeapLabel = { fg = colors.green, style = { "bold" } },
         MsgArea = { fg = colors.overlay2 },
-        CmpItemAbbrMatch = { fg = colors.sky, style = { "bold" } },
-        CmpItemAbbrMatchFuzzy = { fg = colors.sky, style = { "bold" } },
+        CmpItemAbbrMatch = { fg = colors.green, style = { "bold" } },
+        CmpItemAbbrMatchFuzzy = { fg = colors.green, style = { "bold" } },
 
         -- Mini customizations
         MiniClueDescGroup = { fg = colors.mauve },
@@ -72,8 +72,9 @@ require("catppuccin").setup({
         MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
         MiniPickMatchCurrent = { fg = nil, bg = colors.surface0, style = { "bold" } },
-        MiniPickMatchRanges = { fg = colors.sky, style = { "bold" } },
+        MiniPickMatchRanges = { fg = colors.green, style = { "bold" } },
         MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
+        MiniPickPrompt = { fg = colors.sky, style = { "bold" } },
 
         MiniStarterInactive = { fg = colors.surface2, style = {} },
         MiniStarterItem = { fg = colors.overlay2, bg = nil },
