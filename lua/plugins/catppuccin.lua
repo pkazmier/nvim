@@ -1,14 +1,44 @@
 require("catppuccin").setup({
+  default_integrations = false,
+  integrations = {
+    cmp = true,
+    markdown = true,
+    mason = true,
+    mini = { enabled = true },
+    native_lsp = {
+      enabled = true,
+      virtual_text = {
+        errors = { "italic" },
+        hints = { "italic" },
+        warnings = { "italic" },
+        information = { "italic" },
+        ok = { "italic" },
+      },
+      underlines = {
+        errors = { "underline" },
+        hints = { "underline" },
+        warnings = { "underline" },
+        information = { "underline" },
+        ok = { "underline" },
+      },
+      inlay_hints = {
+        background = true,
+      },
+    },
+    semantic_tokens = true,
+    treesitter = true,
+    treesitter_context = true,
+  },
   highlight_overrides = {
     mocha = function(colors)
       local overrides = {
         Headline = { style = { "bold" } },
         FloatTitle = { fg = colors.sky },
         WinSeparator = { fg = colors.surface1, style = { "bold" } },
-        CursorLineNr = { fg = colors.lavendar, style = { "bold" } },
+        CursorLineNr = { fg = colors.lavender, style = { "bold" } },
         KazCodeBlock = { bg = colors.mantle },
         LeapBackdrop = { link = "MiniJump2dDim" },
-        LeapLabel = { fg = colors.sapphire, style = { "bold" } },
+        LeapLabel = { fg = colors.green, style = { "bold" } },
         MsgArea = { fg = colors.overlay2 },
         CmpItemAbbrMatch = { fg = colors.sky, style = { "bold" } },
         CmpItemAbbrMatchFuzzy = { fg = colors.sky, style = { "bold" } },
@@ -33,6 +63,11 @@ require("catppuccin").setup({
         MiniHipatternsTodoColon = { bg = colors.teal, fg = colors.teal, style = { "bold" } },
 
         MiniIndentscopeSymbol = { fg = colors.sapphire },
+
+        MiniJump = { bg = colors.green, fg = colors.base, style = { "bold" } },
+        MiniJump2dSpot = { fg = colors.peach },
+        MiniJump2dSpotAhead = { fg = colors.mauve },
+        MiniJump2dSpotUnique = { fg = colors.peach },
 
         MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
