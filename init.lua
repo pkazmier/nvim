@@ -93,7 +93,7 @@ later(load("plugins.mini.surround"))
 
 -- Other plugins ============================================================
 
-later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview"}))
+later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview" }))
 later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
 later(load("sainnhe/edge",                       { init = "plugins.edge" }))
