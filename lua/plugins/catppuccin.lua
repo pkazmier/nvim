@@ -30,6 +30,12 @@ require("catppuccin").setup({
     treesitter_context = true,
   },
   highlight_overrides = {
+    all = function(colors)
+      local overrides = {
+        Comment = { fg = colors.overlay0, style = { "italic" } },
+      }
+      return overrides
+    end,
     mocha = function(colors)
       local overrides = {
         Headline = { style = { "bold" } },
