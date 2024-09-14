@@ -33,6 +33,7 @@ require("catppuccin").setup({
     all = function(colors)
       local overrides = {
         Comment = { fg = colors.overlay0, style = { "italic" } },
+        ["@markup.quote"] = { fg = colors.maroon, style = { "italic" } }, -- block quotes
       }
       return overrides
     end,
@@ -106,7 +107,7 @@ require("catppuccin").setup({
         MiniTablineVisible = { fg = colors.overlay1, bg = colors.surface0, style = { "bold" } },
       }
       for _, hl in ipairs({ "Headline", "rainbow" }) do
-        for i, c in ipairs({ "blue", "mauve", "teal", "green", "peach", "flamingo" }) do
+        for i, c in ipairs({ "green", "sapphire", "mauve", "peach", "red", "yellow" }) do
           overrides[hl .. i] = { fg = colors[c], style = { "bold" } }
         end
       end
