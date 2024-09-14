@@ -83,6 +83,7 @@ require("catppuccin").setup({
         MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
         MiniPickPrompt = { fg = colors.sky, style = { "bold" } },
 
+        MiniStarterHeader = { fg = colors.sapphire },
         MiniStarterInactive = { fg = colors.surface2, style = {} },
         MiniStarterItem = { fg = colors.overlay2, bg = nil },
         MiniStarterItemBullet = { fg = colors.surface2 },
