@@ -1,6 +1,28 @@
+local gen_heading_spec = function(level, icon)
+  return {
+    style = "label",
+    padding_left = " ",
+    padding_right = " ",
+    corner_right = "" .. string.rep("", 6 - level),
+    corner_right_hl = "decorated_h" .. level .. "_inv",
+    icon = icon,
+    sign = "",
+    hl = "decorated_h" .. level,
+  }
+end
 require("markview").setup({
   modes = { "n", "no", "i", "c" },
   hybrid_modes = { "i" },
+  headings = {
+    shift_width = 0,
+
+    heading_1 = gen_heading_spec(1, "󰼏  "),
+    heading_2 = gen_heading_spec(2, "󰎨  "),
+    heading_3 = gen_heading_spec(3, "󰼑  "),
+    heading_4 = gen_heading_spec(4, "󰎲  "),
+    heading_5 = gen_heading_spec(5, "󰼓  "),
+    heading_6 = gen_heading_spec(6, "󰎴  "),
+  },
   highlight_groups = {
     {
       group_name = "red",
@@ -160,69 +182,5 @@ require("markview").setup({
     language_direction = "right",
     sign = false,
     sign_hl = nil,
-  },
-  headings = {
-    shift_width = 0,
-
-    heading_1 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h1_inv",
-      icon = "󰼏  ",
-      sign = "",
-      hl = "decorated_h1",
-    },
-    heading_2 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h2_inv",
-      icon = "󰎨  ",
-      sign = "",
-      hl = "decorated_h2",
-    },
-    heading_3 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h3_inv",
-      icon = "󰼑  ",
-      hl = "decorated_h3",
-      sign = "",
-    },
-    heading_4 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h4_inv",
-      icon = "󰎲  ",
-      sign = "",
-      hl = "decorated_h4",
-    },
-    heading_5 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h5_inv",
-      icon = "󰼓  ",
-      sign = "",
-      hl = "decorated_h5",
-    },
-    heading_6 = {
-      style = "label",
-      padding_left = " ",
-      padding_right = " ",
-      corner_right = "",
-      corner_right_hl = "decorated_h6_inv",
-      icon = "󰎴  ",
-      sign = "",
-      hl = "decorated_h6",
-    },
   },
 })
