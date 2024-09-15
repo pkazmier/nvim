@@ -83,13 +83,13 @@ require("catppuccin").setup({
         MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
         MiniPickPrompt = { fg = colors.sky, style = { "bold" } },
 
-        MiniStarterHeader = { fg = colors.sapphire },
+        MiniStarterHeader = { fg = colors.peach },
         MiniStarterInactive = { fg = colors.surface2, style = {} },
         MiniStarterItem = { fg = colors.overlay2, bg = nil },
         MiniStarterItemBullet = { fg = colors.surface2 },
-        MiniStarterItemPrefix = { fg = colors.sky },
-        MiniStarterQuery = { fg = colors.sky, style = { "bold" } },
-        MiniStarterSection = { fg = colors.green, style = { "bold" } },
+        MiniStarterItemPrefix = { fg = colors.pink },
+        MiniStarterQuery = { fg = colors.red, style = { "bold" } },
+        MiniStarterSection = { fg = colors.lavender, style = { "bold" } },
 
         MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
         MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
@@ -98,10 +98,10 @@ require("catppuccin").setup({
 
         MiniSurround = { fg = nil, bg = colors.yellow },
 
-        MiniTablineCurrent = { fg = colors.sky, bg = colors.base, style = { "bold" } },
+        MiniTablineCurrent = { fg = colors.yellow, bg = colors.base, style = { "bold" } },
         MiniTablineFill = { bg = colors.mantle },
         MiniTablineHidden = { fg = colors.overlay1, bg = colors.surface0 },
-        MiniTablineModifiedCurrent = { fg = colors.base, bg = colors.sky, style = { "bold" } },
+        MiniTablineModifiedCurrent = { fg = colors.base, bg = colors.yellow, style = { "bold" } },
         MiniTablineModifiedHidden = { fg = colors.base, bg = colors.subtext0 },
         MiniTablineModifiedVisible = { fg = colors.base, bg = colors.subtext0, style = { "bold" } },
         MiniTablineTabpagesection = { fg = colors.base, bg = colors.mauve, style = { "bold" } },
