@@ -54,7 +54,7 @@ require("catppuccin").setup({
         -- Mini customizations
         MiniClueDescGroup              = { fg = colors.mauve },
         MiniClueDescSingle             = { fg = colors.sapphire },
-        MiniClueNextKey                = { fg = colors.text, style = { "bold" } },
+        MiniClueNextKey                = { fg = colors.yellow },
         MiniClueNextKeyWithPostkeys    = { fg = colors.red, style = { "bold" } },
 
         MiniFilesCursorLine            = { fg = nil, bg = colors.surface0, style = { "bold" } },
