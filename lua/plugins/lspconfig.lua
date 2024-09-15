@@ -65,6 +65,9 @@ local servers = {
   lua_ls = {
     settings = {
       Lua = {
+        diagnostics = {
+          globals = { "vim", "hs" },
+        },
         hint = {
           enable = true,
         },
