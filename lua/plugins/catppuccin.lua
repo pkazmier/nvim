@@ -84,13 +84,13 @@ require("catppuccin").setup({
         MiniPickNormal                 = { fg = colors.overlay2, bg = colors.mantle },
         MiniPickPrompt                 = { fg = colors.sky, style = { "bold" } },
 
-        MiniStarterHeader              = { fg = colors.peach },
+        MiniStarterHeader              = { fg = colors.sapphire },
         MiniStarterInactive            = { fg = colors.surface2, style = {} },
         MiniStarterItem                = { fg = colors.overlay2, bg = nil },
         MiniStarterItemBullet          = { fg = colors.surface2 },
         MiniStarterItemPrefix          = { fg = colors.pink },
         MiniStarterQuery               = { fg = colors.red, style = { "bold" } },
-        MiniStarterSection             = { fg = colors.lavender, style = { "bold" } },
+        MiniStarterSection             = { fg = colors.peach, style = { "bold" } },
 
         MiniStatuslineDirectory        = { fg = colors.overlay1, bg = colors.surface0 },
         MiniStatuslineFilename         = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
