@@ -93,6 +93,8 @@ later(load("plugins.mini.surround"))
 
 -- Other plugins ============================================================
 
+-- Load now so we can use oil when opening vim with a dir command line arg
+now(load("stevearc/oil.nvim",                    { init = "plugins.oil" }))
 later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview" }))
 later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
@@ -101,7 +103,6 @@ later(load("sainnhe/everforest",                 { init = "plugins.everforest" }
 later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
 later(load("sainnhe/sonokai",                    { init = "plugins.sonokai" }))
 later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
-later(load("stevearc/oil.nvim",                  { init = "plugins.oil" }))
 later(load("tummetott/reticle.nvim",             { init = "plugins.reticle" }))
 later(load("windwp/nvim-autopairs",              { setup = {} }))
 later(load("zk-org/zk-nvim",                     { init = "plugins.zk" }))
