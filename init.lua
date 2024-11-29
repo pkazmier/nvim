@@ -47,6 +47,7 @@ now(load("plugins.mini.basics"))
 now(load("plugins.mini.icons"))
 now(load("plugins.mini.sessions"))
 now(load("plugins.mini.starter"))
+now(load("plugins.mini.files"))
 
 -- Testing if these three can be loaded later
 later(load("plugins.mini.notify"))
@@ -71,7 +72,6 @@ later(load("mini.visits",     { setup = {} }))
 later(load("plugins.mini.ai"))
 later(load("plugins.mini.clue"))
 later(load("plugins.mini.diff"))
-later(load("plugins.mini.files"))
 later(load("plugins.mini.git"))
 later(load("plugins.mini.hipatterns"))
 later(load("plugins.mini.indentscope"))
@@ -94,7 +94,7 @@ later(load("plugins.mini.surround"))
 -- Other plugins ============================================================
 
 -- Load now so we can use oil when opening vim with a dir command line arg
-now(load("stevearc/oil.nvim",                    { init = "plugins.oil" }))
+-- later(load("stevearc/oil.nvim",                  { init = "plugins.oil" }))
 later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview" }))
 later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
 later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
