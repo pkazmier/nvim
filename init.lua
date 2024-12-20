@@ -54,20 +54,20 @@ later(load("plugins.mini.notify"))
 later(load("plugins.mini.statusline"))
 later(load("mini.tabline", { setup = {} }))
 
-later(load("mini.align",      { setup = {} }))
+later(load("mini.align", { setup = {} }))
 -- later(load("mini.animate",    { setup = {} }))
-later(load("mini.bracketed",  { setup = {} }))
-later(load("mini.bufremove",  { setup = {} }))
-later(load("mini.colors",     { setup = {} }))
-later(load("mini.comment",    { setup = {} }))
+later(load("mini.bracketed", { setup = {} }))
+later(load("mini.bufremove", { setup = {} }))
+later(load("mini.colors", { setup = {} }))
+later(load("mini.comment", { setup = {} }))
 later(load("mini.cursorword", { setup = {} }))
-later(load("mini.extra",      { setup = {} }))
-later(load("mini.jump",       { setup = {} }))
-later(load("mini.move",       { setup = {} }))
-later(load("mini.operators",  { setup = {} }))
-later(load("mini.splitjoin",  { setup = {} }))
+later(load("mini.extra", { setup = {} }))
+later(load("mini.jump", { setup = {} }))
+later(load("mini.move", { setup = {} }))
+later(load("mini.operators", { setup = {} }))
+later(load("mini.splitjoin", { setup = {} }))
 later(load("mini.trailspace", { setup = {} }))
-later(load("mini.visits",     { setup = {} }))
+later(load("mini.visits", { setup = {} }))
 
 later(load("plugins.mini.ai"))
 later(load("plugins.mini.clue"))
@@ -95,18 +95,18 @@ later(load("plugins.mini.surround"))
 
 -- Load now so we can use oil when opening vim with a dir command line arg
 -- later(load("stevearc/oil.nvim",                  { init = "plugins.oil" }))
-later(load("OXY2DEV/markview.nvim",              { init = "plugins.markview" }))
-later(load("ggandor/leap.nvim",                  { add = { name = "leap" }, init = "plugins.leap" }))
-later(load("mfussenegger/nvim-lint",             { init = "plugins.nvim-lint"}))
-later(load("sainnhe/edge",                       { init = "plugins.edge" }))
-later(load("sainnhe/everforest",                 { init = "plugins.everforest" }))
-later(load("sainnhe/gruvbox-material",           { init = "plugins.gruvbox-material" }))
-later(load("sainnhe/sonokai",                    { init = "plugins.sonokai" }))
-later(load("stevearc/conform.nvim",              { init = "plugins.conform" }))
-later(load("tummetott/reticle.nvim",             { init = "plugins.reticle" }))
-later(load("windwp/nvim-autopairs",              { setup = {} }))
-later(load("zk-org/zk-nvim",                     { init = "plugins.zk" }))
-later(load('akinsho/toggleterm.nvim',            { init = "plugins.toggleterm" }))
+later(load("OXY2DEV/markview.nvim", { init = "plugins.markview" }))
+later(load("ggandor/leap.nvim", { add = { name = "leap" }, init = "plugins.leap" }))
+later(load("mfussenegger/nvim-lint", { init = "plugins.nvim-lint" }))
+later(load("sainnhe/edge", { init = "plugins.edge" }))
+later(load("sainnhe/everforest", { init = "plugins.everforest" }))
+later(load("sainnhe/gruvbox-material", { init = "plugins.gruvbox-material" }))
+later(load("sainnhe/sonokai", { init = "plugins.sonokai" }))
+later(load("stevearc/conform.nvim", { init = "plugins.conform" }))
+later(load("tummetott/reticle.nvim", { init = "plugins.reticle" }))
+later(load("windwp/nvim-autopairs", { setup = {} }))
+later(load("zk-org/zk-nvim", { init = "plugins.zk" }))
+later(load('akinsho/toggleterm.nvim', { init = "plugins.toggleterm" }))
 
 later(load("nvim-treesitter/nvim-treesitter", {
   init = "plugins.treesitter",
@@ -119,7 +119,30 @@ later(load("nvim-treesitter/nvim-treesitter-context", {
   setup = {},
 }))
 
+local function build_blink(params)
+  vim.notify('Building blink.cmp', vim.log.levels.INFO)
+  local obj = vim.system({ 'cargo', 'build', '--release' }, { cwd = params.path }):wait()
+  if obj.code == 0 then
+    vim.notify('Building blink.cmp done', vim.log.levels.INFO)
+  else
+    vim.notify('Building blink.cmp failed', vim.log.levels.ERROR)
+  end
+end
+later(load('saghen/blink.cmp', {
+  init = "plugins.blink",
+  add = {
+    depends = {
+      "rafamadriz/friendly-snippets",
+    },
+    hooks = {
+      post_install = build_blink,
+      post_checkout = build_blink,
+    },
+  }
+}))
+
 local build_codesnap = function(args)
+  vim.notify('Building codesnap', vim.log.levels.INFO)
   vim.system({ "make", "-C", args.path }, { text = true }, function(r)
     if r.stdout ~= "" then vim.notify(r.stdout, vim.log.levels.INFO) end
     if r.stderr ~= "" then vim.notify(r.stderr, vim.log.levels.ERROR) end
@@ -135,17 +158,17 @@ later(load("mistricky/codesnap.nvim", {
   },
 }))
 
-later(load("hrsh7th/nvim-cmp", {
-  init = "plugins.cmp",
-  add = {
-    depends = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-    },
-  },
-}))
+-- later(load("hrsh7th/nvim-cmp", {
+--   init = "plugins.cmp",
+--   add = {
+--     depends = {
+--       "hrsh7th/cmp-nvim-lsp",
+--       "hrsh7th/cmp-path",
+--       "hrsh7th/cmp-buffer",
+--       "hrsh7th/cmp-cmdline",
+--     },
+--   },
+-- }))
 
 later(load("neovim/nvim-lspconfig", {
   init = "plugins.lspconfig",

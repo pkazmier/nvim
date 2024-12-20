@@ -2,7 +2,8 @@
 require("catppuccin").setup({
   default_integrations = false,
   integrations = {
-    cmp = true,
+    -- cmp = true,
+    blink_cmp = true,
     markdown = true,
     mason = true,
     mini = { enabled = true },
@@ -34,7 +35,7 @@ require("catppuccin").setup({
     all = function(colors)
       local overrides = {
         Comment           = { fg = colors.overlay0, style = { "italic" } },
-        ["@markup.quote"] = { fg = colors.maroon,   style = { "italic" } }, -- block quotes
+        ["@markup.quote"] = { fg = colors.maroon, style = { "italic" } }, -- block quotes
       }
       return overrides
     end,
@@ -118,15 +119,15 @@ require("catppuccin").setup({
     -- This is a comment and for the love of ...
     macchiato = function(colors)
       local overrides = {
-        CurSearch                  = { bg = colors.peach },
-        CursorLineNr               = { fg = colors.blue, style = { "bold" } },
-        IncSearch                  = { bg = colors.peach },
-        MsgArea                    = { fg = colors.overlay1 },
-        Search                     = { bg = colors.mauve, fg = colors.base },
-        TreesitterContextBottom    = { sp = colors.overlay1, style = { "underline" } },
-        WinSeparator               = { fg = colors.surface1, style = { "bold" } },
-        ["@string.special.symbol"] = { link = "Special" },
-        ["@constructor.lua"]       = { fg = colors.pink },
+        CurSearch                      = { bg = colors.peach },
+        CursorLineNr                   = { fg = colors.blue, style = { "bold" } },
+        IncSearch                      = { bg = colors.peach },
+        MsgArea                        = { fg = colors.overlay1 },
+        Search                         = { bg = colors.mauve, fg = colors.base },
+        TreesitterContextBottom        = { sp = colors.overlay1, style = { "underline" } },
+        WinSeparator                   = { fg = colors.surface1, style = { "bold" } },
+        ["@string.special.symbol"]     = { link = "Special" },
+        ["@constructor.lua"]           = { fg = colors.pink },
 
         -- Better markdown code block compat w/ mini.hues
         KazCodeBlock                   = { bg = colors.crust },
