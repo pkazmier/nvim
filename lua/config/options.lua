@@ -11,3 +11,4 @@ vim.opt.fillchars = {
   vertright = "┣",
   verthoriz = "╋",
 }
+vim.opt.textwidth = 76
