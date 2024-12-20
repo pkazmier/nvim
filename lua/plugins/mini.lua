@@ -1,11 +1,20 @@
 return {
   {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "gx" },
+      },
+    },
+  },
+  {
     "echasnovski/mini.align",
-    opts = {},
     keys = {
       { "ga", mode = { "n", "v" }, desc = "Align" },
       { "gA", mode = { "n", "v" }, desc = "Align with preview" },
     },
+    opts = {},
   },
   {
     "echasnovski/mini.operators",
@@ -19,6 +28,17 @@ return {
     opts = {
       sort = {
         prefix = "gS",
+      },
+    },
+  },
+  {
+    "echasnovski/mini.splitjoin",
+    keys = {
+      { "gJ", mode = { "n", "v" }, desc = "Split/Join" },
+    },
+    opts = {
+      mappings = {
+        toggle = "gJ",
       },
     },
   },
