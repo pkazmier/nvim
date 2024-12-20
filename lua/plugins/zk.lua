@@ -1,104 +1,117 @@
-local H = {}
-local cmds = require("zk.commands")
-
-require("zk").setup({
-  picker = "minipick",
-  lsp = {
-    config = {
-      cmd = { "zk", "lsp" },
-      name = "zk",
-    },
-    auto_attach = { enabled = true, filetypes = { "markdown" } },
-  },
-})
-
-cmds.add("ZkNewMeeting", function(opts)
-  opts = vim.tbl_extend("force", { dir = "meetings" }, opts or {})
-  H.new_meeting(opts)
-end)
-
-cmds.add("ZkFullTextSearch", function(opts)
-  opts = opts or {}
-  if not opts.match then
-    opts.match = { vim.fn.input("Match: ") }
-  end
-  opts = vim.tbl_extend("keep", opts, {
-    sort = { "created" },
-  })
-  cmds.get("ZkNotes")(opts)
-end)
-
-cmds.add("ZkPriorMeetings", function(_)
-  local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-  if #line == 1 then
-    local meeting = line[1]:match("^# %d%d%d%d%-%d%d%-%d%d: (.+)")
-    if meeting then
-      local filter = 'title: "' .. meeting .. '"'
-      local bufname = vim.api.nvim_buf_get_name(0)
-      cmds.get("ZkNotes")({
-        excludeHrefs = { bufname },
-        sort = { "created" },
-        match = { filter },
-      })
-    end
-  end
-end)
-
-H.new_meeting = function(opts)
-  local zk = require("zk")
-  local ui = require("zk.ui")
-  local api = require("zk.api")
-
-  opts = vim.tbl_extend("force", {
-    select = { "title", "absPath" },
-    tags = { "meeting" },
-    sort = { "modified" },
-    regex = "^%d+%-%d+%-%d+: (.-)$",
-  }, opts or {})
-
-  api.list(opts.notebook_path, opts, function(err, notes)
-    assert(not err, tostring(err))
-    local recent_notes = H.recent_meetings(notes, "title", opts.regex)
-    local picker_opts = {
-      title = "New Meeting",
-      multi_select = false,
-      minipick = {
-        mappings = {
-          ["new meeting"] = {
-            char = "<C-e>",
-            func = function()
-              local query = MiniPick.get_picker_query()
-              if query == nil then
-                return true
-              end
-              local title = table.concat(query, "")
-              zk.new(vim.tbl_extend("keep", { title = title }, opts))
-              return true
-            end,
-          },
-        },
+return {
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>z", group = "Zk Notes", icon = { icon = "󰠮", color = "yellow" } },
       },
-    }
+    },
+  },
+  {
+    "zk-org/zk-nvim",
+    -- cmd = { "ZkNotes", "ZkMeeting" },
+    config = function()
+      require("zk").setup({
+        picker = "fzf_lua",
+        lsp = {
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+          },
+          auto_attach = { enabled = true, filetypes = { "markdown" } },
+        },
+      })
 
-    ui.pick_notes(recent_notes, picker_opts, function(note)
-      local short_title = string.match(note.title, opts.regex)
-      zk.new(vim.tbl_extend("keep", { title = short_title }, opts))
-    end)
-  end)
-end
+      require("zk.commands").add("ZkMeeting", function(options)
+        options = vim.tbl_extend("force", { dir = "meetings" }, options or {})
+        require("util.zk").new_meeting(options)
+      end)
+    end,
 
--- Returns a table of notes with duplicate entries removed. Duplicity is
--- determined by regex applied to the field entry of the note. The first
--- unique note found is kept, while others are discarded.
-H.recent_meetings = function(notes, field, regex)
-  local seen_notes = {}
-  local unique_notes = {}
-  for _, note in ipairs(notes) do
-    local name = string.match(note[field], regex)
-    if name and not seen_notes[name] then
-      seen_notes[name] = true
-      table.insert(unique_notes, note)
-    end
-  end
-  return unique_notes
-end
+    keys = {
+      {
+        "<leader>zb",
+        function()
+          require("zk.commands").get("ZkBacklinks")()
+        end,
+        desc = "Backlink Picker",
+      },
+      {
+        "<leader>zd",
+        function()
+          require("zk.commands").get("ZkCd")()
+        end,
+        desc = "Change Directory",
+      },
+      {
+        "<leader>zr",
+        function()
+          require("zk.commands").get("ZkIndex")()
+        end,
+        desc = "Refresh Index",
+      },
+      {
+        "<leader>zl",
+        function()
+          require("zk.commands").get("ZkLinks")()
+        end,
+        desc = "Link Picker",
+      },
+      {
+        "<leader>zm",
+        function()
+          require("zk.commands").get("ZkNotes")({ sort = { "created" }, match = { vim.fn.input("Match: ") } })
+        end,
+        desc = "Match (FTS)",
+      },
+      {
+        "<leader>zs",
+        function()
+          require("zk.commands").get("ZkNotes")({ sort = { "created" } })
+        end,
+        desc = "Search",
+      },
+      {
+        "<leader>zp",
+        function()
+          local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+          if #line == 1 then
+            local meeting = line[1]:match("^# %d%d%d%d%-%d%d%-%d%d: (.+)")
+            if meeting then
+              local filter = 'title: "' .. meeting .. '"'
+              local bufname = vim.api.nvim_buf_get_name(0)
+              require("zk.commands").get("ZkNotes")({
+                excludeHrefs = { bufname },
+                sort = { "created" },
+                match = { filter },
+              })
+            end
+          end
+        end,
+        desc = "Search 1:1s",
+      },
+      {
+        "<leader>zn",
+        function()
+          require("zk.commands").get("ZkNew")({ title = vim.fn.input("Title: ") })
+        end,
+        desc = "New Note",
+      },
+      {
+        "<leader>zN",
+        function()
+          require("zk.commands").get("ZkMeeting")()
+        end,
+        desc = "New Meeting Note",
+      },
+      {
+        "<leader>zt",
+        function()
+          require("zk.commands").get("ZkTags")()
+        end,
+        desc = "Tags",
+      },
+    },
+  },
+}
