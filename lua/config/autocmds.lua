@@ -30,20 +30,32 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 -- Set buffer local options based on filetype
 local filetype_options = {
   go = {
-    tabstop = 8,
-    shiftwidth = 8,
-    expandtab = false,
+    opt_local = {
+      tabstop = 8,
+      shiftwidth = 8,
+      expandtab = false,
+    },
   },
   haskell = {
-    tabstop = 4,
-    shiftwidth = 4,
+    opt_local = {
+      tabstop = 4,
+      shiftwidth = 4,
+    },
+  },
+  markdown = {
+    b = {
+      snacks_indent = false,
+    },
   },
 }
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = vim.tbl_keys(filetype_options),
   callback = function(ev)
-    for opt, val in pairs(filetype_options[ev.match]) do
-      vim.opt_local[opt] = val
+    for option_type, options in pairs(filetype_options[ev.match]) do
+      for opt, val in pairs(options) do
+        vim[option_type][opt] = val
+      end
     end
   end,
 })
