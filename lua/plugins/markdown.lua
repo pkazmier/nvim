@@ -2,12 +2,6 @@ return {
   "MeanderingProgrammer/render-markdown.nvim",
   opts = {
     render_modes = { "n", "c", "t", "i" },
-    anti_conceal = {
-      ignore = {
-        -- code_border = true,
-        code_background = true,
-      },
-    },
     code = {
       sign = false,
       position = "right",
