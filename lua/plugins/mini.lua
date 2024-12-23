@@ -31,7 +31,13 @@ return {
       },
     },
   },
-  { "echasnovski/mini.pairs", enabled = false },
+  {
+    -- I find myself fighting too much with mini.pairs,
+    -- and it doesn't work well with python or markdown
+    -- triple quotes. nvim-autopairs is simply better.
+    "echasnovski/mini.pairs",
+    enabled = false,
+  },
   {
     "echasnovski/mini.splitjoin",
     keys = {
