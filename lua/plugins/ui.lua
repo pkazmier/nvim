@@ -5,7 +5,23 @@ return {
     opts = function(_, opts)
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
-        hl["SnacksDashboardHeader"] = { fg = c.blue2 }
+        math.randomseed(os.time())
+        local choices = {
+          c.blue,
+          c.blue1,
+          c.blue2,
+          c.blue5,
+          c.cyan,
+          c.green,
+          c.green2,
+          c.magenta,
+          c.orange,
+          c.purple,
+          c.red,
+          c.teal,
+          c.yellow,
+        }
+        hl["SnacksDashboardHeader"] = { fg = choices[math.random(1, #choices)] }
         hl["SnacksDashboardTitle"] = { fg = c.magenta, bold = true }
         hl["SnacksDashboardKey"] = { fg = c.yellow, bold = true }
       end
@@ -64,10 +80,11 @@ return {
             local username = os.getenv("USER") or os.getenv("USERNAME") or "user"
             return ("Good %s, %s"):format(day_part, username)
           end
+
           -- stylua: ignore
           return {
-            { padding = 0, text = { header, hl = "header" } },
-            { align = "center", desc = greeting(), padding = 2 },
+            { padding = 0, align = "center", text = { header, hl = "header" } },
+            { padding = 2, align = "center", text = { greeting(), hl = "header" } },
             { title = "Builtin Actions", indent = 2, padding = 1,
               { icon = " ", key = "f", desc = "Find File",       action = ":lua Snacks.dashboard.pick('files')" },
               { icon = " ", key = "n", desc = "New File",        action = ":ene | startinsert" },
