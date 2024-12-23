@@ -23,7 +23,7 @@ return {
         }
         hl["SnacksDashboardHeader"] = { fg = choices[math.random(1, #choices)] }
         hl["SnacksDashboardTitle"] = { fg = c.magenta, bold = true }
-        hl["SnacksDashboardKey"] = { fg = c.yellow, bold = true }
+        hl["SnacksDashboardKey"] = { fg = c.orange, bold = true }
       end
       return opts
     end,
