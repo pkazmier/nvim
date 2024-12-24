@@ -1,11 +1,10 @@
 return {
   {
-    "saghen/blink.cmp",
-    opts = {
-      keymap = {
-        preset = "default",
-      },
-    },
+    -- I find myself fighting too much with mini.pairs,
+    -- and it doesn't work well with python or markdown
+    -- triple quotes. nvim-autopairs is simply better.
+    "echasnovski/mini.pairs",
+    enabled = false,
   },
   {
     "windwp/nvim-autopairs",
@@ -13,12 +12,45 @@ return {
     opts = {},
   },
   {
-    "dhruvmanila/browser-bookmarks.nvim",
+    "echasnovski/mini.align",
     keys = {
-      { "<leader>sB", "<cmd>BrowserBookmarks<cr>", desc = "Safari Bookmarks" },
+      { "ga", mode = { "n", "v" }, desc = "Align" },
+      { "gA", mode = { "n", "v" }, desc = "Align with preview" },
+    },
+    opts = {},
+  },
+  {
+    "echasnovski/mini.operators",
+    keys = {
+      { "g=", mode = { "n", "v" }, desc = "Evaluate" },
+      { "gx", mode = { "n", "v" }, desc = "Exchange" },
+      { "gm", mode = { "n", "v" }, desc = "Multiply" },
+      { "gr", mode = { "n", "v" }, desc = "Replace with register" },
+      { "gS", mode = { "n", "v" }, desc = "Sort" },
     },
     opts = {
-      selected_browser = "safari",
+      sort = {
+        prefix = "gS",
+      },
+    },
+  },
+  {
+    "echasnovski/mini.splitjoin",
+    keys = {
+      { "gJ", mode = { "n", "v" }, desc = "Split/Join" },
+    },
+    opts = {
+      mappings = {
+        toggle = "gJ",
+      },
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        preset = "default",
+      },
     },
   },
 }
