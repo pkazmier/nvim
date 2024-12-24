@@ -1,3 +1,4 @@
+local util = require("util")
 return {
   { "akinsho/bufferline.nvim", opts = { options = { separator_style = "slope" } } },
   {
@@ -5,23 +6,23 @@ return {
     opts = function(_, opts)
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
-        math.randomseed(os.time())
-        local choices = {
-          c.blue,
-          c.blue1,
-          c.blue2,
-          c.blue5,
-          c.cyan,
-          c.green,
-          c.green2,
-          c.magenta,
-          c.orange,
-          c.purple,
-          c.red,
-          c.teal,
-          c.yellow,
+        hl["SnacksDashboardHeader"] = {
+          fg = util.choose({
+            c.blue,
+            c.blue1,
+            c.blue2,
+            c.blue5,
+            c.cyan,
+            c.green,
+            c.green2,
+            c.magenta,
+            c.orange,
+            c.purple,
+            c.red,
+            c.teal,
+            c.yellow,
+          }),
         }
-        hl["SnacksDashboardHeader"] = { fg = choices[math.random(1, #choices)] }
         hl["SnacksDashboardTitle"] = { fg = c.magenta, bold = true }
         hl["SnacksDashboardKey"] = { fg = c.orange, bold = true }
       end
