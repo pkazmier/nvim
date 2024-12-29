@@ -4,6 +4,7 @@
 
 vim.g.ai_cmp = false
 vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.kaz_transparency = false
 
 vim.opt.fillchars = {
   horiz = "━",

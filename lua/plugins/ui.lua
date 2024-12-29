@@ -4,6 +4,13 @@ return {
   {
     "folke/tokyonight.nvim",
     opts = function(_, opts)
+      if vim.g.kaz_transparency then
+        opts.transparent = true
+        opts.styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        }
+      end
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
         hl["SnacksDashboardHeader"] = {
