@@ -1,6 +1,19 @@
 local util = require("util")
 return {
-  { "akinsho/bufferline.nvim", opts = { options = { separator_style = "slope" } } },
+  {
+    "akinsho/bufferline.nvim",
+    opts = function(_, opts)
+      if vim.g.kaz_transparency then
+        opts.options = {
+          indicator = { style = "underline" },
+          separator_style = { "┃", "┃" },
+        }
+      else
+        opts.options = { separator_style = "slope" }
+      end
+      return opts
+    end,
+  },
   {
     "folke/tokyonight.nvim",
     opts = function(_, opts)
@@ -13,6 +26,15 @@ return {
       end
       opts.lualine_bold = true
       opts.on_highlights = function(hl, c)
+        if vim.g.kaz_transparency then
+          hl["BufferLineSeparator"] = { fg = c.bg_statusline }
+          hl["BufferLineGroupSeparator"] = { fg = c.bg_statusline }
+          hl["BufferLineOffsetSeparator"] = { fg = c.bg_statusline }
+          hl["BufferLineSeparatorSelected"] = { fg = c.bg_statusline }
+          hl["BufferLineSeparatorVisible"] = { fg = c.bg_statusline }
+          hl["BufferLineTabSeparator"] = { fg = c.bg_statusline }
+          hl["BufferLineTabSeparatorSelected"] = { fg = c.bg_statusline }
+        end
         hl["SnacksDashboardHeader"] = {
           fg = util.choose({
             c.blue,

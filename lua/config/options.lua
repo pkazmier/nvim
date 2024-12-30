@@ -3,9 +3,10 @@
 -- Add any additional options here
 
 vim.g.ai_cmp = false
+vim.g.kaz_transparency = true
 vim.g.lazyvim_python_lsp = "basedpyright"
-vim.g.kaz_transparency = false
 
+vim.opt.cursorline = not vim.g.kaz_transparency
 vim.opt.fillchars = {
   horiz = "━",
   horizup = "┻",
