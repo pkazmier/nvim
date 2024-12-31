@@ -6,7 +6,7 @@ vim.g.ai_cmp = false
 vim.g.kaz_transparency = true
 vim.g.lazyvim_python_lsp = "basedpyright"
 
-vim.opt.cursorline = not vim.g.kaz_transparency
+vim.opt.cursorlineopt = vim.g.kaz_transparency and "number" or "both"
 vim.opt.fillchars = {
   horiz = "━",
   horizup = "┻",

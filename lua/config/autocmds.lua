@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd({ "WinEnter" }, {
     if vim.tbl_contains(no_cursorlines, vim.bo.filetype) then
       return
     end
-    vim.opt_local.cursorline = not vim.g.kaz_transparency
+    vim.opt_local.cursorline = true
   end,
 })
 
