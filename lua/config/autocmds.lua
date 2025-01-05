@@ -61,6 +61,7 @@ local filetype_options = {
   markdown = {
     b = {
       snacks_indent = false,
+      trouble_lualine = false,
     },
   },
 }
