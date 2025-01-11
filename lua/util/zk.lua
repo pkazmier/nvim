@@ -18,15 +18,22 @@ function M.new_meeting(opts)
     local picker_opts = {
       title = "New Meeting",
       multi_select = false,
-      fzf_lua = {
+      snacks_picker = {
+        win = {
+          input = {
+            keys = {
+              ["<c-e>"] = { "new_note_from_input", mode = { "i", "n" } },
+            },
+          },
+        },
         actions = {
-          ["ctrl-y"] = function(selected, action_opts)
-            local title = action_opts.last_query
+          new_note_from_input = function(picker, item)
+            picker:close()
+            local title = picker.input.filter.pattern
             if title == "" then
-              return true
+              return
             end
             zk.new(vim.tbl_extend("keep", { title = title }, opts))
-            return true
           end,
         },
       },
