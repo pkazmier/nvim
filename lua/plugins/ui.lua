@@ -90,6 +90,30 @@ return {
   {
     "snacks.nvim",
     opts = {
+      picker = {
+        -- preset = "ivy",
+        layout = {
+          win = {
+            backdrop = false,
+            row = -1,
+            width = 0,
+            height = 0.4,
+            zindex = 50,
+            border = "top",
+            title = " {source} {live}",
+            title_pos = "left",
+          },
+          layout = {
+            box = "vertical",
+            { win = "input", height = 1, border = "bottom" },
+            {
+              box = "horizontal",
+              { win = "list", border = "none" },
+              { win = "preview", width = 0.6, border = "left" },
+            },
+          },
+        },
+      },
       dashboard = {
         width = 40,
         sections = function()
