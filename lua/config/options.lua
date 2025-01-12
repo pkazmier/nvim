@@ -3,7 +3,7 @@
 -- Add any additional options here
 
 vim.g.ai_cmp = false
-vim.g.kaz_transparency = true
+vim.g.kaz_transparency = false
 vim.g.lazyvim_python_lsp = "basedpyright"
 
 vim.opt.cursorlineopt = vim.g.kaz_transparency and "number" or "both"
