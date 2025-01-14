@@ -8,7 +8,7 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Disable cursorline in inactive windows
-local no_cursorlines = { "neo-tree", "trouble", "snacks_dashboard" }
+local no_cursorlines = { "neo-tree", "trouble", "snacks_dashboard", "snacks_picker_input" }
 vim.api.nvim_create_autocmd({ "WinEnter" }, {
   callback = function()
     if vim.tbl_contains(no_cursorlines, vim.bo.filetype) then
