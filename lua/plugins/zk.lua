@@ -4,7 +4,7 @@ return {
     optional = true,
     opts = {
       spec = {
-        { "<leader>z", group = "Zk Notes", icon = { icon = "󰠮", color = "yellow" } },
+        { "<leader>n", group = "Zk Notes", icon = { icon = "󰠮", color = "yellow" } },
       },
     },
   },
@@ -31,49 +31,49 @@ return {
 
     keys = {
       {
-        "<leader>zb",
+        "<leader>nb",
         function()
           require("zk.commands").get("ZkBacklinks")()
         end,
         desc = "Backlink Picker",
       },
       {
-        "<leader>zd",
+        "<leader>nd",
         function()
           require("zk.commands").get("ZkCd")()
         end,
         desc = "Change Directory",
       },
       {
-        "<leader>zr",
+        "<leader>nr",
         function()
           require("zk.commands").get("ZkIndex")()
         end,
         desc = "Refresh Index",
       },
       {
-        "<leader>zl",
+        "<leader>nl",
         function()
           require("zk.commands").get("ZkLinks")()
         end,
         desc = "Link Picker",
       },
       {
-        "<leader>zm",
+        "<leader>nm",
         function()
           require("zk.commands").get("ZkNotes")({ sort = { "created" }, match = { vim.fn.input("Match: ") } })
         end,
         desc = "Match (FTS)",
       },
       {
-        "<leader>zs",
+        "<leader>ns",
         function()
           require("zk.commands").get("ZkNotes")({ sort = { "created" } })
         end,
         desc = "Search",
       },
       {
-        "<leader>zp",
+        "<leader>np",
         function()
           local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
           if #line == 1 then
@@ -92,21 +92,21 @@ return {
         desc = "Search 1:1s",
       },
       {
-        "<leader>zn",
+        "<leader>nn",
         function()
           require("zk.commands").get("ZkNew")({ title = vim.fn.input("Title: ") })
         end,
         desc = "New Note",
       },
       {
-        "<leader>zN",
+        "<leader>nN",
         function()
           require("zk.commands").get("ZkMeeting")()
         end,
         desc = "New Meeting Note",
       },
       {
-        "<leader>zt",
+        "<leader>nt",
         function()
           require("zk.commands").get("ZkTags")()
         end,

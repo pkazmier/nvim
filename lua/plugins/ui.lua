@@ -89,6 +89,16 @@ return {
   },
   {
     "snacks.nvim",
+    keys = {
+      { "<leader>n", false },
+      {
+        "<leader>N",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
+    },
     opts = {
       ---@type snacks.picker.Config
       picker = {
