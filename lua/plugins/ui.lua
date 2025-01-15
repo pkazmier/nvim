@@ -15,6 +15,49 @@ return {
     end,
   },
   {
+    "folke/noice.nvim",
+    opts = {
+      views = {
+        cmdline_popup = {
+          position = {
+            row = 2,
+            col = "50%",
+          },
+          border = {
+            padding = {
+              left = 0,
+              right = 0,
+            },
+          },
+          size = {
+            width = "78",
+            height = "auto",
+          },
+        },
+        cmdline_popupmenu = {
+          position = {
+            row = 4,
+            col = "50%",
+          },
+          size = {
+            width = 78,
+            height = "auto",
+          },
+          border = {
+            style = { "", "", "", " ", "", "", "", " " },
+            padding = {
+              left = 0,
+              right = 0,
+            },
+          },
+          win_options = {
+            winhighlight = { Normal = "NormalFloat", FloatBorder = "Constant" },
+          },
+        },
+      },
+    },
+  },
+  {
     "folke/tokyonight.nvim",
     opts = function(_, opts)
       if vim.g.kaz_transparency then
@@ -35,6 +78,8 @@ return {
           hl["BufferLineTabSeparator"] = { fg = c.bg_statusline }
           hl["BufferLineTabSeparatorSelected"] = { fg = c.bg_statusline }
         end
+        hl["NoiceCmdlinePopup"] = hl.NormalFloat
+        hl["NoiceCmdlinePopupBorder"] = hl.Constant
         hl["SnacksDashboardHeader"] = {
           fg = util.choose({
             c.blue,
