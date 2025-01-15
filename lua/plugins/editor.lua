@@ -2,15 +2,15 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      preset = "classic",
-      win = {
-        border = { "─", "─", "─", " ", " ", " ", " ", " " },
-        title_pos = "left",
-      },
+      preset = "helix",
+      -- win = {
+      --   border = { "─", "─", "─", " ", " ", " ", " ", " " },
+      --   title_pos = "left",
+      -- },
       icons = {
         -- Helix looks better with this vertical separator. See:
         -- https://github.com/folke/which-key.nvim/discussions/922
-        -- separator = "│",
+        separator = "│",
       },
       spec = {
         { "gx" }, -- unbind for mini.operators exchange mapping
