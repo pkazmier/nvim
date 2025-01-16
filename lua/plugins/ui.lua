@@ -135,6 +135,13 @@ return {
   {
     "snacks.nvim",
     keys = {
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Open",
+      },
       { "<leader>n", false },
       {
         "<leader>N",
