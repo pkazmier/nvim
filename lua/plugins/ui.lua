@@ -154,16 +154,6 @@ return {
     opts = {
       ---@type snacks.picker.Config
       picker = {
-        -- previewers = {
-        --   git = {
-        --     native = true,
-        --   },
-        -- },
-        -- formatters = {
-        --   file = {
-        --     filename_first = false,
-        --   },
-        -- },
         win = {
           input = {
             keys = {
