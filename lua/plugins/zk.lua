@@ -62,14 +62,19 @@ return {
       {
         "<leader>nm",
         function()
-          require("zk.commands").get("ZkNotes")({ sort = { "created" }, match = { vim.fn.input("Match: ") } })
+          require("zk.commands").get("ZkNotes")({
+            sort = { "created" },
+            match = { vim.fn.input("Match: ") },
+          })
         end,
         desc = "Match (FTS)",
       },
       {
         "<leader>ns",
         function()
-          require("zk.commands").get("ZkNotes")({ sort = { "created" } })
+          require("zk.commands").get("ZkNotes")({
+            sort = { "created" },
+          })
         end,
         desc = "Search",
       },
@@ -95,7 +100,9 @@ return {
       {
         "<leader>nn",
         function()
-          require("zk.commands").get("ZkNew")({ title = vim.fn.input("Title: ") })
+          require("zk.commands").get("ZkNew")({
+            title = vim.fn.input("Title: "),
+          })
         end,
         desc = "New Note",
       },
