@@ -4,14 +4,11 @@ return {
     dev = true,
     opts = {
       preset = "helix",
-      -- win = {
-      --   border = { "─", "─", "─", " ", " ", " ", " ", " " },
-      --   title_pos = "left",
-      -- },
       icons = {
-        -- Helix looks better with this vertical separator. See:
-        -- https://github.com/folke/which-key.nvim/discussions/922
-        separator = "│",
+        -- The helix prefix looks better with this vertical separator. See:
+        -- https://github.com/folke/which-key.nvim/discussions/922 as this
+        -- requires changing which-key code (I forked it).
+        separator = " │ ",
       },
       spec = {
         { "gx" }, -- unbind for mini.operators exchange mapping
