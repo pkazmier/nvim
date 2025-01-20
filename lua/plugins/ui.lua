@@ -167,11 +167,14 @@ return {
           },
         },
         actions = {
-          cycle_layouts = require("util.snacks_picker").set_next_preferred_layout,
+          cycle_layouts = function(picker)
+            return require("util.snacks_picker").set_next_preferred_layout(picker)
+          end,
         },
         layout = {
-          -- preset = "ivy",
-          preset = require("util.snacks_picker").preferred_layout,
+          preset = function()
+            return require("util.snacks_picker").preferred_layout()
+          end,
         },
       },
       dashboard = {
