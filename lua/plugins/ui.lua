@@ -154,6 +154,11 @@ return {
     opts = {
       ---@type snacks.picker.Config
       picker = {
+        previewers = {
+          git = {
+            native = true,
+          },
+        },
         win = {
           input = {
             keys = {
