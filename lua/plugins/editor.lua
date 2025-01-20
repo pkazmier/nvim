@@ -1,6 +1,7 @@
 return {
   {
     "folke/which-key.nvim",
+    dev = true,
     opts = {
       preset = "helix",
       -- win = {
