@@ -3,6 +3,10 @@ return {
   "MeanderingProgrammer/render-markdown.nvim",
   opts = {
     render_modes = { "n", "c", "t", "i" },
+    checkbox = {
+      enable = true,
+      position = "inline",
+    },
     code = {
       sign = false,
       position = "right",
