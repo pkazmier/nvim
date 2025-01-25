@@ -36,6 +36,12 @@ return {
     end,
   },
   {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
+  },
+  {
     "stevearc/oil.nvim",
     keys = {
       { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
