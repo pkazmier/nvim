@@ -29,7 +29,7 @@ return {
         require("util.zk").new_meeting(options)
       end)
     end,
-
+    cmd = { "ZkMeeting", "ZkNotes" },
     keys = {
       {
         "<leader>nb",

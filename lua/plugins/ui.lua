@@ -223,7 +223,7 @@ return {
             { padding = 2, align = "center", text = { greeting(), hl = "header" } },
             { title = "Builtin Actions", indent = 2, padding = 1,
               { icon = " ", key = "f", desc = "Find File",       action = ":lua Snacks.dashboard.pick('files')" },
-              { icon = " ", key = "n", desc = "New File",        action = ":ene | startinsert" },
+              { icon = " ", key = "n", desc = "New Meeting",     action = ":ZkMeeting" },
               { icon = " ", key = "s", desc = "Restore Session", section = "session" },
               { icon = " ", key = "q", desc = "Quit",            action = ":qa" } },
             { title = "Recent Projects", section = "projects", indent = 2, padding = 1 },
