@@ -64,7 +64,7 @@ return {
         -- Hex colors
         hex_color = require("mini.hipatterns").gen_highlighter.hex_color({
           style = "inline",
-          inline_text = "⬤",
+          inline_text = " ",
         }),
       },
     },
