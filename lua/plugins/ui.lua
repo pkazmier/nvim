@@ -181,7 +181,7 @@ return {
         win = {
           input = {
             keys = {
-              ["<a-c>"] = { "cycle_layouts", mode = { "i", "n" } },
+              ["<a-l>"] = { "cycle_layouts", mode = { "i", "n" } },
             },
           },
         },
