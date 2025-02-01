@@ -154,25 +154,6 @@ return {
     opts = {
       ---@type snacks.picker.Config
       picker = {
-        config = function()
-          local orig_preview_file = Snacks.picker.preview.file
-          Snacks.picker.preview.file = function(ctx)
-            local retval = orig_preview_file(ctx)
-            if ctx.item.file and ctx.item.file:find("%.md$") then
-              -- render-markdown does nothing unless the buffer's ft is
-              -- markdown, so temporarily change the ft to markdown and
-              -- restore when we are done as this buf is reused by snacks.
-              local render = require("render-markdown.core.ui")
-              local saved_ft = vim.bo[ctx.buf].filetype
-              vim.bo[ctx.buf].filetype = "markdown"
-              render.update(ctx.buf, ctx.win, "Snacks", true)
-              vim.schedule(function()
-                vim.bo[ctx.buf].filetype = saved_ft
-              end)
-            end
-            return retval
-          end
-        end,
         previewers = {
           git = {
             native = true,
