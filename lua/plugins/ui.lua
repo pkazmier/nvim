@@ -154,6 +154,32 @@ return {
     opts = {
       ---@type snacks.picker.Config
       picker = {
+        sources = {
+          insert_markdown_link = {
+            name = "Insert Markdown Link",
+            cmd = "fd",
+            args = { "-e", "md", "-e", "png", "-e", "jpg" },
+            finder = "files",
+            format = "file",
+            show_empty = true,
+            hidden = false,
+            ignored = false,
+            follow = false,
+            supports_live = true,
+            confirm = function(picker, item)
+              picker:close()
+              if item then
+                local ext = vim.fn.fnamemodify(item.file, ":e")
+                local tail = vim.fn.fnamemodify(item.file, ":t")
+                local link = string.format("[%s](%s)", tail, item.file)
+                local inline = vim.tbl_contains({ "png", "jpg" }, ext)
+                vim.api.nvim_put({ (inline and "!" or "") .. link }, "c", true, true)
+                local pos = vim.api.nvim_win_get_cursor(0)
+                vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] - #link + 2 })
+              end
+            end,
+          },
+        },
         previewers = {
           git = {
             native = true,
