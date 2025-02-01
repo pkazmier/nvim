@@ -45,8 +45,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 local filetype_options = {
   go = {
     opt_local = {
-      tabstop = 8,
-      shiftwidth = 8,
+      tabstop = 4,
+      shiftwidth = 4,
       expandtab = false,
     },
   },
