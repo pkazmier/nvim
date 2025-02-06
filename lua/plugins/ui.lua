@@ -191,6 +191,12 @@ return {
               ["<a-l>"] = { "cycle_layouts", mode = { "i", "n" } },
             },
           },
+          preview = {
+            wo = {
+              number = false,
+              signcolumn = "no",
+            },
+          },
         },
         actions = {
           cycle_layouts = function(picker)
