@@ -11,7 +11,7 @@ return {
   {
     "zk-org/zk-nvim",
     -- cmd = { "ZkNotes", "ZkMeeting" },
-    dev = true,
+    dev = false,
     config = function()
       require("zk").setup({
         picker = "snacks_picker",
