@@ -1,14 +1,14 @@
 return {
   {
     "folke/which-key.nvim",
-    dev = true,
+    dev = false,
     opts = {
       preset = "helix",
       icons = {
         -- The helix prefix looks better with this vertical separator. See:
         -- https://github.com/folke/which-key.nvim/discussions/922 as this
         -- requires changing which-key code (I forked it).
-        separator = " │ ",
+        separator = "│",
       },
       spec = {
         { "gx" }, -- unbind for mini.operators exchange mapping
