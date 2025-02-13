@@ -9,10 +9,10 @@ return {
     },
     code = {
       sign = false,
-      position = "right",
+      -- position = "right",
       width = "full",
       -- min_width = min_width,
-      left_pad = 1,
+      left_pad = 3,
       right_pad = 1,
     },
     heading = {
