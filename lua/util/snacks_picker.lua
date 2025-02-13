@@ -30,26 +30,4 @@ M.set_next_preferred_layout = function(picker)
   picker:set_layout(preferred[idx])
 end
 
--- Monkey patch Snacks.picker.preview.file to provide a preview function
--- that renders markdown using the render-markdown plug-in.
-local orig_preview_file = Snacks.picker.preview.file
-Snacks.picker.preview.file = function(ctx)
-  local retval = orig_preview_file(ctx)
-  if ctx.item.file and ctx.item.file:find("%.md$") then
-    -- render-markdown does nothing unless the buffer's ft is
-    -- markdown, so temporarily change the ft to markdown and
-    -- restore when we are done as this buf is reused by snacks.
-    local render = require("render-markdown.core.ui")
-    local saved_ft = vim.bo[ctx.buf].filetype
-    vim.bo[ctx.buf].buftype = "nofile"
-    vim.bo[ctx.buf].filetype = "markdown"
-    render.update(ctx.buf, ctx.win, "Snacks", true)
-    vim.schedule(function()
-      vim.bo[ctx.buf].filetype = saved_ft
-      vim.bo[ctx.buf].buftype = ""
-    end)
-  end
-  return retval
-end
-
 return M
