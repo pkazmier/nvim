@@ -153,6 +153,7 @@ return {
     },
     opts = {
       ---@type snacks.picker.Config
+      image = { enabled = true },
       picker = {
         sources = {
           insert_markdown_link = {
