@@ -134,6 +134,7 @@ return {
   },
   {
     "snacks.nvim",
+    dev = false,
     keys = {
       {
         "<leader><space>",

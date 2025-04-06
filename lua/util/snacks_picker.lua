@@ -5,6 +5,9 @@ local M = {}
 -- pickers. See my snacks.picker config in plugins/ui.lua where I use these.
 local layouts = require("snacks.picker.config.layouts")
 
+layouts.default_Wider_preview = vim.deepcopy(layouts.default)
+layouts.default_Wider_preview.layout[2].width = 0.8
+
 layouts.ivy_taller = vim.tbl_deep_extend("keep", { layout = { height = 0.8 } }, layouts.ivy)
 
 layouts.ivy_wider_results = vim.deepcopy(layouts.ivy)
@@ -15,10 +18,11 @@ layouts.ivy_wider_preview.layout[2][2].width = 0.9
 
 local idx = 1
 local preferred = {
-  "ivy",
-  "ivy_wider_results",
-  "ivy_wider_preview",
-  "ivy_taller",
+  "default",
+  "default_Wider_preview",
+  -- "ivy_wider_results",
+  -- "ivy_wider_preview",
+  -- "ivy_taller",
 }
 
 M.preferred_layout = function()
