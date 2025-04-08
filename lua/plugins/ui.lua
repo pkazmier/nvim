@@ -3,14 +3,12 @@ return {
   {
     "akinsho/bufferline.nvim",
     opts = function(_, opts)
-      if vim.g.kaz_transparency then
-        opts.options = {
-          indicator = { style = "underline" },
-          separator_style = { "┃", "┃" },
-        }
-      else
-        opts.options = { separator_style = "slope" }
-      end
+      opts.options = vim.tbl_deep_extend("force", opts.options, vim.g.kaz_transparency and {
+        indicator = { style = "underline" },
+        separator_style = { "┃", "┃" },
+      } or {
+        separator_style = "slope",
+      })
       return opts
     end,
   },
