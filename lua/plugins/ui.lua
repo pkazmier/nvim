@@ -258,8 +258,18 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.opt.background = "light"
-      vim.cmd.colorscheme("zenbones")
+      vim.g.zenbones = {
+        darken_non_text = 30,
+        solid_float_border = true,
+      }
+      local lush = require("lush")
+      local base = require("zenbones")
+      local specs = lush.parse(function()
+        return {
+          NoiceCmdlinePopup({ base.NormalFloat }),
+        }
+      end)
+      lush.apply(lush.compile(specs))
     end,
   },
 }
