@@ -16,6 +16,56 @@ return {
     },
   },
   {
+    "folke/flash.nvim",
+    enabled = false,
+  },
+  {
+    "ggandor/leap.nvim",
+    keys = {
+      {
+        "s",
+        function()
+          require("leap").leap({
+            target_windows = { vim.api.nvim_get_current_win() },
+          })
+        end,
+        mode = { "x", "n", "o" },
+        desc = "Leap current window",
+      },
+      {
+        "S",
+        function()
+          require("leap").leap({
+            target_windows = require("leap.util").get_enterable_windows(),
+          })
+        end,
+        mode = { "n" },
+        desc = "Leap other window",
+      },
+      {
+        "gS",
+        function()
+          require("leap.treesitter").select()
+        end,
+        mode = { "x", "n", "o" },
+        desc = "Leap treesitter",
+      },
+      {
+        "gR",
+        function()
+          require("leap.remote").action()
+        end,
+        mode = { "n", "x", "o" },
+        desc = "Leap remote",
+      },
+    },
+    config = function(_, opts)
+      require("leap.user").set_repeat_keys("<enter>", "<backspace>")
+      require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+      return opts
+    end,
+  },
+  {
     "nvzone/typr",
     dependencies = "nvzone/volt",
     opts = {},
