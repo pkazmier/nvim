@@ -76,6 +76,7 @@ return {
           hl["BufferLineTabSeparator"] = { fg = c.bg_statusline }
           hl["BufferLineTabSeparatorSelected"] = { fg = c.bg_statusline }
         end
+        hl["LeapLabel"] = { fg = c.blue1, bold = true }
         hl["NoiceCmdlinePopup"] = hl.NormalFloat
         hl["NoiceCmdlinePopupBorder"] = hl.Constant
         hl["SnacksDashboardHeader"] = {
@@ -250,5 +251,10 @@ return {
         end,
       },
     },
+  },
+  {
+    "zenbones-theme/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim",
+    lazy = true,
   },
 }
