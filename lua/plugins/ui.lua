@@ -262,11 +262,18 @@ return {
         darken_non_text = 30,
         solid_float_border = true,
       }
+
+      vim.opt.background = "light"
+      vim.cmd.colorscheme("zenbones")
+
+      -- local palette = require("zenbones.palette")
       local lush = require("lush")
       local base = require("zenbones")
       local specs = lush.parse(function()
+        ---@diagnostic disable: undefined-global
         return {
           NoiceCmdlinePopup({ base.NormalFloat }),
+          NoiceCmdlinePopupBorder({ fg = base.Normal.fg }),
         }
       end)
       lush.apply(lush.compile(specs))
