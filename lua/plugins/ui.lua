@@ -258,13 +258,14 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.zenbones = {
+      local theme = "nordbones"
+      vim.g[theme] = {
         darken_non_text = 30,
+        lighten_non_text = 40,
         solid_float_border = true,
       }
-
-      vim.opt.background = "light"
-      vim.cmd.colorscheme("zenbones")
+      vim.opt.background = "dark"
+      vim.cmd.colorscheme(theme)
 
       -- local palette = require("zenbones.palette")
       local lush = require("lush")
