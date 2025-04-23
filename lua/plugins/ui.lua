@@ -255,6 +255,7 @@ return {
   {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
