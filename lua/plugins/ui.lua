@@ -253,13 +253,69 @@ return {
     },
   },
   {
+    "cdmill/neomodern.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("neomodern").setup({
+        -- plain_float = true,
+        -- optional configuration here
+      })
+      require("neomodern").load()
+    end,
+  },
+  {
+    "thesimonho/kanagawa-paper.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    opts = {
+      color_balance = {
+        ink = { brightness = 0, saturation = 0 },
+      },
+      overrides = function(colors)
+        return {}
+      end,
+    },
+  },
+  {
+    "sainnhe/gruvbox-material",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- Optionally configure and load the colorscheme
+      -- directly inside the plugin declaration.
+      vim.g.gruvbox_material_diagnostic_virtual_text = "highlighted"
+      vim.g.gruvbox_material_enable_bold = true
+      vim.g.gruvbox_material_enable_italic = true
+
+      -- stylua: ignore start
+      local config  = vim.fn["gruvbox_material#get_configuration"]()
+      local palette = vim.fn["gruvbox_material#get_palette"](config.background, config.foreground, config.colors_override)
+      local set_hl  = vim.fn["gruvbox_material#highlight"]
+
+      set_hl("LeapBackdrop",             palette.bg5,    palette.none)
+      set_hl("LeapLabel",                palette.orange, palette.none,   "bold")
+      set_hl("MiniHipatternsFixmeBody",  palette.red,    palette.bg0)
+      set_hl("MiniHipatternsFixmeColon", palette.red,    palette.red,    "bold")
+      set_hl("MiniHipatternsHackBody",   palette.yellow, palette.bg0)
+      set_hl("MiniHipatternsHackColon",  palette.yellow, palette.yellow, "bold")
+      set_hl("MiniHipatternsNoteBody",   palette.blue,   palette.bg0)
+      set_hl("MiniHipatternsNoteColon",  palette.blue,   palette.blue,   "bold")
+      set_hl("MiniHipatternsTodoBody",   palette.green,  palette.bg0)
+      set_hl("MiniHipatternsTodoColon",  palette.green,  palette.green,  "bold")
+    end,
+  },
+  {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
     enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
-      local theme = "nordbones"
+      local theme = "iosevkabones"
       vim.g[theme] = {
         darken_non_text = 30,
         lighten_non_text = 40,
