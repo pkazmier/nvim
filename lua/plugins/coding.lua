@@ -22,6 +22,20 @@ return {
     opts = {},
   },
   {
+    "echasnovski/mini.keymap",
+    opts = {},
+    config = function()
+      local map_combo = require("mini.keymap").map_combo
+      map_combo("i", "kk", "<BS><BS><Esc>[sz=gi<Right>")
+
+      local map_multistep = require("mini.keymap").map_multistep
+      map_multistep("i", "<Tab>", { "jump_after_tsnode", "jump_after_close" })
+      map_multistep("i", "<S-Tab>", { "jump_before_tsnode", "jump_before_open" })
+      map_multistep("i", "<CR>", { "nvimautopairs_cr" })
+      map_multistep("i", "<BS>", { "nvimautopairs_bs" })
+    end,
+  },
+  {
     "echasnovski/mini.operators",
     keys = {
       { "g=", mode = { "n", "v" }, desc = "Evaluate" },
