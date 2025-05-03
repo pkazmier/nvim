@@ -339,6 +339,10 @@ return {
       set_hl("MiniHipatternsNoteColon",  palette.blue,   palette.blue,   "bold")
       set_hl("MiniHipatternsTodoBody",   palette.green,  palette.bg0)
       set_hl("MiniHipatternsTodoColon",  palette.green,  palette.green,  "bold")
+      set_hl("SnacksDashboardKey",       palette.purple, palette.none,   "bold")
+      set_hl("SnacksDashboardIcon",      palette.blue,   palette.none)
+      set_hl("SnacksDashboardDesc",      palette.aqua,   palette.none)
+      set_hl("SnacksDashboardFile",      palette.aqua,   palette.none)
     end,
   },
   {
