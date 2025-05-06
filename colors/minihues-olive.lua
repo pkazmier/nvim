@@ -5,5 +5,6 @@ local opts = {
   foreground = "#c2c9c3",
 }
 hues.setup(opts)
-require("plugins.mini.hues").apply_custom_highlights(opts)
+local p = hues.make_palette(opts)
+Config.minihues_apply_custom_highlights(p)
 vim.g.colors_name = "minihues-olive"
