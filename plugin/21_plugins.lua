@@ -346,6 +346,7 @@ now(function() -- vague
 
       hl.MiniMapNormal                  = { fg = c.comment,     bg = c.line }
 
+      hl.MiniPickHeader                 = { fg = c.keyword,     gui = "bold" }
       hl.MiniPickMatchCurrent           = { fg = c.constant,    bg = c.line }
       hl.MiniPickMatchRanges            = { fg = c.delta,       gui = "bold" }
       hl.MiniPickPrompt                 = { fg = c.constant }
