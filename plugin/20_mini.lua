@@ -38,7 +38,10 @@ now(function() -- mini.notify
     return MiniNotify.default_sort(vim.tbl_filter(predicate, notif_arr))
   end
 
-  require("mini.notify").setup({ content = { sort = custom_sort } })
+  require("mini.notify").setup({
+    content = { sort = custom_sort },
+    window = { max_width_share = 0.75 },
+  })
   vim.notify = MiniNotify.make_notify()
 end)
 
