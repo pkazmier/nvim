@@ -302,6 +302,14 @@ end)
 now(function() -- vague
   add({ source = "vague2k/vague.nvim" })
   require("vague").setup({
+    plugins = {
+      lsp = {
+        diagnostic_info = "italic",
+        diagnostic_warn = "italic",
+        diagnostic_error = "italic",
+        diagnostic_hint = "italic",
+      },
+    },
     -- stylua: ignore
     on_highlights = function(hl, c)
       hl.Directory                      = { fg = c.keyword }
