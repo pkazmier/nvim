@@ -106,7 +106,7 @@ now(function() -- mini.statusline
         -- stylua: ignore start
         local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
         local git           = MiniStatusline.section_git({ trunc_width = 40 })
-        local diff          = MiniStatusline.section_diff({ trunc_width = 70 })
+        local diff          = MiniStatusline.section_diff({ trunc_width = 80 })
         local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 60 })
         local lsp           = MiniStatusline.section_lsp({ trunc_width = 40 })
         local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 100 })
