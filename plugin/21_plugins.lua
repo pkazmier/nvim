@@ -304,12 +304,13 @@ now(function() -- vague
   require("vague").setup({
     -- stylua: ignore
     on_highlights = function(hl, c)
-      hl.CurSearch                      = { fg = c.bg,          bg = c.constant }
+      hl.CurSearch                      = { fg = c.bg,          bg= c.constant }
       hl.Directory                      = { fg = c.keyword }
-      hl.IncSearch                      = { fg = c.bg,          bg = c.constant }
+      hl.IncSearch                      = { fg = c.bg,          bg= c.constant }
       hl.LeapBackdrop                   = { fg = c.comment }
       hl.LeapLabel                      = { fg = c.delta,       gui = "bold" }
-      hl.StatusLine                     = { fg = c.line,        bg = c.floatBorder }
+      hl.StatusLine                     = { fg = c.operator,    bg = c.line }
+      hl.WinSeparator                   = { fg = c.line }
 
       hl.MiniClueDescGroup              = { fg = c.type }
       hl.MiniClueNextKey                = { fg = c.parameter,   gui = "bold" }
@@ -348,11 +349,11 @@ now(function() -- vague
 
       -- Statusline
       hl.MiniStatuslineDevinfo          = { fg = c.fg,          bg = c.search}
-      hl.MiniStatuslineDirectory        = { fg = c.line,        bg = c.floatBorder }
+      hl.MiniStatuslineDirectory        = { fg = c.operator,    bg = c.line }
       hl.MiniStatuslineFileinfo         = { fg = c.fg,          bg = c.search}
-      hl.MiniStatuslineFilename         = { fg = c.line,        bg = c.floatBorder, gui = "bold" }
-      hl.MiniStatuslineFilenameModified = { fg = c.line,        bg = c.floatBorder, gui = "bold" }
-      hl.MiniStatuslineInactive         = { fg = c.line,        bg = c.floatBorder }
+      hl.MiniStatuslineFilename         = { fg = c.operator,    bg = c.line, gui = "bold" }
+      hl.MiniStatuslineFilenameModified = { fg = c.operator,    bg = c.line, gui = "bold" }
+      hl.MiniStatuslineInactive         = { fg = c.comment,     bg = c.line }
       hl.MiniStatuslineModeCommand      = { fg = c.fg,          bg = c.comment }
       hl.MiniStatuslineModeInsert       = { fg = c.bg,          bg = c.plus}
       hl.MiniStatuslineModeNormal       = { fg = c.bg,          bg = c.keyword }
@@ -361,14 +362,14 @@ now(function() -- vague
       hl.MiniStatuslineModeVisual       = { fg = c.bg,          bg = c.constant}
 
       -- Tabline
-      hl.MiniTablineCurrent             = { fg = c.constant,    bg = c.line,        sp = c.floatBorder, gui = "bold,underline" }
-      hl.MiniTablineFill                = {                     bg = c.bg,          sp = c.floatBorder, gui = "underline" }
-      hl.MiniTablineHidden              = { fg = c.floatBorder, bg = c.line,        sp = c.floatBorder, gui = "underline" }
-      hl.MiniTablineVisible             = { fg = c.keyword,     bg = c.line,        sp = c.floatBorder, gui = "underline" }
-      hl.MiniTablineModifiedCurrent     = { fg = c.bg,          bg = c.constant,    sp = c.floatBorder, gui = "bold,underline" }
-      hl.MiniTablineModifiedHidden      = { fg = c.line,        bg = c.floatBorder, sp = c.floatBorder, gui = "underline" }
-      hl.MiniTablineModifiedVisible     = { fg = c.bg,          bg = c.keyword,     sp = c.floatBorder, gui = "underline" }
-      hl.MiniTablineTabpagesection      = { fg = c.fg,          bg = c.comment,     sp = c.floatBorder, gui = "bold,underline" }
+      hl.MiniTablineCurrent             = { fg = c.constant,    bg = c.line,        sp = c.line, gui = "bold,underline" }
+      hl.MiniTablineFill                = {                     bg = c.bg,          sp = c.line, gui = "underline" }
+      hl.MiniTablineHidden              = { fg = c.comment,     bg = c.line,        sp = c.line, gui = "underline" }
+      hl.MiniTablineVisible             = { fg = c.operator,    bg = c.line,        sp = c.line, gui = "underline" }
+      hl.MiniTablineModifiedCurrent     = { fg = c.bg,          bg = c.constant,    sp = c.line, gui = "bold,underline" }
+      hl.MiniTablineModifiedHidden      = { fg = c.line,        bg = c.comment,     sp = c.line, gui = "underline" }
+      hl.MiniTablineModifiedVisible     = { fg = c.bg,          bg = c.operator,    sp = c.line, gui = "underline" }
+      hl.MiniTablineTabpagesection      = { fg = c.fg,          bg = c.comment,     sp = c.line, gui = "bold,underline" }
 
       -- Markdown
       hl["@markup.heading.1"]           = { fg = c.keyword }
@@ -389,7 +390,7 @@ now(function() -- vague
       -- Treesitter Context
       hl.TreesitterContext              = { bg = c.line }
       hl.TreesitterContextLineNumber    = { fg = c.comment,     bg = c.line }
-      hl.TreesitterContextBottom        = { sp = c.floatBorder, gui = "underdotted" }
+      hl.TreesitterContextBottom        = { sp = c.comment,     gui = "underdotted" }
     end,
   })
   vim.cmd.colorscheme("vague")
