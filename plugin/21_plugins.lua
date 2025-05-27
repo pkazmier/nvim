@@ -354,12 +354,12 @@ now(function() -- vague
       hl.MiniStatuslineFilename         = { fg = c.operator,    bg = c.line, gui = "bold" }
       hl.MiniStatuslineFilenameModified = { fg = c.delta,       bg = c.line, gui = "bold" }
       hl.MiniStatuslineInactive         = { fg = c.comment,     bg = c.line }
-      hl.MiniStatuslineModeCommand      = { fg = c.fg,          bg = c.comment }
+      hl.MiniStatuslineModeCommand      = { fg = c.bg,          bg = c.string }
       hl.MiniStatuslineModeInsert       = { fg = c.bg,          bg = c.plus}
       hl.MiniStatuslineModeNormal       = { fg = c.bg,          bg = c.keyword }
       hl.MiniStatuslineModeOther        = { fg = c.bg,          bg = c.keyword }
       hl.MiniStatuslineModeReplace      = { fg = c.bg,          bg = c.func}
-      hl.MiniStatuslineModeVisual       = { fg = c.bg,          bg = c.constant}
+      hl.MiniStatuslineModeVisual       = { fg = c.bg,          bg = c.parameter }
 
       hl.MiniTablineCurrent             = { fg = c.constant,    bg = c.line,        sp = c.line, gui = "bold,underline" }
       hl.MiniTablineFill                = {                     bg = c.bg,          sp = c.line, gui = "underline" }
