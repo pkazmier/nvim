@@ -304,13 +304,14 @@ now(function() -- vague
   require("vague").setup({
     -- stylua: ignore
     on_highlights = function(hl, c)
-      hl.CurSearch                      = { fg = c.bg,          bg= c.constant }
       hl.Directory                      = { fg = c.keyword }
-      hl.IncSearch                      = { fg = c.bg,          bg= c.constant }
-      hl.LeapBackdrop                   = { fg = c.comment }
-      hl.LeapLabel                      = { fg = c.delta,       gui = "bold" }
+      hl.CurSearch                      = { fg = c.bg,          bg = c.constant }
+      hl.IncSearch                      = { fg = c.bg,          bg = c.constant }
       hl.StatusLine                     = { fg = c.operator,    bg = c.line }
       hl.WinSeparator                   = { fg = c.line }
+
+      hl.LeapBackdrop                   = { fg = c.comment }
+      hl.LeapLabel                      = { fg = c.delta,       gui = "bold" }
 
       hl.MiniClueDescGroup              = { fg = c.type }
       hl.MiniClueNextKey                = { fg = c.parameter,   gui = "bold" }
@@ -318,41 +319,40 @@ now(function() -- vague
 
       hl.MiniFilesTitleFocused          = { fg = c.constant,    gui = "bold" }
 
-      hl.MiniHipatternsFixme            = { fg = c.bg,          bg = c.error }
       hl.MiniHipatternsFixmeBody        = { fg = c.error }
-      hl.MiniHipatternsFixmeColon       = { bg = c.error,       fg = c.error,       gui = "bold" }
-      hl.MiniHipatternsHack             = { fg = c.bg,          bg = c.warning }
       hl.MiniHipatternsHackBody         = { fg = c.warning }
-      hl.MiniHipatternsHackColon        = { bg = c.warning,     fg = c.warning,     gui = "bold" }
-      hl.MiniHipatternsNote             = { fg = c.bg,          bg = c.plus }
       hl.MiniHipatternsNoteBody         = { fg = c.plus }
-      hl.MiniHipatternsNoteColon        = { bg = c.plus,        fg = c.plus,        gui = "bold" }
-      hl.MiniHipatternsTodo             = { fg = c.bg,          bg = c.hint }
       hl.MiniHipatternsTodoBody         = { fg = c.hint }
+      hl.MiniHipatternsFixme            = { fg = c.bg,          bg = c.error }
+      hl.MiniHipatternsHack             = { fg = c.bg,          bg = c.warning }
+      hl.MiniHipatternsNote             = { fg = c.bg,          bg = c.plus }
+      hl.MiniHipatternsTodo             = { fg = c.bg,          bg = c.hint }
+      hl.MiniHipatternsFixmeColon       = { bg = c.error,       fg = c.error,       gui = "bold" }
+      hl.MiniHipatternsHackColon        = { bg = c.warning,     fg = c.warning,     gui = "bold" }
+      hl.MiniHipatternsNoteColon        = { bg = c.plus,        fg = c.plus,        gui = "bold" }
       hl.MiniHipatternsTodoColon        = { bg = c.hint,        fg = c.hint,        gui = "bold" }
 
       hl.MiniIndentscopeSymbol          = { fg = c.comment }
+
       hl.MiniJump                       = { sp = c.delta,       gui = "undercurl"}
+
       hl.MiniMapNormal                  = { fg = c.comment,     bg = c.line }
 
-      -- Picker
       hl.MiniPickMatchCurrent           = { fg = c.constant,    bg = c.line }
       hl.MiniPickMatchRanges            = { fg = c.delta,       gui = "bold" }
       hl.MiniPickPrompt                 = { fg = c.constant }
 
-      -- Starter
       hl.MiniStarterInactive            = { fg = c.comment }
       hl.MiniStarterItemPrefix          = { fg = c.string }
       hl.MiniStarterQuery               = { fg = c.delta,       gui = "bold" }
       hl.MiniStarterHeader              = { fg = c.keyword,     gui = "bold" }
       hl.MiniStarterSection             = { fg = c.func,        gui = "bold" }
 
-      -- Statusline
       hl.MiniStatuslineDevinfo          = { fg = c.fg,          bg = c.search}
       hl.MiniStatuslineDirectory        = { fg = c.operator,    bg = c.line }
       hl.MiniStatuslineFileinfo         = { fg = c.fg,          bg = c.search}
       hl.MiniStatuslineFilename         = { fg = c.operator,    bg = c.line, gui = "bold" }
-      hl.MiniStatuslineFilenameModified = { fg = c.operator,    bg = c.line, gui = "bold" }
+      hl.MiniStatuslineFilenameModified = { fg = c.delta,       bg = c.line, gui = "bold" }
       hl.MiniStatuslineInactive         = { fg = c.comment,     bg = c.line }
       hl.MiniStatuslineModeCommand      = { fg = c.fg,          bg = c.comment }
       hl.MiniStatuslineModeInsert       = { fg = c.bg,          bg = c.plus}
@@ -361,7 +361,6 @@ now(function() -- vague
       hl.MiniStatuslineModeReplace      = { fg = c.bg,          bg = c.func}
       hl.MiniStatuslineModeVisual       = { fg = c.bg,          bg = c.constant}
 
-      -- Tabline
       hl.MiniTablineCurrent             = { fg = c.constant,    bg = c.line,        sp = c.line, gui = "bold,underline" }
       hl.MiniTablineFill                = {                     bg = c.bg,          sp = c.line, gui = "underline" }
       hl.MiniTablineHidden              = { fg = c.comment,     bg = c.line,        sp = c.line, gui = "underline" }
@@ -369,9 +368,8 @@ now(function() -- vague
       hl.MiniTablineModifiedCurrent     = { fg = c.bg,          bg = c.constant,    sp = c.line, gui = "bold,underline" }
       hl.MiniTablineModifiedHidden      = { fg = c.line,        bg = c.comment,     sp = c.line, gui = "underline" }
       hl.MiniTablineModifiedVisible     = { fg = c.bg,          bg = c.operator,    sp = c.line, gui = "underline" }
-      hl.MiniTablineTabpagesection      = { fg = c.fg,          bg = c.comment,     sp = c.line, gui = "bold,underline" }
+      hl.MiniTablineTabpagesection      = { fg = c.fg,          bg = c.search,      sp = c.line, gui = "underline" }
 
-      -- Markdown
       hl["@markup.heading.1"]           = { fg = c.keyword }
       hl["@markup.heading.2"]           = { fg = c.parameter }
       hl["@markup.heading.3"]           = { fg = c.type }
@@ -387,10 +385,8 @@ now(function() -- vague
       hl.RenderMarkdownTableRow         = { fg = c.keyword }
       hl.RenderMarkdownCode             = { bg = c.visual }
 
-      -- Treesitter Context
-      hl.TreesitterContext              = { bg = c.line }
-      hl.TreesitterContextLineNumber    = { fg = c.comment,     bg = c.line }
-      hl.TreesitterContextBottom        = { sp = c.comment,     gui = "underdotted" }
+      hl.TreesitterContextLineNumber    = { fg = c.comment }
+      hl.TreesitterContextBottom        = { sp = c.comment, gui = "underdotted" }
     end,
   })
   vim.cmd.colorscheme("vague")
