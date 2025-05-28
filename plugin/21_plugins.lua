@@ -321,7 +321,7 @@ now(function() -- vague
       hl.LeapBackdrop                   = { fg = c.comment }
       hl.LeapLabel                      = { fg = c.delta,       gui = "bold" }
 
-      hl.MiniClueDescGroup              = { fg = c.type }
+      hl.MiniClueDescGroup              = { fg = c.keyword }
       hl.MiniClueNextKey                = { fg = c.parameter,   gui = "bold" }
       hl.MiniClueNextKeyWithPostkeys    = { fg = c.func,        gui = "bold" }
 
