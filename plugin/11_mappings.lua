@@ -148,7 +148,7 @@ map("n", L("qs"),  C("lua Config.session_save()"),                          "Sav
 
 -- Visits
 map("n", L("va"),  C("lua MiniVisits.add_label()"),                         "Add label")
-map("n", L("vl"),  C("Pick visit_labels"),                                  "Find visited labels")
+map("n", L("vl"),  C("Pick visit_labels cwd=''"),                           "Find visited labels")
 map("n", L("vr"),  C("lua MiniVisits.remove_label()"),                      "Remove label")
 map("n", L("vv"),  C("Pick visit_paths cwd=''"),                            "Visit paths (all)")
 map("n", L("vV"),  C("Pick visit_paths"),                                   "Visit paths (cwd)")
