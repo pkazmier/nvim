@@ -379,23 +379,35 @@ now(function() -- vague
       hl.MiniTablineModifiedVisible     = { fg = c.bg,          bg = c.operator,    sp = c.line, gui = "underline" }
       hl.MiniTablineTabpagesection      = { fg = c.fg,          bg = c.search,      sp = c.line, gui = "underline" }
 
-      hl["@markup.heading.1"]           = { fg = c.keyword }
-      hl["@markup.heading.2"]           = { fg = c.parameter }
-      hl["@markup.heading.3"]           = { fg = c.type }
-      hl["@markup.heading.4"]           = { fg = c.operator }
-      hl["@markup.heading.5"]           = { fg = c.func }
-      hl["@markup.heading.6"]           = { fg = c.property }
-      hl.RenderMarkdownH1Bg             = { bg = c.line }
-      hl.RenderMarkdownH2Bg             = { bg = c.line }
-      hl.RenderMarkdownH3Bg             = { bg = c.line }
-      hl.RenderMarkdownH4Bg             = { bg = c.line }
-      hl.RenderMarkdownH5Bg             = { bg = c.line }
-      hl.RenderMarkdownH6Bg             = { bg = c.line }
+      hl.RenderMarkdownBullet           = { fg = c.plus }
       hl.RenderMarkdownTableRow         = { fg = c.keyword }
-      hl.RenderMarkdownCode             = { bg = c.visual }
+      hl.RenderMarkdownCode             = { bg = c.line }
 
       hl.TreesitterContextLineNumber    = { fg = c.comment }
-      hl.TreesitterContextBottom        = { sp = c.comment, gui = "underdotted" }
+      hl.TreesitterContextBottom        = { sp = c.comment,   gui = "underdotted" }
+
+      hl["@markup.strong"]              = { fg = c.keyword,   gui = "bold" }
+      hl["@markup.italic"]              = { fg = c.keyword,   gui = "italic" }
+      hl["@markup.heading.1"]           = { fg = c.constant,  gui = "bold" }
+      hl["@markup.heading.2"]           = { fg = c.parameter, gui = "bold" }
+      hl["@markup.heading.3"]           = { fg = c.type,      gui = "bold" }
+      hl["@markup.heading.4"]           = { fg = c.operator,  gui = "bold" }
+      hl["@markup.heading.5"]           = { fg = c.plus,      gui = "bold" }
+      hl["@markup.heading.6"]           = { fg = c.func,      gui = "bold" }
+
+      -- Compute a nice background color for markup headings based on the
+      -- foreground color of each level. Use mini.colors to adjust the colors.
+      local groups = {}
+      for i = 1, 6 do
+        groups["h"..i] = hl["@markup.heading."..i]
+      end
+      local cs = require("mini.colors").as_colorscheme({ groups = groups })
+      cs = cs:chan_invert('lightness', { gamut_clip = 'cusp'})
+      cs = cs:chan_add('lightness', -5)
+      for i = 1, 6 do
+        local bg = cs.groups["h"..i].fg
+        hl["RenderMarkdownH"..i.."Bg"] = { bg = bg }
+      end
     end,
   })
   vim.cmd.colorscheme("vague")
