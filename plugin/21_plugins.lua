@@ -278,6 +278,7 @@ later(function() -- toggleterm
 
   require("toggleterm").setup({
     direction = "float",
+    highlights = { FloatBorder = { link = "FloatBorder" } },
     open_mapping = [[<c-\>]],
     on_create = function(term)
       local opts = { buffer = term.bufnr }
@@ -290,6 +291,7 @@ later(function() -- toggleterm
     local lazygit = require("toggleterm.terminal").Terminal:new({
       cmd = "lazygit",
       hidden = true,
+      highlights = { FloatBorder = { link = "FloatBorder" } },
       direction = "float",
       on_open = function(term)
         vim.keymap.del("t", "<Esc><Esc>", { buffer = term.bufnr })
@@ -312,6 +314,8 @@ now(function() -- vague
     },
     -- stylua: ignore
     on_highlights = function(hl, c)
+      hl.Added                          = { fg = c.plus }
+      hl.Changed                        = { fg = c.delta }
       hl.Directory                      = { fg = c.keyword }
       hl.CurSearch                      = { fg = c.bg,          bg = c.constant }
       hl.IncSearch                      = { fg = c.bg,          bg = c.constant }
