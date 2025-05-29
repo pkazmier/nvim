@@ -514,7 +514,7 @@ later(function() -- mini.operators
   end
   remap("n", "gx", "gX")
   remap("x", "gx", "gX")
-  MiniClue.set_mapping_desc("n", "gX", "Open file or URI")
+  MiniClue.set_mapping_desc({ "n", "x" }, "gX", "Open file or URI")
 
   require("mini.operators").setup()
 end)
