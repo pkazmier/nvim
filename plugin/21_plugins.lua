@@ -384,16 +384,16 @@ now(function() -- vague
       hl.RenderMarkdownCode             = { bg = c.line }
 
       hl.TreesitterContextLineNumber    = { fg = c.comment }
-      hl.TreesitterContextBottom        = { sp = c.comment,   gui = "underdotted" }
+      hl.TreesitterContextBottom        = { sp = c.comment,     gui = "underdotted" }
 
-      hl["@markup.strong"]              = { fg = c.keyword,   gui = "bold" }
-      hl["@markup.italic"]              = { fg = c.keyword,   gui = "italic" }
-      hl["@markup.heading.1"]           = { fg = c.constant,  gui = "bold" }
-      hl["@markup.heading.2"]           = { fg = c.parameter, gui = "bold" }
-      hl["@markup.heading.3"]           = { fg = c.type,      gui = "bold" }
-      hl["@markup.heading.4"]           = { fg = c.operator,  gui = "bold" }
-      hl["@markup.heading.5"]           = { fg = c.plus,      gui = "bold" }
-      hl["@markup.heading.6"]           = { fg = c.func,      gui = "bold" }
+      hl["@markup.strong"]              = { fg = c.keyword,     gui = "bold" }
+      hl["@markup.italic"]              = { fg = c.keyword,     gui = "italic" }
+      hl["@markup.heading.1"]           = { fg = c.constant,    gui = "bold" }
+      hl["@markup.heading.2"]           = { fg = c.parameter,   gui = "bold" }
+      hl["@markup.heading.3"]           = { fg = c.type,        gui = "bold" }
+      hl["@markup.heading.4"]           = { fg = c.operator,    gui = "bold" }
+      hl["@markup.heading.5"]           = { fg = c.plus,        gui = "bold" }
+      hl["@markup.heading.6"]           = { fg = c.func,        gui = "bold" }
 
       -- Compute a nice background color for markup headings based on the
       -- foreground color of each level. Use mini.colors to adjust the colors.
