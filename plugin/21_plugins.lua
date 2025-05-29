@@ -277,7 +277,7 @@ later(function() -- toggleterm
   add("akinsho/toggleterm.nvim")
 
   require("toggleterm").setup({
-    direction = "float",
+    -- direction = "float",
     highlights = { FloatBorder = { link = "FloatBorder" } },
     open_mapping = [[<c-\>]],
     on_create = function(term)
