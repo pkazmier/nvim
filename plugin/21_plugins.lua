@@ -388,8 +388,9 @@ now(function() -- vague
       hl.RenderMarkdownTableRow         = { fg = c.keyword }
       hl.RenderMarkdownCode             = { bg = c.line }
 
-      hl.TreesitterContextLineNumber    = { fg = c.comment }
+      hl.TreesitterContext              = { bg = c.line }
       hl.TreesitterContextBottom        = { sp = c.comment,     gui = "underdotted" }
+      hl.TreesitterContextLineNumber    = { fg = c.comment,     bg = c.line }
 
       hl["@markup.strong"]              = { fg = c.keyword,     gui = "bold" }
       hl["@markup.italic"]              = { fg = c.keyword,     gui = "italic" }
