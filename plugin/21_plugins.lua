@@ -306,10 +306,11 @@ now(function() -- vague
   require("vague").setup({
     plugins = {
       lsp = {
+        diagnostic_ok = "italic",
+        diagnostic_hint = "italic",
         diagnostic_info = "italic",
         diagnostic_warn = "italic",
         diagnostic_error = "italic",
-        diagnostic_hint = "italic",
       },
     },
     -- stylua: ignore
