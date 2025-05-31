@@ -211,6 +211,16 @@ later(function() -- lsp
   }
 end)
 
+later(function() -- quicker
+  add("stevearc/quicker.nvim")
+  require("quicker").setup({
+    keys = {
+      { ">", "<Cmd>lua require('quicker').expand({ add_to_existing = true })<Cr>", desc = "Expand quickfix context" },
+      { "<", "<Cmd>lua require('quicker').collapse()<Cr>", desc = "Collapse quickfix context" },
+    },
+  })
+end)
+
 later(function() -- render-markdown
   add("MeanderingProgrammer/render-markdown.nvim")
   require("render-markdown").setup({
@@ -320,6 +330,7 @@ now(function() -- vague
       hl.Directory                      = { fg = c.keyword }
       hl.CurSearch                      = { fg = c.bg,          bg = c.constant }
       hl.IncSearch                      = { fg = c.bg,          bg = c.constant }
+      -- hl.QuickFixLine                   = { fg = c.constant,    gui = "bold" }
       hl.StatusLine                     = { fg = c.operator,    bg = c.line }
       hl.WinSeparator                   = { fg = c.line }
 

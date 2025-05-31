@@ -155,7 +155,7 @@ map("n", L("vV"),  C("Pick visit_paths"),                                   "Vis
 
 -- Window
 map("n", L("wz"),  C("lua MiniMisc.zoom()"),                                "Zoom window")
-map("n", L("wl"),  C("lopen"),                                              "Open location list")
-map("n", L("wq"),  C("copen"),                                              "Open quickfix")
+map("n", L("wl"),  C("lua require('quicker').toggle({ loclist = true })"),  "Open location list")
+map("n", L("wq"),  C("lua require('quicker').toggle()"),                    "Open quickfix")
 
 --stylua: ignore end
