@@ -726,7 +726,7 @@ end)
 
 later(function() -- everforest
   add("sainnhe/everforest")
-  vim.g.everforest_float_style = "bright"
+  vim.g.everforest_float_style = "dim"
   vim.g.everforest_background = "medium"
 
   vim.api.nvim_create_autocmd("ColorScheme", {
@@ -788,7 +788,7 @@ end)
 
 later(function() -- gruvbox-material
   add("sainnhe/gruvbox-material")
-  vim.g.gruvbox_material_float_style = "bright"
+  vim.g.gruvbox_material_float_style = "dim"
   vim.g.gruvbox_material_background = "medium"
 
   vim.api.nvim_create_autocmd("ColorScheme", {
