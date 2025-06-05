@@ -238,23 +238,20 @@ later(function() -- render-markdown
       right_pad = 1,
     },
     heading = {
-      -- backgrounds = {},
+      -- backgrounds = { "DiffChange" },
       sign = false,
       border = true,
-      -- width = "block",
-      -- min_width = min_width,
-      -- below = "▔",
-      -- above = "▁",
+      border_prefix = true,
       left_pad = 0,
       right_pad = 4,
       position = "overlay",
       icons = {
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
+        "█ ",
+        "██ ",
+        "███ ",
+        "████ ",
+        "█████ ",
+        "██████ ",
       },
     },
   })
@@ -311,7 +308,125 @@ later(function() -- toggleterm
   end
 end)
 
-now(function() -- vague
+now_if_args(function() -- vim-helm
+  add("towolf/vim-helm")
+end)
+
+later(function() -- zk
+  add("zk-org/zk-nvim")
+  local cmds = require("zk.commands")
+
+  require("zk").setup({
+    picker = "minipick",
+    lsp = {
+      config = {
+        cmd = { "zk", "lsp" },
+        name = "zk",
+      },
+      auto_attach = { enabled = true, filetypes = { "markdown" } },
+    },
+  })
+
+  cmds.add("ZkNewMeeting", function(opts)
+    opts = vim.tbl_extend("force", { dir = "meetings" }, opts or {})
+    Config.new_meeting(opts)
+  end)
+
+  cmds.add("ZkFullTextSearch", function(opts)
+    opts = opts or {}
+    if not opts.match then
+      opts.match = { vim.fn.input("Match: ") }
+    end
+    opts = vim.tbl_extend("keep", opts, {
+      sort = { "created" },
+    })
+    cmds.get("ZkNotes")(opts)
+  end)
+
+  cmds.add("ZkPriorMeetings", function(_)
+    local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
+    if #line == 1 then
+      local meeting = line[1]:match("^# %d%d%d%d%-%d%d%-%d%d: (.+)")
+      if meeting then
+        local filter = 'title: "' .. meeting .. '"'
+        local bufname = vim.api.nvim_buf_get_name(0)
+        cmds.get("ZkNotes")({
+          excludeHrefs = { bufname },
+          sort = { "created" },
+          match = { filter },
+        })
+      end
+    end
+  end)
+end)
+
+-- Other colorschemes I like to use
+now(function() -- kanagawa
+  add("rebelot/kanagawa.nvim")
+  require("kanagawa").setup({
+    colors = {
+      palette = {
+        oldWhite = "#C7C19F", -- slightly less yellow
+        fujiWhite = "#CFCAB0", -- slightly dimmer
+      },
+    },
+    overrides = function(colors)
+      local t = colors.theme
+      local c = colors.palette
+      return {
+        MiniClueDescGroup = { fg = c.crystalBlue },
+        MiniClueNextKey = { fg = c.oniViolet },
+
+        MiniHipatternsFixmeBody = { fg = t.diag.error },
+        MiniHipatternsFixme = { fg = c.bg, bg = t.diag.error },
+        MiniHipatternsFixmeColon = { bg = t.diag.error, fg = t.diag.error, bold = true },
+        MiniHipatternsHackBody = { fg = t.diag.warning },
+        MiniHipatternsHack = { fg = c.bg, bg = t.diag.warning },
+        MiniHipatternsHackColon = { bg = t.diag.warning, fg = t.diag.warning, bold = true },
+        MiniHipatternsNoteBody = { fg = t.diag.info },
+        MiniHipatternsNote = { fg = c.bg, bg = t.diag.info },
+        MiniHipatternsNoteColon = { bg = t.diag.info, fg = t.diag.info, bold = true },
+        MiniHipatternsTodoBody = { fg = t.diag.hint },
+        MiniHipatternsTodo = { fg = c.bg, bg = t.diag.hint },
+        MiniHipatternsTodoColon = { bg = t.diag.hint, fg = t.diag.hint, bold = true },
+
+        MiniFilesTitleFocused = { fg = t.ui.fg_dim, bold = true },
+
+        MiniPickMatchRanges = { fg = t.syn.fun },
+
+        MiniStarterInactive = { fg = c.fujiGray },
+        MiniStarterItemBullet = { fg = c.dragonBlue, bold = true },
+        MiniStarterItemPrefix = { fg = c.carpYellow, bold = true },
+        MiniStarterQuery = { fg = c.crystalBlue, bold = true },
+        MiniStarterSection = { fg = c.waveAqua1, bold = true },
+        MiniStarterHeader = { fg = c.dragonBlue },
+        --         MiniStarterHeader = { fg = c.springBlue },
+
+        MiniStatuslineModeNormal = { bg = c.springBlue },
+        MiniStatuslineFileinfo = { bg = t.ui.bg_visual },
+        MiniStatuslineDevinfo = { bg = t.ui.bg_visual },
+        MiniStatuslineDirectory = { fg = c.oldWhite },
+        MiniStatuslineFilename = { fg = c.fujiWhite, bold = true },
+        MiniStatuslineFilenameModified = { fg = c.fujiWhite, bold = true },
+
+        RenderMarkdownBullet = { fg = c.waveAqua2 },
+        RenderMarkdownTableRow = { fg = c.oniViolet },
+        RenderMarkdownH1Bg = { link = "DiffChange" },
+        RenderMarkdownH2Bg = { link = "DiffChange" },
+        RenderMarkdownH3Bg = { link = "DiffChange" },
+        RenderMarkdownH4Bg = { link = "DiffChange" },
+        RenderMarkdownH5Bg = { link = "DiffChange" },
+        RenderMarkdownH6Bg = { link = "DiffChange" },
+
+        ["@markup.strong"] = { fg = t.syn.keyword, bold = true },
+        ["@markup.italic"] = { fg = t.syn.keyword, italic = true },
+      }
+    end,
+  })
+  vim.cmd.colorscheme("kanagawa")
+end)
+
+later(function() -- vague
   add({ source = "vague2k/vague.nvim" })
   require("vague").setup({
     plugins = {
@@ -427,62 +542,8 @@ now(function() -- vague
       end
     end,
   })
-  vim.cmd.colorscheme("vague")
 end)
 
-now_if_args(function() -- vim-helm
-  add("towolf/vim-helm")
-end)
-
-later(function() -- zk
-  add("zk-org/zk-nvim")
-  local cmds = require("zk.commands")
-
-  require("zk").setup({
-    picker = "minipick",
-    lsp = {
-      config = {
-        cmd = { "zk", "lsp" },
-        name = "zk",
-      },
-      auto_attach = { enabled = true, filetypes = { "markdown" } },
-    },
-  })
-
-  cmds.add("ZkNewMeeting", function(opts)
-    opts = vim.tbl_extend("force", { dir = "meetings" }, opts or {})
-    Config.new_meeting(opts)
-  end)
-
-  cmds.add("ZkFullTextSearch", function(opts)
-    opts = opts or {}
-    if not opts.match then
-      opts.match = { vim.fn.input("Match: ") }
-    end
-    opts = vim.tbl_extend("keep", opts, {
-      sort = { "created" },
-    })
-    cmds.get("ZkNotes")(opts)
-  end)
-
-  cmds.add("ZkPriorMeetings", function(_)
-    local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)
-    if #line == 1 then
-      local meeting = line[1]:match("^# %d%d%d%d%-%d%d%-%d%d: (.+)")
-      if meeting then
-        local filter = 'title: "' .. meeting .. '"'
-        local bufname = vim.api.nvim_buf_get_name(0)
-        cmds.get("ZkNotes")({
-          excludeHrefs = { bufname },
-          sort = { "created" },
-          match = { filter },
-        })
-      end
-    end
-  end)
-end)
-
--- Other colorschemes I like to use
 later(function() -- catppuccin
   add({ source = "catppuccin/nvim", name = "catppuccin" })
   require("catppuccin").setup({
