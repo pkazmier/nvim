@@ -376,6 +376,16 @@ now(function() -- kanagawa
         oldWhite = "#C7C19F", -- slightly less yellow
         fujiWhite = "#CFCAB0", -- slightly dimmer
       },
+      theme = {
+        wave = {
+          ui = {
+            float = {
+              bg = "#1a1a22",
+              bg_border = "#1a1a22",
+            },
+          },
+        },
+      },
     },
     overrides = function(colors)
       local t = colors.theme
@@ -419,12 +429,12 @@ now(function() -- kanagawa
         MiniStatuslineFilename = { fg = c.fujiWhite, bold = true },
         MiniStatuslineFilenameModified = { fg = c.fujiWhite, bold = true },
 
-        RenderMarkdownBullet = { fg = c.boatYellow2 },
+        RenderMarkdownBullet = { fg = t.syn.string },
         RenderMarkdownCode = { bg = t.ui.float.bg },
         RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
 
-        ["@markup.heading"] = { fg = c.dragonBlue, bold = true },
+        ["@markup.heading"] = { fg = c.dragonBlue },
         ["@markup.strong"] = { fg = t.syn.string, bold = true },
         ["@markup.italic"] = { fg = t.syn.string, italic = true },
       }
