@@ -233,12 +233,11 @@ later(function() -- render-markdown
       sign = false,
       -- position = "right",
       width = "full",
-      -- min_width = min_width,
-      left_pad = 3,
+      left_pad = 1,
       right_pad = 1,
     },
     heading = {
-      -- backgrounds = { "DiffChange" },
+      backgrounds = { "DiffChange" },
       sign = false,
       border = true,
       border_prefix = true,
@@ -246,13 +245,21 @@ later(function() -- render-markdown
       right_pad = 4,
       position = "overlay",
       icons = {
-        "█ ",
-        "██ ",
-        "███ ",
-        "████ ",
-        "█████ ",
-        "██████ ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
       },
+      -- icons = {
+      --   "█ ",
+      --   "██ ",
+      --   "███ ",
+      --   "████ ",
+      --   "█████ ",
+      --   "██████ ",
+      -- },
     },
   })
 end)
@@ -374,6 +381,7 @@ now(function() -- kanagawa
       local t = colors.theme
       local c = colors.palette
       return {
+        BlinkCmpLabelMatch = { fg = t.syn.fun, bold = true },
         MiniClueDescGroup = { fg = c.crystalBlue },
         MiniClueNextKey = { fg = c.oniViolet },
 
@@ -392,7 +400,9 @@ now(function() -- kanagawa
 
         MiniFilesTitleFocused = { fg = t.ui.fg_dim, bold = true },
 
-        MiniPickMatchRanges = { fg = t.syn.fun },
+        MiniMapNormal = { fg = t.syn.comment },
+
+        MiniPickMatchRanges = { fg = t.syn.fun, bold = true },
 
         MiniStarterInactive = { fg = c.fujiGray },
         MiniStarterItemBullet = { fg = c.dragonBlue, bold = true },
@@ -410,16 +420,13 @@ now(function() -- kanagawa
         MiniStatuslineFilenameModified = { fg = c.fujiWhite, bold = true },
 
         RenderMarkdownBullet = { fg = c.waveAqua2 },
+        RenderMarkdownCode = { bg = t.ui.float.bg },
+        RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
-        RenderMarkdownH1Bg = { link = "DiffChange" },
-        RenderMarkdownH2Bg = { link = "DiffChange" },
-        RenderMarkdownH3Bg = { link = "DiffChange" },
-        RenderMarkdownH4Bg = { link = "DiffChange" },
-        RenderMarkdownH5Bg = { link = "DiffChange" },
-        RenderMarkdownH6Bg = { link = "DiffChange" },
 
-        ["@markup.strong"] = { fg = t.syn.keyword, bold = true },
-        ["@markup.italic"] = { fg = t.syn.keyword, italic = true },
+        ["@markup.heading"] = { fg = c.dragonBlue, bold = true },
+        ["@markup.strong"] = { fg = t.syn.string, bold = true },
+        ["@markup.italic"] = { fg = t.syn.string, italic = true },
       }
     end,
   })
