@@ -400,7 +400,7 @@ now(function() -- kanagawa
 
         MiniFilesTitleFocused = { fg = t.ui.fg_dim, bold = true },
 
-        MiniMapNormal = { fg = t.syn.comment },
+        MiniMapNormal = { fg = t.ui.nontext },
 
         MiniPickMatchRanges = { fg = t.syn.fun, bold = true },
 
@@ -412,14 +412,14 @@ now(function() -- kanagawa
         MiniStarterHeader = { fg = c.dragonBlue },
         --         MiniStarterHeader = { fg = c.springBlue },
 
-        MiniStatuslineModeNormal = { bg = c.springBlue },
+        MiniStatuslineModeNormal = { bg = c.dragonBlue },
         MiniStatuslineFileinfo = { bg = t.ui.bg_visual },
         MiniStatuslineDevinfo = { bg = t.ui.bg_visual },
         MiniStatuslineDirectory = { fg = c.oldWhite },
         MiniStatuslineFilename = { fg = c.fujiWhite, bold = true },
         MiniStatuslineFilenameModified = { fg = c.fujiWhite, bold = true },
 
-        RenderMarkdownBullet = { fg = c.waveAqua2 },
+        RenderMarkdownBullet = { fg = c.boatYellow2 },
         RenderMarkdownCode = { bg = t.ui.float.bg },
         RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
