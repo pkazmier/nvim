@@ -410,7 +410,7 @@ now(function() -- kanagawa
 
         MiniFilesTitleFocused = { fg = t.ui.fg_dim, bold = true },
 
-        MiniMapNormal = { fg = t.ui.nontext },
+        MiniMapNormal = { fg = t.ui.nontext, bg = t.ui.float.bg },
 
         MiniPickMatchRanges = { fg = t.syn.fun, bold = true },
 
@@ -420,7 +420,6 @@ now(function() -- kanagawa
         MiniStarterQuery = { fg = c.crystalBlue, bold = true },
         MiniStarterSection = { fg = c.waveAqua1, bold = true },
         MiniStarterHeader = { fg = c.dragonBlue },
-        --         MiniStarterHeader = { fg = c.springBlue },
 
         MiniStatuslineModeNormal = { bg = c.dragonBlue },
         MiniStatuslineFileinfo = { bg = t.ui.bg_visual },
