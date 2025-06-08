@@ -421,12 +421,15 @@ now(function() -- kanagawa
         MiniStarterSection = { fg = c.waveAqua1, bold = true },
         MiniStarterHeader = { fg = c.dragonBlue },
 
-        MiniStatuslineModeNormal = { bg = c.dragonBlue },
+        MiniStatuslineModeNormal = { bg = c.springBlue },
         MiniStatuslineFileinfo = { bg = t.ui.bg_visual },
         MiniStatuslineDevinfo = { bg = t.ui.bg_visual },
         MiniStatuslineDirectory = { fg = c.oldWhite },
         MiniStatuslineFilename = { fg = c.fujiWhite, bold = true },
         MiniStatuslineFilenameModified = { fg = c.fujiWhite, bold = true },
+
+        MiniTablineCurrent = { fg = c.springBlue, bg = t.ui.bg_p1, bold = true },
+        MiniTablineModifiedCurrent = { fg = t.ui.bg_p1, bg = c.springBlue, bold = true },
 
         RenderMarkdownBullet = { fg = t.syn.string },
         RenderMarkdownCode = { bg = t.ui.float.bg },
