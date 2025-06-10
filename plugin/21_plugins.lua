@@ -419,7 +419,7 @@ now(function() -- kanagawa
         MiniStarterItemPrefix = { fg = c.carpYellow, bold = true },
         MiniStarterQuery = { fg = c.crystalBlue, bold = true },
         MiniStarterSection = { fg = c.waveAqua1, bold = true },
-        MiniStarterHeader = { fg = c.dragonBlue },
+        MiniStarterHeader = { fg = c.springBlue },
 
         MiniStatuslineModeNormal = { bg = c.springBlue },
         MiniStatuslineFileinfo = { bg = t.ui.bg_visual },
@@ -436,7 +436,7 @@ now(function() -- kanagawa
         RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
 
-        ["@markup.heading"] = { fg = c.dragonBlue },
+        ["@markup.heading"] = { fg = t.syn.string },
         ["@markup.strong"] = { fg = t.syn.string, bold = true },
         ["@markup.italic"] = { fg = t.syn.string, italic = true },
       }
