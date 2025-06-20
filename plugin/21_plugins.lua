@@ -234,8 +234,12 @@ later(function() -- render-markdown
     },
     code = {
       sign = false,
+      border = "thin",
       position = "right",
       width = "block",
+      above = "▁",
+      below = "▔",
+      language_border = "▁",
       left_pad = 1,
       right_pad = 1,
     },
@@ -450,6 +454,7 @@ now(function() -- kanagawa
 
         RenderMarkdownBullet = { fg = t.syn.string },
         RenderMarkdownCode = { bg = t.ui.float.bg },
+        RenderMarkdownCodeBorder = { bg = c.waveBlue1 },
         RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
 
