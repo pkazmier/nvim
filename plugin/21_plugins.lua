@@ -142,11 +142,14 @@ later(function() -- conform
       return { timeout_ms = 500, lsp_format = "fallback" }
     end,
     formatters_by_ft = {
-      markdown = { "prettierd" },
+      css = { "prettierd" },
+      html = { "prettierd" },
       javascript = { "prettierd" },
       json = { "prettier" },
       lua = { "stylua" },
+      markdown = { "prettierd" },
       python = { "isort", "black" },
+      sql = { "sqruff" },
     },
   })
 
