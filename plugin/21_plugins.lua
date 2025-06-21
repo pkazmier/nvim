@@ -239,6 +239,8 @@ later(function() -- render-markdown
       width = "block",
       above = "▁",
       below = "▔",
+      language_left = "█",
+      language_right = "█",
       language_border = "▁",
       left_pad = 1,
       right_pad = 1,
