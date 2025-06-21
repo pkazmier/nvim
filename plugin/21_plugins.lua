@@ -141,15 +141,16 @@ later(function() -- conform
       end
       return { timeout_ms = 500, lsp_format = "fallback" }
     end,
+    -- stylua: ignore
     formatters_by_ft = {
-      css = { "prettierd" },
-      html = { "prettierd" },
+      css        = { "prettierd" },
+      html       = { "prettierd" },
       javascript = { "prettierd" },
-      json = { "prettier" },
-      lua = { "stylua" },
-      markdown = { "prettierd" },
-      python = { "isort", "black" },
-      sql = { "sqruff" },
+      json       = { "prettier" },
+      lua        = { "stylua" },
+      markdown   = { "prettierd" },
+      python     = { "isort", "black" },
+      sql        = { "sqruff" },
     },
   })
 
@@ -297,7 +298,7 @@ later(function() -- nvim-lint
   local lint = require("lint")
   lint.linters_by_ft = {
     markdown = { "markdownlint-cli2" },
-    sql = { "sqlfluff" },
+    sql = { "sqruff" },
     sh = { "shellcheck" },
   }
 
