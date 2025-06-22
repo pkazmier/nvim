@@ -211,6 +211,10 @@ Config.minihues_apply_custom_highlights = function(p)
   hi("MiniStatuslineFilename",         { fg = p.fg_mid,  bg = p.accent_bg, bold = true })
   hi("MiniStatuslineFilenameModified", { fg = p.accent,  bg = p.accent_bg, bold = true })
 
+  hi("RenderMarkdownCodeBorder" , { bg = p.bg_mid })
+  hi("RenderMarkdownTableHead" , { fg = p.bg_mid2 })
+  hi("RenderMarkdownTableRow" , { fg = p.bg_mid2 })
+
   -- I like my vertical split divider to be the same color as my inactive
   -- horizontal status bar color, so it's consistent both vertically and
   -- horizontally when laststatus=2.

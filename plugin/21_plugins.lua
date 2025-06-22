@@ -626,6 +626,10 @@ later(function() -- catppuccin
         local overrides = {
           Folded = { bg = colors.surface0 },
           Comment = { fg = colors.overlay0, style = { "italic" } },
+          RenderMarkdownCodeBorder = { bg = colors.surface0 },
+          RenderMarkdownCode = { bg = colors.mantle },
+          RenderMarkdownTableHead = { fg = colors.overlay0 },
+          RenderMarkdownTableRow = { fg = colors.overlay0 },
           ["@markup.quote"] = { fg = colors.maroon, style = { "italic" } }, -- block quotes
         }
         return overrides
@@ -636,7 +640,6 @@ later(function() -- catppuccin
           FloatTitle = { fg = colors.green },
           WinSeparator = { fg = colors.surface1, style = { "bold" } },
           CursorLineNr = { fg = colors.lavender, style = { "bold" } },
-          KazCodeBlock = { bg = colors.mantle },
           LeapBackdrop = { link = "MiniJump2dDim" },
           LeapLabel = { fg = colors.green, style = { "bold" } },
           MsgArea = { fg = colors.overlay2 },
@@ -883,6 +886,10 @@ later(function() -- everforest
       set_hl("RenderMarkdownH4Bg",             palette.none,   palette.bg_green)
       set_hl("RenderMarkdownH5Bg",             palette.none,   palette.bg_blue)
       set_hl("RenderMarkdownH6Bg",             palette.none,   palette.bg2)
+      set_hl("RenderMarkdownCodeBorder",       palette.none,   palette.bg2)
+      set_hl("RenderMarkdownCode",             palette.none,   palette.bg_dim)
+      set_hl("RenderMarkdownTableHead",        palette.bg3,    palette.none)
+      set_hl("RenderMarkdownTableRow",         palette.bg3,    palette.none)
       set_hl("TreesitterContext",              palette.none,   palette.bg_dim)
       set_hl("TreesitterContextLineNumber",    palette.bg5,    palette.bg_dim)
       set_hl("TreesitterContextBottom",        palette.none,   palette.none, "underline", palette.bg1)
@@ -944,6 +951,10 @@ later(function() -- gruvbox-material
       set_hl("RenderMarkdownH4Bg",             palette.none,   palette.bg_visual_green)
       set_hl("RenderMarkdownH5Bg",             palette.none,   palette.bg_current_word)
       set_hl("RenderMarkdownH6Bg",             palette.none,   palette.bg_current_word)
+      set_hl("RenderMarkdownCodeBorder",       palette.none,   palette.bg3)
+      set_hl("RenderMarkdownCode",             palette.none,   palette.bg_dim)
+      set_hl("RenderMarkdownTableHead",        palette.bg3,    palette.none)
+      set_hl("RenderMarkdownTableRow",         palette.bg3,    palette.none)
       set_hl("TreesitterContext",              palette.none,   palette.bg_dim)
       set_hl("TreesitterContextLineNumber",    palette.bg5,    palette.bg_dim)
       set_hl("TreesitterContextBottom",        palette.none,   palette.none, "underline", palette.bg1)
@@ -987,6 +998,7 @@ later(function() -- tokyonight
       hl["MiniStatuslineDirectory"] = { fg = c.fg_dark, bg = c.bg_highlight }
       hl["MiniStatuslineFilename"] = { fg = c.fg, bg = c.bg_highlight, bold = true }
       hl["MiniStatuslineFilenameModified"] = { fg = c.yellow, bg = c.bg_highlight, bold = true }
+      hl["RenderMarkdownCodeBorder"] = { bg = c.bg_highlight }
     end,
   })
   -- vim.cmd.colorscheme("tokyonight-moon")
