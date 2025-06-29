@@ -178,14 +178,13 @@ later(function() -- lsp
   add("neovim/nvim-lspconfig")
 
   vim.diagnostic.config({
-    -- float = { border = "single" },
     underline = false,
     update_in_insert = false,
-    virtual_text = {
-      spacing = 4,
-      source = "if_many",
-      prefix = "",
-    },
+    -- virtual_text = {
+    --   spacing = 4,
+    --   source = "if_many",
+    --   prefix = "",
+    -- },
     severity_sort = true,
   })
 
@@ -249,8 +248,8 @@ later(function() -- render-markdown
     heading = {
       width = "block",
       backgrounds = {
-        "MiniStatusLineModeNormal",
         "MiniStatusLineModeInsert",
+        "MiniStatusLineModeNormal",
         "MiniStatusLineModeReplace",
         "MiniStatusLineModeVisual",
         "MiniStatusLineModeCommand",
@@ -418,6 +417,7 @@ now(function() -- kanagawa
         BlinkCmpLabelMatch = { fg = t.syn.fun, bold = true },
         MiniClueDescGroup = { fg = c.crystalBlue },
         MiniClueNextKey = { fg = c.oniViolet },
+        MiniClueNextKeyWithPostkeys = { fg = c.sakuraPink },
 
         MiniHipatternsFixmeBody = { fg = t.diag.error },
         MiniHipatternsFixme = { fg = c.bg, bg = t.diag.error },
