@@ -170,7 +170,7 @@ later(function() -- mini.align
 end)
 
 later(function() -- mini.animate
-  require("mini.animate").setup({ scroll = { enable = false } })
+  require("mini.animate").setup({ cursor = { enable = false }, scroll = { enable = false } })
 end)
 
 later(function() -- mini.bracketed
