@@ -281,7 +281,10 @@ later(function() -- mini.diff
 end)
 
 later(function() -- mini.files
-  require("mini.files").setup({ windows = { preview = true } })
+  require("mini.files").setup({
+    mappings = { mark_set = "M" },
+    windows = { preview = true },
+  })
 
   local minifiles_augroup = vim.api.nvim_create_augroup("ec-mini-files", {})
   vim.api.nvim_create_autocmd("User", {
