@@ -123,6 +123,24 @@ later(function() -- copilot
   })
 end)
 
+later(function() -- CopilotChat
+  if not vim.g.kaz_copilot then
+    return
+  end
+
+  add({
+    source = "CopilotC-Nvim/CopilotChat.nvim",
+    hooks = {
+      post_checkout = function()
+        vim.cmd("CopilotChat auth")
+      end,
+    },
+    depends = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
+  })
+
+  require("CopilotChat").setup()
+end)
+
 later(function() -- mason
   add("williamboman/mason.nvim")
   require("mason").setup()

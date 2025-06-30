@@ -47,10 +47,11 @@ map("n",       L("/"),   C("Pick buf_lines scope='current' preserve_order=true")
 
 -- Code
 map({"n","x"}, L("ca"),  C("lua vim.lsp.buf.code_action()"),                      "Code action")
-map("n",       L("cc"),  C("LspInfo"),                                            "LSP info")
+map("n",       L("cc"),  C("CopilotChat"),                                        "Copilot chat")
 map("n",       L("cd"),  C("lua vim.lsp.bup.definition()"),                       "Goto definition")
 map("n",       L("cD"),  C("Pick lsp scope='declaration'"),                       "Goto declaration")
-map("n",       L("ci"),  C("Pick lsp scope='implementation'"),                    "Goto implementation")
+map("n",       L("ci"),  C("LspInfo"),                                            "LSP info")
+map("n",       L("cI"),  C("Pick lsp scope='implementation'"),                    "Goto implementation")
 map("n",       L("cj"),  C("lua vim.diagnostic.jump({count=1, float=true})"),     "Next diagnostic")
 map("n",       L("ck"),  C("lua vim.diagnostic.jump({count=-1, float=true})"),    "Prev diagnostic")
 map("n",       L("cl"),  C("lua vim.lsp.codelens.run()"),                         "Run codelens")
