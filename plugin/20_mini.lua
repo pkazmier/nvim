@@ -421,8 +421,8 @@ later(function() -- mini.keymap
     end,
   }
 
-  map_multistep("i", "<Tab>", { copilot_accept, "minisnippets_next", "increase_indent", "jump_after_close" })
-  map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent", "jump_before_open" })
+  map_multistep("i", "<Tab>", { copilot_accept, "increase_indent", "jump_after_close" })
+  map_multistep("i", "<S-Tab>", { "decrease_indent", "jump_before_open" })
   map_multistep("i", "<CR>", { "blink_accept", "pmenu_accept", "nvimautopairs_cr" })
   map_multistep("i", "<BS>", { "nvimautopairs_bs" })
 
