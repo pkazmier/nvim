@@ -47,7 +47,8 @@ map("n",       L("/"),   C("Pick buf_lines scope='current' preserve_order=true")
 
 -- Code
 map({"n","x"}, L("ca"),  C("lua vim.lsp.buf.code_action()"),                      "Code action")
-map("n",       L("cc"),  C("CopilotChat"),                                        "Copilot chat")
+map({"n","x"}, L("cc"),  C("CodeCompanionChat Toggle"),                           "Code Companion chat")
+map({"n","x"}, L("cC"),  C("CodeCompanionActions"),                               "Code Companion actions")
 map("n",       L("cd"),  C("lua vim.lsp.bup.definition()"),                       "Goto definition")
 map("n",       L("cD"),  C("Pick lsp scope='declaration'"),                       "Goto declaration")
 map("n",       L("ci"),  C("LspInfo"),                                            "LSP info")
