@@ -197,7 +197,7 @@ When given a task:
   })
 end)
 
-later(function() -- copilotk
+later(function() -- copilot
   if not vim.g.kaz_copilot then
     return
   end
@@ -351,12 +351,12 @@ later(function() -- render-markdown
     heading = {
       width = "block",
       backgrounds = {
+        "MiniStatusLineModeVisual",
+        "MiniStatusLineModeOther",
+        "MiniStatusLineModeReplace",
+        "MiniStatusLineModeCommand",
         "MiniStatusLineModeInsert",
         "MiniStatusLineModeNormal",
-        "MiniStatusLineModeReplace",
-        "MiniStatusLineModeVisual",
-        "MiniStatusLineModeCommand",
-        "MiniStatusLineModeOther",
       },
       sign = false,
       left_pad = 1,
