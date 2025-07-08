@@ -351,12 +351,12 @@ later(function() -- render-markdown
     heading = {
       width = "block",
       backgrounds = {
-        "MiniStatusLineModeVisual",
+        "MiniStatusLineModeNormal",
+        "MiniStatusLineModeInsert",
         "MiniStatusLineModeOther",
         "MiniStatusLineModeReplace",
         "MiniStatusLineModeCommand",
-        "MiniStatusLineModeInsert",
-        "MiniStatusLineModeNormal",
+        "MiniStatusLineModeVisual",
       },
       sign = false,
       left_pad = 1,
@@ -494,7 +494,7 @@ later(function() -- zk
 end)
 
 -- Other colorschemes I like to use
-now(function() -- kanagawa
+later(function() -- kanagawa
   add("rebelot/kanagawa.nvim")
   require("kanagawa").setup({
     colors = {
@@ -570,7 +570,109 @@ now(function() -- kanagawa
       }
     end,
   })
-  vim.cmd.colorscheme("kanagawa")
+  -- vim.cmd.colorscheme("kanagawa")
+end)
+
+now(function() -- mellow
+  add("mellow-theme/mellow.nvim")
+  local c = require("mellow.colors").dark
+
+  vim.g.mellow_bold_keywords = true
+  vim.g.mellow_bold_functions = true
+  vim.g.mellow_highlight_overrides = {
+    DiagnosticHint = { fg = c.blue },
+    DiagnosticUnderlineHint = { fg = c.blue, underline = true },
+
+    LeapLabel = { fg = c.bright_yellow, bold = true },
+    LeapBackdrop = { fg = c.gray05 },
+
+    NormalNC = { link = "Normal" },
+
+    Search = { sp = c.bright_yellow, underdouble = true },
+
+    MiniClueNextKeyWithPostkeys = { fg = c.blue },
+
+    -- FIXME: this is a test.
+    MiniHipatternsFixmeBody = { fg = c.cyan },
+    MiniHipatternsFixme = { fg = c.bg, bg = c.cyan },
+    MiniHipatternsFixmeColon = { bg = c.cyan, fg = c.cyan, bold = true },
+
+    -- HACK: this is a test.
+    MiniHipatternsHackBody = { fg = c.red },
+    MiniHipatternsHack = { fg = c.bg, bg = c.red },
+    MiniHipatternsHackColon = { bg = c.red, fg = c.red, bold = true },
+
+    -- NOTE: this is a note.
+    MiniHipatternsNoteBody = { fg = c.yellow },
+    MiniHipatternsNote = { fg = c.bg, bg = c.yellow },
+    MiniHipatternsNoteColon = { bg = c.yellow, fg = c.yellow, bold = true },
+
+    -- TODO: this is a test.
+    MiniHipatternsTodoBody = { fg = c.blue },
+    MiniHipatternsTodo = { fg = c.bg, bg = c.blue },
+    MiniHipatternsTodoColon = { bg = c.blue, fg = c.blue, bold = true },
+
+    MiniFilesCursorLine = { bg = c.gray02, bold = true },
+    MiniFilesTitleFocused = { fg = c.bright_green, bold = true },
+
+    MiniJump = { sp = c.yellow, undercurl = true },
+
+    MiniMapNormal = { fg = c.gray04, bg = c.gray01 },
+
+    -- The default blue for matches in blink/cmp/pick is too faint,
+    -- so we use c.cyan (which is really a bright magenta) instead.
+    BlinkCmpLabelMatch = { fg = c.cyan, bold = true },
+    MiniPickMatchRanges = { fg = c.cyan, bold = true },
+    MiniPickMatchCurrent = { bg = c.gray02, bold = true },
+    MiniPickPrompt = { fg = c.blue, bold = true },
+    MiniPickPromptPrefix = { fg = c.magenta },
+
+    MiniStarterInactive = { fg = c.gray04 },
+    MiniStarterItemBullet = { fg = c.gray04, bold = true },
+    MiniStarterItemPrefix = { fg = c.magenta, bold = true },
+    MiniStarterQuery = { fg = c.cyan, bold = true },
+    MiniStarterSection = { fg = c.blue, bold = true },
+    MiniStarterHeader = { fg = c.cyan, bold = true },
+
+    MiniStatuslineModeNormal = { fg = c.bg, bg = c.cyan, bold = true },
+    MiniStatuslineModeInsert = { fg = c.bg, bg = c.blue, bold = true },
+    MiniStatuslineModeVisual = { fg = c.bg, bg = c.magenta, bold = true },
+    MiniStatuslineModeCommand = { fg = c.bg, bg = c.yellow, bold = true },
+    MiniStatuslineModeReplace = { fg = c.bg, bg = c.red, bold = true },
+    MiniStatuslineModeTerminal = { fg = c.bg, bg = c.green, bold = true },
+    MiniStatuslineModeOther = { fg = c.bg, bg = c.green, bold = true },
+
+    StatusLine = { fg = c.white, bg = c.gray02 },
+    StatusLineNC = { fg = c.gray05, bg = c.gray02 },
+    MiniStatuslineFileinfo = { fg = c.gray06, bg = c.gray03 },
+    MiniStatuslineDevinfo = { fg = c.gray06, bg = c.gray03 },
+    MiniStatuslineDirectory = { fg = c.gray05 },
+    MiniStatuslineFilename = { fg = c.white, bold = true },
+    MiniStatuslineFilenameModified = { fg = c.red, bold = true },
+
+    MiniTablineCurrent = { fg = c.blue, bg = c.black, bold = true },
+    MiniTablineVisible = { fg = c.gray07, bg = c.black },
+    MiniTablineModifiedCurrent = { fg = c.black, bg = c.blue, bold = true },
+    MiniTablineModifiedHidden = { fg = c.black, bg = c.gray05, bold = true },
+    MiniTablineModifiedVisible = { fg = c.black, bg = c.gray07, bold = true },
+    MiniTablineTabpagesection = { fg = c.black, bg = c.green, bold = true },
+
+    RenderMarkdownBullet = { fg = c.cyan },
+    RenderMarkdownCodeBorder = { bg = c.black },
+    RenderMarkdownTableHead = { fg = c.gray03 },
+    RenderMarkdownTableRow = { fg = c.gray03 },
+
+    ["@markup.heading"] = { fg = c.bright_cyan, bold = true },
+    ["@markup.heading.1"] = { italic = false },
+    ["@markup.heading.2"] = { italic = false },
+    ["@markup.heading.3"] = { italic = false },
+    ["@markup.heading.4"] = { italic = false },
+    ["@markup.heading.5"] = { italic = false },
+    ["@markup.heading.6"] = { italic = false },
+    ["@markup.strong"] = { fg = c.cyan, bold = true },
+    ["@markup.italic"] = { fg = c.cyan, italic = true },
+  }
+  vim.cmd.colorscheme("mellow")
 end)
 
 later(function() -- vague
