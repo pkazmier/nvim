@@ -662,6 +662,10 @@ now(function() -- mellow
     RenderMarkdownTableHead = { fg = c.gray03 },
     RenderMarkdownTableRow = { fg = c.gray03 },
 
+    TreesitterContext = { bg = c.gray01 },
+    TreesitterContextBottom = { sp = c.gray03, underdotted = true },
+    TreesitterContextLineNumber = { fg = c.gray04, bg = c.gray01 },
+
     ["@markup.heading"] = { fg = c.bright_cyan, bold = true },
     ["@markup.heading.1"] = { italic = false },
     ["@markup.heading.2"] = { italic = false },
