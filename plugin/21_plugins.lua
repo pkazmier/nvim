@@ -580,6 +580,7 @@ now(function() -- mellow
   vim.g.mellow_bold_keywords = true
   vim.g.mellow_bold_functions = true
   vim.g.mellow_highlight_overrides = {
+    Delimiter = { fg = c.gray03 },
     DiagnosticHint = { fg = c.blue },
     DiagnosticUnderlineHint = { fg = c.blue, underline = true },
 
@@ -590,7 +591,7 @@ now(function() -- mellow
 
     Search = { sp = c.bright_yellow, underdouble = true },
 
-    MiniClueNextKeyWithPostkeys = { fg = c.blue },
+    MiniClueNextKeyWithPostkeys = { fg = c.cyan },
 
     -- FIXME: this is a test.
     MiniHipatternsFixmeBody = { fg = c.cyan },
