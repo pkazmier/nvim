@@ -556,7 +556,7 @@ now(function() -- mellow
     MiniStarterItemPrefix          = { fg = c.magenta, bold = true },
     MiniStarterQuery               = { fg = c.cyan, bold = true },
     MiniStarterSection             = { fg = c.blue, bold = true },
-    MiniStarterHeader              = { fg = c.cyan, bold = true },
+    MiniStarterHeader              = { fg = c.red, bold = true },
 
     MiniStatuslineModeNormal       = { fg = c.bg, bg = c.cyan, bold = true },
     MiniStatuslineModeInsert       = { fg = c.bg, bg = c.blue, bold = true },
@@ -599,6 +599,9 @@ now(function() -- mellow
     ["@markup.heading.6"]          = { italic = false },
     ["@markup.strong"]             = { fg = c.cyan, bold = true },
     ["@markup.italic"]             = { fg = c.cyan, italic = true },
+
+    ["@lsp.type.variable"]         = {},
+    ["@variable.member"]           = { fg = c.white },
   }
   vim.cmd.colorscheme("mellow")
 end)
