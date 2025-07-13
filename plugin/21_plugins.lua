@@ -4,15 +4,15 @@ local now_if_args = vim.fn.argc(-1) > 0 and now or later
 now_if_args(function() -- treesitter
   add({
     source = "nvim-treesitter/nvim-treesitter",
-    checkout = "master",
+    checkout = "main",
     hooks = {
       post_checkout = function()
         vim.cmd("TSUpdate")
       end,
     },
   })
-  add("nvim-treesitter/nvim-treesitter-textobjects")
-  add("nvim-treesitter/nvim-treesitter-context")
+  add({ source = "nvim-treesitter/nvim-treesitter-textobjects", checkout = "main" })
+  add({ source = "nvim-treesitter/nvim-treesitter-context" })
 
   local ensure_installed = {
     "bash",
@@ -28,25 +28,18 @@ now_if_args(function() -- treesitter
     "python",
     "regex",
     "rust",
+    "sql",
     "toml",
     "yaml",
   }
-
-  require("nvim-treesitter.configs").setup({
-    auto_install = true,
-    ensure_installed = ensure_installed,
-    highlight = { enable = true },
-    textobjects = { enable = false },
-    indent = { enable = false },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<C-space>",
-        node_incremental = "<C-space>",
-        scope_incremental = false,
-        node_decremental = "<bs>",
-      },
-    },
+  require("nvim-treesitter").install(ensure_installed)
+  local filetypes = vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
+  vim.list_extend(filetypes, { "markdown", "pandoc" })
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = filetypes,
+    callback = function(ev)
+      vim.treesitter.start(ev.buf)
+    end,
   })
 
   require("treesitter-context").setup()
