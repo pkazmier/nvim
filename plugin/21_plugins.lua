@@ -244,7 +244,7 @@ later(function() -- conform
       json       = { "prettier" },
       lua        = { "stylua" },
       markdown   = { "prettierd" },
-      python     = { "isort", "black" },
+      -- python     = { "isort", "black" },  -- testing ruff instead now
       sql        = { "sqruff" },
     },
   })
