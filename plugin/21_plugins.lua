@@ -541,6 +541,8 @@ now(function() -- mellow
     ["@markup.heading.6"]          = { italic = false },
     ["@markup.strong"]             = { fg = c.cyan, bold = true },
     ["@markup.italic"]             = { fg = c.cyan, italic = true },
+
+    ["@lsp.typemod.type.defaultLibrary"] = { fg = c.bright_red },
   }
   vim.cmd.colorscheme("mellow")
 end)

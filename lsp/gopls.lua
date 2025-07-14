@@ -10,6 +10,8 @@ return {
         parameterNames = true,
         rangeVariableTypes = true,
       },
+      semanticTokens = true,
+      semanticTokenTypes = { keyword = false },
     },
   },
 }
