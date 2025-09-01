@@ -31,6 +31,7 @@ now_if_args(function() -- treesitter
     "sql",
     "toml",
     "yaml",
+    "zig",
   }
   require("nvim-treesitter").install(ensure_installed)
   local filetypes = vim.iter(ensure_installed):map(vim.treesitter.language.get_filetypes):flatten():totable()
@@ -295,6 +296,7 @@ later(function() -- lsp
     "rust_analyzer",
     "jsonls",
     "yamlls",
+    "zls",
   })
 
   vim.lsp.config["*"] = {
