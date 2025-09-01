@@ -452,6 +452,7 @@ now(function() -- mellow
   add("mellow-theme/mellow.nvim")
   local c = require("mellow.colors").dark
 
+  vim.g.mellow_transparent = vim.fn.expand("$NEOVIM_TRANSPARENT") == "1"
   vim.g.mellow_italic_keywords = true
   vim.g.mellow_bold_functions = true
 
