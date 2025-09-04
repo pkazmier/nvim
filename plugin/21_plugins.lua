@@ -46,53 +46,53 @@ now_if_args(function() -- treesitter
   require("treesitter-context").setup()
 end)
 
-later(function() -- blink
-  add({
-    source = "saghen/blink.cmp",
-    depends = { "rafamadriz/friendly-snippets" },
-    hooks = {
-      post_install = Config.build_blink,
-      post_checkout = Config.build_blink,
-    },
-  })
-
-  require("blink.cmp").setup({
-    keymap = {
-      preset = "enter",
-      -- defer these to mini.keymap binding
-      ["<Tab>"] = { "fallback" },
-      ["<S-Tab>"] = { "fallback" },
-    },
-    completion = {
-      list = { selection = { preselect = false } },
-      documentation = { auto_show = true },
-      menu = {
-        draw = {
-          components = {
-            kind_icon = {
-              text = function(ctx)
-                local kind_icon, _, _ = MiniIcons.get("lsp", ctx.kind)
-                return kind_icon
-              end,
-              highlight = function(ctx)
-                local _, hl, _ = MiniIcons.get("lsp", ctx.kind)
-                return hl
-              end,
-            },
-          },
-        },
-      },
-    },
-    appearance = { nerd_font_variant = "normal" },
-    sources = {
-      per_filetype = {
-        codecompanion = { "codecompanion" },
-      },
-    },
-    snippets = { preset = "mini_snippets" },
-    signature = { enabled = true },
-  })
-end)
+-- later(function() -- blink
+--   add({
+--     source = "saghen/blink.cmp",
+--     depends = { "rafamadriz/friendly-snippets" },
+--     hooks = {
+--       post_install = Config.build_blink,
+--       post_checkout = Config.build_blink,
+--     },
+--   })
+--
+--   require("blink.cmp").setup({
+--     keymap = {
+--       preset = "enter",
+--       -- defer these to mini.keymap binding
+--       ["<Tab>"] = { "fallback" },
+--       ["<S-Tab>"] = { "fallback" },
+--     },
+--     completion = {
+--       list = { selection = { preselect = false } },
+--       documentation = { auto_show = true },
+--       menu = {
+--         draw = {
+--           components = {
+--             kind_icon = {
+--               text = function(ctx)
+--                 local kind_icon, _, _ = MiniIcons.get("lsp", ctx.kind)
+--                 return kind_icon
+--               end,
+--               highlight = function(ctx)
+--                 local _, hl, _ = MiniIcons.get("lsp", ctx.kind)
+--                 return hl
+--               end,
+--             },
+--           },
+--         },
+--       },
+--     },
+--     appearance = { nerd_font_variant = "normal" },
+--     sources = {
+--       per_filetype = {
+--         codecompanion = { "codecompanion" },
+--       },
+--     },
+--     snippets = { preset = "mini_snippets" },
+--     signature = { enabled = true },
+--   })
+-- end)
 
 later(function() -- codecompanion
   if not vim.g.kaz_copilot then
