@@ -25,19 +25,19 @@ map({ "n","x","o" }, "S",         C("lua Config.leap_treesitter_select()"),  "Tr
 
 -- Leader mappings ==========================================================
 _G.Config.leader_group_clues = {
-  { mode = "n", keys = "<leader>b",  desc = "+Buffers" },
-  { mode = "n", keys = "<leader>c",  desc = "+Code" },
-  { mode = "n", keys = "<leader>f",  desc = "+Files" },
-  { mode = "n", keys = "<leader>fg", desc = "+Git Files" },
-  { mode = "n", keys = "<leader>g",  desc = "+Git/Diff" },
-  { mode = "n", keys = "<leader>m",  desc = "+Mini" },
-  { mode = "n", keys = "<leader>md", desc = "+Deps" },
-  { mode = "n", keys = "<leader>mm", desc = "+Map" },
-  { mode = "n", keys = "<leader>n",  desc = "+Zk Notes" },
-  { mode = "n", keys = "<leader>s",  desc = "+Search" },
-  { mode = "n", keys = "<leader>q",  desc = "+Quit/Session" },
-  { mode = "n", keys = "<Leader>v",  desc = "+Visits" },
-  { mode = "n", keys = "<Leader>w",  desc = "+Window" },
+  { mode = "n", keys = L"b",  desc = "+Buffers" },
+  { mode = "n", keys = L"c",  desc = "+Code" },
+  { mode = "n", keys = L"f",  desc = "+Files" },
+  { mode = "n", keys = L"fg", desc = "+Git Files" },
+  { mode = "n", keys = L"g",  desc = "+Git/Diff" },
+  { mode = "n", keys = L"m",  desc = "+Mini" },
+  { mode = "n", keys = L"md", desc = "+Deps" },
+  { mode = "n", keys = L"mm", desc = "+Map" },
+  { mode = "n", keys = L"n",  desc = "+Zk Notes" },
+  { mode = "n", keys = L"s",  desc = "+Search" },
+  { mode = "n", keys = L"q",  desc = "+Quit/Session" },
+  { mode = "n", keys = L"v",  desc = "+Visits" },
+  { mode = "n", keys = L"w",  desc = "+Window" },
 }
 
 -- Frequently used
