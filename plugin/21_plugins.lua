@@ -451,7 +451,7 @@ later(function() -- zk
 end)
 
 -- Colorschemes I like to use
-now(function() -- mellow
+later(function() -- mellow
   add("mellow-theme/mellow.nvim")
   local c = require("mellow.colors").dark
 
@@ -509,7 +509,7 @@ now(function() -- mellow
 
     ["@lsp.typemod.type.defaultLibrary"] = { fg = c.bright_red },
   }
-  vim.cmd.colorscheme("mellow")
+  -- vim.cmd.colorscheme("mellow")
 end)
 
 later(function() -- kanagawa
@@ -709,7 +709,7 @@ later(function() -- vague
   })
 end)
 
-later(function() -- catppuccin
+now(function() -- catppuccin
   add({ source = "catppuccin/nvim", name = "catppuccin" })
   require("catppuccin").setup({
     default_integrations = false,
@@ -883,7 +883,7 @@ later(function() -- catppuccin
           MiniMapNormal = { fg = colors.overlay2, bg = colors.mantle },
 
           MiniPickBorderText = { fg = colors.blue },
-          MiniPickMatchCurrent = { fg = nil, bg = colors.surface1, style = { "bold" } },
+          MiniPickMatchCurrent = { fg = colors.text, bg = colors.surface1, style = { "bold" } },
           MiniPickMatchRanges = { fg = colors.text, style = { "bold" } },
           MiniPickNormal = { fg = colors.overlay2, bg = colors.mantle },
           MiniPickPrompt = { fg = colors.sky },
@@ -950,7 +950,7 @@ later(function() -- catppuccin
       },
     },
   })
-  -- vim.cmd.colorscheme("catppuccin-macchiato")
+  vim.cmd.colorscheme("catppuccin-macchiato")
 end)
 
 later(function() -- everforest
