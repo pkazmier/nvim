@@ -346,7 +346,10 @@ end)
 
 later(function() -- nvim-autopairs
   add("windwp/nvim-autopairs")
-  require("nvim-autopairs").setup()
+  require("nvim-autopairs").setup({
+    map_cr = false,
+    map_bs = false,
+  })
 end)
 
 later(function() -- nvim-lint
