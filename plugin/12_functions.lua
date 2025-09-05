@@ -73,13 +73,16 @@ Config.minifiles_open_bufdir = function()
 end
 
 -- MiniPick =================================================================
-H.truncate_path = function(path)
-  local sep = package.config:sub(1, 1)
-  local parts = vim.split(path, sep)
-  if #parts > 3 then
-    parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+H.sep = package.config:sub(1, 1)
+H.truncate_path = function(max_parts)
+  max_parts = vim.fn.max({ max_parts, 3 })
+  return function(path)
+    local parts = vim.split(path, H.sep)
+    if #parts > max_parts then
+      parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+    end
+    return table.concat(parts, H.sep)
   end
-  return table.concat(parts, sep)
 end
 
 H.map_gsub = function(items, pattern, replacement)
@@ -92,7 +95,7 @@ end
 Config.minipick_align_on_nul = function(buf_id, items, query)
   -- Shorten the pathname to keep the width of the picker window to something
   -- a bit more reasonable for longer pathnames.
-  -- items = map_gsub(items, "^%Z+", truncate_path)
+  items = H.map_gsub(items, "^%Z+", H.truncate_path(3))
 
   -- Because items is an array of blobs (contains a NUL byte), align_strings
   -- will not work because it expects strings. So, convert the NUL bytes to a
