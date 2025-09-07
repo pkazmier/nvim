@@ -11,7 +11,7 @@ local L = function(key) return "<leader>" .. key end
 local C = function(cmd) return "<Cmd>" .. cmd .. "<CR>" end
 
 -- Basic mappings ===========================================================
-map("i",             "jk",        "<esc>",                                   "Exit insert mode", { silent = true })
+-- map("i",             "jk",        "<esc>",                                   "Exit insert mode", { silent = true })
 map("i",             "<A-Space>", C("normal ciw "),                          "Just one space")
 map("n",             "-",         C("lua Config.minifiles_open_bufdir()"),   "Open mini.files")
 map("n",             "H",         C("lua MiniBracketed.buffer('backward')"), "Prev buffer")
