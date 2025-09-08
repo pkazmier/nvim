@@ -414,21 +414,11 @@ later(function() -- mini.keymap
   local map_combo = require("mini.keymap").map_combo
   local map_multistep = require("mini.keymap").map_multistep
 
-  local copilot_accept = {
-    condition = function()
-      return vim.g.kaz_copilot and require("copilot.suggestion").is_visible()
-    end,
-    action = function()
-      require("copilot.suggestion").accept()
-    end,
-  }
-
 -- stylua: ignore start
-  map_multistep("i", "<Tab>",   { "minisnippets_next", "minisnippets_expand", copilot_accept, "increase_indent", "jump_after_close" })
+  map_multistep("i", "<Tab>",   { "minisnippets_next", "minisnippets_expand", "increase_indent", "jump_after_close" })
   map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent",     "jump_before_open" })
   map_multistep("i", "<CR>",    { "blink_accept",      "pmenu_accept",        "nvimautopairs_cr" })
   map_multistep("i", "<BS>",    { "nvimautopairs_bs" })
-  map_multistep("i", "<Tab>",   { "minisnippets_next", "minisnippets_expand", copilot_accept, "increase_indent", "jump_after_close" })
   -- stylua: ignore end
 
   map_combo({ "i", "c", "x", "s" }, "jk", "<BS><BS><Esc>")
