@@ -5,10 +5,6 @@ vim.lsp.config.lua_ls = {
     -- Reduce unnecessarily long list of completion triggers for better
     -- 'mini.completion' experience
     client.server_capabilities.completionProvider.triggerCharacters = { ".", ":", "#", "(" }
-
-    -- -- Override global "Go to source" mapping with dedicated buffer-local
-    local opts = { buffer = buf_id, desc = "Lua source definition" }
-    vim.keymap.set("n", "<Leader>cd", Config.luals_unique_definition, opts)
   end,
 }
 

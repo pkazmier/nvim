@@ -1,0 +1,27 @@
+-- FIXME: Revisit use of mini.jump2d after rewrite
+-- I prefer the leap pluging for the following reasons:
+--
+--    1. Target blank lines
+--    2. Equivalence classes (i.e.single quote matches double-quote, backtick)
+--    3. Treesitter node selection
+--
+-- MiniDeps.later(function()
+--   local jump2d = require("mini.jump2d")
+--   jump2d.setup({
+--     labels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+--     view = { dim = true, n_steps_ahead = 2 },
+--     mappings = { start_jumping = "m" },
+--   })
+--
+--   -- NOTE: <Cr> binding must be set here as jump2d overwrites our mappings.lua.
+--   -- Relies on jump2d opts.mappings.start_jumping being set to <Cr>, so the
+--   -- autocomands to unmap <Cr> in quickfix are installed. I think it would be
+--   -- better if one could just specify the default jump function as an option so
+--   -- one doesn't have to define their own keymap to override it.
+--   vim.keymap.set(
+--     { "o", "x", "n" },
+--     "m",
+--     "<Cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.single_character)<CR>",
+--     { desc = "Jump anywhere" }
+--   )
+-- end)
