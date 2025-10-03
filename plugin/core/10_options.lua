@@ -18,7 +18,6 @@ vim.o.formatlistpat    = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 vim.o.formatoptions    = "jcrql1nt"
 vim.o.grepformat       = "%f:%l:%c:%m"
 vim.o.grepprg          = "rg --vimgrep"
-vim.o.iskeyword        = '@,48-57,_,192-255,-' -- Treat dash separated words as a word text object
 vim.o.list             = true
 vim.o.pumheight        = 10
 vim.o.shiftround       = true
