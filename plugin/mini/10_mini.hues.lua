@@ -7,21 +7,6 @@ MiniDeps.now(function()
     hi("Title", { fg = p.accent, bg = nil, bold = true })
 
     -- stylua: ignore start
-    hi("BlinkCmpMenu",                { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpMenuBorder",          { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpDoc",                 { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpDocBorder",           { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpDocSeparator",        { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpLabelMatch",          { fg = p.cyan, bg = p.bg, bold = true })
-    hi("BlinkCmpSignatureHelp",       { fg = p.fg, bg = p.bg })
-    hi("BlinkCmpSignatureHelpBorder", { fg = p.fg, bg = p.bg })
-
-    hi("BlinkCmpMenu",                { link = 'NormalFloat' })
-    hi("BlinkCmpMenuBorder",          { link = 'FloatBorder' })
-    hi("BlinkCmpDoc",                 { link = 'NormalFloat' })
-    hi("BlinkCmpDocBorder",           { link = 'FloatBorder' })
-    hi("BlinkCmpSignatureHelp",       { link = 'NormalFloat' })
-    hi("BlinkCmpSignatureHelpBorder", { link = 'FloatBorder' })
 
     -- Links to Comment by default, but that has italics
     hi("LeapBackdrop",                { link = "MiniJump2dDim" })
