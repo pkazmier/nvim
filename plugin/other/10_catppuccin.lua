@@ -1,4 +1,4 @@
-MiniDeps.now(function()
+MiniDeps.later(function()
   vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }, { load = true })
   require("catppuccin").setup({
     default_integrations = false,
@@ -239,5 +239,5 @@ MiniDeps.now(function()
       },
     },
   })
-  vim.cmd.colorscheme("catppuccin-macchiato")
+  -- vim.cmd.colorscheme("catppuccin-macchiato")
 end)

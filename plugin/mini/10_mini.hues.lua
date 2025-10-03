@@ -1,4 +1,4 @@
-MiniDeps.later(function()
+MiniDeps.now(function()
   Config.minihues_apply_custom_highlights = function(p)
     local hi = function(name, data)
       vim.api.nvim_set_hl(0, name, data)
@@ -70,4 +70,5 @@ MiniDeps.later(function()
     hi("WinSeparator", { fg = p.bg_edge, bg = nil })
     -- stylua: ignore end
   end
+  vim.cmd.colorscheme("minihues-winter")
 end)
