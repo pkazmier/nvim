@@ -76,9 +76,10 @@ MiniDeps.now(function()
     -- stylua: ignore end
   end
 
-  -- Function to export current mini.hues palette to a neovim colorscheme
-  -- file and a ghostty theme file. Prompts user for a name for the theme.
-  -- This is useful if you generate a random colorscheme with mini.huas.
+  -- Export current mini.hues palette to a neovim colorscheme file and
+  -- a ghostty theme file. Prompts user for a name for the theme. This is
+  -- useful if you generate a random colorscheme with mini.huas. Generated
+  -- files are opened in a new split window for review and manual saving.
   Config.export_minihues_theme = function()
     local ok, theme_name = pcall(vim.fn.input, {
       prompt = "Enter name for color scheme: minihues-",
@@ -92,7 +93,7 @@ MiniDeps.now(function()
     local p = require("mini.hues").get_palette()
 
     -- Make a neovim minihues theme file
-    H.render(H.minihues_path(filename), H.minihues_template, {
+    H.render_to_buffer(H.minihues_path(filename), H.minihues_template, {
       name = filename,
       bg = p.bg,
       fg = p.fg,
@@ -100,7 +101,7 @@ MiniDeps.now(function()
     vim.cmd("split")
 
     -- Make a ghostty theme file
-    H.render(H.ghostty_path(filename), H.ghostty_template, {
+    H.render_to_buffer(H.ghostty_path(filename), H.ghostty_template, {
       black = p.bg_mid,
       red = p.red,
       green = p.green,
@@ -135,7 +136,7 @@ MiniDeps.now(function()
     return string.format("%s/%s.lua", dir, theme_name)
   end
 
-  H.render = function(filename, template, vars)
+  H.render_to_buffer = function(filename, template, vars)
     local rendered = template:gsub("%${(.-)}", function(key)
       return vars[key] or ""
     end)
