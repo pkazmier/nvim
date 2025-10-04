@@ -1,7 +1,7 @@
 local hues = require("mini.hues")
 math.randomseed(vim.loop.hrtime())
 local base_colors = hues.gen_random_base_colors()
-local p = hues.get_palette()
+local p = hues.make_palette({
   background = base_colors.background,
   foreground = base_colors.foreground,
   saturation = vim.o.background == "dark" and "medium" or "high",

@@ -109,6 +109,7 @@ map("n",       L"mms", C"lua MiniMap.toggle_side()",                          "S
 map("n",       L"mmt", C"lua Config.minimap_toggle()",                        "Toggle map")
 map("n",       L"mmT", C"lua Config.minimap_buf_toggle()",                    "Toggle map (buf)")
 map("n",       L"ms",  C"lua MiniStarter.open()",                             "Open MiniStarter")
+map("n",       L"mx",  C"lua Config.export_minihues_theme()",                 "Export mini.hues theme")
 
 -- Zk Notes
 map("n",       L"nN",  C"ZkNewMeeting",                                       "New meeting note")
