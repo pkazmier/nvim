@@ -5,6 +5,4 @@ local opts = {
   foreground = "#c0c9c9",
 }
 hues.setup(opts)
-local p = hues.get_palette()
-Config.minihues_apply_custom_highlights(p)
 vim.g.colors_name = "minihues-emerald"

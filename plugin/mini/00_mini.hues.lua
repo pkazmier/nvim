@@ -1,5 +1,25 @@
+local H = {}
 MiniDeps.now(function()
-  Config.minihues_apply_custom_highlights = function(p)
+  -- Apply custom highlights after loading a mini.hues based colorscheme.
+  -- All of my mini.hues based colorschemes are prefixed with "minihues",
+  -- but we cannot pattern match on "minihues*" because the seasonal ones
+  -- in mini.hues are named "miniwinter", "minisummer", etc. So we match
+  -- "mini*" and then exclude the two mini non-hues colorschemes included
+  -- in mani.base16 ("minischeme" and "minicyan").
+  vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+    pattern = "mini*",
+    callback = function(ev)
+      if ev.match == "minischeme" or ev.match == "minicyan" then
+        return
+      end
+      local p = require("mini.hues").get_palette()
+      if p ~= nil then
+        H.minihues_apply_custom_highlights(p)
+      end
+    end,
+  })
+
+  H.minihues_apply_custom_highlights = function(p)
     local hi = function(name, data)
       vim.api.nvim_set_hl(0, name, data)
     end
@@ -7,7 +27,6 @@ MiniDeps.now(function()
     hi("Title", { fg = p.accent, bg = nil, bold = true })
 
     -- stylua: ignore start
-
     -- Links to Comment by default, but that has italics
     hi("LeapBackdrop",                { link = "MiniJump2dDim" })
 
@@ -55,5 +74,6 @@ MiniDeps.now(function()
     hi("WinSeparator", { fg = p.bg_edge, bg = nil })
     -- stylua: ignore end
   end
-  vim.cmd.colorscheme("minihues-winter")
+
+  vim.cmd.colorscheme("miniwinter")
 end)

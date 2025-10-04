@@ -8,5 +8,4 @@ local p = hues.get_palette()
   accent = "azure",
 })
 hues.apply_palette(p)
-Config.minihues_apply_custom_highlights(p)
 vim.g.colors_name = "minihues-myrandomhue"
