@@ -1,24 +1,26 @@
+-- Disable modeline for this file because our template for the ghostty theme
+-- includes a vim modeline, which would conflict with this file's modeline.
+-- vim: nomodeline
 local H = {}
 
 MiniDeps.now(function()
   -- Apply custom highlights after loading a mini.hues based colorscheme.
-  -- All of my mini.hues based colorschemes are prefixed with "minihues",
-  -- but we cannot pattern match on "minihues*" because the seasonal ones
-  -- in mini.hues are named "miniwinter", "minisummer", etc. So we match
-  -- "mini*" and then exclude the two mini non-hues colorschemes included
-  -- in mani.base16 ("minischeme" and "minicyan").
-  vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-    pattern = "mini*",
-    callback = function(ev)
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    -- Only trigger for mini.hues based colorschemes and exclude mini.base16
+    -- themes such as "minischeme" and "minicyan" as those are not generated
+    -- from mini.hues palette.
+    pattern = { "minihues*", "miniwinter", "minisummer", "miniautumn", "minispring", "randomhue" },
+    callback = function(_)
       local p = require("mini.hues").get_palette()
-      if ev.match == "minischeme" or ev.match == "minicyan" or p == nil then
-        return
-      end
       H.minihues_apply_custom_highlights(p)
     end,
   })
 
   H.minihues_apply_custom_highlights = function(p)
+    if p == nil then
+      return
+    end
+
     local hi = function(name, data)
       vim.api.nvim_set_hl(0, name, data)
     end
@@ -72,9 +74,11 @@ MiniDeps.now(function()
     hi("VertSplit",    { fg = p.bg_edge, bg = nil })
     hi("WinSeparator", { fg = p.bg_edge, bg = nil })
     -- stylua: ignore end
-    
   end
 
+  -- Function to export current mini.hues palette to a neovim colorscheme
+  -- file and a ghostty theme file. Prompts user for a name for the theme.
+  -- This is useful if you generate a random colorscheme with mini.huas.
   Config.export_minihues_theme = function()
     local ok, theme_name = pcall(vim.fn.input, {
       prompt = "Enter name for color scheme: minihues-",
