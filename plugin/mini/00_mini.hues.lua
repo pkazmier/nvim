@@ -9,13 +9,11 @@ MiniDeps.now(function()
   vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     pattern = "mini*",
     callback = function(ev)
-      if ev.match == "minischeme" or ev.match == "minicyan" then
+      local p = require("mini.hues").get_palette()
+      if ev.match == "minischeme" or ev.match == "minicyan" or p == nil then
         return
       end
-      local p = require("mini.hues").get_palette()
-      if p ~= nil then
-        H.minihues_apply_custom_highlights(p)
-      end
+      H.minihues_apply_custom_highlights(p)
     end,
   })
 
