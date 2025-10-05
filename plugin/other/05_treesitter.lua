@@ -4,9 +4,9 @@ now_if_args(function() -- treesitter
     pattern = "*/nvim-treesitter",
     callback = function(ev)
       if ev.data.kind == "install" or ev.data.kind == "update" then
-        vim.schedule(function()
+        if vim.fn.exists(":TSUpdate") > 0 then
           vim.cmd("TSUpdate")
-        end)
+        end
       end
     end,
   })

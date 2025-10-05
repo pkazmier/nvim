@@ -7,9 +7,9 @@ MiniDeps.later(function()
     pattern = "*/copilot.lua",
     callback = function(ev)
       if ev.data.kind == "install" or ev.data.kind == "update" then
-        vim.schedule(function()
+        if vim.fn.exists(":Copilot") > 0 then
           vim.cmd("Copilot auth")
-        end)
+        end
       end
     end,
   })
