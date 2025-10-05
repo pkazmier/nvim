@@ -16,6 +16,11 @@
       "rev": "3fffb09",
       "src": "https://github.com/sainnhe/everforest"
     },
+    "friendly-snippets": {
+      "rev": "572f566",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "friendly-snippets ": [],
     "gruvbox-material": {
       "rev": "834dbf2",
       "src": "https://github.com/sainnhe/gruvbox-material"
