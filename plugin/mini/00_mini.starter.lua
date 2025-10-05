@@ -40,9 +40,9 @@ MiniDeps.now(function()
       {
         { name = "Mason",         action = "Mason",                 section = "Updaters"},
         { name = "Update deps",   action = "lua vim.pack.update()", section = "Updaters"},
-        { name = "New Meeting",   action = "ZkNewMeeting",          section = "Builtin actions"},
-        { name = "Visited files", action = "Pick visit_paths",      section = "Builtin actions"},
-        { name = "Quit Neovim",   action = "qall",                  section = "Builtin actions"},
+        { name = "New Meeting",   action = "ZkNewMeeting",          section = "Actions"},
+        { name = "Visited files", action = "Pick visit_paths",      section = "Actions"},
+        { name = "Quit Neovim",   action = "qall",                  section = "Actions"},
       },
     },
 
