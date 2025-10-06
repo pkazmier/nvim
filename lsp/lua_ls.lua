@@ -8,7 +8,7 @@ vim.lsp.config.lua_ls = {
   end,
 }
 
--- THis will be merged with the rest neovim-lspconfig configuration.
+-- This will be merged with the rest neovim-lspconfig configuration.
 return {
   settings = {
     Lua = {
