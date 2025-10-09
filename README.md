@@ -5,6 +5,8 @@ package management, which is scheduled to be included in Neovim 0.12+. In
 addition, you'll notice that I'm a huge fan of `mini.nvim` and use it
 extensively in my setup.
 
+![Neovim Screenshot](screenshot.png)
+
 ## Directory Structure
 
 Key concepts:
