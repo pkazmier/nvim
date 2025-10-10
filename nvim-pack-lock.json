@@ -97,10 +97,6 @@
     "vim-helm": {
       "rev": "2c8525f",
       "src": "https://github.com/towolf/vim-helm"
-    },
-    "zk-nvim": {
-      "rev": "8e0446f",
-      "src": "https://github.com/zk-org/zk-nvim"
     }
   }
 }
