@@ -18,8 +18,8 @@ MiniDeps.later(function()
     },
   })
 
-  vim.keymap.set("n", [[\h]], ":let v:hlsearch = 1 - v:hlsearch<CR>", { desc = "Toggle hlsearch", silent = true })
-  for _, key in ipairs({ "n", "N", "*" }) do
+  -- Refresh minimap on certain movements
+  for _, key in ipairs({ "n", "N", "*", "#" }) do
     vim.keymap.set("n", key, key .. "zv<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>")
   end
 
