@@ -24,6 +24,7 @@ vim.o.shiftround       = true
 vim.o.shiftwidth       = 2
 vim.o.shortmess        = "FOSWICaco"
 vim.o.spelloptions     = "camel"
+vim.o.splitkeep        = "cursor"
 vim.o.textwidth        = 78
 vim.o.wildmode         = "longest:full,full"
 vim.o.winborder        = "rounded"
