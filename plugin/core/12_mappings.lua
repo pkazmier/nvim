@@ -32,6 +32,8 @@ map("n",             "-",         C"lua Config.minifiles_open_bufdir()",      "O
 map("n",             "H",         C"lua MiniBracketed.buffer('backward')",    "Prev buffer")
 map("n",             "L",         C"lua MiniBracketed.buffer('forward')",     "Next buffer")
 map("n",             "z=",        C"Pick spellsuggest",                       "Spelling suggestions")
+map("n",             "[p",        C'exe "put! " . v:register',                "Paste Above")
+map("n",             "]p",        C'exe "put "  . v:register',                "Paste Below")
 map("n",             [[\f]],      C"FormatToggle",                            "Toggle auto-format")
 map("n",             [[\H]],      C"lua Config.toggle_hints()",               "Toggle inlay hints")
 map("n",             "M",         "m",                                        "Mark", { noremap = true, silent = true })
