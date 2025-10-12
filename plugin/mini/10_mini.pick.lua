@@ -6,6 +6,9 @@ MiniDeps.later(function()
         return MiniPick.default_preview(buf_id, item, { line_position = "center" })
       end,
     },
+    window = {
+      prompt_prefix = "❯ ",
+    },
   })
 
   vim.ui.select = MiniPick.ui_select
