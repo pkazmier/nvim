@@ -5,7 +5,7 @@ local H = {}
 
 MiniDeps.now(function()
   -- Apply custom highlights after loading a mini.hues based colorscheme.
-  vim.api.nvim_create_autocmd("ColorScheme", {
+  Config.new_autocmd("ColorScheme", {
     -- Only trigger for mini.hues based colorschemes and exclude mini.base16
     -- themes such as "minischeme" and "minicyan" as those are not generated
     -- from mini.hues palette.

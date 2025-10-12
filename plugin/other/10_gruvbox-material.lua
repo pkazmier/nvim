@@ -3,8 +3,7 @@ MiniDeps.later(function()
   vim.g.gruvbox_material_float_style = "dim"
   vim.g.gruvbox_material_background = "medium"
 
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", {}),
+  Config.new_autocmd("ColorScheme", {
     pattern = "gruvbox-material",
     callback = function()
       -- stylua: ignore start

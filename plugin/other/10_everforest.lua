@@ -3,8 +3,7 @@ MiniDeps.later(function()
   vim.g.everforest_float_style = "dim"
   vim.g.everforest_background = "medium"
 
-  vim.api.nvim_create_autocmd("ColorScheme", {
-    group = vim.api.nvim_create_augroup("custom_highlights_everforest", {}),
+  Config.new_autocmd("ColorScheme", {
     pattern = "everforest",
     callback = function()
       -- stylua: ignore start

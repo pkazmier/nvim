@@ -64,8 +64,7 @@ MiniDeps.later(function()
     return enabled_explicitly or auto_enable[ft] and not disabled
   end
 
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("kaz-minimap", { clear = true }),
+  Config.new_autocmd("BufEnter", {
     desc = "Toggle 'mini.map' based on filetype",
     callback = vim.schedule_wrap(function()
       if H.minimap_should_be_enabled() then

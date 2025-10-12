@@ -3,7 +3,7 @@ MiniDeps.later(function()
   --   return
   -- end
 
-  vim.api.nvim_create_autocmd({ "PackChanged" }, {
+  Config.new_autocmd({ "PackChanged" }, {
     pattern = "*/copilot.lua",
     callback = function(ev)
       if ev.data.kind == "install" or ev.data.kind == "update" then

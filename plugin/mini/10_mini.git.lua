@@ -16,16 +16,12 @@ MiniDeps.later(function()
     vim.wo[win_src].scrollbind, vim.wo.scrollbind = true, true
   end
 
-  local group = vim.api.nvim_create_augroup("kaz-minigit", { clear = true })
-
-  vim.api.nvim_create_autocmd("User", {
-    group = group,
+  Config.new_autocmd("User", {
     pattern = "MiniGitCommandSplit",
     callback = align_blame,
   })
 
-  vim.api.nvim_create_autocmd({ "FileType" }, {
-    group = group,
+  Config.new_autocmd({ "FileType" }, {
     pattern = { "git", "diff" },
     desc = "Set fold configuration for mini.git",
     callback = function()

@@ -11,7 +11,6 @@ MiniDeps.later(function()
   require("codecompanion").setup({})
 
   local ids = {} -- CodeCompanion request ID --> MiniNotify notification ID
-  local group = vim.api.nvim_create_augroup("CodeCompanionMiniNotifyHooks", {})
 
   local function format_request_status(ev)
     local name = ev.data.adapter.formatted_name or ev.data.adapter.name
@@ -26,18 +25,16 @@ MiniDeps.later(function()
     return msg, level, hl_group
   end
 
-  vim.api.nvim_create_autocmd({ "User" }, {
+  Config.new_autocmd({ "User" }, {
     pattern = "CodeCompanionRequestStarted",
-    group = group,
     callback = function(ev)
       local msg, level, hl_group = format_request_status(ev)
       ids[ev.data.id] = MiniNotify.add(msg, level, hl_group)
     end,
   })
 
-  vim.api.nvim_create_autocmd({ "User" }, {
+  Config.new_autocmd({ "User" }, {
     pattern = "CodeCompanionRequestFinished",
-    group = group,
     callback = function(ev)
       local msg, level, hl_group = format_request_status(ev)
       local mini_id = ids[ev.data.id]

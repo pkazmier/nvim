@@ -7,9 +7,7 @@ MiniDeps.later(function()
     sh = { "shellcheck" },
   }
 
-  local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-    group = lint_augroup,
+  Config.new_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
     callback = function()
       lint.try_lint()
     end,

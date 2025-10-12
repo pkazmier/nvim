@@ -4,9 +4,7 @@ MiniDeps.later(function()
     windows = { preview = true },
   })
 
-  local minifiles_augroup = vim.api.nvim_create_augroup("ec-mini-files", {})
-  vim.api.nvim_create_autocmd("User", {
-    group = minifiles_augroup,
+  Config.new_autocmd("User", {
     pattern = "MiniFilesExplorerOpen",
     callback = function()
       MiniFiles.set_bookmark("c", vim.fn.stdpath("config"), { desc = "Config" })
