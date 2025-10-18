@@ -12,7 +12,7 @@ MiniDeps.later(function()
     shading_factor = -20,
   })
 
-  Config.lazygit_toggle = function()
+  Config.toggleterm_lazygit = function()
     local lazygit = require("toggleterm.terminal").Terminal:new({
       cmd = "lazygit",
       hidden = true,

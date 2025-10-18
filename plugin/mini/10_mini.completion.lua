@@ -1,6 +1,7 @@
 MiniDeps.later(function()
   require("mini.completion").setup({
     lsp_completion = { source_func = "omnifunc", auto_setup = false },
+    mappings = { force_fallback = "" },
   })
   local on_attach = function(args)
     vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"

@@ -55,6 +55,14 @@ Config.gen_hydra_brackets = function(suffixes, replacements)
   return clues
 end
 
+-- Open a new scratch buffer in the current window. This differs from
+-- `:enew` in that it creates a new empty buffer rather than reusing
+-- the existing empty buffer if one exists. It also sets the buffer to
+-- be a scratch buffer (i.e. not listed, not saved to disk).
+Config.new_scratch_buffer = function()
+  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
+end
+
 H.capitalize = function(w)
   return w:sub(1, 1):upper() .. w:sub(2)
 end
