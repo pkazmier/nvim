@@ -2,6 +2,14 @@
 return {
   settings = {
     gopls = {
+      codelenses = {
+        generate = true,
+        gc_details = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
+      },
       hints = {
         assignVariableTypes = true,
         compositeLiteralFields = true,
