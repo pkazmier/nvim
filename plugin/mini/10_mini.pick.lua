@@ -30,11 +30,14 @@ MiniDeps.later(function()
   local repo_dir = vim.fn.expand("~/repos")
   MiniPick.registry.projects = H.two_stage_dir_picker(repo_dir, "Repo Picker")
 
-  -- Aligned Grep live picker
+  -- Aligned grep picker
+  MiniPick.registry.grep_align = function(opts)
+    MiniPick.builtin.grep(opts, { source = { show = H.minipick_align_on_nul } })
+  end
+
+  -- Aligned live grep picker
   MiniPick.registry.grep_live_align = function(opts)
-    MiniPick.builtin.grep_live(opts, {
-      source = { show = H.minipick_align_on_nul },
-    })
+    MiniPick.builtin.grep_live(opts, { source = { show = H.minipick_align_on_nul } })
   end
 
   -- Aligned TODO picker
