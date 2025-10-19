@@ -1,14 +1,6 @@
 MiniDeps.later(function()
-  local remap = function(mode, lhs_from, lhs_to)
-    local keymap = vim.fn.maparg(lhs_from, mode, false, true)
-    local rhs = keymap.callback or keymap.rhs
-    if rhs == nil then
-      error("Could not remap from " .. lhs_from .. " to " .. lhs_to)
-    end
-    vim.keymap.set(mode, lhs_to, rhs, { desc = keymap.desc })
-  end
-  remap("n", "gx", "gX")
-  remap("x", "gx", "gX")
+  Config.remap("n", "gx", "gX")
+  Config.remap("x", "gx", "gX")
   MiniClue.set_mapping_desc("n", "gX", "Open file or URI")
   MiniClue.set_mapping_desc("x", "gX", "Open file or URI")
 

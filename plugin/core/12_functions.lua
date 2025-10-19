@@ -14,6 +14,16 @@ Config.new_scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
+-- Remap binding
+Config.remap = function(mode, lhs_from, lhs_to)
+  local keymap = vim.fn.maparg(lhs_from, mode, false, true)
+  local rhs = keymap.callback or keymap.rhs
+  if rhs == nil then
+    error("Could not remap from " .. lhs_from .. " to " .. lhs_to)
+  end
+  vim.keymap.set(mode, lhs_to, rhs, { desc = keymap.desc })
+end
+
 -- Generate keymaps for bracketed navigation tuned for repeated motions. For
 -- example, mini.bracketed defines the following mappings to navigate between
 -- diagnostics:
