@@ -1,7 +1,7 @@
 MiniDeps.later(function()
-  -- if Config.copilot_disable then
-  --   return
-  -- end
+  if Config.copilot_disable then
+    return
+  end
 
   Config.new_autocmd({ "PackChanged" }, {
     pattern = "*/copilot.lua",

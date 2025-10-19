@@ -1,0 +1,22 @@
+{
+  "Stylua ignore": {
+    "prefix": "#i",
+    "body": "-- stylua: ignore",
+    "description": "Stylua ignore"
+  },
+  "Stylua ignore start": {
+    "prefix": "#is",
+    "body": "-- stylua: ignore start",
+    "description": "Stylua ignore start"
+  },
+  "Stylua ignore end": {
+    "prefix": "#ie",
+    "body": "-- stylua: ignore end",
+    "description": "Stylua ignore end"
+  },
+  "Stylua ignore start / end": {
+    "prefix": "#ise",
+    "body": "-- stylua: ignore start\n$0\n-- stylua: ignore end",
+    "description": "Stylua ignore start / end"
+  }
+}

@@ -1,6 +1,8 @@
--- Disable modeline for this file because our template for the ghostty theme
--- includes a vim modeline, which would conflict with this file's modeline.
+-- Disable modeline for this file because our template string defined below
+-- for the ghostty theme includes a vim modeline, which would conflict with
+-- this file's modeline.
 -- vim: nomodeline
+
 local H = {}
 
 MiniDeps.now(function()
@@ -17,15 +19,11 @@ MiniDeps.now(function()
   })
 
   H.minihues_apply_custom_highlights = function(p)
-    if p == nil then
-      return
-    end
-
-    local hi = function(name, data)
-      vim.api.nvim_set_hl(0, name, data)
-    end
-
     -- stylua: ignore start
+    if p == nil then return end
+    local hi = function(name, data) vim.api.nvim_set_hl(0, name, data) end
+
+    -- I prefer bold titles
     hi("Title",                          { fg = p.accent,  bg = nil,         bold = true })
 
     -- Links to Comment by default, but that has italics
@@ -79,75 +77,78 @@ MiniDeps.now(function()
     -- stylua: ignore end
   end
 
-  -- Export current mini.hues palette to a neovim colorscheme file and
-  -- a ghostty theme file. Prompts user for a name for the theme. This is
-  -- useful if you generate a random colorscheme with mini.huas. Generated
-  -- files are opened in a new split window for review and manual saving.
-  Config.export_minihues_theme = function()
-    local ok, theme_name = pcall(vim.fn.input, {
-      prompt = "Enter name for color scheme: minihues-",
-      cancelreturn = false,
-    })
-    if not ok or theme_name == false then
-      return nil
-    end
+  vim.cmd.colorscheme("miniwinter")
+end)
 
-    local filename = "minihues-" .. theme_name
-    local p = require("mini.hues").get_palette()
-
-    -- Make a neovim minihues theme file
-    H.render_to_buffer(H.minihues_path(filename), H.minihues_template, {
-      name = filename,
-      bg = p.bg,
-      fg = p.fg,
-    })
-    vim.cmd("split")
-
-    -- Make a ghostty theme file
-    H.render_to_buffer(H.ghostty_path(filename), H.ghostty_template, {
-      black = p.bg_mid,
-      red = p.red,
-      green = p.green,
-      yellow = p.yellow,
-      blue = p.azure,
-      magenta = p.purple,
-      cyan = p.cyan,
-      white = p.fg_mid2,
-      bright_black = p.bg_mid2,
-      bright_red = p.red,
-      bright_green = p.green,
-      bright_yellow = p.yellow,
-      bright_blue = p.azure,
-      bright_magenta = p.purple,
-      bright_cyan = p.cyan,
-      bright_white = p.fg_mid,
-      bg = p.bg,
-      fg = p.fg,
-      cursor_bg = p.azure,
-      selection_bg = p.bg_mid2,
-      selection_fg = p.fg,
-    })
+-- Export current mini.hues palette to a neovim colorscheme file and
+-- a ghostty theme file. Prompts user for a name for the theme. This is
+-- useful if you generate a random colorscheme with mini.huas. Generated
+-- files are opened in a new split window for review and manual saving.
+Config.export_minihues_theme = function()
+  local ok, theme_name = pcall(vim.fn.input, {
+    prompt = "Enter name for color scheme: minihues-",
+    cancelreturn = false,
+  })
+  if not ok or theme_name == false then
+    return nil
   end
 
-  H.ghostty_path = function(theme_name)
-    local dir = os.getenv("HOME")
-    return string.format("%s/.config/ghostty/theme/%s", dir, theme_name)
-  end
+  local filename = "minihues-" .. theme_name
+  local p = require("mini.hues").get_palette()
 
-  H.minihues_path = function(theme_name)
-    local dir = string.format("~/.config/%s/colors", os.getenv("NVIM_APPNAME") or "nvim")
-    return string.format("%s/%s.lua", dir, theme_name)
-  end
+  -- Make a neovim minihues theme file
+  H.render_to_buffer(H.minihues_path(filename), H.minihues_template, {
+    name = filename,
+    bg = p.bg,
+    fg = p.fg,
+  })
+  vim.cmd("split")
 
-  H.render_to_buffer = function(filename, template, vars)
-    local rendered = template:gsub("%${(.-)}", function(key)
-      return vars[key] or ""
-    end)
-    vim.cmd(string.format("edit %s", filename))
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(rendered, "\n"))
-  end
+  -- Make a ghostty theme file
+  H.render_to_buffer(H.ghostty_path(filename), H.ghostty_template, {
+    black = p.bg_mid,
+    red = p.red,
+    green = p.green,
+    yellow = p.yellow,
+    blue = p.azure,
+    magenta = p.purple,
+    cyan = p.cyan,
+    white = p.fg_mid2,
+    bright_black = p.bg_mid2,
+    bright_red = p.red,
+    bright_green = p.green,
+    bright_yellow = p.yellow,
+    bright_blue = p.azure,
+    bright_magenta = p.purple,
+    bright_cyan = p.cyan,
+    bright_white = p.fg_mid,
+    bg = p.bg,
+    fg = p.fg,
+    cursor_bg = p.azure,
+    selection_bg = p.bg_mid2,
+    selection_fg = p.fg,
+  })
+end
 
-  H.minihues_template = [[local hues = require("mini.hues")
+H.ghostty_path = function(theme_name)
+  local dir = os.getenv("HOME")
+  return string.format("%s/.config/ghostty/theme/%s", dir, theme_name)
+end
+
+H.minihues_path = function(theme_name)
+  local dir = string.format("~/.config/%s/colors", os.getenv("NVIM_APPNAME") or "nvim")
+  return string.format("%s/%s.lua", dir, theme_name)
+end
+
+H.render_to_buffer = function(filename, template, vars)
+  local rendered = template:gsub("%${(.-)}", function(key)
+    return vars[key] or ""
+  end)
+  vim.cmd(string.format("edit %s", filename))
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(rendered, "\n"))
+end
+
+H.minihues_template = [[local hues = require("mini.hues")
 hues.setup({
   background = "${bg}",
   foreground = "${fg}",
@@ -156,7 +157,7 @@ hues.setup({
 vim.g.colors_name = "${name}"
 ]]
 
-  H.ghostty_template = [[# Ghostty theme generated by mini.hues
+H.ghostty_template = [[# Ghostty theme generated by mini.hues
 palette = 0=${black}
 palette = 1=${red}
 palette = 2=${green}
@@ -182,6 +183,3 @@ selection-foreground = ${selection_fg}
 
 # vim: ft=config
 ]]
-
-  vim.cmd.colorscheme("miniwinter")
-end)

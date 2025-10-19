@@ -5,7 +5,9 @@ _G.Config.new_autocmd = function(event, opts)
   vim.api.nvim_create_autocmd(event, opts)
 end
 
--- Auto toggle cursorline
+-- Show cursorline only in the current window. I find it annoying to see
+-- cursorlines in other windows, so this autocommand will automatically
+-- disable when leaving and enable when entering.
 Config.new_autocmd({ "InsertLeave", "WinEnter" }, {
   callback = function()
     if vim.w.auto_cursorline then

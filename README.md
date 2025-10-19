@@ -22,7 +22,7 @@ Key concepts:
    those directories, plugins are loaded in alphabetical order as well, which
    is why they are prefixed with numbers to ensure the correct loading
    order.
-4. Most mappings are defined in `plugin/core/12_mappings` so it's easy to see
+4. Most mappings are defined in `plugin/core/13_mappings` so it's easy to see
    what mappings have been used and what's still available. In some cases,
    this is not possible, but for the most part, it works well.
 5. Lazy loading is achieved using two helper functions from `mini.deps` called
@@ -43,8 +43,8 @@ Below is an overview of the directory structure:
 │   ├── core                       # Core configurations
 │   │   ├── 10_options.lua         # General options
 │   │   ├── 11_autocommands.lua    # General autocommands
-│   │   ├── 12_mappings.lua        # Key mappings
-│   │   └── 13_functions.lua       # Custom functions
+│   │   ├── 12_functions.lua       # Custom functions
+│   │   └── 13_mappings.lua        # Key mappings
 │   ├── mini/                      # Mini.nvim configurations
 │   └── other/                     # Other plugin configurations
 ├── snippets/                      # Snippets for various filetypes

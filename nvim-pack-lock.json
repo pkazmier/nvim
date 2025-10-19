@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "alabaster.nvim": {
+      "rev": "f7d0ed5",
+      "src": "https://github.com/p00f/alabaster.nvim"
+    },
     "catppuccin": {
       "rev": "af58927",
       "src": "https://github.com/catppuccin/nvim"
@@ -9,7 +13,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
-      "rev": "30b98a4",
+      "rev": "3123983",
       "src": "https://github.com/zbirenbaum/copilot.lua"
     },
     "everforest": {
@@ -24,8 +28,12 @@
       "rev": "834dbf2",
       "src": "https://github.com/sainnhe/gruvbox-material"
     },
+    "iceberg.vim": {
+      "rev": "23835d5",
+      "src": "https://github.com/cocopon/iceberg.vim"
+    },
     "kanagawa.nvim": {
-      "rev": "27f1e11",
+      "rev": "aef7f5c",
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "lazydev.nvim": {
@@ -33,7 +41,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "leap.nvim": {
-      "rev": "f5fe479",
+      "rev": "7068a05",
       "src": "https://github.com/ggandor/leap.nvim"
     },
     "mason.nvim": {
@@ -45,11 +53,11 @@
       "src": "https://github.com/mellow-theme/mellow.nvim"
     },
     "mini.nvim": {
-      "rev": "fbb6ad0",
+      "rev": "8a7cf7e",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-autopairs": {
-      "rev": "23320e7",
+      "rev": "7a2c97c",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-lint": {
@@ -57,11 +65,11 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "e688b48",
+      "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "3ab4f2d2",
+      "rev": "71bf1665",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -79,7 +87,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "2064980",
+      "rev": "475d3ad",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "toggleterm.nvim": {
@@ -87,16 +95,19 @@
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "tokyonight.nvim": {
-      "rev": "00d92e6",
+      "rev": "e63c42a",
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "vague.nvim": {
-      "rev": "27a19ff",
+      "rev": "cdbfdc8",
       "src": "https://github.com/vague2k/vague.nvim"
     },
     "vim-helm": {
       "rev": "2c8525f",
       "src": "https://github.com/towolf/vim-helm"
+    },
+    "zk-nvim": {
+      "rev": "575c3e8"
     }
   }
 }

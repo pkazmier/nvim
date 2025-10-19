@@ -1,15 +1,11 @@
--- This will override any on_attach function if neovim-lspconfig
--- had one defined for lua_ls, which it does not specifically.
-vim.lsp.config.lua_ls = {
+-- This will be merged with the rest neovim-lspconfig configuration.
+
+return {
   on_attach = function(client, buf_id)
     -- Reduce unnecessarily long list of completion triggers for better
     -- 'mini.completion' experience
     client.server_capabilities.completionProvider.triggerCharacters = { ".", ":", "#", "(" }
   end,
-}
-
--- This will be merged with the rest neovim-lspconfig configuration.
-return {
   settings = {
     Lua = {
       workspace = {
