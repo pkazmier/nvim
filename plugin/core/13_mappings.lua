@@ -1,5 +1,6 @@
 -- stylua: ignore start
--- Mapping helpers
+
+-- Mapping helpers to make clean and easy to align with mini.align
 local map = function(mode, lhs, rhs, desc, opts)
   opts = opts or {}
   opts.desc = desc
@@ -9,12 +10,12 @@ end
 local L = function(key) return "<leader>" .. key end
 local C = function(cmd) return "<Cmd>" .. cmd .. "<CR>" end
 
--- Leader mappings
+-- Leader mappings and descriptions used later when mini.clue is setup
 Config.leader_group_clues = {
   { mode = "n", keys = L"b",  desc = "+Buffer" },
   { mode = "n", keys = L"c",  desc = "+Copilot" },
   { mode = "n", keys = L"e",  desc = "+Explore" },
-  { mode = "n", keys = L"f",  desc = "+Fuzzy Find" },
+  { mode = "n", keys = L"f",  desc = "+Find" },
   { mode = "n", keys = L"g",  desc = "+Git" },
   { mode = "n", keys = L"l",  desc = "+Language" },
   { mode = "n", keys = L"m",  desc = "+Map" },
@@ -27,7 +28,6 @@ Config.leader_group_clues = {
 
 -- Basic mappings
 map("i",   "<A-Space>", C"normal ciw ",                                        "Just one space")
-map("n",   "-",         C"lua Config.minifiles_open_bufdir()",                 "Open mini.files")
 map("n",   "z=",        C"Pick spellsuggest",                                  "Spelling suggestions")
 map("n",   "[p",        C'exe "put! " . v:register',                           "Paste Above")
 map("n",   "]p",        C'exe "put "  . v:register',                           "Paste Below")
@@ -37,7 +37,7 @@ map("n",   [[\W]],      C"lua Config.minicursorword_toggle()",                 "
 map("nxo", "sj",        "<Plug>(leap)",                                        "Leap anywhere")
 map("nxo", "S",         C"lua require('leap.treesitter').select()",            "Treesitter select")
 
--- Frequently used
+-- Frequently used pickers
 map("n",   L" ",        C"Pick files",                                         "Find files")
 map("n",   L",",        C"Pick buffers",                                       "Switch buffer")
 map("n",   L"/",        C"Pick buf_lines scope='current' preserve_order=true", "Lines (current)")
@@ -51,11 +51,11 @@ map("n",   L"bt",       C"lua MiniTrailspace.trim()",                          "
 map("n",   L"bu",       C"lua MiniBufremove.unshow()",                         "Unshow buffer")
 map("n",   L"bw",       C"lua MiniBufremove.wipeout()",                        "Wipeout buffer")
 
--- Code
+-- Copilot
 map("nx",  L"cc",       C"CodeCompanionChat Toggle",                           "Code Companion chat")
 map("nx",  L"cC",       C"CodeCompanionActions",                               "Code Companion actions")
 
--- Explore / Edit
+-- Explore
 map("n",   L"ec",       C"Pick config",                                        "Config")
 map("n",   L"ed",       C"lua MiniFiles.open()",                               "Directory (cwd)")
 map("n",   L"ef",       C"lua Config.minifiles_open_bufdir()",                 "Directory (file)")
@@ -65,7 +65,7 @@ map("n",   L"ep",       C"Pick plugins",                                       "
 map("n",   L"eq",       C"lua require('quicker').toggle()",                    "Quickfix")
 map("n",   L"er",       C"Pick projects",                                      "Projects")
 
--- Fuzzy / Find
+-- Find
 map("n",   L"f/",       C"Pick history scope='/'",                             '"/" history')
 map("n",   L"f:",       C"Pick history scope=':'",                             '":" history')
 map("n",   L"fa",       C"Pick git_hunks scope='staged'",                      "Added hunks (all)")
