@@ -2,7 +2,6 @@ MiniDeps.later(function()
   local ai = require("mini.ai")
   local extra = require("mini.extra")
   ai.setup({
-    n_lines = 500,
     custom_textobjects = {
       F = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
       o = ai.gen_spec.treesitter({
@@ -15,5 +14,6 @@ MiniDeps.later(function()
       L = extra.gen_ai_spec.line(),
       N = extra.gen_ai_spec.number(),
     },
+    search_method = "cover",
   })
 end)

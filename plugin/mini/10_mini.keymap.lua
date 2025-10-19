@@ -1,22 +1,23 @@
 MiniDeps.later(function()
-  local map_combo = require("mini.keymap").map_combo
-  local map_multistep = require("mini.keymap").map_multistep
+  require("mini.keymap").setup()
 
--- stylua: ignore start
-  map_multistep("i", "<Tab>",   { "minisnippets_next", "increase_indent", "jump_after_close" })
-  map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent", "jump_before_open" })
-  map_multistep("i", "<CR>",    { "blink_accept",      "pmenu_accept",    "nvimautopairs_cr" })
-  map_multistep("i", "<BS>",    { "nvimautopairs_bs" })
+  -- stylua: ignore start
+  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", "increase_indent", "jump_after_close" })
+  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent", "jump_before_open" })
+  MiniKeymap.map_multistep("i", "<CR>",    { "blink_accept",      "pmenu_accept",    "nvimautopairs_cr" })
+  MiniKeymap.map_multistep("i", "<BS>",    { "nvimautopairs_bs" })
   -- stylua: ignore end
 
-  map_combo({ "i", "c", "x", "s" }, "jk", "<BS><BS><Esc>")
+  -- Better escape key
+  MiniKeymap.map_combo({ "i", "c", "x", "s" }, "jk", "<BS><BS><Esc>")
 
+  -- Prevent bad habits
   local notify_many_keys = function(key)
     local lhs = string.rep(key, 5)
     local action = function()
       vim.notify("Too many " .. key)
     end
-    map_combo({ "n", "x" }, lhs, action)
+    MiniKeymap.map_combo({ "n", "x" }, lhs, action)
   end
 
   notify_many_keys("h")
