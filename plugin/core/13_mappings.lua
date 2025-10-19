@@ -64,6 +64,7 @@ map("n",   L"en",       C"lua MiniNotify.show_history()",                      "
 map("n",   L"ep",       C"Pick plugins",                                       "Plugins")
 map("n",   L"eq",       C"lua require('quicker').toggle()",                    "Quickfix")
 map("n",   L"er",       C"Pick projects",                                      "Projects")
+map("n",   L"eu",       C"Undotree",                                           "Undotree")
 
 -- Find
 map("n",   L"f/",       C"Pick history scope='/'",                             '"/" history')
