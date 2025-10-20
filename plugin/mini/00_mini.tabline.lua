@@ -1,3 +1,3 @@
-MiniDeps.later(function()
+MiniDeps.now(function()
   require("mini.tabline").setup()
 end)
