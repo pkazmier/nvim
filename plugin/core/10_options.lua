@@ -22,7 +22,7 @@ vim.opt.grepformat     = "%f:%l:%c:%m"
 vim.opt.grepprg        = "rg --vimgrep"
 vim.opt.list           = true
 vim.opt.listchars      = { extends="…", precedes="…", tab="  ", nbsp="␣" }
-vim.opt.pumborder      = "single"
+vim.opt.pumborder      = "rounded"
 vim.opt.pumheight      = 10
 vim.opt.shiftround     = true
 vim.opt.shiftwidth     = 2
@@ -31,7 +31,7 @@ vim.opt.spelloptions   = "camel"
 vim.opt.splitkeep      = "cursor"
 vim.opt.textwidth      = 78
 vim.opt.wildmode       = "longest:full,full"
-vim.opt.winborder      = "double"
+vim.opt.winborder      = "rounded"
 vim.opt.winminwidth    = 5
 
 -- Fold settings
