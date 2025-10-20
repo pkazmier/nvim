@@ -9,6 +9,7 @@ vim.g.maplocalleader   = " "
 
 -- General settings
 vim.opt.breakindentopt = "list:-1"
+vim.opt.cmdheight      = 0
 vim.opt.complete       = '.,w,b,kspell'
 vim.opt.completeopt    = "menuone,noselect,fuzzy"
 vim.opt.conceallevel   = 2
