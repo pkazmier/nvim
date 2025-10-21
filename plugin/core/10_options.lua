@@ -42,3 +42,14 @@ vim.opt.foldnestmax    = 10
 vim.opt.foldtext       = ""
 
 -- stylua: ignore end
+
+-- Diagnostics
+local diagnostic_opts = {
+  underline = false,
+  update_in_insert = false,
+  virtual_text = { current_line = true },
+  severity_sort = true,
+}
+MiniDeps.later(function()
+  vim.diagnostic.config(diagnostic_opts)
+end)
