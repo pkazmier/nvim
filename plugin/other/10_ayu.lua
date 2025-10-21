@@ -7,8 +7,14 @@ MiniDeps.now(function()
       local c = require("ayu.colors")
       -- stylua: ignore
       return {
+        CursorLineNr                   = { fg = c.accent, bg = c.line, bold = true },
+
+        -- I prefer dimming background and brighter labels
+        LeapBackdrop                   = { link = "MiniJump2dDim" },
+        LeapLabel                      = { fg = c.accent, bold = true },
+
         -- By default ayu uses the same background for floats as the normal
-        -- editing windown. I prefer a darker background for all floats.
+        -- editing window. I prefer a darker background for all floats.
         NormalFloat                    = { bg = c.panel_bg },
 
         -- Bold current line in MiniFiles
@@ -42,14 +48,21 @@ MiniDeps.now(function()
         MiniStatuslineDevinfo          = { fg = c.fg,             bg = c.selection_bg },
         MiniStatuslineFileinfo         = { fg = c.fg,             bg = c.selection_bg },
 
-        RenderMarkdownCodeBorder       = { bg = c.panel_border },
+        RenderMarkdownBullet           = { fg = c.vcs_added },
+        RenderMarkdownCode             = { bg = c.selection_inactive },
+        RenderMarkdownCodeBorder       = { bg = c.selection_bg },
+        RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
 
         -- Extend the context highlighting to line numbers as well
-        TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
         TreesitterContextBottom        = { sp = c.selection_bg, underdotted = true },
+        TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
 
-        ['@markup.italic']             = { fg = c.string, italic = true },
-        ['@markup.strong']             = { fg = c.string, bold = true },
+        ['@markup.heading']            = { fg = c.keyword, bold = true },
+        ['@markup.strong']             = { fg = c.keyword, bold = true },
+        ['@markup.italic']             = { fg = c.keyword, italic = true },
+        ['@markup.list']               = { fg = c.vcs_added },
+        ['@markup.raw']                = { fg = c.tag, bg = c.selection_inactive },
+        ['@markup.quote']              = { fg = c.constant, italic = true },
         ['@module']                    = { fg = c.fg },
         ['@string.documentation']      = { fg = c.lsp_inlay_hint },
         ['@variable.builtin']          = { fg = c.fg },
