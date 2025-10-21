@@ -9,11 +9,11 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "codecompanion.nvim": {
-      "rev": "5efcc8f",
+      "rev": "7cb84be",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "conform.nvim": {
-      "rev": "fbcb4fa",
+      "rev": "235dd79",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "copilot.lua": {
@@ -57,8 +57,12 @@
       "src": "https://github.com/mellow-theme/mellow.nvim"
     },
     "mini.nvim": {
-      "rev": "e04b5c6",
+      "rev": "cf32454",
       "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "neovim-ayu": {
+      "rev": "38caa8b",
+      "src": "https://github.com/Shatur/neovim-ayu"
     },
     "nvim-autopairs": {
       "rev": "7a2c97c",
@@ -73,12 +77,12 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "71bf1665",
+      "rev": "30c466ad",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-context": {
-      "rev": "41847d3",
+      "rev": "ec308c7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
