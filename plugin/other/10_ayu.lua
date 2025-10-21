@@ -7,11 +7,12 @@ MiniDeps.now(function()
       local c = require("ayu.colors")
       -- stylua: ignore
       return {
-        -- TODO: open PR to fix MiniMap background
-        -- MiniMapNormal = { bg = c.panel_bg },
+        -- By default ayu uses the same background for floats as the normal
+        -- editing windown. I prefer a darker background for all floats.
         NormalFloat                    = { bg = c.panel_bg },
 
-        MiniFilesCursorLine = { fg = nil, bg = c.line, bold = true },
+        -- Bold current line in MiniFiles
+        MiniFilesCursorLine            = { fg = nil, bg = c.line, bold = true },
 
         -- Highlight patterns for highlighting the whole line and hiding colon.
         -- See https://github.com/echasnovski/mini.nvim/discussions/783
@@ -24,9 +25,7 @@ MiniDeps.now(function()
         MiniHipatternsNoteColon        = { bg = c.regexp,  fg = c.regexp,  bold = true },
         MiniHipatternsTodoColon        = { bg = c.tag,     fg = c.tag,     bold = true },
 
-        MiniMapNormal                  = { fg = c.lsp_inlay_hint, bg = c.panel_bg },
-
-        -- Bold matches in MiniPick
+        -- Bold matches and current line in MiniPick
         MiniPickMatchCurrent           = { fg = nil, bg = c.line, bold = true },
         MiniPickMatchRanges            = { bg = nil, fg = c.regexp, bold = true},
 
@@ -45,7 +44,8 @@ MiniDeps.now(function()
 
         RenderMarkdownCodeBorder       = { bg = c.panel_border },
 
-        TreesitterContextLineNumber    = { fg = c.comment, bg = c.selection_inactive },
+        -- Extend the context highlighting to line numbers as well
+        TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
         TreesitterContextBottom        = { sp = c.selection_bg, underdotted = true },
 
         ['@markup.italic']             = { fg = c.string, italic = true },
