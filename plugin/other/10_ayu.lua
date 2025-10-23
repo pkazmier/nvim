@@ -9,6 +9,12 @@ MiniDeps.now(function()
       return {
         CursorLineNr                   = { fg = c.accent, bg = c.line, bold = true },
 
+        -- Use reverse text for diagnostics
+        DiagnosticVirtualTextError     = { bg = c.error,   fg = c.line, italic = true },
+        DiagnosticVirtualTextWarn      = { bg = c.keyword, fg = c.line, italic = true },
+        DiagnosticVirtualTextInfo      = { bg = c.tag,     fg = c.line, italic = true },
+        DiagnosticVirtualTextHint      = { bg = c.regexp,  fg = c.line, italic = true },
+
         -- I prefer dimming background and brighter labels
         LeapBackdrop                   = { link = "MiniJump2dDim" },
         LeapLabel                      = { fg = c.accent, bold = true },

@@ -46,7 +46,7 @@ vim.opt.foldtext       = ""
 local diagnostic_opts = {
   underline = false,
   update_in_insert = false,
-  virtual_text = { current_line = true },
+  virtual_text = { current_line = true, spacing = 3, prefix = "  " },
   severity_sort = true,
 }
 MiniDeps.later(function()
