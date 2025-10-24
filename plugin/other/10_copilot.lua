@@ -3,13 +3,13 @@ MiniDeps.later(function()
     return
   end
 
+  -- Add post hook to run after first-time install
   Config.new_autocmd({ "PackChanged" }, {
-    pattern = "*/copilot.lua",
     callback = function(ev)
-      if ev.data.kind == "install" or ev.data.kind == "update" then
-        if vim.fn.exists(":Copilot") > 0 then
-          vim.cmd("Copilot auth")
-        end
+      local name, kind = ev.data.spec.name, ev.data.kind
+      if name == "copilot.lua" and kind == "install" then
+        vim.cmd.packadd("copilot.lua")
+        vim.cmd("Copilot auth")
       end
     end,
   })

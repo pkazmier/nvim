@@ -1,12 +1,11 @@
 local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
-now_if_args(function() -- treesitter
+now_if_args(function()
+  -- Add post hook to run after every update, but not first-time install
   Config.new_autocmd({ "PackChanged" }, {
-    pattern = "*/nvim-treesitter",
     callback = function(ev)
-      if ev.data.kind == "install" or ev.data.kind == "update" then
-        if vim.fn.exists(":TSUpdate") > 0 then
-          vim.cmd("TSUpdate")
-        end
+      local name, active, kind = ev.data.spec.name, ev.data.active, ev.data.kind
+      if name == "tree-sitter" and kind == "update" and active then
+        vim.cmd("TSUpdate")
       end
     end,
   })
