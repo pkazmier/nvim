@@ -22,6 +22,7 @@ MiniDeps.now(function()
         -- By default ayu uses the same background for floats as the normal
         -- editing window. I prefer a darker background for all floats.
         NormalFloat                    = { bg = c.panel_bg },
+        FloatBorder                    = { fg = c.comment, bg = c.panel_bg },
 
         -- Bold current line in MiniFiles
         MiniFilesCursorLine            = { fg = nil, bg = c.line, bold = true },
