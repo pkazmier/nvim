@@ -102,13 +102,13 @@ H.section_searchcount = function(args)
 
   local icon = MiniStatusline.is_truncated(args.trunc_width) and "" or " "
   if s_count.incomplete == 1 then
-    return icon .. "?/?│"
+    return icon .. "?⧸?│"
   end
 
   local too_many = (">%d"):format(s_count.maxcount)
   local current = s_count.current > s_count.maxcount and too_many or s_count.current
   local total = s_count.total > s_count.maxcount and too_many or s_count.total
-  return ("%s%s/%s│"):format(icon, current, total)
+  return ("%s%s⧸%s│"):format(icon, current, total)
 end
 
 H.section_pathname = function(args)
