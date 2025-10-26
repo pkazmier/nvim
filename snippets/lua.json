@@ -18,5 +18,10 @@
     "prefix": "#ise",
     "body": "-- stylua: ignore start\n$0\n-- stylua: ignore end",
     "description": "Stylua ignore start / end"
+  },
+  "Lua section header": {
+    "prefix": "#s",
+    "body": "-- ---------------------------------------------------------------------------\n-- $0\n-- ---------------------------------------------------------------------------\n",
+    "description": "Stylua ignore start / end"
   }
 }
