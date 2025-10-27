@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.starter
+-- ---------------------------------------------------------------------------
+
 MiniDeps.now(function()
   local pad = function(str, n)
     return string.rep(" ", n) .. str
@@ -31,9 +35,6 @@ MiniDeps.now(function()
 
   local starter = require("mini.starter")
   starter.setup({
-    -- Default values with exception of '-' as I use it to open mini.files.
-    query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_.",
-
     -- stylua: ignore
     items = {
       starter.sections.sessions(5, true),

@@ -1,13 +1,22 @@
 -- stylua: ignore start
 
+-- ---------------------------------------------------------------------------
 -- Custom globals
+-- ---------------------------------------------------------------------------
+
 Config.copilot_disable = vim.fn.expand("$USER") == "kaz"
 
+-- ---------------------------------------------------------------------------
 -- Global settings
+-- ---------------------------------------------------------------------------
+
 vim.g.mapleader        = " "
 vim.g.maplocalleader   = " "
 
+-- ---------------------------------------------------------------------------
 -- General settings
+-- ---------------------------------------------------------------------------
+
 vim.opt.breakindentopt = "list:-1"
 vim.opt.complete       = '.,w,b,kspell'
 vim.opt.completeopt    = "menuone,noselect,fuzzy"
@@ -33,14 +42,20 @@ vim.opt.wildmode       = "longest:full,full"
 vim.opt.winborder      = "rounded"
 vim.opt.winminwidth    = 5
 
+-- ---------------------------------------------------------------------------
 -- Fold settings
+-- ---------------------------------------------------------------------------
+
 vim.opt.foldexpr       = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel      = 99
 vim.opt.foldmethod     = "expr"
 vim.opt.foldnestmax    = 10
 vim.opt.foldtext       = ""
 
+-- ---------------------------------------------------------------------------
 -- Diagnostics
+-- ---------------------------------------------------------------------------
+
 local icons = {
   [vim.diagnostic.severity.ERROR] = " ",
   [vim.diagnostic.severity.WARN]  = " ",

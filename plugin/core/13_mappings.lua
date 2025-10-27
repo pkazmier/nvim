@@ -1,5 +1,9 @@
 -- stylua: ignore start
 
+-- ---------------------------------------------------------------------------
+-- Helpers
+-- ---------------------------------------------------------------------------
+
 -- Mapping helpers to make clean and easy to align with mini.align
 local map = function(mode, lhs, rhs, desc, opts)
   opts = opts or {}
@@ -9,6 +13,10 @@ end
 
 local L = function(key) return "<leader>" .. key end
 local C = function(cmd) return "<Cmd>" .. cmd .. "<CR>" end
+
+-- ---------------------------------------------------------------------------
+-- Leader Groups
+-- ---------------------------------------------------------------------------
 
 -- Leader mappings and descriptions used later when mini.clue is setup
 Config.leader_group_clues = {
@@ -26,7 +34,10 @@ Config.leader_group_clues = {
   { mode = "n", keys = L"w",  desc = "+Window" },
 }
 
--- Basic mappings
+-- ---------------------------------------------------------------------------
+-- Basic Mappings
+-- ---------------------------------------------------------------------------
+
 map("i",   "<A-Space>", C"normal ciw ",                                        "Just one space")
 map("n",   "z=",        C"Pick spellsuggest",                                  "Spelling suggestions")
 map("n",   "[p",        C'exe "put! " . v:register',                           "Paste Above")
@@ -37,12 +48,18 @@ map("n",   [[\W]],      C"lua Config.minicursorword_toggle()",                 "
 map("nxo", "sj",        "<Plug>(leap)",                                        "Leap anywhere")
 map("nxo", "S",         C"lua require('leap.treesitter').select()",            "Treesitter select")
 
--- Frequently used pickers
+-- ---------------------------------------------------------------------------
+-- Frequently Used Pickers
+-- ---------------------------------------------------------------------------
+
 map("n",   L" ",        C"Pick files",                                         "Find files")
 map("n",   L",",        C"Pick buffers",                                       "Switch buffer")
 map("n",   L"/",        C"Pick buf_lines scope='current' preserve_order=true", "Lines (current)")
 
+-- ---------------------------------------------------------------------------
 -- Buffer
+-- ---------------------------------------------------------------------------
+
 map("n",   L"ba",       C"b#",                                                 "Alternate buffer")
 map("n",   L"bd",       C"lua MiniBufremove.delete()",                         "Delete buffer")
 map("n",   L"bD",       C"%bd|e#|bd#",                                         "Delete other buffers")
@@ -51,11 +68,17 @@ map("n",   L"bt",       C"lua MiniTrailspace.trim()",                          "
 map("n",   L"bu",       C"lua MiniBufremove.unshow()",                         "Unshow buffer")
 map("n",   L"bw",       C"lua MiniBufremove.wipeout()",                        "Wipeout buffer")
 
+-- ---------------------------------------------------------------------------
 -- Copilot
+-- ---------------------------------------------------------------------------
+
 map("nx",  L"cc",       C"CodeCompanionChat Toggle",                           "Code Companion chat")
 map("nx",  L"cC",       C"CodeCompanionActions",                               "Code Companion actions")
 
+-- ---------------------------------------------------------------------------
 -- Explore
+-- ---------------------------------------------------------------------------
+
 map("n",   L"ec",       C"Pick config",                                        "Config")
 map("n",   L"ed",       C"lua MiniFiles.open()",                               "Directory (cwd)")
 map("n",   L"ef",       C"lua Config.minifiles_open_bufdir()",                 "Directory (file)")
@@ -66,7 +89,10 @@ map("n",   L"eq",       C"lua require('quicker').toggle()",                    "
 map("n",   L"er",       C"Pick projects",                                      "Projects")
 map("n",   L"eu",       C"Undotree",                                           "Undotree")
 
+-- ---------------------------------------------------------------------------
 -- Find
+-- ---------------------------------------------------------------------------
+
 map("n",   L"f/",       C"Pick history scope='/'",                             '"/" history')
 map("n",   L"f:",       C"Pick history scope=':'",                             '":" history')
 map("n",   L"fa",       C"Pick git_hunks scope='staged'",                      "Added hunks (all)")
@@ -94,7 +120,10 @@ map("n",   L"fT",       C"Pick colorschemes",                                  "
 map("n",   L"fv",       C"Pick visit_paths cwd=''",                            "Visit paths (all)")
 map("n",   L"fV",       C"Pick visit_paths",                                   "Visit paths (cwd)")
 
+-- ---------------------------------------------------------------------------
 -- Git
+-- ---------------------------------------------------------------------------
+
 map("n",   L"ga",       C"Git diff --cached",                                  "Added diff")
 map("n",   L"gA",       C"Git diff --cached -- %",                             "Added diff (buf)")
 map("nx",  L"gb",       C"lua MiniGit.show_range_history()",                   "Range history")
@@ -109,7 +138,10 @@ map("n",   L"go",       C"lua MiniDiff.toggle_overlay()",                      "
 map("n",   L"gq",       C"lua Config.minidiff_to_qf()",                        "Quickfix diffs")
 map("nx",  L"gs",       C"lua MiniGit.show_at_cursor()",                       "Show at cursor")
 
+-- ---------------------------------------------------------------------------
 -- Language
+-- ---------------------------------------------------------------------------
+
 map("nx",  L"la",       C"lua vim.lsp.buf.code_action()",                      "Actions")
 map("n",   L"ld",       C"lua vim.diagnostic.open_float()",                    "Diagnostic popup")
 map("nx",  L"lf",       C"lua require('conform').format({lsp_fallback=true})", "Format")
@@ -123,14 +155,20 @@ map("n",   L"lR",       C"lua vim.lsp.buf.references()",                       "
 map("n",   L"ls",       C"lua vim.lsp.buf.definition()",                       "Source definition")
 map("n",   L"lt",       C"lua vim.lsp.buf.type_definition()",                  "Type definition")
 
+-- ---------------------------------------------------------------------------
 -- Map
+-- ---------------------------------------------------------------------------
+
 map("n",   L"mf",       C"lua MiniMap.toggle_focus()",                         "Focus")
 map("n",   L"mr",       C"lua MiniMap.refresh()",                              "Refresh")
 map("n",   L"ms",       C"lua MiniMap.toggle_side()",                          "Switch sides")
 map("n",   L"mt",       C"lua Config.minimap_toggle()",                        "Toggle map")
 map("n",   L"mT",       C"lua Config.minimap_buf_toggle()",                    "Toggle map (buf)")
 
+-- ---------------------------------------------------------------------------
 -- Notes
+-- ---------------------------------------------------------------------------
+
 map("n",   L"nb",       C"ZkBacklinks",                                        "Backlink picker")
 map("n",   L"nd",       C"ZkCd",                                               "Change directory")
 map("n",   L"nl",       C"ZkLinks",                                            "Link picker")
@@ -142,19 +180,28 @@ map("n",   L"nr",       C"ZkIndex",                                            "
 map("n",   L"ns",       C"ZkNotes { sort = { 'created' } }",                   "Search")
 map("n",   L"nt",       C"ZkTags",                                             "Tags")
 
+-- ---------------------------------------------------------------------------
 -- Other
+-- ---------------------------------------------------------------------------
+
 map("n",   L"oa",       C"Mason",                                              "Mason")
 map("n",   L"os",       C"lua MiniStarter.open()",                             "Open MiniStarter")
 map("n",   L"ou",       C"lua vim.pack.update()",                              "Update deps")
 map("n",   L"ox",       C"lua Config.export_minihues_theme()",                 "Export mini.hues theme")
 
+-- ---------------------------------------------------------------------------
 -- Session
+-- ---------------------------------------------------------------------------
+
 map("n",   L"sd",       C"lua MiniSessions.select('delete')",                  'Delete session')
 map("n",   L"sl",       C"lua MiniSessions.select('read')",                    'Load session')
 map("n",   L"sn",       C"lua MiniSessions.write(vim.fn.input('Name: '))",     'New session')
 map("n",   L"ss",       C"lua MiniSessions.write()",                           'Save session')
 
+-- ---------------------------------------------------------------------------
 -- Visits
+-- ---------------------------------------------------------------------------
+
 map("n",   L"va",       C"Pick visit_labels cwd=''",                           "All labels")
 map("n",   L"vc",       C"lua Config.minivisits_pick('', 'core')",             'Core visits (all)')
 map("n",   L"vC",       C"lua Config.minivisits_pick(nil, 'core')",            'Core visits (cwd)')
@@ -163,7 +210,10 @@ map("n",   L"vL",       C"lua MiniVisits.remove_label()",                      "
 map("n",   L"vv",       C"lua MiniVisits.add_label('core')",                   "Add core label")
 map("n",   L"vV",       C"lua MiniVisits.remove_label('core')",                "Remove core label")
 
+-- ---------------------------------------------------------------------------
 -- Window
+-- ---------------------------------------------------------------------------
+
 map("n",   L"wr",       C"lua MiniMisc.resize_window()",                       "Resize to default width")
 map("n",   L"wz",       C"lua MiniMisc.zoom()",                                "Zoom window")
 

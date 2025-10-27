@@ -1,10 +1,16 @@
 local H = {}
 
--- Helper to print lua values when debugging. It's also handy when inspecting
--- values in command mode.
+-- ---------------------------------------------------------------------------
+-- Debug Utils
+-- ---------------------------------------------------------------------------
+
 Config.dd = function(...)
   vim.notify(vim.inspect(...))
 end
+
+-- ---------------------------------------------------------------------------
+-- Scratch Buffer
+-- ---------------------------------------------------------------------------
 
 -- Open a new scratch buffer in the current window. This differs from
 -- `:enew` in that it creates a new empty buffer rather than reusing
@@ -14,7 +20,10 @@ Config.new_scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
--- Remap binding
+-- ---------------------------------------------------------------------------
+-- Re-map Binding
+-- ---------------------------------------------------------------------------
+
 Config.remap = function(mode, lhs_from, lhs_to)
   local keymap = vim.fn.maparg(lhs_from, mode, false, true)
   local rhs = keymap.callback or keymap.rhs
@@ -23,6 +32,10 @@ Config.remap = function(mode, lhs_from, lhs_to)
   end
   vim.keymap.set(mode, lhs_to, rhs, { desc = keymap.desc })
 end
+
+-- ---------------------------------------------------------------------------
+-- Hydra Brackets
+-- ---------------------------------------------------------------------------
 
 -- Generate keymaps for bracketed navigation tuned for repeated motions. For
 -- example, mini.bracketed defines the following mappings to navigate between
@@ -107,6 +120,10 @@ Config.gen_hydra_brackets = function(suffixes, replacements)
   end
   return clues
 end
+
+-- ---------------------------------------------------------------------------
+-- Helpers
+-- ---------------------------------------------------------------------------
 
 -- Return a string where the first letter has been capitalized.
 H.capitalize = function(w)

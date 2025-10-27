@@ -1,3 +1,26 @@
+-- ---------------------------------------------------------------------------
+-- mini.statusline
+-- ---------------------------------------------------------------------------
+
+-- While the default statusline is sufficient, there are several enhancements
+-- that I've made to improve usability and readability:
+--
+-- 1. Don't show file encoding or file size as I've never needed this info.
+--
+-- 2. Don't show total lines or chars---only show current line and column.
+--
+-- 3. Add visual separation between search results, lines, and column. In the
+--    default, the search results aren't visually separated.
+--
+-- 4. Demphasize the directory visually from the filename for better clarity
+--    and visually distinguish the filename if it has been modified. This
+--    requires four hl-groups: MiniStatuslineDirectory, MiniStatulineInactive,
+--    MiniStatuslineFilename, and MiniStatuslineFilenameModified
+--
+-- 5. Move diagnostics to right side next file type and LSP indicator as it
+--    makes more sense to group these items together. It also reduces the
+--    amount of noise on the left side due to all the Git related info.
+
 local H = {}
 MiniDeps.now(function()
   require("mini.statusline").setup({
