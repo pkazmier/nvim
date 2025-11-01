@@ -16,17 +16,6 @@ MiniDeps.later(function()
     "zls",
   })
 
-  vim.lsp.config["*"] = {
-    capabilities = {
-      workspace = {
-        fileOperations = {
-          didRename = true,
-          willRename = true,
-        },
-      },
-    },
-  }
-
   Config.toggle_hints = function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
   end
