@@ -54,6 +54,8 @@ MiniDeps.now(function()
         MiniStatuslineFilenameModified = { fg = c.fg,             bg = c.panel_border, bold = true },
         MiniStatuslineDevinfo          = { fg = c.fg,             bg = c.selection_bg },
         MiniStatuslineFileinfo         = { fg = c.fg,             bg = c.selection_bg },
+        StatusLine                     = { fg = c.fg,             bg = c.panel_border },
+        StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
         RenderMarkdownBullet           = { fg = c.vcs_added },
         RenderMarkdownCode             = { bg = c.selection_inactive },
