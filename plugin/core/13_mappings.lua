@@ -42,7 +42,7 @@ map("i",   "<A-Space>", C"normal ciw ",                                        "
 map("n",   "z=",        C"Pick spellsuggest",                                  "Spelling suggestions")
 map("n",   "[p",        C'exe "put! " . v:register',                           "Paste Above")
 map("n",   "]p",        C'exe "put "  . v:register',                           "Paste Below")
-map("n",   [[\f]],      C"FormatToggle",                                       "Toggle auto-format")
+map("n",   [[\f]],      C"lua Config.conform_toggle()",                        "Toggle auto-format")
 map("n",   [[\H]],      C"lua Config.toggle_hints()",                          "Toggle inlay hints")
 map("n",   [[\W]],      C"lua Config.minicursorword_toggle()",                 "Toggle cursor word")
 map("nxo", "sj",        "<Plug>(leap)",                                        "Leap anywhere")

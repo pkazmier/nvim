@@ -24,12 +24,10 @@ MiniDeps.later(function()
       sql        = { "sqruff" },
     },
   })
-
-  vim.api.nvim_create_user_command("FormatToggle", function(_)
-    Config.disable_autoformat = not Config.disable_autoformat
-    local state = vim.g.disable_autoformat and "disabled" or "enabled"
-    vim.notify("Auto-save " .. state)
-  end, {
-    desc = "Toggle autoformat-on-save",
-  })
 end)
+
+Config.conform_toggle = function()
+  Config.disable_autoformat = not Config.disable_autoformat
+  local state = Config.disable_autoformat and "disabled" or "enabled"
+  vim.notify("Auto-format " .. state)
+end
