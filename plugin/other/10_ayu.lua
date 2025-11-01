@@ -7,7 +7,7 @@ MiniDeps.now(function()
       local c = require("ayu.colors")
       -- stylua: ignore
       return {
-        CursorLineNr                   = { fg = c.accent, bg = c.line, bold = true },
+        CursorLineNr                   = { fg = c.accent, bg = c.bg, bold = true },
 
         -- Use reverse text for diagnostics
         DiagnosticVirtualTextError     = { bg = c.error,   fg = c.line, italic = true },
