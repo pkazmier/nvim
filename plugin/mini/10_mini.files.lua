@@ -1,6 +1,5 @@
 MiniDeps.later(function()
   require("mini.files").setup({
-    mappings = { mark_set = "M" },
     windows = { preview = true },
   })
 
