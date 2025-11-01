@@ -38,7 +38,6 @@ MiniDeps.later(function()
       { mode = "x", keys = "z" },
     },
     window = {
-      delay = 300,
       config = { width = "auto" },
     },
   })
