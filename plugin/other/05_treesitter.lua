@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- treesitter
+-- ---------------------------------------------------------------------------
+
 local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
 now_if_args(function()
   -- Add post hook to run after every update, but not first-time install
@@ -35,6 +39,7 @@ now_if_args(function()
     "yaml",
     "zig",
   }
+
   require("nvim-treesitter").install(ensure_languages)
   local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
   vim.list_extend(filetypes, { "markdown", "pandoc" })
@@ -45,5 +50,6 @@ now_if_args(function()
     end,
   })
 
+  -- Display context when current block is off-screen
   require("treesitter-context").setup()
 end)

@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.completion
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   require("mini.completion").setup({
     lsp_completion = { source_func = "omnifunc", auto_setup = false },

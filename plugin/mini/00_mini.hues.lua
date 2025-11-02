@@ -1,12 +1,12 @@
+-- ---------------------------------------------------------------------------
+-- mini.hues
+-- ---------------------------------------------------------------------------
+
 -- The template string defined below that generates a ghostty theme includes
 -- a vim modeline, so we explicitly disable modeline for this file.
 -- vim: nomodeline
 
 local H = {}
-
--- ---------------------------------------------------------------------------
--- mini.hues
--- ---------------------------------------------------------------------------
 
 MiniDeps.now(function()
   -- Apply custom highlights after loading a mini.hues based colorscheme.

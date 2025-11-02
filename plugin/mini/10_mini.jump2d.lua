@@ -1,8 +1,13 @@
--- FIXME: Revisit use of mini.jump2d after rewrite
--- I prefer the leap pluging for the following reasons:
+-- ---------------------------------------------------------------------------
+-- mini.jump2d
+-- ---------------------------------------------------------------------------
+
+-- TODO: Revisit use of mini.jump2d after rewrite
 --
---    1. Target blank lines
---    2. Equivalence classes (i.e.single quote matches double-quote, backtick)
+-- I prefer the leap plugin for the following reasons:
+--
+--    1. Ability to target blank lines
+--    2. Equivalence classes (i.e. single quote matches double quote, backtick)
 --    3. Treesitter node selection
 --
 -- MiniDeps.later(function()

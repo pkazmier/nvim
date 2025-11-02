@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.misc
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   require("mini.misc").setup({ make_global = { "put", "put_text", "stat_summary", "bench_time" } })
   MiniMisc.setup_auto_root()

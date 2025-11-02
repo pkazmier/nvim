@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.bracketed
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   require("mini.bracketed").setup()
 
@@ -5,7 +9,8 @@ MiniDeps.later(function()
     return v.suffix
   end, vim.tbl_values(MiniBracketed.config))
 
-  -- better mini.bracketed mappings
+  -- Better mini.bracketed mappings, see comment in `gen_hydra_brackets`
+  -- definition within `core/12_functions.lua`.
   local clues = Config.gen_hydra_brackets(suffixes, {
     ["["] = { old = "first", new = "forward" },
     ["]"] = { old = "last", new = "backward" },

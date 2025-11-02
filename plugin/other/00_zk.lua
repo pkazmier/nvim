@@ -1,4 +1,9 @@
+-- ---------------------------------------------------------------------------
+-- zk-nvim (my note taking system)
+-- ---------------------------------------------------------------------------
+
 local H = {}
+
 MiniDeps.now(function()
   vim.pack.add({ "https://github.com/zk-org/zk-nvim" }, { load = true })
   local cmds = require("zk.commands")
@@ -45,63 +50,63 @@ MiniDeps.now(function()
       end
     end
   end)
+end)
 
-  H.new_meeting = function(opts)
-    local zk = require("zk")
-    local ui = require("zk.ui")
-    local api = require("zk.api")
+H.new_meeting = function(opts)
+  local zk = require("zk")
+  local ui = require("zk.ui")
+  local api = require("zk.api")
 
-    opts = vim.tbl_extend("force", {
-      select = { "title", "absPath" },
-      tags = { "meeting" },
-      sort = { "modified" },
-      regex = "^%d+%-%d+%-%d+: (.-)$",
-    }, opts or {})
+  opts = vim.tbl_extend("force", {
+    select = { "title", "absPath" },
+    tags = { "meeting" },
+    sort = { "modified" },
+    regex = "^%d+%-%d+%-%d+: (.-)$",
+  }, opts or {})
 
-    api.list(opts.notebook_path, opts, function(err, notes)
-      assert(not err, tostring(err))
-      local recent_notes = H.recent_meetings(notes, "title", opts.regex)
-      local picker_opts = {
-        title = "New Meeting",
-        multi_select = false,
-        minipick = {
-          mappings = {
-            ["new meeting"] = {
-              char = "<C-e>",
-              func = function()
-                local query = MiniPick.get_picker_query()
-                if query == nil then
-                  return true
-                end
-                local title = table.concat(query, "")
-                zk.new(vim.tbl_extend("keep", { title = title }, opts))
+  api.list(opts.notebook_path, opts, function(err, notes)
+    assert(not err, tostring(err))
+    local recent_notes = H.recent_meetings(notes, "title", opts.regex)
+    local picker_opts = {
+      title = "New Meeting",
+      multi_select = false,
+      minipick = {
+        mappings = {
+          ["new meeting"] = {
+            char = "<C-e>",
+            func = function()
+              local query = MiniPick.get_picker_query()
+              if query == nil then
                 return true
-              end,
-            },
+              end
+              local title = table.concat(query, "")
+              zk.new(vim.tbl_extend("keep", { title = title }, opts))
+              return true
+            end,
           },
         },
-      }
+      },
+    }
 
-      ui.pick_notes(recent_notes, picker_opts, function(note)
-        local short_title = string.match(note.title, opts.regex)
-        zk.new(vim.tbl_extend("keep", { title = short_title }, opts))
-      end)
+    ui.pick_notes(recent_notes, picker_opts, function(note)
+      local short_title = string.match(note.title, opts.regex)
+      zk.new(vim.tbl_extend("keep", { title = short_title }, opts))
     end)
-  end
+  end)
+end
 
-  -- Returns a table of notes with duplicate entries removed. Duplicity is
-  -- determined by regex applied to the field entry of the note. The first
-  -- unique note found is kept, while others are discarded.
-  H.recent_meetings = function(notes, field, regex)
-    local seen_notes = {}
-    local unique_notes = {}
-    for _, note in ipairs(notes) do
-      local name = string.match(note[field], regex)
-      if name and not seen_notes[name] then
-        seen_notes[name] = true
-        table.insert(unique_notes, note)
-      end
+-- Returns a table of notes with duplicate entries removed. Duplicity is
+-- determined by regex applied to the field entry of the note. The first
+-- unique note found is kept, while others are discarded.
+H.recent_meetings = function(notes, field, regex)
+  local seen_notes = {}
+  local unique_notes = {}
+  for _, note in ipairs(notes) do
+    local name = string.match(note[field], regex)
+    if name and not seen_notes[name] then
+      seen_notes[name] = true
+      table.insert(unique_notes, note)
     end
-    return unique_notes
   end
-end)
+  return unique_notes
+end

@@ -1,7 +1,13 @@
+-- ---------------------------------------------------------------------------
+-- mini.keymap
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   require("mini.keymap").setup()
 
   -- stylua: ignore start
+  -- I really like "jump_after_close" when used with an auto pair plugin. It
+  -- makes it trivial to skip after the closing quote/bracket/brace/paren.
   MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", "increase_indent", "jump_after_close" })
   MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", "decrease_indent", "jump_before_open" })
   MiniKeymap.map_multistep("i", "<CR>",    { "blink_accept",      "pmenu_accept",    "nvimautopairs_cr" })

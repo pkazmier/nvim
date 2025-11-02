@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.pick
+-- ---------------------------------------------------------------------------
+
 local H = {}
 MiniDeps.later(function()
   require("mini.pick").setup({
@@ -13,9 +17,9 @@ MiniDeps.later(function()
 
   vim.ui.select = MiniPick.ui_select
 
-  ----------------------------------------
-  -- Custom Pickers
-  ----------------------------------------
+  -- ---------------------------------------------------------------------------
+  -- Custom pickers
+  -- ---------------------------------------------------------------------------
 
   -- Config picker
   MiniPick.registry.config = function()
@@ -40,7 +44,7 @@ MiniDeps.later(function()
     MiniPick.builtin.grep_live(opts, { source = { show = H.minipick_align_on_nul } })
   end
 
-  -- Aligned TODO picker
+  -- Aligned and highlighted TODO picker
   MiniPick.registry.grep_todo_keywords = function(opts)
     opts.pattern = "(TODO|FIXME|HACK|NOTE):"
     MiniPick.builtin.grep(opts, {
@@ -54,9 +58,9 @@ MiniDeps.later(function()
   end
 end)
 
-----------------------------------------
+-- ---------------------------------------------------------------------------
 -- Helpers
-----------------------------------------
+-- ---------------------------------------------------------------------------
 
 -- Creates a two-stage directory picker. First stage picks a directory inside
 -- `dir` with the explorer, then the second stage opens a file picker inside
@@ -110,7 +114,7 @@ H.minipick_highlight_keywords = function(bufnr)
   for row, line in ipairs(lines) do
     for word, hl_group in pairs(keywords) do
       local start_idx, end_idx = line:find(word)
-      if start_idx then
+      if start_idx and end_idx then
         -- Highlights the keyword
         extmark_opts.hl_group = hl_group.keyword
         extmark_opts.end_row = row - 1

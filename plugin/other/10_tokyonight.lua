@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- tokyonight colorscheme
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   vim.pack.add({ "https://github.com/folke/tokyonight.nvim" }, { load = true })
   ---@diagnostic disable-next-line: missing-fields

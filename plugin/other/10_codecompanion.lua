@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- codecompanion
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   if Config.copilot_disable then
     return
@@ -9,6 +13,10 @@ MiniDeps.later(function()
   }, { load = true })
 
   require("codecompanion").setup({})
+
+  -- ---------------------------------------------------------------------------
+  -- Use MiniNotify to track start / stop of requests
+  -- ---------------------------------------------------------------------------
 
   local ids = {} -- CodeCompanion request ID --> MiniNotify notification ID
 

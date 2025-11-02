@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- nvim-lint
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" }, { load = true })
   local lint = require("lint")

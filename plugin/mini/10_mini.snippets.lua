@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.snippets
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   local snippets = require("mini.snippets")
   snippets.setup({
@@ -11,6 +15,4 @@ MiniDeps.later(function()
       }),
     },
   })
-  -- Not sure if I like this feature yet
-  -- MiniSnippets.start_lsp_server(opts)
 end)

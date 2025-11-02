@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- ayu colorscheme
+-- ---------------------------------------------------------------------------
+
 MiniDeps.now(function()
   vim.pack.add({ "https://github.com/Shatur/neovim-ayu" }, { load = true })
   require("ayu").setup({

@@ -1,3 +1,7 @@
+-- ---------------------------------------------------------------------------
+-- mini.ai (around/inside, not artificial intelligence)
+-- ---------------------------------------------------------------------------
+
 MiniDeps.later(function()
   local ai = require("mini.ai")
   local extra = require("mini.extra")
