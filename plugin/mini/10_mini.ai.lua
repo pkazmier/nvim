@@ -14,6 +14,7 @@ MiniDeps.later(function()
       L = extra.gen_ai_spec.line(),
       N = extra.gen_ai_spec.number(),
     },
+    n_lines = 500,
     search_method = "cover",
   })
 end)
