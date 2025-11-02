@@ -34,7 +34,7 @@ MiniDeps.later(function()
         "MiniStatusLineModeOther",
         "MiniStatusLineModeInsert",
       },
-      sign = false,
+      sign = true,
       left_pad = 1,
       right_pad = 0,
       position = "right",
