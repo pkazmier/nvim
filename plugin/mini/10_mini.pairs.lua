@@ -1,4 +1,7 @@
--- TODO: test mini.pairs now that I'm using snippets more
---
--- I don't use MiniPairs as it doesn't handle Python triple quotes or
--- markdown triple backticks. I prefer nvim_autopairs.
+-- ---------------------------------------------------------------------------
+-- mini.pairs
+-- ---------------------------------------------------------------------------
+
+MiniDeps.later(function()
+  require("mini.pairs").setup({ modes = { command = true } })
+end)
