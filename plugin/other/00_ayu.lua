@@ -61,7 +61,6 @@ MiniDeps.now(function()
         StatusLine                     = { fg = c.fg,             bg = c.panel_border },
         StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
-        RenderMarkdownBullet           = { fg = c.vcs_added },
         RenderMarkdownCode             = { bg = c.selection_inactive },
         RenderMarkdownCodeBorder       = { bg = c.selection_bg },
         RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
