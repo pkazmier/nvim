@@ -2,14 +2,16 @@ MiniDeps.later(function()
   vim.pack.add({ "https://github.com/akinsho/toggleterm.nvim" }, { load = true })
 
   require("toggleterm").setup({
-    -- direction = "float",
-    highlights = { FloatBorder = { link = "FloatBorder" } },
+    direction = "float",
+    highlights = {
+      NormalFloat = { link = "NormalFloat" },
+      FloatBorder = { link = "FloatBorder" },
+    },
     open_mapping = [[<c-\>]],
     on_create = function(term)
       local opts = { buffer = term.bufnr }
       vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", opts)
     end,
-    shading_factor = -20,
   })
 
   Config.toggleterm_lazygit = function()
