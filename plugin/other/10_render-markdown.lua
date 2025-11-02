@@ -7,10 +7,6 @@ MiniDeps.later(function()
   require("render-markdown").setup({
     file_types = { "markdown", "md", "codecompanion" },
     render_modes = { "n", "no", "c", "t", "i", "ic" },
-    checkbox = {
-      enable = true,
-      position = "inline",
-    },
     code = {
       sign = false,
       border = "thin",
@@ -34,7 +30,6 @@ MiniDeps.later(function()
         "MiniStatusLineModeOther",
         "MiniStatusLineModeInsert",
       },
-      sign = true,
       left_pad = 1,
       right_pad = 0,
       position = "right",
