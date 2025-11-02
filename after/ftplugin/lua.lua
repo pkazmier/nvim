@@ -7,7 +7,7 @@ vim.opt_local.comments = { ":---", ":--" }
 -- Customize 'mini.nvim'
 vim.b.miniai_config = {
   custom_textobjects = {
-    s = { "%[%[().-()%]%]" },
+    S = { "%[%[().-()%]%]" },
   },
 }
 
