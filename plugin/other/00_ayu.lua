@@ -86,6 +86,7 @@ MiniDeps.now(function()
         ['@markup.italic']             = { fg = c.keyword, italic = true },
         ['@markup.list']               = { fg = c.vcs_added },
         ['@markup.raw']                = { fg = c.tag, bg = c.selection_inactive },
+        ['@markup.raw.block']          = { fg = c.tag },
         ['@markup.quote']              = { fg = c.constant, italic = true },
         ['@module']                    = { fg = c.fg },
         ['@string.documentation']      = { fg = c.lsp_inlay_hint },
