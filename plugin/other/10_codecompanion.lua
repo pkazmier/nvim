@@ -12,7 +12,19 @@ MiniDeps.later(function()
     "https://github.com/olimorris/codecompanion.nvim",
   }, { load = true })
 
-  require("codecompanion").setup({})
+  require("codecompanion").setup({
+    strategies = {
+      chat = {
+        keymaps = {
+          completion = {
+            modes = { i = "<C-/>" },
+            callback = "keymaps.completion",
+            description = "Completion menu",
+          },
+        },
+      },
+    },
+  })
 
   -- ---------------------------------------------------------------------------
   -- Use MiniNotify to track start / stop of requests
