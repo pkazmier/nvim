@@ -22,6 +22,7 @@ now_if_args(function()
       right_pad = 1,
     },
     heading = {
+      sign = false,
       width = "block",
       backgrounds = {
         "MiniStatusLineModeVisual",
