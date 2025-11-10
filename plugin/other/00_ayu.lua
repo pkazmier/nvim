@@ -11,6 +11,7 @@ MiniDeps.now(function()
       local c = require("ayu.colors")
       -- stylua: ignore
       return {
+        LineNr                         = { fg = c.guide_active },
         CursorLineNr                   = { fg = c.accent, bg = c.bg, bold = true },
 
         -- Use reverse text for diagnostics
@@ -23,13 +24,18 @@ MiniDeps.now(function()
         LeapBackdrop                   = { link = "MiniJump2dDim" },
         LeapLabel                      = { fg = c.accent, bold = true },
 
-        -- By default ayu uses the same background for floats as the normal
-        -- editing window. I prefer a darker background for all floats.
-        NormalFloat                    = { bg = c.panel_bg },
-        FloatBorder                    = { fg = c.comment, bg = c.panel_bg },
+        -- Trying to find the best combo of floating window "look"
+        -- Visual                         = { bg = c.selection_bg },
+        -- NormalFloat                    = { bg = c.selection_inactive },
+        PmenuSel                       = { bg = c.line, reverse = false, bold = true },
+        FloatBorder                    = { fg = c.panel_border },
+        FloatTitle                     = { fg = c.panel_border, bg = c.tag, bold = true },
+        Pmenu                          = { fg = c.fg, bg = c.bg },
+        PmenuBorder                    = { fg = c.panel_border },
 
         -- Bold current line in MiniFiles
         MiniFilesCursorLine            = { fg = nil, bg = c.line, bold = true },
+        MiniFilesTitleFocused          = { fg = c.panel_bg, bg = c.constant, bold = true },
 
         -- Highlight patterns for highlighting the whole line and hiding colon.
         -- See https://github.com/echasnovski/mini.nvim/discussions/783
@@ -62,8 +68,10 @@ MiniDeps.now(function()
         StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
         RenderMarkdownCode             = { bg = c.selection_inactive },
-        RenderMarkdownCodeBorder       = { bg = c.selection_bg },
+        RenderMarkdownCodeBorder       = { bg = c.panel_border },
         RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
+        RenderMarkdownTableHead        = { fg = c.selection_bg },
+        RenderMarkdownTableRow         = { fg = c.selection_bg },
         RenderMarkdownH1               = { fg = c.accent },
         RenderMarkdownH2               = { fg = c.keyword },
         RenderMarkdownH3               = { fg = c.markup },
@@ -72,7 +80,7 @@ MiniDeps.now(function()
         RenderMarkdownH6               = { fg = c.string },
 
         -- Extend the context highlighting to line numbers as well
-        TreesitterContextBottom        = { sp = c.selection_bg, underdotted = true },
+        TreesitterContextBottom        = { sp = c.panel_border, underline = true },
         TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
 
         ['@markup.heading']            = { fg = c.keyword, bold = true },
