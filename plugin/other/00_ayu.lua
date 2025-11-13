@@ -27,11 +27,14 @@ MiniDeps.now(function()
         -- Trying to find the best combo of floating window "look"
         -- Visual                         = { bg = c.selection_bg },
         -- NormalFloat                    = { bg = c.selection_inactive },
+        Visual                         = { bg = c.selection_bg },
+        NormalFloat                    = { bg = c.selection_inactive },
         PmenuSel                       = { bg = c.line, reverse = false, bold = true },
         FloatBorder                    = { fg = c.panel_border },
         FloatTitle                     = { fg = c.panel_border, bg = c.tag, bold = true },
-        Pmenu                          = { fg = c.fg, bg = c.bg },
+        Pmenu                          = { fg = c.fg },
         PmenuBorder                    = { fg = c.panel_border },
+        SignColumn                     = { bg = "NONE" },
 
         -- Bold current line in MiniFiles
         MiniFilesCursorLine            = { fg = nil, bg = c.line, bold = true },
@@ -68,7 +71,7 @@ MiniDeps.now(function()
         StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
         RenderMarkdownCode             = { bg = c.selection_inactive },
-        RenderMarkdownCodeBorder       = { bg = c.panel_border },
+        RenderMarkdownCodeBorder       = { bg = c.panel_bg },
         RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
         RenderMarkdownTableHead        = { fg = c.selection_bg },
         RenderMarkdownTableRow         = { fg = c.selection_bg },
@@ -80,7 +83,7 @@ MiniDeps.now(function()
         RenderMarkdownH6               = { fg = c.string },
 
         -- Extend the context highlighting to line numbers as well
-        TreesitterContextBottom        = { sp = c.panel_border, underline = true },
+        TreesitterContextBottom        = { sp = c.panel_bg, underline = true },
         TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
 
         ['@markup.heading']            = { fg = c.keyword, bold = true },

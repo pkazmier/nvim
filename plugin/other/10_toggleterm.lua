@@ -11,6 +11,10 @@ MiniDeps.later(function()
       NormalFloat = { link = "NormalFloat" },
       FloatBorder = { link = "FloatBorder" },
     },
+    float_opts = {
+      border = { " ", "▁", " ", " ", " ", "▔", " ", " " },
+      winblend = 0,
+    },
     open_mapping = [[<c-\>]],
     on_create = function(term)
       local opts = { buffer = term.bufnr }
