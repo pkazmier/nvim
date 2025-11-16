@@ -15,7 +15,7 @@ MiniDeps.later(function()
   -- stylua: ignore end
 
   -- Better escape key
-  MiniKeymap.map_combo({ "i", "c", "x", "s" }, "jk", "<BS><BS><Esc>")
+  MiniKeymap.map_combo({ "i", "c", "x", "s", "R" }, "jk", "<BS><BS><Esc>")
 
   -- Prevent bad habits
   local notify_many_keys = function(key)
