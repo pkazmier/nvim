@@ -71,7 +71,7 @@ MiniDeps.now(function()
         StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
         RenderMarkdownCode             = { bg = c.selection_inactive },
-        RenderMarkdownCodeBorder       = { bg = c.panel_bg },
+        RenderMarkdownCodeBorder       = { bg = c.selection_bg },
         RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
         RenderMarkdownTableHead        = { fg = c.selection_bg },
         RenderMarkdownTableRow         = { fg = c.selection_bg },
