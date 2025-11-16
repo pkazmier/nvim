@@ -36,12 +36,17 @@ MiniDeps.later(function()
 
   -- Aligned grep picker
   MiniPick.registry.grep_align = function(opts)
-    MiniPick.builtin.grep(opts, { source = { show = H.minipick_align_on_nul } })
+    MiniPick.builtin.grep(opts, { source = { show = H.grep_align_on_nul } })
   end
 
   -- Aligned live grep picker
   MiniPick.registry.grep_live_align = function(opts)
-    MiniPick.builtin.grep_live(opts, { source = { show = H.minipick_align_on_nul } })
+    MiniPick.builtin.grep_live(opts, { source = { show = H.show_aligned_grep_results } })
+  end
+
+  -- Aligned lsp picker
+  MiniPick.registry.lsp_align = function(opts)
+    MiniExtra.pickers.lsp(opts, { source = { show = H.show_aligned_lsp_results } })
   end
 
   -- Aligned and highlighted TODO picker
@@ -50,7 +55,7 @@ MiniDeps.later(function()
     MiniPick.builtin.grep(opts, {
       source = {
         show = function(buf_id, items, query)
-          H.minipick_align_on_nul(buf_id, items, query)
+          H.grep_align_on_nul(buf_id, items, query)
           H.minipick_highlight_keywords(buf_id)
         end,
       },
@@ -81,10 +86,15 @@ H.two_stage_dir_picker = function(dir, name)
   end
 end
 
-H.minipick_align_on_nul = function(buf_id, items, query)
+-- items is a table in this shape (NUL byte separators):
+--    {
+--      "what\0we are\0aligning",
+--      "what\0I am\0trying to align",
+--    }
+H.show_aligned_grep_results = function(buf_id, items, query)
   -- Shorten the pathname to keep the width of the picker window to something
   -- a bit more reasonable for longer pathnames.
-  items = H.map_gsub(items, "^%Z+", H.truncate_path(3))
+  items = H.map_gsub(items, "^%Z+", H.truncate_path(4))
 
   -- Because items is an array of blobs (contains a NUL byte), align_strings
   -- will not work because it expects strings. So, convert the NUL bytes to a
@@ -92,13 +102,47 @@ H.minipick_align_on_nul = function(buf_id, items, query)
   items = H.map_gsub(items, "%z", "#|#")
   items = MiniAlign.align_strings(items, {
     justify_side = { "left", "right", "right" },
-    merge_delimiter = { "", " ", "", " ", "" },
+    merge_delimiter = " ",
     split_pattern = "#|#",
   })
   items = H.map_gsub(items, "#|#", "\0")
 
   -- Back to the regularly scheduled program :-)
   MiniPick.default_show(buf_id, items, query)
+end
+
+-- items is a table in this shape ('│' separators):
+--    {
+--      { start = 1, end = 10, path ="blah", text = "what│we are│aligning" },
+--      { start = 1, end = 10, path ="blah", text = "what│I am│trying to align" },
+--    }
+H.show_aligned_lsp_results = function(buf_id, items, query)
+  -- Shorten the pathname to keep the width of the picker window to something
+  -- a bit more reasonable for longer pathnames.
+  local item_texts = vim.tbl_map(function(item)
+    return item.text:gsub("^[^│]+", H.truncate_path(4))
+  end, items)
+
+  item_texts = MiniAlign.align_strings(item_texts, {
+    justify_side = { "left", "right", "right" },
+    merge_delimiter = " ",
+    split_pattern = "│",
+  }, { pre_justify = { MiniAlign.gen_step.trim("both", "remove") } })
+
+  for i, item in ipairs(items) do
+    item.text = item_texts[i]
+  end
+
+  -- Back to the regularly scheduled program :-)
+  MiniPick.default_show(buf_id, items, query)
+
+  -- Highlight the lines
+  local ns_id = vim.api.nvim_get_namespaces()["MiniExtraPickers"]
+  pcall(vim.api.nvim_buf_clear_namespace, buf_id, ns_id, 0, -1)
+  for i, item in ipairs(items) do
+    local opts = { end_row = i, end_col = 0, hl_mode = "blend", hl_group = item.hl, priority = 199 }
+    vim.api.nvim_buf_set_extmark(buf_id, ns_id, i - 1, 0, opts)
+  end
 end
 
 H.minipick_highlight_keywords = function(bufnr)
@@ -137,13 +181,15 @@ end
 
 H.sep = package.config:sub(1, 1)
 H.truncate_path = function(max_parts)
-  max_parts = vim.fn.max({ max_parts, 3 })
+  max_parts = math.max(max_parts, 3)
   return function(path)
+    local absolute = path:sub(1, 1) == H.sep
     local parts = vim.split(path, H.sep)
+    parts = absolute and vim.list_slice(parts, 2, #parts) or parts
     if #parts > max_parts then
-      parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+      parts = { parts[1], "󰇘", parts[#parts - 1], parts[#parts] }
     end
-    return table.concat(parts, H.sep)
+    return (absolute and H.sep or "") .. table.concat(parts, H.sep)
   end
 end
 
