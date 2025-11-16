@@ -41,6 +41,17 @@ MiniDeps.now(function()
     hi("DiagnosticVirtualTextOk",        { fg = p.green,   bg = p.green_bg,  italic = true })
     hi("DiagnosticVirtualTextWarn",      { fg = p.yellow,  bg = p.yellow_bg, italic = true })
 
+    -- I prefer unique looking borders on floats and their titles
+    hi("FloatBorder",                    { fg = p.bg_mid2 } )
+    hi("FloatTitle",                     { fg = p.fg_edge, bg = p.bg_mid2,   bold = true } )
+    hi("PmenuBorder",                    { fg = p.bg_mid2 })
+    hi("PmenuSel",                       { bg = p.bg_mid,  reverse = false })
+    hi("MiniFilesTitleFocused",          { fg = p.bg_mid2, bg = p.fg_edge,   bold = true })
+
+    -- Do I like a subtle darker border? Not sure yet.
+    -- hi("FloatBorder",                    { fg = p.bg_edge2 } )
+    -- hi("PmenuBorder",                    { fg = p.bg_edge2 })
+
     -- Highlight patterns for highlighting the whole line and hiding colon.
     -- See https://github.com/echasnovski/mini.nvim/discussions/783
     hi("MiniHipatternsFixmeBody",        { fg = p.red })
@@ -54,6 +65,8 @@ MiniDeps.now(function()
 
     -- Bold matches in MiniPick
     hi("MiniPickMatchRanges",            { bg = nil,       fg = p.cyan,      bold = true})
+    hi("MiniPickPromptCaret",            { bg = nil,       fg = p.blue,      bold = true})
+    hi("MiniPickPromptPrefix",           { bg = nil,       fg = p.blue,      bold = true})
 
     -- Dim inactive MiniStarter elements
     hi("MiniStarterInactive",            { link = "MiniJump2dDim" })
@@ -67,16 +80,29 @@ MiniDeps.now(function()
     hi("MiniStatuslineFilenameModified", { fg = p.accent,  bg = p.accent_bg, bold = true })
 
     hi("RenderMarkdownCodeBorder",       { bg = p.bg_mid })
+    hi("RenderMarkdownTodo",             { fg = p.azure })
     hi("RenderMarkdownTableHead",        { fg = p.bg_mid2 })
     hi("RenderMarkdownTableRow",         { fg = p.bg_mid2 })
+    hi("RenderMarkdownLink",             { fg = p.yellow })
+    hi("RenderMarkdownWikiLink",         { fg = p.yellow })
+    hi("TreesitterContext",              { bg = p.bg_edge })
+    hi("TreesitterContextBottom",        { sp = p.bg_mid,  underline = true})
     hi("TreesitterContextLineNumber",    { bg = p.bg_edge })
-    hi("TreesitterContextBottom",        { sp = p.bg_mid,  underdotted = true})
 
     -- I like my vertical split divider to be the same color as my inactive
     -- horizontal status bar color, so it's consistent both vertically and
     -- horizontally when laststatus=2.
-    hi("VertSplit",                      { fg = p.bg_edge, bg = nil })
     hi("WinSeparator",                   { fg = p.bg_edge, bg = nil })
+
+    hi('@markup.heading',                { fg = p.accent,  bold = true } )
+    hi('@markup.heading.1',              { fg = p.green,   bold = true } )
+    hi('@markup.heading.2',              { fg = p.yellow,  bold = true } )
+    hi('@markup.heading.3',              { fg = p.red,     bold = true } )
+    hi('@markup.heading.4',              { fg = p.fg,      bold = true } )
+    hi('@markup.heading.5',              { fg = p.cyan,    bold = true } )
+    hi('@markup.heading.6',              { fg = p.azure,   bold = true } )
+    hi('@markup.strong',                 { fg = p.accent,  bold = true } )
+    hi('@markup.italic',                 { fg = p.accent,  italic = true } )
     -- stylua: ignore end
   end
 
