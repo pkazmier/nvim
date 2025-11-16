@@ -5,6 +5,7 @@
 MiniDeps.later(function()
   local animate = require("mini.animate")
   animate.setup({
+    scroll = { enable = false },
     cursor = {
       path = animate.gen_path.line({
         -- Enable animation when moving horizontally within the same line as
