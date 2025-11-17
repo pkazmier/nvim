@@ -12,7 +12,8 @@ MiniDeps.later(function()
       FloatBorder = { link = "FloatBorder" },
     },
     float_opts = {
-      border = { " ", "▁", " ", " ", " ", "▔", " ", " " },
+      -- border = { " ", "▁", " ", " ", " ", "▔", " ", " " },
+      border = { "█", "█", "█", " ", "▁", "▁", "▁", " " },
       winblend = 0,
     },
     open_mapping = [[<c-\>]],

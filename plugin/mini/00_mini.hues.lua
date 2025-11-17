@@ -42,11 +42,16 @@ MiniDeps.now(function()
     hi("DiagnosticVirtualTextWarn",      { fg = p.yellow,  bg = p.yellow_bg, italic = true })
 
     -- I prefer unique looking borders on floats and their titles
-    hi("FloatBorder",                    { fg = p.bg_mid2 } )
+    hi("FloatBorder",                    { fg = p.bg_mid2, bg = p.bg_edge } )
     hi("FloatTitle",                     { fg = p.fg_edge, bg = p.bg_mid2,   bold = true } )
-    hi("PmenuBorder",                    { fg = p.bg_mid2 })
+    hi("PmenuBorder",                    { fg = p.bg_mid2, bg = p.bg_edge })
     hi("PmenuSel",                       { bg = p.bg_mid,  reverse = false })
     hi("MiniFilesTitleFocused",          { fg = p.bg_mid2, bg = p.fg_edge,   bold = true })
+--     hi("FloatBorder",                    { fg = p.bg_mid2, bg = "NONE" } )
+--     hi("FloatTitle",                     { fg = p.fg_edge, bg = p.bg_mid2,   bold = true } )
+--     hi("PmenuBorder",                    { fg = p.bg_mid2, bg = "NONE" })
+--     hi("PmenuSel",                       { bg = p.bg_mid,  reverse = false })
+--     hi("MiniFilesTitleFocused",          { fg = p.bg_mid2, bg = p.fg_edge,   bold = true })
 
     -- Do I like a subtle darker border? Not sure yet.
     -- hi("FloatBorder",                    { fg = p.bg_edge2 } )
@@ -65,8 +70,9 @@ MiniDeps.now(function()
 
     -- Bold matches in MiniPick
     hi("MiniPickMatchRanges",            { bg = nil,       fg = p.cyan,      bold = true})
-    hi("MiniPickPromptCaret",            { bg = nil,       fg = p.blue,      bold = true})
-    hi("MiniPickPromptPrefix",           { bg = nil,       fg = p.blue,      bold = true})
+    hi("MiniPickPrompt",                 { bg = p.bg_mid2, fg = p.accent,    bold = true})
+    hi("MiniPickPromptCaret",            { bg = p.bg_mid2, fg = p.blue,      bold = true})
+    hi("MiniPickPromptPrefix",           { bg = p.bg_mid2, fg = p.blue,      bold = true})
 
     -- Dim inactive MiniStarter elements
     hi("MiniStarterInactive",            { link = "MiniJump2dDim" })
@@ -85,9 +91,9 @@ MiniDeps.now(function()
     hi("RenderMarkdownTableRow",         { fg = p.bg_mid2 })
     hi("RenderMarkdownLink",             { fg = p.yellow })
     hi("RenderMarkdownWikiLink",         { fg = p.yellow })
-    hi("TreesitterContext",              { bg = p.bg_edge })
-    hi("TreesitterContextBottom",        { sp = p.bg_mid,  underline = true})
-    hi("TreesitterContextLineNumber",    { bg = p.bg_edge })
+    hi("TreesitterContext",              { bg = p.bg_mid })
+    hi("TreesitterContextBottom",        { sp = p.bg_edge,  underline = true})
+    hi("TreesitterContextLineNumber",    { bg = p.bg_mid })
 
     -- I like my vertical split divider to be the same color as my inactive
     -- horizontal status bar color, so it's consistent both vertically and

@@ -30,14 +30,14 @@ MiniDeps.now(function()
         Visual                         = { bg = c.selection_bg },
         NormalFloat                    = { bg = c.selection_inactive },
         PmenuSel                       = { bg = c.line, reverse = false, bold = true },
-        FloatBorder                    = { fg = c.panel_border },
-        FloatTitle                     = { fg = c.panel_border, bg = c.tag, bold = true },
+        FloatBorder                    = { fg = c.selection_bg, bg = c.selection_inactive },
+        FloatTitle                     = { fg = c.tag, bg = c.selection_bg, bold = true },
         Pmenu                          = { fg = c.fg },
-        PmenuBorder                    = { fg = c.panel_border },
+        PmenuBorder                    = { fg = c.selection_bg, bg = c.selection_inactive },
         SignColumn                     = { bg = "NONE" },
 
         -- Bold current line in MiniFiles
-        MiniFilesCursorLine            = { fg = nil, bg = c.line, bold = true },
+        MiniFilesCursorLine            = { fg = nil,        bg = c.bg,       bold = true },
         MiniFilesTitleFocused          = { fg = c.panel_bg, bg = c.constant, bold = true },
 
         -- Highlight patterns for highlighting the whole line and hiding colon.
@@ -52,8 +52,12 @@ MiniDeps.now(function()
         MiniHipatternsTodoColon        = { bg = c.tag,     fg = c.tag,     bold = true },
 
         -- Bold matches and current line in MiniPick
-        MiniPickMatchCurrent           = { fg = nil, bg = c.line, bold = true },
-        MiniPickMatchRanges            = { bg = nil, fg = c.regexp, bold = true},
+        MiniPickMatchCurrent           = { fg = nil,   bg = c.bg,            bold = true },
+        MiniPickMatchMarked            = { fg = nil,   bg = c.gutter_active, bold = true },
+        MiniPickMatchRanges            = { bg = nil,   fg = c.regexp,        bold = true},
+        MiniPickPrompt                 = { fg = c.tag, bg = c.selection_bg,  bold = true },
+        MiniPickPromptCaret            = { fg = c.tag, bg = c.selection_bg,  bold = true },
+        MiniPickPromptPrefix           = { fg = c.tag, bg = c.selection_bg,  bold = true },
 
         -- Dim inactive MiniStarter elements
         MiniStarterInactive            = { link = "MiniJump2dDim" },
