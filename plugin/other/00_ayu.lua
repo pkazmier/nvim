@@ -87,8 +87,9 @@ MiniDeps.now(function()
         RenderMarkdownH6               = { fg = c.string },
 
         -- Extend the context highlighting to line numbers as well
+        TreesitterContext              = { bg = c.guide_normal },
         TreesitterContextBottom        = { sp = c.panel_bg, underline = true },
-        TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.selection_inactive },
+        TreesitterContextLineNumber    = { fg = c.guide_active, bg = c.guide_normal },
 
         ['@markup.heading']            = { fg = c.keyword, bold = true },
         ['@markup.heading.1']          = { fg = c.accent,  bold = true },
