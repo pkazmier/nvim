@@ -61,6 +61,8 @@ MiniDeps.now(function()
 
         -- Dim inactive MiniStarter elements
         MiniStarterInactive            = { link = "MiniJump2dDim" },
+        MiniStarterSection             = { fg = c.keyword, bold = true },
+        MiniStarterHeader              = { fg = c.tag, bold = true },
 
         -- Highlight patterns for deemphasizing the directory name, so the
         -- filename is more prominent. Visually, this makes it faster to
