@@ -56,19 +56,12 @@ vim.opt.foldtext       = ""
 -- Diagnostics
 -- ---------------------------------------------------------------------------
 
-local icons = {
-  [vim.diagnostic.severity.ERROR] = " ",
-  [vim.diagnostic.severity.WARN]  = " ",
-  [vim.diagnostic.severity.INFO]  = " ",
-  [vim.diagnostic.severity.HINT]  = " ",
-}
 local diagnostic_opts = {
   severity_sort = true,
   underline = false,
   update_in_insert = false,
   virtual_text = {
     current_line = true,
-    prefix = function(diag) return icons[diag.severity] or " ? " end,
   },
 }
 MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
