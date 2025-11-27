@@ -41,22 +41,6 @@ MiniDeps.now(function()
     hi("DiagnosticVirtualTextOk",        { fg = p.green,   bg = p.green_bg,  italic = true })
     hi("DiagnosticVirtualTextWarn",      { fg = p.yellow,  bg = p.yellow_bg, italic = true })
 
-    -- I prefer unique looking borders on floats and their titles
-    hi("FloatBorder",                    { fg = p.bg_mid2, bg = p.bg_edge } )
-    hi("FloatTitle",                     { fg = p.fg_edge, bg = p.bg_mid2,   bold = true } )
-    hi("PmenuBorder",                    { fg = p.bg_mid2, bg = p.bg_edge })
-    hi("PmenuSel",                       { bg = p.bg_mid,  reverse = false })
-    hi("MiniFilesTitleFocused",          { fg = p.bg_mid2, bg = p.fg_edge,   bold = true })
---     hi("FloatBorder",                    { fg = p.bg_mid2, bg = "NONE" } )
---     hi("FloatTitle",                     { fg = p.fg_edge, bg = p.bg_mid2,   bold = true } )
---     hi("PmenuBorder",                    { fg = p.bg_mid2, bg = "NONE" })
---     hi("PmenuSel",                       { bg = p.bg_mid,  reverse = false })
---     hi("MiniFilesTitleFocused",          { fg = p.bg_mid2, bg = p.fg_edge,   bold = true })
-
-    -- Do I like a subtle darker border? Not sure yet.
-    -- hi("FloatBorder",                    { fg = p.bg_edge2 } )
-    -- hi("PmenuBorder",                    { fg = p.bg_edge2 })
-
     -- Highlight patterns for highlighting the whole line and hiding colon.
     -- See https://github.com/echasnovski/mini.nvim/discussions/783
     hi("MiniHipatternsFixmeBody",        { fg = p.red })
@@ -67,12 +51,6 @@ MiniDeps.now(function()
     hi("MiniHipatternsHackColon",        { bg = p.yellow,  fg = p.yellow,    bold = true })
     hi("MiniHipatternsNoteColon",        { bg = p.cyan,    fg = p.cyan,      bold = true })
     hi("MiniHipatternsTodoColon",        { bg = p.blue,    fg = p.blue,      bold = true })
-
-    -- Bold matches in MiniPick
-    hi("MiniPickMatchRanges",            { bg = nil,       fg = p.cyan,      bold = true})
-    hi("MiniPickPrompt",                 { bg = p.bg_mid2, fg = p.accent,    bold = true})
-    hi("MiniPickPromptCaret",            { bg = p.bg_mid2, fg = p.blue,      bold = true})
-    hi("MiniPickPromptPrefix",           { bg = p.bg_mid2, fg = p.blue,      bold = true})
 
     -- Dim inactive MiniStarter elements
     hi("MiniStarterInactive",            { link = "MiniJump2dDim" })
