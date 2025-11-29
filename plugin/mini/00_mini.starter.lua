@@ -3,36 +3,6 @@
 -- ---------------------------------------------------------------------------
 
 MiniDeps.now(function()
-  Config.new_autocmd("User", {
-    pattern = "MiniStarterOpened",
-    callback = function(_)
-      local function find_in_window(pattern)
-        local row, col = unpack(vim.fn.searchpos(pattern, "n"))
-        local screenpos = vim.fn.screenpos(0, row, col)
-        return { row = screenpos.row, col = screenpos.col }
-      end
-
-      local image = require("image")
-      local desired_width = 80
-      local win_width = vim.api.nvim_win_get_width(0)
-      local coords = find_in_window(" ")
-      local logo = image.from_file("/Users/kaz/Downloads/x-mini.png", {
-        x = math.floor((win_width - desired_width) / 2),
-        y = coords.row,
-        width = desired_width,
-      })
-      Config.new_autocmd({ "BufUnload", "BufWipeout" }, {
-        once = true,
-        callback = function()
-          if vim.bo.filetype == "ministarter" then
-            logo:clear()
-          end
-        end,
-      })
-      logo:render()
-    end,
-  })
-
   local pad = function(str, n)
     return string.rep(" ", n) .. str
   end
@@ -80,34 +50,20 @@ MiniDeps.now(function()
 
     header = function()
       local banner = [[
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
+
+                 █              █
+
+████████████ ███ ████████ ███
+██████████████ ████ ██████████ ████
+█████ ████ █████ ████ █████ █████ ████
+█████ ████ ████████ █████ ████████
+🎄✨🎅❄️🎄 MERRY CHRISTMAS! 🎄❄️🎅✨🎄
 ]]
+      -- local msg = greeting()
+      -- local msg_pad = longest_line(banner) - msg:len()
+      -- return banner .. pad(msg, msg_pad)
       return banner
     end,
-    --       local banner = [[
-    --
-    --                  █              █
-    --
-    -- ████████████ ███ ████████ ███
-    -- ██████████████ ████ ██████████ ████
-    -- █████ ████ █████ ████ █████ █████ ████
-    -- █████ ████ █████ ████ █████ █████ ████
-    -- █████ ████ ████████ █████ ████████
-    -- ]]
-    --       local msg = greeting()
-    --       local msg_pad = longest_line(banner) - msg:len()
-    --       return banner .. pad(msg, msg_pad)
-    --     end,
 
     -- Fortune slows startup a small amount, but I like it.
     footer = fortune(),
