@@ -26,6 +26,15 @@ MiniDeps.later(function()
     return MiniPick.builtin.files(nil, { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } })
   end
 
+  -- Buffer picker with delete
+  MiniPick.registry.buffers = function(local_opts)
+    local wipeout_cur = function()
+      vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+    end
+    local buffer_mappings = { wipeout = { char = "<C-d>", func = wipeout_cur } }
+    MiniPick.builtin.buffers(local_opts, { mappings = buffer_mappings })
+  end
+
   -- Plugin picker
   local plugin_dir = vim.fn.stdpath("data") .. "/site/pack/core/opt"
   MiniPick.registry.plugins = H.two_stage_dir_picker(plugin_dir, "Plugin Picker")
