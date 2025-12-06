@@ -63,9 +63,9 @@ MiniDeps.now(function()
         -- filename is more prominent. Visually, this makes it faster to
         -- identify the name of the file.
         -- See https://github.com/echasnovski/mini.nvim/discussions/36#discussioncomment-8889147
-        MiniStatuslineDirectory        = { fg = c.lsp_inlay_hint, bg = c.panel_border },
-        MiniStatuslineFilename         = { fg = c.fg,             bg = c.panel_border,  bold = true },
-        MiniStatuslineFilenameModified = { fg = c.fg,             bg = c.panel_border,  bold = true },
+        MiniStatuslineDirectory        = { fg = c.lsp_inlay_hint, bg = c.selection_inactive},
+        MiniStatuslineFilename         = { fg = c.fg,             bg = c.selection_inactive,  bold = true },
+        MiniStatuslineFilenameModified = { fg = c.fg,             bg = c.selection_inactive,  bold = true },
         MiniStatuslineDevinfo          = { fg = c.fg,             bg = c.selection_bg },
         MiniStatuslineFileinfo         = { fg = c.fg,             bg = c.selection_bg },
         StatusLine                     = { fg = c.fg,             bg = c.panel_border },
