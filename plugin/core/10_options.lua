@@ -38,7 +38,6 @@ vim.opt.shortmess      = "FOSWICaco"
 vim.opt.spelloptions   = "camel"
 vim.opt.splitkeep      = "cursor"
 vim.opt.textwidth      = 78
-vim.opt.wildmode       = "longest:full,full"
 vim.opt.winborder      = "rounded"
 vim.opt.winminwidth    = 5
 
