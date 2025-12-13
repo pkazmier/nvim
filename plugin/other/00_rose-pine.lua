@@ -28,7 +28,10 @@ MiniDeps.now(function()
       MiniStatuslineFilename         = { fg = "subtle", bold   = true },
       MiniStatuslineFilenameModified = { fg = "rose",   bold   = true },
       MiniStatuslineInactive         = { fg = "subtle", bold   = false },
+      RenderMarkdownCodeInline       = { fg = "iris", bg = "highlight_med" },
+      RenderMarkdownCodeBorder       = { fg = "iris", bg = "highlight_med" },
       WinSeparator                   = { fg = "overlay" },
+      ["@lsp.type.parameter"]        = { link = "@variable.parameter" },
     },
     palette = {
       main = {
@@ -41,5 +44,5 @@ MiniDeps.now(function()
       italic = false,
     },
   })
-  vim.cmd.colorscheme("rose-pine")
+  -- vim.cmd.colorscheme("rose-pine")
 end)
