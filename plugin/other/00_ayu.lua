@@ -18,7 +18,7 @@ MiniDeps.now(function()
         -- Now that 'pumborder' exists, use same styling for other floats
         Pmenu                          = { fg = c.fg,           bg = c.bg },
         PmenuBorder                    = { fg = c.comment,      bg = c.bg },
-        PmenuMatch                     = { fg = c.regexp },
+        PmenuMatch                     = { fg = c.regexp,       bold = true },
         PmenuSel                       = { bg = c.selection_bg, reverse = false, bold = true },
 
         -- Use reverse text for diagnostics
@@ -49,6 +49,7 @@ MiniDeps.now(function()
         -- Bold matches and current line in MiniPick
         MiniPickMatchCurrent           = { fg = nil,      bg = c.selection_bg,  bold = true },
         MiniPickMatchMarked            = { fg = nil,      bg = c.gutter_normal, bold = true },
+        MiniPickMatchRanges            = { fg = c.regexp, bold = true },
         MiniPickPrompt                 = { fg = c.regexp, bold = true },
         MiniPickPromptPrefix           = { fg = c.tag,    bold = true },
 
