@@ -12,14 +12,14 @@ MiniDeps.now(function()
       -- stylua: ignore
       return {
         CursorLineNr                   = { fg = c.accent, bg = c.bg, bold = true },
-        FloatTitle                     = { fg = c.tag, bold = true },
+        FloatTitle                     = { fg = c.tag,    bold = true },
         LineNr                         = { fg = c.guide_active },
 
         -- Now that 'pumborder' exists, use same styling for other floats
-        Pmenu                          = { fg = c.fg,      bg = c.bg },
-        PmenuBorder                    = { fg = c.comment, bg = c.bg },
+        Pmenu                          = { fg = c.fg,           bg = c.bg },
+        PmenuBorder                    = { fg = c.comment,      bg = c.bg },
         PmenuMatch                     = { fg = c.regexp },
-        PmenuSel                       = { bg = c.line,    reverse = false, bold = true },
+        PmenuSel                       = { bg = c.selection_bg, reverse = false, bold = true },
 
         -- Use reverse text for diagnostics
         DiagnosticVirtualTextError     = { bg = c.error,   fg = c.line, italic = true },
@@ -32,8 +32,8 @@ MiniDeps.now(function()
         LeapLabel                      = { fg = c.accent, bold = true },
 
         -- Bold current line in MiniFiles
-        MiniFilesCursorLine            = { fg = nil,        bg = c.line, bold = true },
-        MiniFilesTitleFocused          = { fg = c.panel_bg, bg = c.tag,  bold = true },
+        MiniFilesCursorLine            = { fg = nil,        bg = c.selection_bg, bold = true },
+        MiniFilesTitleFocused          = { fg = c.panel_bg, bg = c.tag,          bold = true },
 
         -- Highlight patterns for highlighting the whole line and hiding colon.
         -- See https://github.com/echasnovski/mini.nvim/discussions/783
@@ -47,12 +47,10 @@ MiniDeps.now(function()
         MiniHipatternsTodoColon        = { bg = c.tag,     fg = c.tag,     bold = true },
 
         -- Bold matches and current line in MiniPick
-        MiniPickMatchCurrent           = { fg = nil, bg = c.line,          bold = true },
-        MiniPickMatchMarked            = { fg = nil, bg = c.gutter_normal, bold = true },
-        -- MiniPickMatchRanges            = { bg = nil,   fg = c.regexp,        bold = true},
-        -- MiniPickPrompt                 = { fg = c.tag, bg = c.selection_bg,  bold = true },
-        -- MiniPickPromptCaret            = { fg = c.tag, bg = c.selection_bg,  bold = true },
-        -- MiniPickPromptPrefix           = { fg = c.tag, bg = c.selection_bg,  bold = true },
+        MiniPickMatchCurrent           = { fg = nil,      bg = c.selection_bg,  bold = true },
+        MiniPickMatchMarked            = { fg = nil,      bg = c.gutter_normal, bold = true },
+        MiniPickPrompt                 = { fg = c.regexp, bold = true },
+        MiniPickPromptPrefix           = { fg = c.tag,    bold = true },
 
         -- Dim inactive MiniStarter elements
         MiniStarterInactive            = { link = "MiniJump2dDim" },
