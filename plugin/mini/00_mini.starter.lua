@@ -57,8 +57,8 @@ MiniDeps.now(function()
 ██████████████ ████ ██████████ ████
 █████ ████ █████ ████ █████ █████ ████
 █████ ████ ████████ █████ ████████
-🎄✨🎅❄️🎄 MERRY CHRISTMAS! 🎄❄️🎅✨🎄
-]]
+
+🎄✨🎅❄️🎄 MERRY CHRISTMAS! 🎄❄️🎅✨🎄]]
       -- local msg = greeting()
       -- local msg_pad = longest_line(banner) - msg:len()
       -- return banner .. pad(msg, msg_pad)
@@ -66,6 +66,12 @@ MiniDeps.now(function()
     end,
 
     -- Fortune slows startup a small amount, but I like it.
-    footer = fortune(),
+    -- footer = fortune(),
+    footer = [[
+The real problem of humanity is the following:
+We have paleolithic emotions; medieval institutions;
+and god-like technology.
+        -- Edward O. Wilson, Sociobiologist
+]],
   })
 end)
