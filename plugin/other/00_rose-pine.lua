@@ -2,7 +2,7 @@
 -- rose pine colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.now(function()
+Config.now(function()
   vim.pack.add(
     { { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } },
     { load = true }

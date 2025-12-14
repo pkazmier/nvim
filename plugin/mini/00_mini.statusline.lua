@@ -22,7 +22,7 @@
 --    amount of noise on the left side due to all the Git related info.
 
 local H = {}
-MiniDeps.now(function()
+Config.now(function()
   require("mini.statusline").setup({
     use_icons = true,
     content = {

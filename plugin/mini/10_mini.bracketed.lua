@@ -2,7 +2,7 @@
 -- mini.bracketed
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.bracketed").setup()
 
   local suffixes = vim.tbl_map(

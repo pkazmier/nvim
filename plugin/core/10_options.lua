@@ -63,6 +63,6 @@ local diagnostic_opts = {
     current_line = true,
   },
 }
-MiniDeps.later(function() vim.diagnostic.config(diagnostic_opts) end)
+Config.later(function() vim.diagnostic.config(diagnostic_opts) end)
 
 -- stylua: ignore end

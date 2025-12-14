@@ -2,7 +2,7 @@
 -- mini.cursorword
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.cursorword").setup()
 
   -- Create toggle function, which is bound to '\W' in mappings

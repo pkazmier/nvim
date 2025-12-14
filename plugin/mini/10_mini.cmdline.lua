@@ -1,4 +1,4 @@
-MiniDeps.later(
+Config.later(
   function()
     require("mini.cmdline").setup({
       autocomplete = { delay = 200 },

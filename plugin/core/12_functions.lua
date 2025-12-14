@@ -7,12 +7,6 @@ local H = {}
 Config.dd = function(...) vim.notify(vim.iter({ ... }):map(vim.inspect):join(", ")) end
 
 -- ---------------------------------------------------------------------------
--- Lazy Loading Helper
--- ---------------------------------------------------------------------------
-
-Config.now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
-
--- ---------------------------------------------------------------------------
 -- Custom `vim.pack.add()` hook helper
 -- ---------------------------------------------------------------------------
 
@@ -34,9 +28,7 @@ end
 -- `:enew` in that it creates a new empty buffer rather than reusing
 -- the existing empty buffer if one exists. It also sets the buffer to
 -- be a scratch buffer (i.e. not listed, not saved to disk).
-Config.new_scratch_buffer = function()
-  vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
-end
+Config.new_scratch_buffer = function() vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true)) end
 
 -- ---------------------------------------------------------------------------
 -- Re-map Binding

@@ -2,7 +2,7 @@
 -- conform
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/stevearc/conform.nvim" }, { load = true })
 
   require("conform").setup({

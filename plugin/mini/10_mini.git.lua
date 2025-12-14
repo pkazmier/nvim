@@ -2,7 +2,7 @@
 -- mini.git
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.git").setup({})
 
   Config.new_autocmd({ "FileType" }, {

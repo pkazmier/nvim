@@ -2,7 +2,7 @@
 -- everforest colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/sainnhe/everforest" }, { load = true })
   vim.g.everforest_float_style = "dim"
   vim.g.everforest_background = "medium"

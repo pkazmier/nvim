@@ -2,7 +2,7 @@
 -- gruvbox-material colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" }, { load = true })
   vim.g.gruvbox_material_float_style = "dim"
   vim.g.gruvbox_material_background = "medium"

@@ -2,4 +2,4 @@
 -- mini.extra
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function() require("mini.extra").setup() end)
+Config.later(function() require("mini.extra").setup() end)

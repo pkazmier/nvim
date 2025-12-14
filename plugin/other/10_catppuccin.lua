@@ -2,7 +2,7 @@
 -- catppuccin
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add(
     { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } },
     { load = true }

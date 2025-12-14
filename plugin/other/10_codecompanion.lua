@@ -2,7 +2,7 @@
 -- codecompanion
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   if Config.copilot_disable then return end
 
   vim.pack.add({

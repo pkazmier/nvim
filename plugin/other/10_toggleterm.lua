@@ -2,7 +2,7 @@
 -- toggleterm
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/akinsho/toggleterm.nvim" }, { load = true })
 
   require("toggleterm").setup({

@@ -2,7 +2,7 @@
 -- mini.visits
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.visits").setup()
 
   Config.minivisits_pick = function(cwd, label)

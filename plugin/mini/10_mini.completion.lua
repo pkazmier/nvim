@@ -2,7 +2,7 @@
 -- mini.completion
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.completion").setup({
     lsp_completion = { source_func = "omnifunc", auto_setup = false },
     mappings = { force_fallback = "" },

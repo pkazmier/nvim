@@ -4,7 +4,7 @@
 
 local H = {}
 
-MiniDeps.now(function()
+Config.now(function()
   vim.pack.add({ "https://github.com/zk-org/zk-nvim" }, { load = true })
   local cmds = require("zk.commands")
 

@@ -2,7 +2,7 @@
 -- mini.snippets
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   local snippets = require("mini.snippets")
   snippets.setup({
     snippets = {

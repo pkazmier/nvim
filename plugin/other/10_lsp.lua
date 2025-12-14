@@ -2,7 +2,7 @@
 -- lsp
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" }, { load = true })
 
   -- All language servers are expected to be installed with 'mason.vnim'

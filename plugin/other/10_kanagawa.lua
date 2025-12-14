@@ -2,7 +2,7 @@
 -- kanagawa colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/rebelot/kanagawa.nvim" }, { load = true })
   require("kanagawa").setup({
     colors = {

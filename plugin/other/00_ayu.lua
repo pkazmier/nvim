@@ -2,7 +2,7 @@
 -- ayu colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.now(function()
+Config.now(function()
   vim.pack.add({ "https://github.com/Shatur/neovim-ayu" }, { load = true })
   require("ayu").setup({
     mirage = true,

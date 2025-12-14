@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 local H = {}
-MiniDeps.later(function()
+Config.later(function()
   require("mini.pick").setup({
     source = {
       preview = function(buf_id, item)

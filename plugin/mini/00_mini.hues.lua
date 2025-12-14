@@ -8,7 +8,7 @@
 
 local H = {}
 
-MiniDeps.now(function()
+Config.now(function()
   -- Apply custom highlights after loading a mini.hues based colorscheme.
   Config.new_autocmd("ColorScheme", {
     -- Only trigger for mini.hues based colorschemes and exclude mini.base16

@@ -2,4 +2,4 @@
 -- mini.comment
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function() require("mini.comment").setup() end)
+Config.later(function() require("mini.comment").setup() end)

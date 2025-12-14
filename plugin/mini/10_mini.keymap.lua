@@ -2,7 +2,7 @@
 -- mini.keymap
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.keymap").setup()
 
   -- stylua: ignore start

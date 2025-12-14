@@ -2,7 +2,7 @@
 -- mini.diff
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.diff").setup()
 
   Config.minidiff_to_qf = function()

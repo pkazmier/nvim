@@ -2,7 +2,7 @@
 -- mini.basics
 -- ---------------------------------------------------------------------------
 
-MiniDeps.now(
+Config.now(
   function()
     require("mini.basics").setup({
       mappings = { windows = true, move_with_alt = true },

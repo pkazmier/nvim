@@ -1,4 +1,4 @@
-MiniDeps.later(function()
+Config.later(function()
   Config.remap("n", "gx", "gX")
   Config.remap("x", "gx", "gX")
   MiniClue.set_mapping_desc("n", "gX", "Open file or URI")

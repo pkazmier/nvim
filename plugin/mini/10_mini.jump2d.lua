@@ -10,7 +10,7 @@
 --    2. Equivalence classes (i.e. single quote matches double quote, backtick)
 --    3. Treesitter node selection
 --
--- MiniDeps.later(function()
+-- Config.later(function()
 --   local jump2d = require("mini.jump2d")
 --   jump2d.setup({
 --     labels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",

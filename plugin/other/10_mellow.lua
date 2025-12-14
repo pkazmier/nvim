@@ -2,7 +2,7 @@
 -- mellow colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" }, { load = true })
   local c = require("mellow.colors").dark
 

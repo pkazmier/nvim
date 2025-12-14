@@ -8,7 +8,7 @@
 --    2. Equivalence classes (i.e. single quote matches double quote, backtick)
 --    3. Treesitter node selection
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/ggandor/leap.nvim" }, { load = true })
   require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
 end)

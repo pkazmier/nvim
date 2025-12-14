@@ -2,4 +2,4 @@
 -- mini.jump
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function() require("mini.jump").setup() end)
+Config.later(function() require("mini.jump").setup() end)

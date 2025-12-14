@@ -2,7 +2,7 @@
 -- mini.starter
 -- ---------------------------------------------------------------------------
 
-MiniDeps.now(function()
+Config.now(function()
   local pad = function(str, n) return string.rep(" ", n) .. str end
 
   -- Function from [echasnovski](https://github.com/echasnovski/nvim).

@@ -2,7 +2,7 @@
 -- vague colorscheme
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   vim.pack.add({ "https://github.com/vague2k/vague.nvim" }, { load = true })
   require("vague").setup({
     plugins = {

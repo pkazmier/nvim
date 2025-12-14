@@ -2,7 +2,7 @@
 -- copilot
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   if Config.copilot_disable then return end
 
   vim.pack.add({ "https://github.com/zbirenbaum/copilot.lua" }, { load = true })

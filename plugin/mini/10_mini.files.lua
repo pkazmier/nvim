@@ -2,7 +2,7 @@
 -- mini.files
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   require("mini.files").setup({
     windows = { preview = true },
   })

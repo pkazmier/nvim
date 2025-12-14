@@ -2,7 +2,7 @@
 -- mini.hipatterns
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   local hipatterns = require("mini.hipatterns")
 
   local censor_extmark_opts = function(_, match, _)

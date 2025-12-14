@@ -2,4 +2,4 @@
 -- undotree
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function() vim.cmd.packadd("nvim.undotree") end)
+Config.later(function() vim.cmd.packadd("nvim.undotree") end)

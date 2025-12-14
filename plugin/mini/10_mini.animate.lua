@@ -2,7 +2,7 @@
 -- mini.animate
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   local animate = require("mini.animate")
   animate.setup({
     scroll = { enable = false },

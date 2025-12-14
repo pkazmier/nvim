@@ -2,7 +2,7 @@
 -- mini.clue
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
+Config.later(function()
   local clue = require("mini.clue")
 
   clue.setup({
