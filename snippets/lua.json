@@ -22,6 +22,6 @@
   "Lua section header": {
     "prefix": "#s",
     "body": "-- ---------------------------------------------------------------------------\n-- $0\n-- ---------------------------------------------------------------------------\n",
-    "description": "Stylua ignore start / end"
+    "description": "Section header in config"
   }
 }
