@@ -3,15 +3,8 @@
 -- ---------------------------------------------------------------------------
 
 Config.now_if_args(function()
-  -- Add post hook to run after every update, but not first-time install
-  Config.new_autocmd({ "PackChanged" }, {
-    callback = function(ev)
-      local name, active, kind = ev.data.spec.name, ev.data.active, ev.data.kind
-      if name == "tree-sitter" and kind == "update" and active then
-        vim.cmd("TSUpdate")
-      end
-    end,
-  })
+  local ts_update = function() vim.cmd("TSUpdate") end
+  Config.on_packchanged("tree-sitter", { "update" }, ts_udpate, "Update tree-sitter parsers")
 
   vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
