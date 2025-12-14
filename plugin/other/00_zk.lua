@@ -26,9 +26,7 @@ MiniDeps.now(function()
 
   cmds.add("ZkFullTextSearch", function(opts)
     opts = opts or {}
-    if not opts.match then
-      opts.match = { vim.fn.input("Match: ") }
-    end
+    if not opts.match then opts.match = { vim.fn.input("Match: ") } end
     opts = vim.tbl_extend("keep", opts, {
       sort = { "created" },
     })
@@ -76,9 +74,7 @@ H.new_meeting = function(opts)
             char = "<C-e>",
             func = function()
               local query = MiniPick.get_picker_query()
-              if query == nil then
-                return true
-              end
+              if query == nil then return true end
               local title = table.concat(query, "")
               zk.new(vim.tbl_extend("keep", { title = title }, opts))
               return true

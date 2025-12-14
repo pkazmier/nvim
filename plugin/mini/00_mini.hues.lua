@@ -106,9 +106,7 @@ Config.export_minihues_theme = function()
     prompt = "Enter name for color scheme: minihues-",
     cancelreturn = false,
   })
-  if not ok or theme_name == false then
-    return nil
-  end
+  if not ok or theme_name == false then return nil end
 
   local filename = "minihues-" .. theme_name
   local p = require("mini.hues").get_palette()
@@ -206,9 +204,7 @@ H.minihues_path = function(theme_name)
 end
 
 H.render_to_buffer = function(filename, template, vars)
-  local rendered = template:gsub("%${(.-)}", function(key)
-    return vars[key] or ""
-  end)
+  local rendered = template:gsub("%${(.-)}", function(key) return vars[key] or "" end)
   vim.cmd(string.format("edit %s", filename))
   vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(rendered, "\n"))
 end

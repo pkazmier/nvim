@@ -3,9 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 MiniDeps.later(function()
-  if Config.copilot_disable then
-    return
-  end
+  if Config.copilot_disable then return end
 
   vim.pack.add({ "https://github.com/zbirenbaum/copilot.lua" }, { load = true })
   require("copilot").setup({

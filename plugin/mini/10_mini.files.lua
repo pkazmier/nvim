@@ -11,8 +11,16 @@ MiniDeps.later(function()
     pattern = "MiniFilesExplorerOpen",
     callback = function()
       MiniFiles.set_bookmark("c", vim.fn.stdpath("config"), { desc = "Config" })
-      MiniFiles.set_bookmark("m", vim.fn.stdpath("data") .. "/site/pack/core/opt/mini.nvim", { desc = "mini.nvim" })
-      MiniFiles.set_bookmark("p", vim.fn.stdpath("data") .. "/site/pack/core/opt", { desc = "Plugins" })
+      MiniFiles.set_bookmark(
+        "m",
+        vim.fn.stdpath("data") .. "/site/pack/core/opt/mini.nvim",
+        { desc = "mini.nvim" }
+      )
+      MiniFiles.set_bookmark(
+        "p",
+        vim.fn.stdpath("data") .. "/site/pack/core/opt",
+        { desc = "Plugins" }
+      )
       MiniFiles.set_bookmark("w", vim.fn.getcwd, { desc = "Working directory" })
     end,
   })

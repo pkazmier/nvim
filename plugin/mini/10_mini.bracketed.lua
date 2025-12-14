@@ -5,9 +5,10 @@
 MiniDeps.later(function()
   require("mini.bracketed").setup()
 
-  local suffixes = vim.tbl_map(function(v)
-    return v.suffix
-  end, vim.tbl_values(MiniBracketed.config))
+  local suffixes = vim.tbl_map(
+    function(v) return v.suffix end,
+    vim.tbl_values(MiniBracketed.config)
+  )
 
   -- Better mini.bracketed mappings, see comment in `gen_hydra_brackets`
   -- definition within `core/12_functions.lua`.

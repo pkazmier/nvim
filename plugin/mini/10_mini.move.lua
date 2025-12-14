@@ -2,6 +2,4 @@
 -- mini.move
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.move").setup()
-end)
+MiniDeps.later(function() require("mini.move").setup() end)

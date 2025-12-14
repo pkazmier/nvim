@@ -33,13 +33,12 @@ Config.now_if_args(function()
   }
 
   require("nvim-treesitter").install(ensure_languages)
-  local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
+  local filetypes =
+    vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
   vim.list_extend(filetypes, { "markdown", "pandoc" })
   Config.new_autocmd("FileType", {
     pattern = filetypes,
-    callback = function(ev)
-      vim.treesitter.start(ev.buf)
-    end,
+    callback = function(ev) vim.treesitter.start(ev.buf) end,
   })
 
   -- Display context when current block is off-screen

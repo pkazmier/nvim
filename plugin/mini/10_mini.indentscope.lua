@@ -2,6 +2,4 @@
 -- mini.indentscope
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.indentscope").setup({})
-end)
+MiniDeps.later(function() require("mini.indentscope").setup({}) end)

@@ -4,9 +4,7 @@ local H = {}
 -- Debug Utils
 -- ---------------------------------------------------------------------------
 
-Config.dd = function(...)
-  vim.notify(vim.iter({ ... }):map(vim.inspect):join(", "))
-end
+Config.dd = function(...) vim.notify(vim.iter({ ... }):map(vim.inspect):join(", ")) end
 
 -- ---------------------------------------------------------------------------
 -- Lazy Loading Helper
@@ -47,9 +45,7 @@ end
 Config.remap = function(mode, lhs_from, lhs_to)
   local keymap = vim.fn.maparg(lhs_from, mode, false, true)
   local rhs = keymap.callback or keymap.rhs
-  if rhs == nil then
-    error("Could not remap from " .. lhs_from .. " to " .. lhs_to)
-  end
+  if rhs == nil then error("Could not remap from " .. lhs_from .. " to " .. lhs_to) end
   vim.keymap.set(mode, lhs_to, rhs, { desc = keymap.desc })
 end
 
@@ -146,6 +142,4 @@ end
 -- ---------------------------------------------------------------------------
 
 -- Return a string where the first letter has been capitalized.
-H.capitalize = function(w)
-  return w:sub(1, 1):upper() .. w:sub(2)
-end
+H.capitalize = function(w) return w:sub(1, 1):upper() .. w:sub(2) end

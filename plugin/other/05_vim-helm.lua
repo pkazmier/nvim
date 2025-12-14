@@ -2,6 +2,6 @@
 -- vim-helm
 -- ---------------------------------------------------------------------------
 
-Config.now_if_args(function()
-  vim.pack.add({ "https://github.com/towolf/vim-helm" }, { load = true })
-end)
+Config.now_if_args(
+  function() vim.pack.add({ "https://github.com/towolf/vim-helm" }, { load = true }) end
+)

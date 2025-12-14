@@ -2,6 +2,4 @@
 -- mini.bufremove
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.bufremove").setup()
-end)
+MiniDeps.later(function() require("mini.bufremove").setup() end)

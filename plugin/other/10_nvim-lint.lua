@@ -12,8 +12,6 @@ MiniDeps.later(function()
   }
 
   Config.new_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-    callback = function()
-      lint.try_lint()
-    end,
+    callback = function() lint.try_lint() end,
   })
 end)

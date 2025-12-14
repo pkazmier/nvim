@@ -3,9 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 MiniDeps.later(function()
-  if Config.copilot_disable then
-    return
-  end
+  if Config.copilot_disable then return end
 
   vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
@@ -64,9 +62,7 @@ MiniDeps.later(function()
       else
         mini_id = MiniNotify.add(msg, level, hl_group)
       end
-      vim.defer_fn(function()
-        MiniNotify.remove(mini_id)
-      end, 5000)
+      vim.defer_fn(function() MiniNotify.remove(mini_id) end, 5000)
     end,
   })
 end)

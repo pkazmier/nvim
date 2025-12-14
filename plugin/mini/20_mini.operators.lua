@@ -7,16 +7,12 @@ MiniDeps.later(function()
   -- From https://github.com/echasnovski/mini.nvim/discussions/1835
   local comment_multiply = false
   local my_multiply_func = function(content)
-    if not (comment_multiply and content.submode == "V") then
-      return content.lines
-    end
+    if not (comment_multiply and content.submode == "V") then return content.lines end
 
     -- Add comment
     comment_multiply = false
     local commentstring = vim.bo.commentstring
-    return vim.tbl_map(function(l)
-      return (commentstring:gsub("%%s", l))
-    end, content.lines)
+    return vim.tbl_map(function(l) return (commentstring:gsub("%%s", l)) end, content.lines)
   end
   require("mini.operators").setup({ multiply = { func = my_multiply_func } })
 
@@ -24,9 +20,7 @@ MiniDeps.later(function()
     local rhs = function()
       -- Preserve cursor position so that it is on *not* commented part
       local pos = vim.api.nvim_win_get_cursor(0)
-      vim.schedule(function()
-        vim.api.nvim_win_set_cursor(0, pos)
-      end)
+      vim.schedule(function() vim.api.nvim_win_set_cursor(0, pos) end)
 
       comment_multiply = true
       return multiply_keys

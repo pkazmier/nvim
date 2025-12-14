@@ -23,7 +23,11 @@ Config.now_if_args(function()
 
   -- Refresh minimap on certain movements
   for _, key in ipairs({ "n", "N", "*", "#" }) do
-    vim.keymap.set("n", key, key .. "zv<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>")
+    vim.keymap.set(
+      "n",
+      key,
+      key .. "zv<Cmd>lua MiniMap.refresh({}, { lines = false, scrollbar = false })<CR>"
+    )
   end
 end)
 
@@ -32,9 +36,7 @@ end)
 -- have a map.
 Config.minimap_toggle = function()
   vim.g.minimap_disable = not vim.g.minimap_disable
-  if H.minimap_should_be_enabled() then
-    map.toggle()
-  end
+  if H.minimap_should_be_enabled() then map.toggle() end
 end
 
 -- Toggle whether the current buffer should display a map if it has not been
@@ -72,9 +74,7 @@ Config.new_autocmd("BufEnter", {
   desc = "Toggle 'mini.map' based on filetype",
   callback = vim.schedule_wrap(function()
     -- Do nothing if entering the minimap buffer itself (when focusing)
-    if vim.bo.filetype == "minimap" then
-      return
-    end
+    if vim.bo.filetype == "minimap" then return end
 
     -- Otherwise we check if the minimap should be opened or not
     if H.minimap_should_be_enabled() then

@@ -3,7 +3,10 @@
 -- ---------------------------------------------------------------------------
 
 MiniDeps.later(function()
-  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }, { load = true })
+  vim.pack.add(
+    { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } },
+    { load = true }
+  )
   require("catppuccin").setup({
     default_integrations = false,
     integrations = {
@@ -103,7 +106,11 @@ MiniDeps.later(function()
 
           MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
           MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
-          MiniStatuslineFilenameModified = { fg = colors.blue, bg = colors.surface0, style = { "bold" } },
+          MiniStatuslineFilenameModified = {
+            fg = colors.blue,
+            bg = colors.surface0,
+            style = { "bold" },
+          },
           MiniStatuslineInactive = { fg = colors.overlay1, bg = colors.surface0 },
 
           MiniSurround = { fg = nil, bg = colors.yellow },
@@ -113,7 +120,11 @@ MiniDeps.later(function()
           MiniTablineHidden = { fg = colors.overlay1, bg = colors.surface0 },
           MiniTablineModifiedCurrent = { fg = colors.base, bg = colors.yellow, style = { "bold" } },
           MiniTablineModifiedHidden = { fg = colors.base, bg = colors.subtext0 },
-          MiniTablineModifiedVisible = { fg = colors.base, bg = colors.subtext0, style = { "bold" } },
+          MiniTablineModifiedVisible = {
+            fg = colors.base,
+            bg = colors.subtext0,
+            style = { "bold" },
+          },
           MiniTablineTabpagesection = { fg = colors.base, bg = colors.mauve, style = { "bold" } },
           MiniTablineVisible = { fg = colors.overlay1, bg = colors.surface0, style = { "bold" } },
         }
@@ -190,7 +201,11 @@ MiniDeps.later(function()
 
           MiniStatuslineDirectory = { fg = colors.overlay1, bg = colors.surface0 },
           MiniStatuslineFilename = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
-          MiniStatuslineFilenameModified = { fg = colors.blue, bg = colors.surface0, style = { "bold" } },
+          MiniStatuslineFilenameModified = {
+            fg = colors.blue,
+            bg = colors.surface0,
+            style = { "bold" },
+          },
           MiniStatuslineInactive = { fg = colors.overlay1, bg = colors.surface0 },
 
           MiniSurround = { fg = nil, bg = colors.yellow },
@@ -200,7 +215,11 @@ MiniDeps.later(function()
           MiniTablineHidden = { fg = colors.overlay1, bg = colors.surface0 },
           MiniTablineModifiedCurrent = { fg = colors.base, bg = colors.blue, style = { "bold" } },
           MiniTablineModifiedHidden = { fg = colors.base, bg = colors.subtext0 },
-          MiniTablineModifiedVisible = { fg = colors.base, bg = colors.subtext0, style = { "bold" } },
+          MiniTablineModifiedVisible = {
+            fg = colors.base,
+            bg = colors.subtext0,
+            style = { "bold" },
+          },
           MiniTablineTabpagesection = { fg = colors.base, bg = colors.mauve, style = { "bold" } },
           MiniTablineVisible = { fg = colors.overlay1, bg = colors.surface0, style = { "bold" } },
         }

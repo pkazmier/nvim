@@ -2,6 +2,4 @@
 -- mini.splitjoin
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.splitjoin").setup()
-end)
+MiniDeps.later(function() require("mini.splitjoin").setup() end)

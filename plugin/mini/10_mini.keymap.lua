@@ -20,9 +20,7 @@ MiniDeps.later(function()
   -- Prevent bad habits
   local notify_many_keys = function(key)
     local lhs = string.rep(key, 5)
-    local action = function()
-      vim.notify("Too many " .. key)
-    end
+    local action = function() vim.notify("Too many " .. key) end
     MiniKeymap.map_combo({ "n", "x" }, lhs, action)
   end
 

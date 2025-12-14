@@ -66,20 +66,14 @@ MiniDeps.now(function()
   })
 end)
 
-H.isnt_normal_buffer = function()
-  return vim.bo.buftype ~= ""
-end
+H.isnt_normal_buffer = function() return vim.bo.buftype ~= "" end
 
-H.has_no_lsp_attached = function()
-  return #vim.lsp.get_clients() == 0
-end
+H.has_no_lsp_attached = function() return #vim.lsp.get_clients() == 0 end
 
 H.get_filetype_icon = function()
   -- Have this `require()` here to not depend on plugin initialization order
   local has_devicons, devicons = pcall(require, "nvim-web-devicons")
-  if not has_devicons then
-    return ""
-  end
+  if not has_devicons then return "" end
 
   local file_name, file_ext = vim.fn.expand("%:t"), vim.fn.expand("%:e")
   return devicons.get_icon(file_name, file_ext, { default = true })
@@ -87,46 +81,32 @@ end
 
 H.section_location = function(args)
   -- Use virtual column number to allow update when past last column
-  if MiniStatusline.is_truncated(args.trunc_width) then
-    return "%-2l│%-2v"
-  end
+  if MiniStatusline.is_truncated(args.trunc_width) then return "%-2l│%-2v" end
 
   return "󰉸 %-2l│󱥖 %-2v"
 end
 
 H.section_filetype = function(args)
-  if MiniStatusline.is_truncated(args.trunc_width) then
-    return ""
-  end
+  if MiniStatusline.is_truncated(args.trunc_width) then return "" end
 
   local filetype = vim.bo.filetype
-  if (filetype == "") or H.isnt_normal_buffer() then
-    return ""
-  end
+  if (filetype == "") or H.isnt_normal_buffer() then return "" end
 
   local icon = H.get_filetype_icon()
-  if icon ~= "" then
-    filetype = string.format("%s %s", icon, filetype)
-  end
+  if icon ~= "" then filetype = string.format("%s %s", icon, filetype) end
 
   return filetype
 end
 
 H.section_searchcount = function(args)
-  if vim.v.hlsearch == 0 then
-    return ""
-  end
+  if vim.v.hlsearch == 0 then return "" end
   -- `searchcount()` can return errors because it is evaluated very often in
   -- statusline. For example, when typing `/` followed by `\(`, it gives E54.
   local ok, s_count = pcall(vim.fn.searchcount, (args or {}).options or { recompute = true })
-  if not ok or s_count.current == nil or s_count.total == 0 then
-    return ""
-  end
+  if not ok or s_count.current == nil or s_count.total == 0 then return "" end
 
   local icon = MiniStatusline.is_truncated(args.trunc_width) and "" or " "
-  if s_count.incomplete == 1 then
-    return icon .. "?⧸?│"
-  end
+  if s_count.incomplete == 1 then return icon .. "?⧸?│" end
 
   local too_many = (">%d"):format(s_count.maxcount)
   local current = s_count.current > s_count.maxcount and too_many or s_count.current
@@ -141,17 +121,13 @@ H.section_pathname = function(args)
     trunc_width = 80,
   }, args or {})
 
-  if vim.bo.buftype == "terminal" then
-    return "%t"
-  end
+  if vim.bo.buftype == "terminal" then return "%t" end
 
   local path = vim.fn.expand("%:p")
   local cwd = vim.uv.cwd() or ""
   cwd = vim.uv.fs_realpath(cwd) or ""
 
-  if path:find(cwd, 1, true) == 1 then
-    path = path:sub(#cwd + 2)
-  end
+  if path:find(cwd, 1, true) == 1 then path = path:sub(#cwd + 2) end
 
   local sep = package.config:sub(1, 1)
   local parts = vim.split(path, sep)
@@ -160,9 +136,7 @@ H.section_pathname = function(args)
   end
 
   local dir = ""
-  if #parts > 1 then
-    dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep
-  end
+  if #parts > 1 then dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep) .. sep end
 
   local file = parts[#parts]
   local file_hl = ""

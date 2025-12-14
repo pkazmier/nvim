@@ -10,9 +10,7 @@ MiniDeps.later(function()
     notify_on_error = true,
     format_on_save = function(bufnr)
       -- Disable with a global or buffer-local variable
-      if Config.disable_autoformat then
-        return
-      end
+      if Config.disable_autoformat then return end
       return { timeout_ms = 2000, lsp_format = "fallback" }
     end,
     -- stylua: ignore

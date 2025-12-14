@@ -2,6 +2,4 @@
 -- mini.colors
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.colors").setup()
-end)
+MiniDeps.later(function() require("mini.colors").setup() end)

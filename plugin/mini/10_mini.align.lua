@@ -2,6 +2,4 @@
 -- mini.align
 -- ---------------------------------------------------------------------------
 
-MiniDeps.later(function()
-  require("mini.align").setup()
-end)
+MiniDeps.later(function() require("mini.align").setup() end)

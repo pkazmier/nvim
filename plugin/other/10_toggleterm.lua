@@ -28,9 +28,7 @@ MiniDeps.later(function()
       hidden = true,
       highlights = { FloatBorder = { link = "FloatBorder" } },
       direction = "float",
-      on_open = function(term)
-        vim.keymap.del("t", "<Esc><Esc>", { buffer = term.bufnr })
-      end,
+      on_open = function(term) vim.keymap.del("t", "<Esc><Esc>", { buffer = term.bufnr }) end,
     })
     lazygit:toggle()
   end

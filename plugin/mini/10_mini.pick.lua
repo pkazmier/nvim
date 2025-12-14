@@ -23,7 +23,10 @@ MiniDeps.later(function()
 
   -- Config picker
   MiniPick.registry.config = function()
-    return MiniPick.builtin.files(nil, { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } })
+    return MiniPick.builtin.files(
+      nil,
+      { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } }
+    )
   end
 
   -- Buffer picker with delete
@@ -80,13 +83,11 @@ end)
 -- `dir` with the explorer, then the second stage opens a file picker inside
 -- the chosen directory.
 H.two_stage_dir_picker = function(dir, name)
-  local pred = function(item)
-    return item.text ~= ".."
-  end
+  local pred = function(item) return item.text ~= ".." end
   local choose = function(item)
-    vim.schedule(function()
-      MiniPick.builtin.files(nil, { source = { name = item.text, cwd = item.path } })
-    end)
+    vim.schedule(
+      function() MiniPick.builtin.files(nil, { source = { name = item.text, cwd = item.path } }) end
+    )
   end
   return function()
     local local_opts = { cwd = dir, filter = pred }
@@ -128,9 +129,10 @@ end
 H.show_aligned_lsp_results = function(buf_id, items, query)
   -- Shorten the pathname to keep the width of the picker window to something
   -- a bit more reasonable for longer pathnames.
-  local item_texts = vim.tbl_map(function(item)
-    return item.text:gsub("^[^│]+", H.truncate_path(4))
-  end, items)
+  local item_texts = vim.tbl_map(
+    function(item) return item.text:gsub("^[^│]+", H.truncate_path(4)) end,
+    items
+  )
 
   item_texts = MiniAlign.align_strings(item_texts, {
     justify_side = { "left", "right", "right" },
@@ -195,9 +197,7 @@ H.truncate_path = function(max_parts)
     local absolute = path:sub(1, 1) == H.sep
     local parts = vim.split(path, H.sep)
     parts = absolute and vim.list_slice(parts, 2, #parts) or parts
-    if #parts > max_parts then
-      parts = { parts[1], "󰇘", parts[#parts - 1], parts[#parts] }
-    end
+    if #parts > max_parts then parts = { parts[1], "󰇘", parts[#parts - 1], parts[#parts] } end
     return (absolute and H.sep or "") .. table.concat(parts, H.sep)
   end
 end

@@ -20,7 +20,5 @@ MiniDeps.later(function()
     "zls",
   })
 
-  Config.toggle_hints = function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-  end
+  Config.toggle_hints = function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end
 end)
