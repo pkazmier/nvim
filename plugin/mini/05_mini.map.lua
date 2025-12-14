@@ -5,8 +5,7 @@
 local H = {}
 local map = require("mini.map")
 
-local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
-now_if_args(function()
+Config.now_if_args(function()
   map.setup({
     integrations = {
       map.gen_integration.builtin_search(),

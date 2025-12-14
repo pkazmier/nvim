@@ -2,8 +2,7 @@
 -- render-markdown
 -- ---------------------------------------------------------------------------
 
-local now_if_args = vim.fn.argc(-1) > 0 and MiniDeps.now or MiniDeps.later
-now_if_args(function()
+Config.now_if_args(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
     file_types = { "markdown", "md", "codecompanion" },
