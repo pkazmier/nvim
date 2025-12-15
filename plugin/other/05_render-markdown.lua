@@ -34,14 +34,7 @@ Config.now_if_args(function()
       left_pad = 1,
       right_pad = 0,
       position = "right",
-      icons = {
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-      },
+      icons = function(ctx) return (""):rep(ctx.level) .. "" end,
     },
   })
 end)
