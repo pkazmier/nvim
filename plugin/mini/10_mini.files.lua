@@ -11,17 +11,23 @@ Config.later(function()
     pattern = "MiniFilesExplorerOpen",
     callback = function()
       MiniFiles.set_bookmark("c", vim.fn.stdpath("config"), { desc = "Config" })
-      MiniFiles.set_bookmark(
-        "m",
-        vim.fn.stdpath("data") .. "/site/pack/core/opt/mini.nvim",
-        { desc = "mini.nvim" }
-      )
-      MiniFiles.set_bookmark(
-        "p",
-        vim.fn.stdpath("data") .. "/site/pack/core/opt",
-        { desc = "Plugins" }
-      )
+      MiniFiles.set_bookmark("m", vim.fn.stdpath("data") .. "/site/pack/core/opt/mini.nvim", { desc = "mini.nvim" })
+      MiniFiles.set_bookmark("p", vim.fn.stdpath("data") .. "/site/pack/core/opt", { desc = "Plugins" })
       MiniFiles.set_bookmark("w", vim.fn.getcwd, { desc = "Working directory" })
+    end,
+  })
+
+  Config.new_autocmd("User", {
+    pattern = "MiniFilesExplorerOpen",
+    callback = function()
+      local target = MiniFiles.get_explorer_state().target_window
+      local orig_winhighlight = vim.api.nvim_get_option_value("winhighlight", { win = target })
+      vim.api.nvim_set_option_value("winhighlight", "Normal:Visual,SignColumn:Visual", { win = target })
+      Config.new_autocmd("User", {
+        once = true,
+        pattern = "MiniFilesExplorerClose",
+        callback = function() vim.api.nvim_set_option_value("winhighlight", orig_winhighlight, { win = target }) end,
+      })
     end,
   })
 
