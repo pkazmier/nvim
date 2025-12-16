@@ -23,9 +23,17 @@ Config.later(function()
     pattern = "MiniFilesExplorerOpen",
     callback = function()
       -- Only highlight a window if there is more than one possible target
-      if H.count_splits() == 0 then return end
-      local target = MiniFiles.get_explorer_state().target_window
-      local restore = H.set_option("winhighlight", "Normal:Visual,SignColumn:Visual", { win = target })
+      local n_target_win = vim
+        .iter(vim.api.nvim_tabpage_list_wins(0))
+        :filter(function(w) return vim.api.nvim_win_get_config(w).relative == "" end)
+        :fold(0, function(acc, _) return acc + 1 end)
+      if n_target_win == 1 then return end
+
+      -- Temporarily set 'winhighlight' and setup restore after closing explorer
+      local target_win_id = MiniFiles.get_explorer_state().target_window
+      local winhl_orig = vim.wo[target_win_id].winhighlight
+      vim.wo[target_win_id].winhighlight = "Normal:Visual,SignColumn:Visual"
+      local restore = function() vim.wo[target_win_id].winhighlight = winhl_orig end
       Config.new_autocmd("User", { once = true, pattern = "MiniFilesExplorerClose", callback = restore })
     end,
   })
@@ -35,22 +43,3 @@ Config.later(function()
     MiniFiles.open(path, true)
   end
 end)
-
--- ---------------------------------------------------------------------------
--- Helpers
--- ---------------------------------------------------------------------------
-
--- Returns the number of splits (non-floating windows) on screen
-H.count_splits = function()
-  return vim
-    .iter(vim.api.nvim_tabpage_list_wins(0))
-    :filter(function(w) return vim.api.nvim_win_get_config(w).relative == "" end)
-    :fold(-1, function(acc, _) return acc + 1 end)
-end
-
--- Sets an option and returns a function to restore the original value
-H.set_option = function(name, value, opts)
-  local original = vim.api.nvim_get_option_value(name, opts)
-  vim.api.nvim_set_option_value(name, value, opts)
-  return function() vim.api.nvim_set_option_value(name, original, opts) end
-end
