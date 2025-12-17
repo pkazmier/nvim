@@ -75,12 +75,6 @@ Config.now(function()
         RenderMarkdownCodeInline       = { fg = c.tag, bg = c.selection_inactive },
         RenderMarkdownTableHead        = { fg = c.selection_bg },
         RenderMarkdownTableRow         = { fg = c.selection_bg },
-        RenderMarkdownH1               = { fg = c.accent },
-        RenderMarkdownH2               = { fg = c.keyword },
-        RenderMarkdownH3               = { fg = c.markup },
-        RenderMarkdownH4               = { fg = c.entity },
-        RenderMarkdownH5               = { fg = c.regexp },
-        RenderMarkdownH6               = { fg = c.string },
 
         -- Extend the context highlighting to line numbers as well
         TreesitterContext              = { bg = c.selection_inactive },

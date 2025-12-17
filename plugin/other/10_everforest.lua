@@ -4,7 +4,7 @@
 
 Config.later(function()
   vim.pack.add({ "https://github.com/sainnhe/everforest" }, { load = true })
-  vim.g.everforest_float_style = "dim"
+  vim.g.everforest_float_style = "dim" -- if changed, update FloatTitle, MiniFilesTitle bg
   vim.g.everforest_background = "medium"
 
   Config.new_autocmd("ColorScheme", {
@@ -22,6 +22,8 @@ Config.later(function()
       set_hl("BlinkCmpDocSeparator",           palette.none,   palette.bg3)
       set_hl("BlinkCmpSignatureHelp",          palette.none,   palette.bg5)
       set_hl("BlinkCmpSignatureHelpBorder",    palette.none,   palette.bg5)
+      set_hl("FloatTitle",                     palette.none,   palette.bg_dim, "bold")
+      set_hl("MiniFilesTitle",                 palette.none,   palette.bg_dim)
       set_hl("MiniPickMatchRanges",            palette.green,  palette.none,   "bold")
       set_hl("MiniTablineFill",                palette.none,   palette.bg1)
       set_hl("MiniTablineCurrent",             palette.blue,   palette.bg0,    "bold")
@@ -49,12 +51,6 @@ Config.later(function()
       set_hl("MiniJump2dSpot",                 palette.orange, palette.bg_dim, "bold")
       set_hl("MiniJump2dSpotUnique",           palette.orange, palette.bg_dim, "bold")
       set_hl("MiniJump2dSpotAhead",            palette.yellow, palette.bg_dim)
-      set_hl("RenderMarkdownH1Bg",             palette.none,   palette.bg_visual)
-      set_hl("RenderMarkdownH2Bg",             palette.none,   palette.bg_red)
-      set_hl("RenderMarkdownH3Bg",             palette.none,   palette.bg_yellow)
-      set_hl("RenderMarkdownH4Bg",             palette.none,   palette.bg_green)
-      set_hl("RenderMarkdownH5Bg",             palette.none,   palette.bg_blue)
-      set_hl("RenderMarkdownH6Bg",             palette.none,   palette.bg2)
       set_hl("RenderMarkdownCodeBorder",       palette.none,   palette.bg2)
       set_hl("RenderMarkdownCode",             palette.none,   palette.bg_dim)
       set_hl("RenderMarkdownTableHead",        palette.bg3,    palette.none)

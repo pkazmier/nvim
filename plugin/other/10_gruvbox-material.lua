@@ -4,7 +4,7 @@
 
 Config.later(function()
   vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" }, { load = true })
-  vim.g.gruvbox_material_float_style = "dim"
+  vim.g.gruvbox_material_float_style = "dim" -- if changed, update FloatTitle, MiniFilesTitle bg
   vim.g.gruvbox_material_background = "medium"
 
   Config.new_autocmd("ColorScheme", {
@@ -22,6 +22,8 @@ Config.later(function()
       set_hl("BlinkCmpDocSeparator",           palette.none,   palette.bg3)
       set_hl("BlinkCmpSignatureHelp",          palette.none,   palette.bg5)
       set_hl("BlinkCmpSignatureHelpBorder",    palette.none,   palette.bg5)
+      set_hl("FloatTitle",                     palette.none,   palette.bg_dim,         "bold")
+      set_hl("MiniFilesTitle",                 palette.none,   palette.bg_dim)
       set_hl("LeapBackdrop",                   palette.bg5,    palette.none)
       set_hl("LeapLabel",                      palette.orange, palette.none,           "bold")
       set_hl("MiniPickMatchRanges",            palette.green,  palette.none,           "bold")
@@ -48,12 +50,6 @@ Config.later(function()
       set_hl("MiniJump2dSpot",                 palette.orange, palette.bg_dim,         "bold")
       set_hl("MiniJump2dSpotUnique",           palette.orange, palette.bg_dim,         "bold")
       set_hl("MiniJump2dSpotAhead",            palette.yellow, palette.bg_dim)
-      set_hl("RenderMarkdownH1Bg",             palette.none,   palette.bg_visual_red)
-      set_hl("RenderMarkdownH2Bg",             palette.none,   palette.bg_visual_yellow)
-      set_hl("RenderMarkdownH3Bg",             palette.none,   palette.bg_visual_blue)
-      set_hl("RenderMarkdownH4Bg",             palette.none,   palette.bg_visual_green)
-      set_hl("RenderMarkdownH5Bg",             palette.none,   palette.bg_current_word)
-      set_hl("RenderMarkdownH6Bg",             palette.none,   palette.bg_current_word)
       set_hl("RenderMarkdownCodeBorder",       palette.none,   palette.bg3)
       set_hl("RenderMarkdownCode",             palette.none,   palette.bg_dim)
       set_hl("RenderMarkdownTableHead",        palette.bg3,    palette.none)

@@ -2,6 +2,7 @@
 -- render-markdown
 -- ---------------------------------------------------------------------------
 
+local H = {}
 Config.now_if_args(function()
   vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
   require("render-markdown").setup({
@@ -23,18 +24,42 @@ Config.now_if_args(function()
     heading = {
       sign = false,
       width = "block",
-      backgrounds = {
-        "MiniStatusLineModeVisual",
-        "MiniStatusLineModeCommand",
-        "MiniStatusLineModeReplace",
-        "MiniStatusLineModeNormal",
-        "MiniStatusLineModeOther",
-        "MiniStatusLineModeInsert",
-      },
       left_pad = 1,
       right_pad = 0,
       position = "right",
       icons = function(ctx) return (""):rep(ctx.level) .. "" end,
     },
   })
+
+  -- Set the heading hl groups as well as an autocmd for colorscheme changes.
+  H.setup_heading_hl_groups()
+  Config.new_autocmd("Colorscheme", {
+    desc = "Setup up heading hl groups for render markdown.",
+    callback = H.setup_heading_hl_groups,
+  })
 end)
+
+-- ---------------------------------------------------------------------------
+-- Helpers
+-- ---------------------------------------------------------------------------
+
+H.setup_heading_hl_groups = function()
+  local fallback_hl_info = H.get_hl("@markup.heading") or H.get_hl("Title")
+
+  for lvl = 1, 6 do
+    local hl_info = H.get_hl("@markup.heading." .. lvl .. ".markdown")
+      or H.get_hl("@markup.heading." .. lvl)
+      or fallback_hl_info
+    assert(hl_info, "Must set one of 'Title', '@markup.heading', '@markup.heading.N', or '@markup.heading.N.markdown'")
+
+    local hl_spec = { fg = hl_info.fg, bg = hl_info.bg, bold = hl_info.bold, italic = hl_info.italic }
+    vim.api.nvim_set_hl(0, "RenderMarkdownH" .. lvl, hl_spec)
+    hl_spec.reverse = true
+    vim.api.nvim_set_hl(0, "RenderMarkdownH" .. lvl .. "Bg", hl_spec)
+  end
+end
+
+H.get_hl = function(hl_name)
+  local hl_info = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+  return not vim.tbl_isempty(hl_info) and hl_info or nil
+end

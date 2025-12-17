@@ -72,7 +72,13 @@ Config.later(function()
         RenderMarkdownTableHead = { fg = c.oniViolet },
         RenderMarkdownTableRow = { fg = c.oniViolet },
 
-        ["@markup.heading"] = { fg = t.syn.string },
+        ["@markup.heading"] = { fg = t.syn.string, bold = true },
+        ["@markup.heading.1"] = { fg = c.oniViolet, bold = true },
+        ["@markup.heading.2"] = { fg = c.waveRed, bold = true },
+        ["@markup.heading.3"] = { fg = c.springBlue, bold = true },
+        ["@markup.heading.4"] = { fg = c.springGreen, bold = true },
+        ["@markup.heading.5"] = { fg = c.waveAqua2, bold = true },
+        ["@markup.heading.6"] = { fg = c.surimiOrange, bold = true },
         ["@markup.strong"] = { fg = t.syn.string, bold = true },
         ["@markup.italic"] = { fg = t.syn.string, italic = true },
       }

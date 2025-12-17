@@ -49,12 +49,12 @@ Config.later(function()
     Search                         = { sp = c.bright_yellow, underdouble = true },
 
     ["@markup.heading"]            = { fg = c.bright_cyan, bold = true },
-    ["@markup.heading.1"]          = { italic = false },
-    ["@markup.heading.2"]          = { italic = false },
-    ["@markup.heading.3"]          = { italic = false },
-    ["@markup.heading.4"]          = { italic = false },
-    ["@markup.heading.5"]          = { italic = false },
-    ["@markup.heading.6"]          = { italic = false },
+    ["@markup.heading.1"]          = { fg = c.bright_cyan, italic = false, bold = true },
+    ["@markup.heading.2"]          = { fg = c.blue, italic = false, bold = true },
+    ["@markup.heading.3"]          = { fg = c.red, italic = false, bold = true },
+    ["@markup.heading.4"]          = { fg = c.green,italic = false, bold = true },
+    ["@markup.heading.5"]          = { fg = c.yellow, italic = false, bold = true },
+    ["@markup.heading.6"]          = { fg = c.magenta, italic = false, bold = true },
     ["@markup.strong"]             = { fg = c.cyan, bold = true },
     ["@markup.italic"]             = { fg = c.cyan, italic = true },
 

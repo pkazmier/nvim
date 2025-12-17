@@ -2,11 +2,8 @@
 -- rose pine colorscheme
 -- ---------------------------------------------------------------------------
 
-Config.now(function()
-  vim.pack.add(
-    { { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } },
-    { load = true }
-  )
+Config.later(function()
+  vim.pack.add({ { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } }, { load = true })
   require("rose-pine").setup({
     enable = {
       legacy_highlights = false,

@@ -21,7 +21,10 @@ Config.later(function()
       hl.Directory                      = { fg = c.keyword }
       hl.CurSearch                      = { fg = c.bg,          bg = c.constant }
       hl.IncSearch                      = { fg = c.bg,          bg = c.constant }
-      -- hl.QuickFixLine                   = { fg = c.constant,    gui = "bold" }
+      hl.PmenuSel                       = { bg = c.line,        gui = "bold" }
+      hl.PmenuMatch                     = { fg = c.delta,       gui = "bold" }
+
+      hl.QuickFixLine                   = { fg = c.constant,    gui = "bold" }
       hl.StatusLine                     = { fg = c.operator,    bg = c.line }
       hl.WinSeparator                   = { fg = c.line }
 
@@ -32,6 +35,7 @@ Config.later(function()
       hl.MiniClueNextKey                = { fg = c.parameter,   gui = "bold" }
       hl.MiniClueNextKeyWithPostkeys    = { fg = c.func,        gui = "bold" }
 
+      hl.MiniFilesCursorLine            = { bg = c.line,        gui = "bold" }
       hl.MiniFilesTitleFocused          = { fg = c.constant,    gui = "bold" }
 
       hl.MiniHipatternsFixmeBody        = { fg = c.error }
@@ -54,7 +58,7 @@ Config.later(function()
       hl.MiniMapNormal                  = { fg = c.comment,     bg = c.line }
 
       hl.MiniPickHeader                 = { fg = c.keyword,     gui = "bold" }
-      hl.MiniPickMatchCurrent           = { fg = c.constant,    bg = c.line }
+      hl.MiniPickMatchCurrent           = { bg = c.line,        gui = "bold" }
       hl.MiniPickMatchRanges            = { fg = c.delta,       gui = "bold" }
       hl.MiniPickPrompt                 = { fg = c.constant }
 
@@ -89,9 +93,9 @@ Config.later(function()
       hl.RenderMarkdownBullet           = { fg = c.plus }
       hl.RenderMarkdownTableRow         = { fg = c.keyword }
       hl.RenderMarkdownCode             = { bg = c.line }
+      hl.RenderMarkdownCodeBorder       = { bg = c.visual }
 
       hl.TreesitterContext              = { bg = c.line }
-      hl.TreesitterContextBottom        = { sp = c.comment,     gui = "underdotted" }
       hl.TreesitterContextLineNumber    = { fg = c.comment,     bg = c.line }
 
       hl["@markup.strong"]              = { fg = c.keyword,     gui = "bold" }
@@ -102,20 +106,6 @@ Config.later(function()
       hl["@markup.heading.4"]           = { fg = c.operator,    gui = "bold" }
       hl["@markup.heading.5"]           = { fg = c.plus,        gui = "bold" }
       hl["@markup.heading.6"]           = { fg = c.func,        gui = "bold" }
-
-      -- Compute a nice background color for markup headings based on the
-      -- foreground color of each level. Use mini.colors to adjust the colors.
-      local groups = {}
-      for i = 1, 6 do
-        groups["h"..i] = hl["@markup.heading."..i]
-      end
-      local cs = require("mini.colors").as_colorscheme({ groups = groups })
-      cs = cs:chan_invert('lightness', { gamut_clip = 'cusp'})
-      cs = cs:chan_add('lightness', -5)
-      for i = 1, 6 do
-        local bg = cs.groups["h"..i].fg
-        hl["RenderMarkdownH"..i.."Bg"] = { bg = bg }
-      end
     end,
   })
 end)
