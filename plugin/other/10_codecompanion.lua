@@ -11,7 +11,7 @@ Config.later(function()
   }, { load = true })
 
   require("codecompanion").setup({
-    strategies = {
+    interactions = {
       chat = {
         keymaps = {
           completion = {
@@ -32,7 +32,7 @@ Config.later(function()
 
   local function format_request_status(ev)
     local name = ev.data.adapter.formatted_name or ev.data.adapter.name
-    local msg = name .. " " .. ev.data.strategy .. " request..."
+    local msg = name .. " " .. ev.data.interaction .. " request..."
     local level, hl_group = "INFO", "DiagnosticInfo"
     if ev.data.status then
       msg = msg .. ev.data.status
