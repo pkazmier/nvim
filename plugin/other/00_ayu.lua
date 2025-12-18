@@ -33,7 +33,8 @@ Config.now(function()
 
         -- Bold current line in MiniFiles
         MiniFilesCursorLine            = { fg = nil,        bg = c.selection_bg, bold = true },
-        MiniFilesTitleFocused          = { fg = c.panel_bg, bg = c.tag,          bold = true },
+        MiniFilesTitle                 = { fg = c.tag,      bg = c.panel_bg,     bold = false },
+        MiniFilesTitleFocused          = { fg = c.tag,      bg = c.panel_bg,     bold = true },
 
         -- Highlight patterns for highlighting the whole line and hiding colon.
         -- See https://github.com/echasnovski/mini.nvim/discussions/783
