@@ -77,7 +77,8 @@ Config.now(function()
 
       ["@function.method.call"]      = { fg = "rose" },
       ["@lsp.type.formatSpecifier"]  = { link = "@markup.list" },
-      ["@lsp.type.namespace.python"] = { fg = "love" },
+      ["@lsp.type.namespace"]        = { fg = "text",    italic = true },
+      ["@lsp.type.namespace.python"] = { fg = "text",    italic = true },
       ["@lsp.type.parameter"]        = { link = "@variable.parameter" },
       ["@variable.member.go"]        = { fg = "iris" },
       ['@markup.italic']             = { fg = "rose",    italic = true },
