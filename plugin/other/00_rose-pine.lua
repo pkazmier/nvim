@@ -25,6 +25,8 @@ Config.now(function()
       MiniFilesCursorLine            = { fg = "text",    bg = "overlay",        bold = true },
       MiniFilesDirectory             = { fg = "foam",    bold = false },
       MiniFilesFile                  = { fg = "subtle" },
+      MiniFilesTitle                 = { fg = "pine" },
+      MiniFilesTitleFocused          = { fg = "gold" },
 
       -- Highlight patterns for highlighting the whole line and hiding colon.
       -- See https://github.com/echasnovski/mini.nvim/discussions/783
