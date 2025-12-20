@@ -15,6 +15,7 @@ Config.later(function()
     "harper_ls",
     "helm_ls",
     "rust_analyzer",
+    "ts_ls",
     "jsonls",
     "yamlls",
     "zls",
