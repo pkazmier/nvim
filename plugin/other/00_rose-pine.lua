@@ -18,12 +18,13 @@ Config.now(function()
     },
     -- stylua: ignore
     highlight_groups = {
-      Comment                        = { fg = "muted",          italic = true },
+      Comment                        = { fg = "muted",   italic = true },
       LineNr                         = { fg = "highlight_med" },
 
       -- Bold current line only
-      MiniFilesCursorLine            = { bg = "overlay",        bold = true },
-      MiniFilesDirectory             = { fg = "foam",           bold = false },
+      MiniFilesCursorLine            = { fg = "text",    bg = "overlay",        bold = true },
+      MiniFilesDirectory             = { fg = "foam",    bold = false },
+      MiniFilesFile                  = { fg = "subtle" },
 
       -- Highlight patterns for highlighting the whole line and hiding colon.
       -- See https://github.com/echasnovski/mini.nvim/discussions/783
@@ -31,36 +32,38 @@ Config.now(function()
       MiniHipatternsHackBody         = { fg = "gold" },
       MiniHipatternsNoteBody         = { fg = "foam" },
       MiniHipatternsTodoBody         = { fg = "iris" },
-      MiniHipatternsFixmeColon       = { bg = "love",           fg = "love", bold = true },
-      MiniHipatternsHackColon        = { bg = "gold",           fg = "gold", bold = true },
-      MiniHipatternsNoteColon        = { bg = "foam",           fg = "foam", bold = true },
-      MiniHipatternsTodoColon        = { bg = "iris",           fg = "iris", bold = true },
+      MiniHipatternsFixmeColon       = { bg = "love",    fg = "love",           bold = true },
+      MiniHipatternsHackColon        = { bg = "gold",    fg = "gold",           bold = true },
+      MiniHipatternsNoteColon        = { bg = "foam",    fg = "foam",           bold = true },
+      MiniHipatternsTodoColon        = { bg = "iris",    fg = "iris",           bold = true },
 
       -- Tone down the brightness of the foreground
       MiniMapNormal                  = { fg = "subtle" },
 
-      -- Several improvements here, brighter marked, bold current line
-      MiniPickBorderText             = { fg = "foam",           bold = true },
-      MiniPickMatchCurrent           = { bg = "overlay",        bold = true },
-      MiniPickMatchMarked            = { bg = "highlight_high", blend = 100 },
-      MiniPickMatchRanges            = { fg = "foam",           bold = true },
-      MiniPickPromptPrefix           = { fg = "iris",           bold = true },
+      -- Several improvements here,                      brighter marked,       bold current line
+      MiniPickBorderText             = { fg = "foam",    bold = true },
+      MiniPickMatchCurrent           = { fg = "text",    bg = "overlay",        bold = true },
+      MiniPickMatchMarked            = { fg = "text",    bg = "highlight_high", blend = 100 },
+      MiniPickMatchRanges            = { fg = "foam",    bold = true },
+      MiniPickNormal                 = { fg = "subtle" },
+      MiniPickPromptPrefix           = { fg = "iris",    bold = true },
 
-      MiniStarterInactive            = { fg = "muted",          italic = false },
-      MiniStarterSection             = { fg = "rose",           bold = true },
+      MiniStarterInactive            = { fg = "muted",   italic = false },
+      MiniStarterSection             = { fg = "rose",    bold = true },
 
       MiniStatuslineDirectory        = { fg = "muted" },
-      MiniStatuslineFilename         = { fg = "subtle",         bold = true },
-      MiniStatuslineFilenameModified = { fg = "rose",           bold = true },
-      MiniStatuslineInactive         = { fg = "subtle",         bold = false },
+      MiniStatuslineFilename         = { fg = "subtle",  bold = true },
+      MiniStatuslineFilenameModified = { fg = "rose",    bold = true },
+      MiniStatuslineInactive         = { fg = "subtle",  bold = false },
 
-      PmenuMatch                     = { fg = "foam",           bold = true },
-      PmenuSel                       = { bg = "overlay",        bold = true },
+      PmenuBorder                    = { fg = "muted" },
+      PmenuMatch                     = { fg = "foam",    bold = true },
+      PmenuSel                       = { bg = "overlay", bold = true },
 
       RenderMarkdownBullet           = { fg = "pine" },
       RenderMarkdownChecked          = { fg = "iris" },
-      RenderMarkdownCodeBorder       = { fg = "iris",           bg = "highlight_med" },
-      RenderMarkdownCodeInline       = { fg = "iris",           bg = "overlay" },
+      RenderMarkdownCodeBorder       = { fg = "iris",    bg = "highlight_med" },
+      RenderMarkdownCodeInline       = { fg = "iris",    bg = "overlay" },
       RenderMarkdownTableHead        = { fg = "highlight_med" },
       RenderMarkdownTableRow         = { fg = "highlight_med" },
       RenderMarkdownTodo             = { fg = "pine" },
@@ -75,8 +78,8 @@ Config.now(function()
       ["@lsp.type.namespace.python"] = { fg = "love" },
       ["@lsp.type.parameter"]        = { link = "@variable.parameter" },
       ["@variable.member.go"]        = { fg = "iris" },
-      ['@markup.italic']             = { fg = "rose",           italic = true },
-      ['@markup.strong']             = { fg = "rose",           bold = true },
+      ['@markup.italic']             = { fg = "rose",    italic = true },
+      ['@markup.strong']             = { fg = "rose",    bold = true },
     },
     palette = {
       main = {
