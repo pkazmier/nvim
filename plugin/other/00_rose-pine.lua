@@ -18,6 +18,7 @@ Config.now(function()
     },
     -- stylua: ignore
     highlight_groups = {
+      Added                          = { fg = "pine" },
       Comment                        = { fg = "muted",   italic = true },
       LineNr                         = { fg = "highlight_med" },
 
