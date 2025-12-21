@@ -46,7 +46,7 @@ Config.now(function()
       MiniPickBorderText             = { fg = "foam",    bold = true },
       MiniPickMatchCurrent           = { fg = "text",    bg = "overlay",        bold = true },
       MiniPickMatchMarked            = { fg = "text",    bg = "highlight_high", blend = 100 },
-      MiniPickMatchRanges            = { fg = "foam",    bold = true },
+      MiniPickMatchRanges            = { fg = "rose",    bold = false },
       MiniPickNormal                 = { fg = "subtle" },
       MiniPickPromptPrefix           = { fg = "iris",    bold = true },
 
@@ -59,7 +59,7 @@ Config.now(function()
       MiniStatuslineInactive         = { fg = "subtle",  bold = false },
 
       PmenuBorder                    = { fg = "muted" },
-      PmenuMatch                     = { fg = "foam",    bold = true },
+      PmenuMatch                     = { fg = "rose",    bold = false },
       PmenuSel                       = { bg = "overlay", bold = true },
 
       RenderMarkdownBullet           = { fg = "pine" },
