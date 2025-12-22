@@ -20,14 +20,20 @@ Config.now(function()
     highlight_groups = {
       Added                          = { fg = "pine" },
       Comment                        = { fg = "muted",   italic = true },
+      FloatTitle                     = { fg = "love" },
       LineNr                         = { fg = "highlight_med" },
+
+      MiniClueDescGroup              = { fg = "iris" },
+      MiniClueNextKey                = { fg = "foam",    bold = true },
+      MiniClueSeparator              = { fg = "highlight_med" },
+      MiniClueTitle                  = { fg = "love" },
 
       -- Bold current line only
       MiniFilesCursorLine            = { fg = "text",    bg = "overlay",        bold = true },
       MiniFilesDirectory             = { fg = "foam",    bold = false },
       MiniFilesFile                  = { fg = "subtle" },
-      MiniFilesTitle                 = { fg = "pine" },
-      MiniFilesTitleFocused          = { fg = "gold" },
+      MiniFilesTitle                 = { fg = "iris" },
+      MiniFilesTitleFocused          = { fg = "love" },
 
       -- Highlight patterns for highlighting the whole line and hiding colon.
       -- See https://github.com/echasnovski/mini.nvim/discussions/783
@@ -43,12 +49,12 @@ Config.now(function()
       -- Tone down the brightness of the foreground
       MiniMapNormal                  = { fg = "subtle" },
 
-      MiniPickBorderText             = { fg = "foam",    bold = true },
+      MiniPickBorderText             = { fg = "love",    bold = true },
       MiniPickMatchCurrent           = { fg = "text",    bg = "overlay",        bold = true },
       MiniPickMatchMarked            = { fg = "text",    bg = "highlight_high", blend = 100 },
       MiniPickMatchRanges            = { fg = "rose",    bold = false },
       MiniPickNormal                 = { fg = "subtle" },
-      MiniPickPromptPrefix           = { fg = "iris",    bold = true },
+      MiniPickPromptPrefix           = { fg = "love",    bold = true },
 
       MiniStarterFooter              = { fg = "muted",   italic = true },
       MiniStarterHeader              = { fg = "love",    bold = true },
