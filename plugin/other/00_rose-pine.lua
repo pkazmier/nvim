@@ -43,7 +43,6 @@ Config.now(function()
       -- Tone down the brightness of the foreground
       MiniMapNormal                  = { fg = "subtle" },
 
-      -- Several improvements here,                      brighter marked,       bold current line
       MiniPickBorderText             = { fg = "foam",    bold = true },
       MiniPickMatchCurrent           = { fg = "text",    bg = "overlay",        bold = true },
       MiniPickMatchMarked            = { fg = "text",    bg = "highlight_high", blend = 100 },
@@ -51,13 +50,25 @@ Config.now(function()
       MiniPickNormal                 = { fg = "subtle" },
       MiniPickPromptPrefix           = { fg = "iris",    bold = true },
 
+      MiniStarterFooter              = { fg = "muted",   italic = true },
+      MiniStarterHeader              = { fg = "love",    bold = true },
       MiniStarterInactive            = { fg = "muted",   italic = false },
-      MiniStarterSection             = { fg = "rose",    bold = true },
+      MiniStarterItem                = { fg = "subtle" },
+      MiniStarterItemPrefix          = { fg = "foam",    bold = true },
+      MiniStarterQuery               = { fg = "gold" },
+      MiniStarterSection             = { fg = "iris",    bold = true },
 
-      MiniStatuslineDirectory        = { fg = "muted" },
-      MiniStatuslineFilename         = { fg = "subtle",  bold = true },
-      MiniStatuslineFilenameModified = { fg = "rose",    bold = true },
-      MiniStatuslineInactive         = { fg = "subtle",  bold = false },
+      MiniStatuslineDevinfo          = { fg = "love",    bg = "love",           blend = 30 },
+      MiniStatuslineDirectory        = { fg = "love",    bg = "love",           blend = 10 },
+      MiniStatuslineFilename         = { fg = "love",    bg = "love",           blend = 10,  bold = true },
+      MiniStatuslineFilenameModified = { fg = "love",    bg = "love",           blend = 10,  bold = true, italic = true },
+      MiniStatuslineInactive         = { fg = "subtle",  bg = "surface",        blend = 100, bold = false },
+      MiniStatuslineModeCommand      = { fg = "base",    bg = "gold",           bold = true },
+      MiniStatuslineModeInsert       = { fg = "base",    bg = "rose",           bold = true },
+      MiniStatuslineModeNormal       = { fg = "base",    bg = "love",           bold = true },
+      MiniStatuslineModeOther        = { fg = "base",    bg = "gold",           bold = true },
+      MiniStatuslineModeReplace      = { fg = "base",    bg = "pine",           bold = true },
+      MiniStatuslineModeVisual       = { fg = "base",    bg = "iris",           bold = true },
 
       PmenuBorder                    = { fg = "muted" },
       PmenuMatch                     = { fg = "rose",    bold = false },
@@ -67,12 +78,14 @@ Config.now(function()
       RenderMarkdownChecked          = { fg = "iris" },
       RenderMarkdownCodeBorder       = { fg = "iris",    bg = "highlight_med" },
       RenderMarkdownCodeInline       = { fg = "iris",    bg = "overlay" },
+      RenderMarkdownLink             = { fg = "love" },
       RenderMarkdownTableHead        = { fg = "highlight_med" },
       RenderMarkdownTableRow         = { fg = "highlight_med" },
       RenderMarkdownTodo             = { fg = "pine" },
       RenderMarkdownUnchecked        = { fg = "pine" },
-      RenderMarkdownLink             = { fg = "love" },
 
+      Search                         = { fg = "gold",    bg = "gold",           blend = 30 },
+      StatusLine                     = { fg = "love",    bg = "love",           blend = 10 },
       TreesitterContextLineNumber    = { fg = "muted" },
       WinSeparator                   = { fg = "overlay" },
 
