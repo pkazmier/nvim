@@ -50,8 +50,8 @@ Config.now(function()
       MiniMapNormal                  = { fg = "subtle" },
 
       MiniPickBorderText             = { fg = "love",    bold = true },
-      MiniPickMatchCurrent           = { fg = "text",    bg = "overlay",        bold = true },
-      MiniPickMatchMarked            = { fg = "text",    bg = "highlight_high", blend = 100 },
+      MiniPickMatchCurrent           = { fg = "text",    bg = "overlay", bold = true },
+      MiniPickMatchMarked            = { fg = "text",    bg = "love",    blend = 30 },
       MiniPickMatchRanges            = { fg = "rose",    bold = false },
       MiniPickNormal                 = { fg = "subtle" },
       MiniPickPromptPrefix           = { fg = "love",    bold = true },
@@ -93,6 +93,7 @@ Config.now(function()
       Search                         = { fg = "gold",    bg = "gold",           blend = 30 },
       StatusLine                     = { fg = "love",    bg = "love",           blend = 10 },
       TreesitterContextLineNumber    = { fg = "muted" },
+      Visual                         = { bg = "love",    blend = 15 },
       WinSeparator                   = { fg = "overlay" },
 
       ["@function.method.call"]      = { fg = "rose" },
