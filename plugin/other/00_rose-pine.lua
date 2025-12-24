@@ -9,11 +9,11 @@ Config.now(function()
       legacy_highlights = false,
     },
     groups = {
-      h1 = "love",
-      h2 = "iris",
-      h4 = "foam",
-      h3 = "pine",
-      h5 = "rose",
+      h1 = "rose",
+      h2 = "love",
+      h3 = "foam",
+      h4 = "pine",
+      h5 = "iris",
       h6 = "gold",
     },
     -- stylua: ignore
@@ -32,7 +32,7 @@ Config.now(function()
       MiniFilesCursorLine            = { fg = "text",    bg = "overlay", bold = true },
       MiniFilesDirectory             = { fg = "foam",    bold = false },
       MiniFilesFile                  = { fg = "subtle" },
-      MiniFilesTitle                 = { fg = "iris" },
+      MiniFilesTitle                 = { fg = "subtle" },
       MiniFilesTitleFocused          = { fg = "love" },
 
       -- Highlight patterns for highlighting the whole line and hiding colon.
@@ -84,7 +84,7 @@ Config.now(function()
       RenderMarkdownChecked          = { fg = "iris" },
       RenderMarkdownCodeBorder       = { fg = "iris",    bg = "iris",    blend = 20 },
       RenderMarkdownCodeInline       = { fg = "iris",    bg = "overlay" },
-      RenderMarkdownLink             = { fg = "love" },
+      RenderMarkdownLink             = { fg = "pine" },
       RenderMarkdownTableHead        = { fg = "highlight_med" },
       RenderMarkdownTableRow         = { fg = "highlight_med" },
       RenderMarkdownTodo             = { fg = "pine" },
@@ -93,7 +93,6 @@ Config.now(function()
       Search                         = { fg = "gold",    bg = "gold",    blend = 30 },
       StatusLine                     = { fg = "love",    bg = "love",    blend = 10 },
       TreesitterContextLineNumber    = { fg = "muted" },
-      Visual                         = { bg = "love",    blend = 20 },
       WinSeparator                   = { fg = "overlay" },
 
       ["@function.method.call"]      = { fg = "rose" },
@@ -103,8 +102,8 @@ Config.now(function()
       ["@lsp.type.parameter"]        = { link = "@variable.parameter" },
       ["@variable.member.go"]        = { fg = "iris" },
       ['@markup.heading']            = { fg = "iris",    bold = true },
-      ['@markup.italic']             = { fg = "rose",    italic = true },
-      ['@markup.strong']             = { fg = "rose",    bold = true },
+      ['@markup.italic']             = { fg = "subtle",    italic = true },
+      ['@markup.strong']             = { fg = "subtle",    bold = true },
     },
     palette = {
       main = {
