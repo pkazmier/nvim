@@ -7,6 +7,13 @@ local H = {}
 Config.dd = function(...) vim.notify(vim.iter({ ... }):map(vim.inspect):join(", ")) end
 
 -- ---------------------------------------------------------------------------
+-- Random choice
+-- ---------------------------------------------------------------------------
+
+math.randomseed(os.time())
+Config.choose = function(choices) return choices[math.random(1, #choices)] end
+
+-- ---------------------------------------------------------------------------
 -- Custom `vim.pack.add()` hook helper
 -- ---------------------------------------------------------------------------
 
