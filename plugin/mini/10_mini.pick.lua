@@ -6,9 +6,7 @@ local H = {}
 Config.later(function()
   require("mini.pick").setup({
     source = {
-      preview = function(buf_id, item)
-        return MiniPick.default_preview(buf_id, item, { line_position = "center" })
-      end,
+      preview = function(buf_id, item) return MiniPick.default_preview(buf_id, item, { line_position = "center" }) end,
     },
     window = {
       prompt_prefix = "❯ ",
@@ -23,19 +21,29 @@ Config.later(function()
 
   -- Config picker
   MiniPick.registry.config = function()
-    return MiniPick.builtin.files(
-      nil,
-      { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } }
-    )
+    return MiniPick.builtin.files(nil, { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } })
   end
 
-  -- Buffer picker with delete
+  -- Buffer picker with delete and modified markers
+  local ns = vim.api.nvim_create_namespace("kaz-modified-buffer-markers")
   MiniPick.registry.buffers = function(local_opts)
-    local wipeout_cur = function()
-      vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
-    end
+    local wipeout_cur = function() vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {}) end
     local buffer_mappings = { wipeout = { char = "<C-d>", func = wipeout_cur } }
-    MiniPick.builtin.buffers(local_opts, { mappings = buffer_mappings })
+
+    local add_modified_marker = function(buf_id, row)
+      local modified_opts = { virt_text = { { "[+]", "DiagnosticInfo" } }, virt_text_pos = "eol" }
+      vim.api.nvim_buf_set_extmark(buf_id, ns, row, 0, modified_opts)
+    end
+
+    local show_with_modified_marker = function(buf_id, items, query)
+      MiniPick.default_show(buf_id, items, query, { show_icons = true })
+      for i, item in ipairs(items) do
+        if vim.bo[item.bufnr].modified then add_modified_marker(buf_id, i - 1) end
+      end
+    end
+
+    local opts = { mappings = buffer_mappings, source = { show = show_with_modified_marker } }
+    MiniPick.builtin.buffers(local_opts, opts)
   end
 
   -- Plugin picker
@@ -47,9 +55,7 @@ Config.later(function()
   MiniPick.registry.projects = H.two_stage_dir_picker(repo_dir, "Repo Picker")
 
   -- Aligned grep picker
-  MiniPick.registry.grep_align = function(opts)
-    MiniPick.builtin.grep(opts, { source = { show = H.grep_align_on_nul } })
-  end
+  MiniPick.registry.grep_align = function(opts) MiniPick.builtin.grep(opts, { source = { show = H.grep_align_on_nul } }) end
 
   -- Aligned live grep picker
   MiniPick.registry.grep_live_align = function(opts)
@@ -68,7 +74,7 @@ Config.later(function()
       source = {
         show = function(buf_id, items, query)
           H.grep_align_on_nul(buf_id, items, query)
-          H.minipick_highlight_keywords(buf_id)
+          H.highlight_keywords(buf_id)
         end,
       },
     })
@@ -85,9 +91,7 @@ end)
 H.two_stage_dir_picker = function(dir, name)
   local pred = function(item) return item.text ~= ".." end
   local choose = function(item)
-    vim.schedule(
-      function() MiniPick.builtin.files(nil, { source = { name = item.text, cwd = item.path } }) end
-    )
+    vim.schedule(function() MiniPick.builtin.files(nil, { source = { name = item.text, cwd = item.path } }) end)
   end
   return function()
     local local_opts = { cwd = dir, filter = pred }
@@ -129,10 +133,7 @@ end
 H.show_aligned_lsp_results = function(buf_id, items, query)
   -- Shorten the pathname to keep the width of the picker window to something
   -- a bit more reasonable for longer pathnames.
-  local item_texts = vim.tbl_map(
-    function(item) return item.text:gsub("^[^│]+", H.truncate_path(4)) end,
-    items
-  )
+  local item_texts = vim.tbl_map(function(item) return item.text:gsub("^[^│]+", H.truncate_path(4)) end, items)
 
   item_texts = MiniAlign.align_strings(item_texts, {
     justify_side = { "left", "right", "right" },
@@ -156,7 +157,7 @@ H.show_aligned_lsp_results = function(buf_id, items, query)
   end
 end
 
-H.minipick_highlight_keywords = function(bufnr)
+H.highlight_keywords = function(bufnr)
   local ns_id = vim.api.nvim_create_namespace("kaz-keywords")
   local keywords = {}
   for _, keyword in ipairs({ "TODO", "FIXME", "HACK", "NOTE" }) do

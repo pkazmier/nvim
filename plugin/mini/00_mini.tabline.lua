@@ -2,4 +2,4 @@
 -- mini.tabline
 -- ---------------------------------------------------------------------------
 
-Config.now(function() require("mini.tabline").setup() end)
+-- Config.now(function() require("mini.tabline").setup() end)
