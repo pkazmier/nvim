@@ -3,7 +3,11 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  require("mini.diff").setup()
+  require("mini.diff").setup({
+    view = {
+      priority = 12, -- lower than diagnostic signs
+    },
+  })
 
   Config.minidiff_to_qf = function()
     vim.fn.setqflist(MiniDiff.export("qf"))
