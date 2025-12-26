@@ -73,7 +73,7 @@ Config.later(function()
     MiniPick.builtin.grep(opts, {
       source = {
         show = function(buf_id, items, query)
-          H.grep_align_on_nul(buf_id, items, query)
+          H.show_aligned_grep_results(buf_id, items, query)
           H.highlight_keywords(buf_id)
         end,
       },
