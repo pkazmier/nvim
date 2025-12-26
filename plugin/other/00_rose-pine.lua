@@ -35,6 +35,8 @@ Config.now(function()
       MiniFilesTitle                 = { fg = "subtle" },
       MiniFilesTitleFocused          = { fg = "love" },
 
+      MiniIndentscopeSymbol          = { fg = "pine" },
+
       -- Highlight patterns for highlighting the whole line and hiding colon.
       -- See https://github.com/echasnovski/mini.nvim/discussions/783
       MiniHipatternsFixmeBody        = { fg = "love" },
