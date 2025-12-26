@@ -39,6 +39,8 @@ Config.leader_group_clues = {
 -- ---------------------------------------------------------------------------
 
 map("i",   "<A-Space>", C"normal ciw ",                                        "Just one space")
+map("n",   "H",         C"lua MiniBracketed.buffer('backward')",               "Prev buffer")
+map("n",   "L",         C"lua MiniBracketed.buffer('forward')",                "Next buffer")
 map("n",   "z=",        C"Pick spellsuggest",                                  "Spelling suggestions")
 map("n",   "[p",        C'exe "put! " . v:register',                           "Paste Above")
 map("n",   "]p",        C'exe "put "  . v:register',                           "Paste Below")
