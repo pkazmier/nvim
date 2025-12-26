@@ -24,25 +24,20 @@ Config.later(function()
     return MiniPick.builtin.files(nil, { source = { name = "Config Files", cwd = vim.fn.stdpath("config") } })
   end
 
-  -- Buffer picker with delete and modified markers
+  -- Buffer picker with modified indicator
   local ns = vim.api.nvim_create_namespace("kaz-modified-buffer-markers")
   MiniPick.registry.buffers = function(local_opts)
-    local wipeout_cur = function() vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {}) end
-    local buffer_mappings = { wipeout = { char = "<C-d>", func = wipeout_cur } }
-
     local add_modified_marker = function(buf_id, row)
-      local modified_opts = { virt_text = { { "[+]", "DiagnosticInfo" } }, virt_text_pos = "eol" }
+      local modified_opts = { virt_text = { { "[+]", "DiagnosticHint" } }, virt_text_pos = "eol" }
       vim.api.nvim_buf_set_extmark(buf_id, ns, row, 0, modified_opts)
     end
-
     local show_with_modified_marker = function(buf_id, items, query)
       MiniPick.default_show(buf_id, items, query, { show_icons = true })
       for i, item in ipairs(items) do
         if vim.bo[item.bufnr].modified then add_modified_marker(buf_id, i - 1) end
       end
     end
-
-    local opts = { mappings = buffer_mappings, source = { show = show_with_modified_marker } }
+    local opts = { source = { show = show_with_modified_marker } }
     MiniPick.builtin.buffers(local_opts, opts)
   end
 
