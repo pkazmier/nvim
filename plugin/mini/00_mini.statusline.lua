@@ -41,6 +41,7 @@ Config.now(function()
         local lsp           = MiniStatusline.section_lsp({ trunc_width = 40 })
         local filetype      = H.section_filetype({ trunc_width = 70 })
         local location      = H.section_location({ trunc_width = 120 })
+        local recording     = H.section_recording({ trunc_width = 120 })
         local search        = H.section_searchcount({ trunc_width = 80 })
         local pathname      = H.section_pathname({
           trunc_width = 100,
@@ -56,6 +57,7 @@ Config.now(function()
             '%<', -- Mark general truncate point
             { hl = 'MiniStatuslineDirectory', strings = { pathname } },
             '%=', -- End left alignment
+            { hl = 'DiagnosticWarn',          strings = { recording } },
             { hl = 'MiniStatuslineFileinfo',  strings = { diagnostics, filetype, lsp } },
             { hl = mode_hl,                   strings = { search .. location } },
             { hl = 'MiniStatuslineDirectory', strings = {} },
@@ -96,6 +98,13 @@ H.section_filetype = function(args)
   if icon ~= "" then filetype = string.format("%s %s", icon, filetype) end
 
   return filetype
+end
+
+H.section_recording = function(args)
+  local is_recording = vim.fn.reg_recording()
+  if is_recording == "" then return "" end
+  local msg = MiniStatusline.is_truncated(args.trunc_width) and "" or "recording "
+  return ("%s%s"):format(msg, is_recording)
 end
 
 H.section_searchcount = function(args)

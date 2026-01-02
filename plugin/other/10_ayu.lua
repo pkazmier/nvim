@@ -68,7 +68,7 @@ Config.later(function()
         MiniStatuslineFilenameModified = { fg = c.fg,             bg = c.selection_inactive,  bold = true },
         MiniStatuslineDevinfo          = { fg = c.fg,             bg = c.selection_bg },
         MiniStatuslineFileinfo         = { fg = c.fg,             bg = c.selection_bg },
-        StatusLine                     = { fg = c.fg,             bg = c.panel_border },
+        StatusLine                     = { fg = c.fg,             bg = c.selection_inactive },
         StatusLineNC                   = { fg = c.fg,             bg = c.panel_border },
 
         RenderMarkdownCode             = { bg = c.selection_inactive },
