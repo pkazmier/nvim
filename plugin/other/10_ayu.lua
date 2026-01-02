@@ -36,17 +36,6 @@ Config.later(function()
         MiniFilesTitle                 = { fg = c.tag,      bg = c.panel_bg,     bold = false },
         MiniFilesTitleFocused          = { fg = c.tag,      bg = c.panel_bg,     bold = true },
 
-        -- Highlight patterns for highlighting the whole line and hiding colon.
-        -- See https://github.com/echasnovski/mini.nvim/discussions/783
-        MiniHipatternsFixmeBody        = { fg = c.error },
-        MiniHipatternsHackBody         = { fg = c.keyword },
-        MiniHipatternsNoteBody         = { fg = c.regexp },
-        MiniHipatternsTodoBody         = { fg = c.tag },
-        MiniHipatternsFixmeColon       = { bg = c.error,   fg = c.error,   bold = true },
-        MiniHipatternsHackColon        = { bg = c.keyword, fg = c.keyword, bold = true },
-        MiniHipatternsNoteColon        = { bg = c.regexp,  fg = c.regexp,  bold = true },
-        MiniHipatternsTodoColon        = { bg = c.tag,     fg = c.tag,     bold = true },
-
         -- Bold matches and current line in MiniPick
         MiniPickMatchCurrent           = { fg = nil,      bg = c.selection_bg,  bold = true },
         MiniPickMatchMarked            = { fg = nil,      bg = c.gutter_normal, bold = true },

@@ -15,24 +15,16 @@ Config.later(function()
     Delimiter                      = { fg = c.gray03 },
 
     -- FIXME: this is a test.
-    MiniHipatternsFixmeBody        = { fg = c.cyan },
-    MiniHipatternsFixme            = { fg = c.bg, bg = c.cyan },
-    MiniHipatternsFixmeColon       = { bg = c.cyan, fg = c.cyan, bold = true },
+    MiniHipatternsFixme            = { fg = c.bg, bg = c.cyan, bold = true },
 
     -- HACK: this is a test.
-    MiniHipatternsHackBody         = { fg = c.red },
-    MiniHipatternsHack             = { fg = c.bg, bg = c.red },
-    MiniHipatternsHackColon        = { bg = c.red, fg = c.red, bold = true },
+    MiniHipatternsHack             = { fg = c.bg, bg = c.red, bold = true },
 
     -- NOTE: this is a note.
-    MiniHipatternsNoteBody         = { fg = c.yellow },
-    MiniHipatternsNote             = { fg = c.bg, bg = c.yellow },
-    MiniHipatternsNoteColon        = { bg = c.yellow, fg = c.yellow, bold = true },
+    MiniHipatternsNote             = { fg = c.bg, bg = c.yellow, bold = true },
 
     -- TODO: this is a test.
-    MiniHipatternsTodoBody         = { fg = c.blue },
-    MiniHipatternsTodo             = { fg = c.bg, bg = c.blue },
-    MiniHipatternsTodoColon        = { bg = c.blue, fg = c.blue, bold = true },
+    MiniHipatternsTodo             = { fg = c.bg, bg = c.blue, bold = true },
 
     MiniJump                       = { sp = c.yellow, undercurl = true },
 

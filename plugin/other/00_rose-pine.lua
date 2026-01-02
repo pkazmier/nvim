@@ -37,17 +37,6 @@ Config.now(function()
 
       MiniIndentscopeSymbol          = { fg = "pine" },
 
-      -- Highlight patterns for highlighting the whole line and hiding colon.
-      -- See https://github.com/echasnovski/mini.nvim/discussions/783
-      MiniHipatternsFixmeBody        = { fg = "love" },
-      MiniHipatternsHackBody         = { fg = "gold" },
-      MiniHipatternsNoteBody         = { fg = "foam" },
-      MiniHipatternsTodoBody         = { fg = "iris" },
-      MiniHipatternsFixmeColon       = { bg = "love",    fg = "love",    bold = true },
-      MiniHipatternsHackColon        = { bg = "gold",    fg = "gold",    bold = true },
-      MiniHipatternsNoteColon        = { bg = "foam",    fg = "foam",    bold = true },
-      MiniHipatternsTodoColon        = { bg = "iris",    fg = "iris",    bold = true },
-
       -- Tone down the brightness of the foreground
       MiniMapNormal                  = { fg = "subtle" },
 

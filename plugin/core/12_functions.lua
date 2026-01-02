@@ -14,6 +14,16 @@ math.randomseed(os.time())
 Config.choose = function(choices) return choices[math.random(1, #choices)] end
 
 -- ---------------------------------------------------------------------------
+-- Highlight groups
+-- ---------------------------------------------------------------------------
+
+-- Return info for hl_name or nil if it does not exist.
+Config.get_hl = function(hl_name)
+  local hl_info = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+  return not vim.tbl_isempty(hl_info) and hl_info or nil
+end
+
+-- ---------------------------------------------------------------------------
 -- Custom `vim.pack.add()` hook helper
 -- ---------------------------------------------------------------------------
 

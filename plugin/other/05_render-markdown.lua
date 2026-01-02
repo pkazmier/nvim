@@ -2,21 +2,15 @@
 -- render-markdown
 -- ---------------------------------------------------------------------------
 
--- Return info for hl_name or nil if it does not exist.
-local get_hl = function(hl_name)
-  local hl_info = vim.api.nvim_get_hl(0, { name = hl_name, link = false })
-  return not vim.tbl_isempty(hl_info) and hl_info or nil
-end
-
 -- Setup custom reverse video render-markdown heading hl groups based on
 -- the fg color of existing markdown hl groups. This provides the fancy
 -- headings when in preview mode.
 local setup_heading_hl_groups = function()
-  local fallback_hl_info = get_hl("@markup.heading") or get_hl("Title")
+  local fallback_hl_info = Config.get_hl("@markup.heading") or Config.get_hl("Title")
 
   for lvl = 1, 6 do
     local hl_name = "@markup.heading." .. lvl
-    local hl_info = get_hl(hl_name .. ".markdown") or get_hl(hl_name) or fallback_hl_info
+    local hl_info = Config.get_hl(hl_name .. ".markdown") or Config.get_hl(hl_name) or fallback_hl_info
     assert(hl_info, "Must set one of 'Title', '@markup.heading', '@markup.heading.N', or '@markup.heading.N.markdown'")
 
     local hl_spec = {}

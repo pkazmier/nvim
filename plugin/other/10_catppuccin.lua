@@ -3,10 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add(
-    { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } },
-    { load = true }
-  )
+  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }, { load = true })
   require("catppuccin").setup({
     default_integrations = false,
     integrations = {
@@ -72,15 +69,6 @@ Config.later(function()
           MiniFilesCursorLine = { fg = nil, bg = colors.surface0, style = { "bold" } },
           MiniFilesFile = { fg = colors.overlay2 },
           MiniFilesTitleFocused = { fg = colors.sky, style = { "bold" } },
-
-          MiniHipatternsFixmeBody = { fg = colors.red, bg = colors.base },
-          MiniHipatternsFixmeColon = { bg = colors.red, fg = colors.red, style = { "bold" } },
-          MiniHipatternsHackBody = { fg = colors.yellow, bg = colors.base },
-          MiniHipatternsHackColon = { bg = colors.yellow, fg = colors.yellow, style = { "bold" } },
-          MiniHipatternsNoteBody = { fg = colors.sky, bg = colors.base },
-          MiniHipatternsNoteColon = { bg = colors.sky, fg = colors.sky, style = { "bold" } },
-          MiniHipatternsTodoBody = { fg = colors.teal, bg = colors.base },
-          MiniHipatternsTodoColon = { bg = colors.teal, fg = colors.teal, style = { "bold" } },
 
           MiniIndentscopeSymbol = { fg = colors.sapphire },
 

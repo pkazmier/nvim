@@ -30,18 +30,10 @@ Config.later(function()
         MiniClueNextKey = { fg = c.oniViolet },
         MiniClueNextKeyWithPostkeys = { fg = c.sakuraPink },
 
-        MiniHipatternsFixmeBody = { fg = t.diag.error },
         MiniHipatternsFixme = { fg = c.bg, bg = t.diag.error },
-        MiniHipatternsFixmeColon = { bg = t.diag.error, fg = t.diag.error, bold = true },
-        MiniHipatternsHackBody = { fg = t.diag.warning },
         MiniHipatternsHack = { fg = c.bg, bg = t.diag.warning },
-        MiniHipatternsHackColon = { bg = t.diag.warning, fg = t.diag.warning, bold = true },
-        MiniHipatternsNoteBody = { fg = t.diag.info },
         MiniHipatternsNote = { fg = c.bg, bg = t.diag.info },
-        MiniHipatternsNoteColon = { bg = t.diag.info, fg = t.diag.info, bold = true },
-        MiniHipatternsTodoBody = { fg = t.diag.hint },
         MiniHipatternsTodo = { fg = c.bg, bg = t.diag.hint },
-        MiniHipatternsTodoColon = { bg = t.diag.hint, fg = t.diag.hint, bold = true },
 
         MiniFilesTitleFocused = { fg = t.ui.fg_dim, bold = true },
 

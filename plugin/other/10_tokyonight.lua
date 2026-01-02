@@ -13,21 +13,6 @@ Config.later(function()
       hl["TreesitterContextLineNumber"] = { fg = c.fg_gutter, bg = c.bg_dark1 }
       hl["TreesitterContextBottom"] = { underline = true, sp = c.bg_highlight }
 
-      -- Highlight patterns for highlighting the whole line and hiding colon.
-      -- See https://github.com/echasnovski/mini.nvim/discussions/783
-      hl["MiniHipatternsFixme"] = { fg = c.bg, bg = c.red }
-      hl["MiniHipatternsFixmeBody"] = { fg = c.red }
-      hl["MiniHipatternsFixmeColon"] = { bg = c.red, fg = c.red, bold = true }
-      hl["MiniHipatternsHack"] = { fg = c.bg, bg = c.yellow }
-      hl["MiniHipatternsHackBody"] = { fg = c.yellow }
-      hl["MiniHipatternsHackColon"] = { bg = c.yellow, fg = c.yellow, bold = true }
-      hl["MiniHipatternsNote"] = { fg = c.bg, bg = c.cyan }
-      hl["MiniHipatternsNoteBody"] = { fg = c.cyan }
-      hl["MiniHipatternsNoteColon"] = { bg = c.cyan, fg = c.cyan, bold = true }
-      hl["MiniHipatternsTodo"] = { fg = c.bg, bg = c.blue }
-      hl["MiniHipatternsTodoBody"] = { fg = c.blue }
-      hl["MiniHipatternsTodoColon"] = { bg = c.blue, fg = c.blue, bold = true }
-
       -- Highlight patterns for deemphasizing the directory name, so the
       -- filename is more prominent. Visually, this makes it faster to
       -- identify the name of the file.

@@ -38,18 +38,10 @@ Config.later(function()
       hl.MiniFilesCursorLine            = { bg = c.line,        gui = "bold" }
       hl.MiniFilesTitleFocused          = { fg = c.constant,    gui = "bold" }
 
-      hl.MiniHipatternsFixmeBody        = { fg = c.error }
-      hl.MiniHipatternsHackBody         = { fg = c.warning }
-      hl.MiniHipatternsNoteBody         = { fg = c.plus }
-      hl.MiniHipatternsTodoBody         = { fg = c.hint }
-      hl.MiniHipatternsFixme            = { fg = c.bg,          bg = c.error }
-      hl.MiniHipatternsHack             = { fg = c.bg,          bg = c.warning }
-      hl.MiniHipatternsNote             = { fg = c.bg,          bg = c.plus }
-      hl.MiniHipatternsTodo             = { fg = c.bg,          bg = c.hint }
-      hl.MiniHipatternsFixmeColon       = { bg = c.error,       fg = c.error,       gui = "bold" }
-      hl.MiniHipatternsHackColon        = { bg = c.warning,     fg = c.warning,     gui = "bold" }
-      hl.MiniHipatternsNoteColon        = { bg = c.plus,        fg = c.plus,        gui = "bold" }
-      hl.MiniHipatternsTodoColon        = { bg = c.hint,        fg = c.hint,        gui = "bold" }
+      hl.MiniHipatternsFixme            = { fg = c.bg,          bg = c.error,       gui = "bold" }
+      hl.MiniHipatternsHack             = { fg = c.bg,          bg = c.warning,     gui = "bold" }
+      hl.MiniHipatternsNote             = { fg = c.bg,          bg = c.plus,        gui = "bold" }
+      hl.MiniHipatternsTodo             = { fg = c.bg,          bg = c.hint,        gui = "bold" }
 
       hl.MiniIndentscopeSymbol          = { fg = c.comment }
 
@@ -71,8 +63,8 @@ Config.later(function()
       hl.MiniStatuslineDevinfo          = { fg = c.fg,          bg = c.search}
       hl.MiniStatuslineDirectory        = { fg = c.operator,    bg = c.line }
       hl.MiniStatuslineFileinfo         = { fg = c.fg,          bg = c.search}
-      hl.MiniStatuslineFilename         = { fg = c.operator,    bg = c.line, gui = "bold" }
-      hl.MiniStatuslineFilenameModified = { fg = c.delta,       bg = c.line, gui = "bold" }
+      hl.MiniStatuslineFilename         = { fg = c.operator,    bg = c.line,        gui = "bold" }
+      hl.MiniStatuslineFilenameModified = { fg = c.delta,       bg = c.line,        gui = "bold" }
       hl.MiniStatuslineInactive         = { fg = c.comment,     bg = c.line }
       hl.MiniStatuslineModeCommand      = { fg = c.bg,          bg = c.string }
       hl.MiniStatuslineModeInsert       = { fg = c.bg,          bg = c.plus}

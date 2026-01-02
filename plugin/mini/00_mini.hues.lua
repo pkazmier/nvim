@@ -41,17 +41,6 @@ Config.now(function()
     hi("DiagnosticVirtualTextOk",        { fg = p.green,   bg = p.green_bg,  italic = true })
     hi("DiagnosticVirtualTextWarn",      { fg = p.yellow,  bg = p.yellow_bg, italic = true })
 
-    -- Highlight patterns for highlighting the whole line and hiding colon.
-    -- See https://github.com/echasnovski/mini.nvim/discussions/783
-    hi("MiniHipatternsFixmeBody",        { fg = p.red })
-    hi("MiniHipatternsHackBody",         { fg = p.yellow })
-    hi("MiniHipatternsNoteBody",         { fg = p.cyan })
-    hi("MiniHipatternsTodoBody",         { fg = p.blue })
-    hi("MiniHipatternsFixmeColon",       { bg = p.red,     fg = p.red,       bold = true })
-    hi("MiniHipatternsHackColon",        { bg = p.yellow,  fg = p.yellow,    bold = true })
-    hi("MiniHipatternsNoteColon",        { bg = p.cyan,    fg = p.cyan,      bold = true })
-    hi("MiniHipatternsTodoColon",        { bg = p.blue,    fg = p.blue,      bold = true })
-
     -- Dim inactive MiniStarter elements
     hi("MiniStarterInactive",            { link = "MiniJump2dDim" })
 
