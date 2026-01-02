@@ -20,18 +20,18 @@ local C = function(cmd) return "<Cmd>" .. cmd .. "<CR>" end
 
 -- Leader mappings and descriptions used later when mini.clue is setup
 Config.leader_group_clues = {
-  { mode = "n", keys = L"b",  desc = "+Buffer" },
-  { mode = "n", keys = L"c",  desc = "+Copilot" },
-  { mode = "n", keys = L"e",  desc = "+Explore" },
-  { mode = "n", keys = L"f",  desc = "+Find" },
-  { mode = "n", keys = L"g",  desc = "+Git" },
-  { mode = "n", keys = L"l",  desc = "+Language" },
-  { mode = "n", keys = L"m",  desc = "+Map" },
-  { mode = "n", keys = L"n",  desc = "+Notes" },
-  { mode = "n", keys = L"o",  desc = "+Other" },
-  { mode = "n", keys = L"s",  desc = "+Session" },
-  { mode = "n", keys = L"v",  desc = "+Visits" },
-  { mode = "n", keys = L"w",  desc = "+Window" },
+  { mode = "n",        keys = L"b",  desc = "+Buffer" },
+  { mode = {"n", "x"}, keys = L"c",  desc = "+Copilot" },
+  { mode = "n",        keys = L"e",  desc = "+Explore" },
+  { mode = "n",        keys = L"f",  desc = "+Find" },
+  { mode = {"n", "x"}, keys = L"g",  desc = "+Git" },
+  { mode = {"n", "x"}, keys = L"l",  desc = "+Language" },
+  { mode = "n",        keys = L"m",  desc = "+Map" },
+  { mode = "n",        keys = L"n",  desc = "+Notes" },
+  { mode = "n",        keys = L"o",  desc = "+Other" },
+  { mode = "n",        keys = L"s",  desc = "+Session" },
+  { mode = "n",        keys = L"v",  desc = "+Visits" },
+  { mode = "n",        keys = L"w",  desc = "+Window" },
 }
 
 -- ---------------------------------------------------------------------------

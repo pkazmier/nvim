@@ -18,28 +18,19 @@ Config.later(function()
       clue.gen_clues.z(),
     },
     triggers = {
-      { mode = "n", keys = "<Leader>" },
-      { mode = "x", keys = "<Leader>" },
       { mode = "n", keys = [[\]] }, -- mini.basics
-      { mode = "n", keys = "[" }, -- mini.bracketed
-      { mode = "n", keys = "]" },
-      { mode = "x", keys = "[" },
-      { mode = "x", keys = "]" },
       { mode = "i", keys = "<C-x>" }, -- built-in completion
-      { mode = "n", keys = "g" }, -- `g` key
-      { mode = "x", keys = "g" },
-      { mode = "n", keys = "'" }, -- marks
-      { mode = "n", keys = "`" },
-      { mode = "x", keys = "'" },
-      { mode = "x", keys = "`" },
-      { mode = "n", keys = '"' }, -- registers
-      { mode = "x", keys = '"' },
-      { mode = "i", keys = "<C-r>" },
-      { mode = "c", keys = "<C-r>" },
       { mode = "n", keys = "s" }, -- surround
       { mode = "n", keys = "<C-w>" }, -- windows
-      { mode = "n", keys = "z" }, -- folds
-      { mode = "x", keys = "z" },
+      { mode = { "n", "x" }, keys = "<Leader>" },
+      { mode = { "n", "x" }, keys = "[" }, -- mini.bracketed
+      { mode = { "n", "x" }, keys = "]" },
+      { mode = { "n", "x" }, keys = "g" }, -- `g` key
+      { mode = { "n", "x" }, keys = "'" }, -- marks
+      { mode = { "n", "x" }, keys = "`" },
+      { mode = { "n", "x" }, keys = '"' }, -- registers
+      { mode = { "n", "x" }, keys = "z" }, -- folds
+      { mode = { "i", "c" }, keys = "<C-r>" },
     },
     window = {
       config = { width = "auto" },
