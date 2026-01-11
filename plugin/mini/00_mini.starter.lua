@@ -17,7 +17,7 @@ Config.now(function()
 
   local fortune = function()
     local ok, quote = pcall(function()
-      local f = assert(io.popen("fortune -s", "r"))
+      local f = assert(io.popen("fortune -s | fmt 38", "r"))
       local s = assert(f:read("*a"))
       f:close()
       return s
@@ -55,21 +55,13 @@ Config.now(function()
 ██████████████ ████ ██████████ ████
 █████ ████ █████ ████ █████ █████ ████
 █████ ████ ████████ █████ ████████
-
-🎄✨🎅❄️🎄 MERRY CHRISTMAS! 🎄❄️🎅✨🎄]]
-      -- local msg = greeting()
-      -- local msg_pad = longest_line(banner) - msg:len()
-      -- return banner .. pad(msg, msg_pad)
-      return banner
+]]
+      local msg = greeting()
+      local msg_pad = longest_line(banner) - msg:len()
+      return banner .. pad(msg, msg_pad)
     end,
 
     -- Fortune slows startup a small amount, but I like it.
-    -- footer = fortune(),
-    footer = [[
-The real problem of humanity is the following:
-We have paleolithic emotions; medieval institutions;
-and god-like technology.
-        -- Edward O. Wilson, Sociobiologist
-]],
+    footer = fortune(),
   })
 end)
