@@ -14,8 +14,8 @@ Config.now(function()
 
         RenderMarkdownBullet           = "Special",
         RenderMarkdownChecked          = "String",
-        RenderMarkdownTodo             = "Special",
-        RenderMarkdownUnchecked        = "Special",
+        RenderMarkdownTodo             = { fg = c.terminal.cyan },
+        RenderMarkdownUnchecked        = { fg = c.terminal.bright_red },
         RenderMarkdownCode             = { bg = c.bg.mantle },
         RenderMarkdownCodeInline       = { bg = c.bg.mantle },
         RenderMarkdownCodeBorder       = { bg = c.bg.surface },
