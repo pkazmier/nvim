@@ -9,14 +9,6 @@ balance features versus implementation complexity.[^1]
 
 ![Neovim Screenshot](screenshot.png)
 
-[^1]:
-    For those looking to explore this wonderful plugin, I highly recommend
-    trying [MiniMax][2], which is a fully working self-contained Neovim
-    configuration compatible with the current stable release of Neovim.
-
-[1]: https://nvim-mini.org/mini.nvim/
-[2]: https://nvim-mini.org/MiniMax/
-
 ## Directory Structure
 
 Key concepts:
@@ -49,19 +41,19 @@ Below is an overview of the directory structure:
 ```txt
 .
 ├── after                          # Sourced last (`:h after-directory`)
-│   └── ftplugin/                  # Configurations for filetypes
+│   └── ftplugin/                  # Configurations for filetypes
 ├── colors/                        # Personal color schemes
 ├── init.lua                       # Main entry point
 ├── lsp/                           # LSP configurations
 ├── nvim-pack-lock.json            # Lockfile for `vim.pack`
 ├── plugin                         # Plugins loaded via `vim.pack`
-│   ├── core                       # Core configurations
-│   │   ├── 10_options.lua         # General options
-│   │   ├── 11_autocommands.lua    # General autocommands
-│   │   ├── 12_functions.lua       # Custom functions
-│   │   └── 13_mappings.lua        # Key mappings
-│   ├── mini/                      # Mini.nvim configurations
-│   └── other/                     # Other plugin configurations
+│   ├── core                       # Core configurations
+│   │   ├── 10_options.lua         # General options
+│   │   ├── 11_autocommands.lua    # General autocommands
+│   │   ├── 12_functions.lua       # Custom functions
+│   │   └── 13_mappings.lua        # Key mappings
+│   ├── mini/                      # Mini.nvim configurations
+│   └── other/                     # Other plugin configurations
 ├── snippets/                      # Snippets for various filetypes
 └── spell/                         # Spelling files
 
@@ -70,3 +62,11 @@ Below is an overview of the directory structure:
 ## Credits
 
 My configuration is inspired by [echasnovski's](https://github.com/echasnovski/nvim).
+
+[^1]:
+    For those looking to explore this wonderful plugin, I highly recommend
+    trying [MiniMax][2], which is a fully working self-contained Neovim
+    configuration compatible with the current stable release of Neovim.
+
+[1]: https://nvim-mini.org/mini.nvim/
+[2]: https://nvim-mini.org/MiniMax/

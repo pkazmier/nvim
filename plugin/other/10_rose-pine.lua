@@ -2,7 +2,7 @@
 -- rose pine colorscheme
 -- ---------------------------------------------------------------------------
 
-Config.now(function()
+Config.later(function()
   vim.pack.add({ { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } }, { load = true })
   require("rose-pine").setup({
     enable = {
@@ -107,5 +107,4 @@ Config.now(function()
       italic = false,
     },
   })
-  vim.cmd.colorscheme("rose-pine")
 end)
