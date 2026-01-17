@@ -23,30 +23,6 @@
 
 local H = {}
 
--- TODO: Comment this function
-local setup_mode_info_hl_groups = function()
-  local hl_base = Config.get_hl("MiniStatuslineDevinfo")
-  assert(hl_base, "MiniStatuslineDevinfo hl group must be set")
-
-  for _, mode in ipairs({
-    "MiniStatuslineModeNormal",
-    "MiniStatuslineModeInsert",
-    "MiniStatuslineModeVisual",
-    "MiniStatuslineModeReplace",
-    "MiniStatuslineModeCommand",
-    "MiniStatuslineModeOther",
-  }) do
-    local hl_spec = {}
-    if hl_base.fg then hl_spec.fg = hl_base.fg end
-    if hl_base.bg then hl_spec.bg = hl_base.bg end
-    if hl_base.bold then hl_spec.bold = true end
-    if hl_base.italic then hl_spec.italic = true end
-    hl_spec.fg = Config.get_hl(mode).bg
-
-    vim.api.nvim_set_hl(0, mode .. "Info", hl_spec)
-  end
-end
-
 Config.now(function()
   require("mini.statusline").setup({
     use_icons = true,
@@ -93,14 +69,39 @@ Config.now(function()
       end,
     },
   })
-end)
 
--- Set the mode info hl groups AND an autocmd for colorscheme changes.
-setup_mode_info_hl_groups()
-Config.new_autocmd("Colorscheme", {
-  desc = "Setup up mode info hl groups for statusline.",
-  callback = setup_mode_info_hl_groups,
-})
+  -- Extend the "mode" color to the file and dev info sections by
+  -- dynamically creating new hl-groups for each mode style.
+  local setup_mode_info_hl_groups = function()
+    local hl_base = Config.get_hl("MiniStatuslineDevinfo")
+    assert(hl_base, "MiniStatuslineDevinfo hl group must be set")
+
+    for _, mode in ipairs({
+      "MiniStatuslineModeNormal",
+      "MiniStatuslineModeInsert",
+      "MiniStatuslineModeVisual",
+      "MiniStatuslineModeReplace",
+      "MiniStatuslineModeCommand",
+      "MiniStatuslineModeOther",
+    }) do
+      local hl_spec = {}
+      if hl_base.fg then hl_spec.fg = hl_base.fg end
+      if hl_base.bg then hl_spec.bg = hl_base.bg end
+      if hl_base.bold then hl_spec.bold = true end
+      if hl_base.italic then hl_spec.italic = true end
+      hl_spec.fg = Config.get_hl(mode).bg
+
+      vim.api.nvim_set_hl(0, mode .. "Info", hl_spec)
+    end
+  end
+
+  -- Set the mode info hl groups AND an autocmd for colorscheme changes.
+  setup_mode_info_hl_groups()
+  Config.new_autocmd("Colorscheme", {
+    desc = "Setup up mode info hl groups for statusline.",
+    callback = setup_mode_info_hl_groups,
+  })
+end)
 
 H.isnt_normal_buffer = function() return vim.bo.buftype ~= "" end
 
