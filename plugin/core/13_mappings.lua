@@ -146,7 +146,7 @@ map("nx",  L"gs",       C"lua MiniGit.show_at_cursor()",                       "
 
 map("nx",  L"la",       C"lua vim.lsp.buf.code_action()",                      "Actions")
 map("n",   L"ld",       C"lua vim.diagnostic.open_float()",                    "Diagnostic popup")
-map("nx",  L"lf",       C"lua require('conform').format({lsp_fallback=true})", "Format")
+map("nx",  L"lf",       C"lua require('conform').format()",                    "Format")
 map("n",   L"li",       C"lua vim.lsp.buf.implementation()",                   "Implementation")
 map("n",   L"lI",       C"LspInfo",                                            "LSP info")
 map("n",   L"lh",       C"lua vim.lsp.buf.hover()",                            "Hover")
