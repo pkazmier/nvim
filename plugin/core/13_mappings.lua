@@ -65,6 +65,8 @@ map("n",   L"/",        C"Pick buf_lines scope='current' preserve_order=true", "
 map("n",   L"ba",       C"b#",                                                 "Alternate buffer")
 map("n",   L"bd",       C"lua MiniBufremove.delete()",                         "Delete buffer")
 map("n",   L"bD",       C"%bd|e#|bd#",                                         "Delete other buffers")
+map("n",   L"bp",       C"lua Config.toggle_pinned()",                         "Pin buffer")
+map("n",   L"bP",       C"lua Config.remove_pinned('delete')",                 "Delete non-pinned")
 map("n",   L"bs",       C"lua Config.new_scratch_buffer()",                    "New scratch buffer")
 map("n",   L"bt",       C"lua MiniTrailspace.trim()",                          "Trim trailspace")
 map("n",   L"bu",       C"lua MiniBufremove.unshow()",                         "Unshow buffer")
