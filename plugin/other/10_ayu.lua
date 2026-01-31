@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/Shatur/neovim-ayu" }, { load = true })
+  vim.pack.add({ "https://github.com/Shatur/neovim-ayu" })
   require("ayu").setup({
     mirage = true,
     terminal = true,

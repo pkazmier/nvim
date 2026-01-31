@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/stevearc/conform.nvim" }, { load = true })
+  vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
   require("conform").setup({
     -- Map of filetype to formatters

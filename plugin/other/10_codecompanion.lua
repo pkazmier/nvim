@@ -8,7 +8,7 @@ Config.later(function()
   vim.pack.add({
     "https://github.com/nvim-lua/plenary.nvim",
     "https://github.com/olimorris/codecompanion.nvim",
-  }, { load = true })
+  })
 
   require("codecompanion").setup({
     interactions = {

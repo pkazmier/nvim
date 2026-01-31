@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/sainnhe/everforest" }, { load = true })
+  vim.pack.add({ "https://github.com/sainnhe/everforest" })
   vim.g.everforest_float_style = "dim" -- if changed, update FloatTitle, MiniFilesTitle bg
   vim.g.everforest_background = "medium"
 

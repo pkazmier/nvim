@@ -7,10 +7,10 @@ Config.now_if_args(function()
   Config.on_packchanged("tree-sitter", { "update" }, ts_udpate, "Update tree-sitter parsers")
 
   vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main", load = true },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-  }, { load = true })
+  })
 
   local ensure_languages = {
     "bash",
@@ -33,8 +33,7 @@ Config.now_if_args(function()
   }
 
   require("nvim-treesitter").install(ensure_languages)
-  local filetypes =
-    vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
+  local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
   vim.list_extend(filetypes, { "markdown", "pandoc" })
   Config.new_autocmd("FileType", {
     pattern = filetypes,

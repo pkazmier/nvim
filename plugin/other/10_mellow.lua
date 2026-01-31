@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" }, { load = true })
+  vim.pack.add({ "https://github.com/mellow-theme/mellow.nvim" })
   local c = require("mellow.colors").dark
 
   vim.g.mellow_transparent = vim.fn.expand("$NEOVIM_TRANSPARENT") == "1"

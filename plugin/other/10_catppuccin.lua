@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }, { load = true })
+  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } })
   require("catppuccin").setup({
     default_integrations = false,
     integrations = {

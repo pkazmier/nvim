@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" }, { load = true })
+  vim.pack.add({ "https://github.com/neovim/nvim-lspconfig" })
 
   -- All language servers are expected to be installed with 'mason.vnim'
   vim.lsp.enable({

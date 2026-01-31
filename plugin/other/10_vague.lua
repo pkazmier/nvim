@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/vague2k/vague.nvim" }, { load = true })
+  vim.pack.add({ "https://github.com/vague2k/vague.nvim" })
   require("vague").setup({
     plugins = {
       lsp = {

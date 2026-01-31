@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } }, { load = true })
+  vim.pack.add({ { src = "https://github.com/rose-pine/neovim", name = "rose-pine" } })
   require("rose-pine").setup({
     enable = {
       legacy_highlights = false,

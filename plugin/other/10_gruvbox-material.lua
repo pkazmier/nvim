@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" }, { load = true })
+  vim.pack.add({ "https://github.com/sainnhe/gruvbox-material" })
   vim.g.gruvbox_material_float_style = "dim" -- if changed, update FloatTitle, MiniFilesTitle bg
   vim.g.gruvbox_material_background = "medium"
 

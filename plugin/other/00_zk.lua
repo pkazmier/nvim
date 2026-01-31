@@ -5,7 +5,7 @@
 local H = {}
 
 Config.now(function()
-  vim.pack.add({ "https://github.com/zk-org/zk-nvim" }, { load = true })
+  vim.pack.add({ "https://github.com/zk-org/zk-nvim" })
   local cmds = require("zk.commands")
 
   require("zk").setup({

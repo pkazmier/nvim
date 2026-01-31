@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.now_if_args(function()
-  vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, { load = true })
+  vim.pack.add({ "https://github.com/MeanderingProgrammer/render-markdown.nvim" })
   require("render-markdown").setup({
     file_types = { "markdown", "md", "codecompanion" },
     render_modes = { "n", "no", "c", "t", "i", "ic" },

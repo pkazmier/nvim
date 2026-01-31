@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.later(function()
-  vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" }, { load = true })
+  vim.pack.add({ "https://github.com/mfussenegger/nvim-lint" })
   local lint = require("lint")
   lint.linters_by_ft = {
     markdown = { "markdownlint-cli2" },

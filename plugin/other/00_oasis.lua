@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.now(function()
-  vim.pack.add({ { src = "https://github.com/uhs-robert/oasis.nvim" } }, { load = true })
+  vim.pack.add({ { src = "https://github.com/uhs-robert/oasis.nvim" } })
   require("oasis").setup({
     highlight_overrides = function(c, colors)
       -- stylua: ignore
