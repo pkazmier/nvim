@@ -9,6 +9,7 @@ Config.later(function()
     markdown = { "markdownlint-cli2" },
     sql = { "sqruff" },
     sh = { "shellcheck" },
+    bash = { "shellcheck" },
   }
 
   Config.new_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {

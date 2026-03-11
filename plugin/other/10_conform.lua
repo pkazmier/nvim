@@ -21,6 +21,8 @@ Config.later(function()
       json       = { "prettierd" },
       yaml       = { "prettierd" },
       lua        = { "stylua" },
+      sh         = { "shfmt" },
+      bash       = { "shfmt" },
       markdown   = { "prettierd" },
       -- python     = { "isort", "black" },  -- testing ruff instead now
       sql        = { "sqruff" },
