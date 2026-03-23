@@ -2,7 +2,7 @@
 -- oasis colorscheme
 -- ---------------------------------------------------------------------------
 
-Config.now(function()
+Config.later(function()
   vim.pack.add({ { src = "https://github.com/uhs-robert/oasis.nvim" } })
   require("oasis").setup({
     highlight_overrides = function(c, colors)
@@ -15,5 +15,5 @@ Config.now(function()
       }
     end,
   })
-  vim.cmd.colorscheme("oasis")
+  -- vim.cmd.colorscheme("oasis")
 end)
