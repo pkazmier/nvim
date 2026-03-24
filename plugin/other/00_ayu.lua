@@ -87,6 +87,23 @@ Config.now(function()
         ['@module']                    = { fg = c.fg },
         ['@string.documentation']      = { fg = c.lsp_inlay_hint },
         ['@variable.builtin']          = { fg = c.fg },
+
+        ['@lsp.type.variable']                     = { link = "@lsp" },
+        ["@lsp.typemod.class.defaultLibrary"]      = { link = "@type.builtin" },
+        ["@lsp.typemod.enum.defaultLibrary"]       = { link = "@type.builtin" },
+        ["@lsp.typemod.enumMember.defaultLibrary"] = { link = "@constant.builtin" },
+        ["@lsp.typemod.function.defaultLibrary"]   = { link = "@function.builtin" },
+        ["@lsp.typemod.keyword.async"]             = { link = "@keyword.coroutine" },
+        ["@lsp.typemod.keyword.injected"]          = { link = "@keyword" },
+        ["@lsp.typemod.macro.defaultLibrary"]      = { link = "@function.builtin" },
+        ["@lsp.typemod.method.defaultLibrary"]     = { link = "@function.builtin" },
+        ["@lsp.typemod.operator.injected"]         = { link = "@operator" },
+        ["@lsp.typemod.string.injected"]           = { link = "@string" },
+        ["@lsp.typemod.struct.defaultLibrary"]     = { link = "@type.builtin" },
+        ["@lsp.typemod.variable.callable"]         = { link = "@function" },
+        ["@lsp.typemod.variable.defaultLibrary"]   = { link = "@variable.builtin" },
+        ["@lsp.typemod.variable.injected"]         = { link = "@variable" },
+        ["@lsp.typemod.variable.static"]           = { link = "@constant" },
       }
     end,
   })
