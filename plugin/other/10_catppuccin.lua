@@ -226,7 +226,7 @@ Config.later(function()
         pink = "#AD6FF7",
         mauve = "#FF8F40",
         red = "#E66767",
-        maroon = "#EB788B",
+        maroon = "#FF99EE",
         peach = "#FAB770",
         yellow = "#FACA64",
         green = "#70CF67",
