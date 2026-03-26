@@ -3,7 +3,7 @@
 -- ---------------------------------------------------------------------------
 
 Config.now(function()
-  local pad = function(str, n) return string.rep(" ", n) .. str end
+  local padleft = function(str, n) return string.rep(" ", n) .. str end
 
   -- Function from [echasnovski](https://github.com/echasnovski/nvim).
   local greeting = function()
@@ -48,20 +48,33 @@ Config.now(function()
 
     header = function()
       local banner = [[
-
-                 █              █
-
-████████████ ███ ████████ ███
-██████████████ ████ ██████████ ████
-█████ ████ █████ ████ █████ █████ ████
-█████ ████ ████████ █████ ████████
+      │ ╲ ││ ╲    ╱ ││ │ ╲  ╱ │
+      ││╲╲││  ╲╲╱╱  ││ ││╲╲╱╱││
+      ││ ╲ │   ╲╱   ││ ││ ╲╱ ││
 ]]
-      local msg = greeting()
-      local msg_pad = longest_line(banner) - msg:len()
-      return banner .. pad(msg, msg_pad)
+      return banner
+
+      --       local banner = [[
+      --
+      --                  █              █
+      --
+      -- ████████████ ███ ████████ ███
+      -- ██████████████ ████ ██████████ ████
+      -- █████ ████ █████ ████ █████ █████ ████
+      -- █████ ████ ████████ █████ ████████
+      -- ]]
+      -- local msg = greeting()
+      -- local msg_pad = longest_line(banner) - msg:len()
+      -- return banner .. padleft(msg, msg_pad)
     end,
 
     -- Fortune slows startup a small amount, but I like it.
-    footer = fortune(),
+    -- footer = fortune(),
+    footer = function()
+      local rule =
+        "\n───────────────────────────────────────\n"
+      local msg = fortune()
+      return rule .. msg
+    end,
   })
 end)
