@@ -200,6 +200,7 @@ map("n",   L"ox",       C"lua Config.export_minihues_theme()",                 "
 map("n",   L"sd",       C"lua MiniSessions.select('delete')",                  'Delete session')
 map("n",   L"sl",       C"lua MiniSessions.select('read')",                    'Load session')
 map("n",   L"sn",       C"lua MiniSessions.write(vim.fn.input('Name: '))",     'New session')
+map("n",   L"sr",       C"lua MiniSessions.restart()",                         'Restart session')
 map("n",   L"ss",       C"lua MiniSessions.write()",                           'Save session')
 
 -- ---------------------------------------------------------------------------
