@@ -107,5 +107,5 @@ Config.now(function()
       }
     end,
   })
-  vim.cmd.colorscheme("ayu")
+  -- vim.cmd.colorscheme("ayu")
 end)
