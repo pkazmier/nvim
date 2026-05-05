@@ -47,25 +47,24 @@ Config.now(function()
     },
 
     header = function()
-      local banner = [[
-      │ ╲ ││ ╲    ╱ ││ │ ╲  ╱ │
-      ││╲╲││  ╲╲╱╱  ││ ││╲╲╱╱││
-      ││ ╲ │   ╲╱   ││ ││ ╲╱ ││
-]]
-      return banner
-
       --       local banner = [[
-      --
-      --                  █              █
-      --
-      -- ████████████ ███ ████████ ███
-      -- ██████████████ ████ ██████████ ████
-      -- █████ ████ █████ ████ █████ █████ ████
-      -- █████ ████ ████████ █████ ████████
+      --       │ ╲ ││ ╲    ╱ ││ │ ╲  ╱ │
+      --       ││╲╲││  ╲╲╱╱  ││ ││╲╲╱╱││
+      --       ││ ╲ │   ╲╱   ││ ││ ╲╱ ││
       -- ]]
-      -- local msg = greeting()
-      -- local msg_pad = longest_line(banner) - msg:len()
-      -- return banner .. padleft(msg, msg_pad)
+      -- return banner
+
+      local banner = [[
+                 █              █
+
+████████████ ███ ████████ ███
+██████████████ ████ ██████████ ████
+█████ ████ █████ ████ █████ █████ ████
+█████ ████ ████████ █████ ████████
+]]
+      local msg = greeting()
+      local msg_pad = longest_line(banner) - msg:len()
+      return banner .. padleft(msg, msg_pad)
     end,
 
     -- Fortune slows startup a small amount, but I like it.
