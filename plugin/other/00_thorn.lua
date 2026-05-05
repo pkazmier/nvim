@@ -2,13 +2,15 @@
 -- tokyonight colorscheme
 -- ---------------------------------------------------------------------------
 
-Config.later(function()
+Config.now(function()
   vim.pack.add({ { src = "https://github.com/pkazmier/thorn.nvim", version = "refactor/theme-change" } })
   require("thorn").setup({
     on_highlights = function(hl, p)
       hl.PmenuSel = { bg = p.cursorline, bold = true }
       hl.TreesitterContextLineNumber = { fg = p.number, bg = p.bg_float }
       hl.LeapLabel = { fg = p.bg, bg = p.orange, bold = true }
+      hl.MiniStatuslineDirectory = { bg = p.statusbar.bg, fg = p.gray }
+      hl.MiniStatuslineFilename = { bg = p.statusbar.bg, fg = p.gray, bold = true }
 
       -- -- mini.clue
       -- hl.MiniClueNextKey = { fg = p.green_6 }
@@ -64,8 +66,6 @@ Config.later(function()
       -- hl.MiniStatuslineModeOther = { bg = p.orange, fg = p.bg, bold = true }
       -- hl.MiniStatuslineDevInfo = { bg = p.statusbar.sep, fg = p.statusbar.fg }
       -- hl.MiniStatuslineFileInfo = { bg = p.statusbar.sep, fg = p.statusbar.fg }
-      hl.MiniStatuslineDirectory = { bg = p.statusbar.bg, fg = p.gray }
-      hl.MiniStatuslineFilename = { bg = p.statusbar.bg, fg = p.gray, bold = true }
       -- hl.MiniStatuslineInactive = { bg = p.statusbar.bg, fg = p.gray }
       --
       -- -- mini.tabline
