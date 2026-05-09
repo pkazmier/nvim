@@ -18,6 +18,7 @@ Config.now_if_args(function()
     "go",
     "helm",
     "html",
+    "java",
     "javascript",
     "json",
     "lua",
@@ -28,6 +29,7 @@ Config.now_if_args(function()
     "rust",
     "sql",
     "toml",
+    "vhs",
     "yaml",
     "zig",
   }
