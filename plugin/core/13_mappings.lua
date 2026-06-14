@@ -28,7 +28,8 @@ Config.leader_group_clues = {
   { mode = {"n", "x"}, keys = L"l",  desc = "+Language" },
   { mode = "n",        keys = L"m",  desc = "+Map" },
   { mode = "n",        keys = L"n",  desc = "+Notes" },
-  { mode = "n",        keys = L"o",  desc = "+Other" },
+  { mode = "n",        keys = L"o",  desc = "+Org" },
+  { mode = "n",        keys = L"O",  desc = "+Other" },
   { mode = "n",        keys = L"s",  desc = "+Session" },
   { mode = "n",        keys = L"v",  desc = "+Visits" },
   { mode = "n",        keys = L"w",  desc = "+Window" },
@@ -186,13 +187,23 @@ map("n",   L"ns",       C"ZkNotes { sort = { 'created' } }",                   "
 map("n",   L"nt",       C"ZkTags",                                             "Tags")
 
 -- ---------------------------------------------------------------------------
+-- Org
+-- ---------------------------------------------------------------------------
+
+map("n",   L"of",       C"lua Config.org_files()",                             "Open org file")
+map("n",   L"oh",       C"lua Config.org_headlines()",                         "Search headlines")
+map("n",   L"om",       C"lua Config.org_new_meeting_entry()",                 "New meeting entry")
+map("n",   L"oM",       C"lua Config.org_items_by_tag()",                      "Open items by tag")
+map("n",   L"o/",       C"lua Config.org_grep()",                              "Grep all lines")
+
+-- ---------------------------------------------------------------------------
 -- Other
 -- ---------------------------------------------------------------------------
 
-map("n",   L"oa",       C"Mason",                                              "Mason")
-map("n",   L"os",       C"lua MiniStarter.open()",                             "Open MiniStarter")
-map("n",   L"ou",       C"lua vim.pack.update()",                              "Update deps")
-map("n",   L"ox",       C"lua Config.export_minihues_theme()",                 "Export mini.hues theme")
+map("n",   L"Oa",       C"Mason",                                              "Mason")
+map("n",   L"Os",       C"lua MiniStarter.open()",                             "Open MiniStarter")
+map("n",   L"Ou",       C"lua vim.pack.update()",                              "Update deps")
+map("n",   L"Ox",       C"lua Config.export_minihues_theme()",                 "Export mini.hues theme")
 
 -- ---------------------------------------------------------------------------
 -- Session
