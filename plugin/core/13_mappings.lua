@@ -194,6 +194,7 @@ map("n",   L"of",       C"lua Config.org_files()",                             "
 map("n",   L"oh",       C"lua Config.org_headlines()",                         "Search headlines")
 map("n",   L"om",       C"lua Config.org_new_meeting_entry()",                 "New meeting entry")
 map("n",   L"oM",       C"lua Config.org_items_by_tag()",                      "Open items by tag")
+map("n",   L"oE",       C"lua Config.org_events()",                            "Events (by next date)")
 map("n",   L"o/",       C"lua Config.org_grep()",                              "Grep all lines")
 
 -- ---------------------------------------------------------------------------

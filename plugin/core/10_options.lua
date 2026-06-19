@@ -24,7 +24,7 @@ vim.opt.completetimeout = 100
 vim.opt.conceallevel    = 2
 vim.opt.confirm         = true
 vim.opt.expandtab       = true
-vim.opt.fillchars       = { fold="╌", diff="╱", eob=" " }
+vim.opt.fillchars       = { fold="╌", diff="╱", eob=" ", foldopen=" ", foldclose="⤵", foldsep=" ", foldinner=" " }
 vim.opt.formatlistpat   = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 vim.opt.formatoptions   = "jcrql1nt"
 vim.opt.grepformat      = "%f:%l:%c:%m"
@@ -46,6 +46,9 @@ vim.opt.winminwidth     = 5
 -- Fold settings
 -- ---------------------------------------------------------------------------
 
+vim.opt.numberwidth = 5
+vim.opt.signcolumn  = "number"
+vim.opt.foldcolumn  = "1"
 vim.opt.foldexpr    = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel   = 99
 vim.opt.foldmethod  = "expr"

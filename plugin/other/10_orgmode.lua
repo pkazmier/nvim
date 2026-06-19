@@ -14,19 +14,20 @@ Config.now(function()
   --             ~/org/meetings/<name>.org. A 1:1 is just a meeting whose name is
   --             a person; tag that name on an item anywhere (e.g. a task you owe
   --             someone, raised in another meeting) to surface it in their view.
-  --   agenda  -> a per-item flag for a genuine DISCUSSION-ONLY point
   --
-  -- FILETAGS carry IDENTITY ONLY -- never `agenda`. So:
+  -- FILETAGS carry IDENTITY ONLY. So:
   --   #+FILETAGS: alice         (alice's 1:1 file)
   --   #+FILETAGS: staff         (staff meeting file)
-  -- Items you record then default to ordinary tasks:
-  --   * TODO ...        your action      -> "Do now" + that meeting's view
-  --   * WAIT ...        delegated        -> "Waiting" + that meeting's view
-  --   * TODO ... :agenda:   a topic to raise (NOT a crisp action you track)
-  --                     -> "Do AND discuss" (kept out of "Do now") + the view
-  -- `agenda` is added deliberately, per item (e.g. <leader>ot), only when an
-  -- item is a thing-to-raise rather than your own task or a delegation. Your
-  -- own actions and delegated items are never agenda-tagged.
+  -- Items you record then take a TODO state (the "discuss vs do" axis is the
+  -- STATE itself, not a tag):
+  --   * AGND ...        a topic to RAISE  -> "Discuss" + that meeting's view
+  --   * NEXT/TODO ...   your action       -> "Do now" + that meeting's view
+  --   * WAIT ...        delegated         -> "Waiting" + that meeting's view
+  -- AGND is its own keyword (a discussion point is a distinct thing, never also a
+  -- tracked action), kept first in the list so it floats to the top of the
+  -- by-tag view (<leader>oM) -- your meeting-prep list. Add a keyworded item with
+  -- <S-CR> (new heading) then a snippet from snippets/org.json: type t/a/w + <C-j>
+  -- for TODO/AGND/WAIT.
 
   local org = require("orgmode")
 
@@ -35,9 +36,16 @@ Config.now(function()
     org_default_notes_file = "~/org/tasks.org",
 
     -- 4-char keywords for consistent-width badges. List order sets the sort
-    -- order under 'todo-state-up': NEXT, TODO, WAIT.
-    org_todo_keywords = { "NEXT(n)", "TODO(t)", "WAIT(w)", "|", "DONE(d)", "CNCL(c)" },
+    -- order under 'todo-state-up' (org has NO custom sort): AGND, NEXT, TODO,
+    -- WAIT. AGND is first so it floats to the top of <leader>oM. The price of
+    -- first place is that org's structural TODO inserts (iT/it, state-cycling)
+    -- default to the first keyword = AGND -- moot here, since we add keyworded
+    -- items via snippets (t/a/w + <C-j>), not org's default insert.
+    org_todo_keywords = { "AGND(a)", "NEXT(n)", "TODO(t)", "WAIT(w)", "|", "DONE(d)", "CNCL(c)" },
     org_deadline_warning_days = 7,
+    -- No blank line before a new heading -- lets <S-CR> bang out tight lists
+    -- (insert your own blank lines when you want spacing).
+    org_blank_before_new_entry = { heading = false, plain_list_item = false },
     -- org_use_tag_inheritance = true  -- default; filetags flow to headlines
 
     -- Heading aesthetics (native, no plugin):
@@ -59,27 +67,62 @@ Config.now(function()
     -- buffer with <leader>ot before finalizing (that's tagging, not refiling).
     org_capture_templates = {
       t = { description = "Task", template = "* TODO %?\n%a", target = "~/org/tasks.org", headline = "Tasks" },
+      -- Agenda item. %(...) runs at capture time and fuzzy-picks the tag from the
+      -- live tag list via a synchronous MiniPick (see Config.org_agenda_tag, which
+      -- returns ":tag:" or ""). Top-level -- found by AGND + tag anywhere.
+      a = {
+        description = "Agenda item",
+        template = "* AGND %? %(return Config.org_agenda_tag())",
+        target = "~/org/tasks.org",
+      },
+      -- Scheduled / recurring task: a dated TODO. %^t opens the calendar widget;
+      -- for a recurring task, add a repeater (e.g. +1w / +1m) inside the <> in the
+      -- capture buffer before finalizing. (One template covers both.)
+      s = {
+        description = "Scheduled task",
+        template = "* TODO %?\nSCHEDULED: %^t",
+        target = "~/org/tasks.org",
+        headline = "Tasks",
+      },
+      -- Deadline task: due-by date. Shows with a lead-in warning in the agenda
+      -- (org_deadline_warning_days) and in the weekly review (r).
+      d = {
+        description = "Deadline task",
+        template = "* TODO %?\nDEADLINE: %^t",
+        target = "~/org/tasks.org",
+        headline = "Tasks",
+      },
+      -- Calendar event: a birthday / anniversary / holiday. A plain heading (NO
+      -- todo keyword) with the active timestamp ON the heading line; %^t picks the
+      -- date, add +1y in the buffer for the usual yearly recurrence. No tag needed
+      -- -- Config.org_events() (<leader>oE) finds events structurally (no-todo
+      -- headline + plain active timestamp).
+      c = {
+        description = "Calendar event",
+        template = "* %? %^t",
+        target = "~/org/calendar.org",
+      },
     },
 
     org_agenda_custom_commands = {
-      -- PERSONAL TODO LIST, two sections. `agenda`-tagged items (incl. all
-      -- meeting items, via filetags) stay out of "Do now" and collect under
-      -- "Do AND discuss" so nothing you must act on is lost.
+      -- PERSONAL TODO LIST, two sections split by STATE. AGND items (discussion
+      -- topics) collect under "Discuss" and stay out of "Do now" so nothing you
+      -- must act on is buried under things you only mean to raise.
       w = {
         description = "Work list",
         types = {
           {
             type = "tags_todo",
-            match = "-agenda/NEXT|TODO",
+            match = "/NEXT|TODO",
             org_agenda_todo_ignore_scheduled = "past", -- VERIFY on your machine
             org_agenda_overriding_header = "Do now",
             org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
           },
           {
             type = "tags_todo",
-            match = "+agenda/NEXT|TODO",
-            org_agenda_overriding_header = "Do AND discuss",
-            org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
+            match = "/AGND",
+            org_agenda_overriding_header = "Discuss",
+            org_agenda_sorting_strategy = { "category-up", "priority-down" },
           },
         },
       },
@@ -167,8 +210,8 @@ Config.now(function()
 
   ----------------------------------------------------------------------------
   -- OPEN ITEMS BY TAG (MiniPick). One picker over every tag; pick one (a meeting,
-  -- a project, the `agenda` flag...) to list all open items carrying it, TODOs on
-  -- top and WAIT at the bottom.
+  -- a project...) to list all open items carrying it. AGND (discussion topics)
+  -- float to the top via todo-state-up -- your meeting-prep list.
   ----------------------------------------------------------------------------
   Config.org_items_by_tag = function()
     local o = require("orgmode").instance()
@@ -192,6 +235,25 @@ Config.now(function()
         end,
       },
     })
+  end
+
+  ----------------------------------------------------------------------------
+  -- AGENDA ITEM CAPTURE. The `a` capture template (in org_capture_templates) is
+  -- `* AGND %? %(return Config.org_agenda_tag())`. A capture template can't run an
+  -- ASYNC picker, but MiniPick.start() is SYNCHRONOUS -- it blocks and returns the
+  -- chosen item -- so it works inside the template's %(...) expansion. A no-op
+  -- `choose` makes start() just return the item (no default file-open). Returns
+  -- ":tag:" or "" (cancelled). Reached via the capture menu (<leader>oc -> a).
+  ----------------------------------------------------------------------------
+  Config.org_agenda_tag = function()
+    local o = require("orgmode").instance()
+    o.files:load() -- idempotent; populates the tag list
+    local tags = o.files:get_tags()
+    if vim.tbl_isempty(tags) then return "" end
+    local tag = require("mini.pick").start({
+      source = { name = "Agenda item: tag", items = tags, choose = function() end },
+    })
+    return (tag and tag ~= "") and (":" .. tag .. ":") or ""
   end
 
   ----------------------------------------------------------------------------
@@ -235,8 +297,56 @@ Config.now(function()
   -- headlines). Needs ripgrep, which mini.pick's grep uses.
   Config.org_grep = function() require("mini.pick").builtin.grep_live({}, { source = { cwd = ORG_ROOT } }) end
 
+  ----------------------------------------------------------------------------
+  -- EVENTS (MiniPick), date-sorted. A flat list of every recurring/dated EVENT
+  -- across all files -- defined STRUCTURALLY, no tag required: a headline with NO
+  -- todo keyword carrying a plain active timestamp. Birthdays/anniversaries/
+  -- appointments use a bare <date>; tasks use SCHEDULED/DEADLINE, so they're
+  -- excluded (date:is_none() keeps only active type-NONE stamps). Sorted by next
+  -- upcoming occurrence so the soonest is on top. This is the events view a
+  -- year-span time-grid can't give (org has no entry-type filter for plain dates).
+  ----------------------------------------------------------------------------
+  Config.org_events = function()
+    local o = require("orgmode").instance()
+    o.files:load() -- idempotent
+    -- next occurrence (today or later) of a yearly event, as a sortable time
+    local function next_occ(ts)
+      local d, t = os.date("*t", ts), os.date("*t")
+      local today = os.time({ year = t.year, month = t.month, day = t.day })
+      local cand = os.time({ year = t.year, month = d.month, day = d.day })
+      if cand < today then cand = os.time({ year = t.year + 1, month = d.month, day = d.day }) end
+      return cand
+    end
+    local items = {}
+    for _, file in ipairs(o.files:all()) do
+      local short = org_rel(file.filename)
+      for _, h in ipairs(file:get_headlines()) do
+        if not h:get_todo() then -- events carry no todo keyword
+          for _, date in ipairs(h:get_all_dates()) do
+            if date:is_none() then -- plain ACTIVE timestamp (excludes SCHEDULED/DEADLINE)
+              local nxt = next_occ(date.timestamp)
+              -- strip a trailing <timestamp> from the title (events keep the date
+              -- on the heading line, so get_title includes it)
+              local title = h:get_title():gsub("%s*<[^>]*>%s*$", "")
+              items[#items + 1] = {
+                text = ("%s  %s  (%s)"):format(os.date("%Y-%m-%d %a", nxt), title, short),
+                path = file.filename,
+                lnum = h:get_range().start_line,
+                _next = nxt,
+              }
+              break -- one row per headline
+            end
+          end
+        end
+      end
+    end
+    if vim.tbl_isempty(items) then return vim.notify("No events found", vim.log.levels.WARN) end
+    table.sort(items, function(a, b) return a._next < b._next end)
+    require("mini.pick").start({ source = { name = "Events (next first)", items = items } })
+  end
+
   -- Tag vocabulary, top of e.g. ~/org/tasks.org:
-  --   #+TAGS: alice bob staff eng_sync project_x agenda
+  --   #+TAGS: alice bob staff eng_sync project_x
 
   ----------------------------------------------------------------------------
   -- FILE LAYOUT (convention)
