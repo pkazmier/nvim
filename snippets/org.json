@@ -1,0 +1,17 @@
+{
+  "TODO": {
+    "prefix": "t",
+    "body": "TODO ",
+    "description": "Insert todo item"
+  },
+  "AGND": {
+    "prefix": "a",
+    "body": "AGND ",
+    "description": "Insert agenda item"
+  },
+  "WAIT": {
+    "prefix": "w",
+    "body": "WAIT ",
+    "description": "Insert wait item"
+  }
+}
