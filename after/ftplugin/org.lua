@@ -1,8 +1,3 @@
--- Buffer-local overrides for org files. This runs AFTER orgmode's own
--- ftplugin/org.lua (the `after/` dir is last on 'runtimepath'), so org's
--- buffer-local mappings -- set synchronously there via config:setup_mappings --
--- are already in place and we can override them directly, no autocmd/scheduling.
-
 -- Replace org's buffer-local Insert <CR> (org_return) with a mini.keymap
 -- multistep { pmenu_accept, minipairs_cr }. Why a replacement is needed: on any
 -- line org itself does not handle, org_return falls back by looking up the GLOBAL
@@ -15,12 +10,8 @@
 -- adding a heading/item/checkbox AND realigning/extending a table live there. So
 -- <CR> stays dead simple -- accept a mini.completion popup item, else a pair-aware
 -- newline -- and the global <CR> multistep is untouched for every other buffer.
---
--- NOTE: require() the function rather than the global MiniKeymap. This ftplugin
--- can run during a cold-start `nvim file.org` BEFORE mini.keymap's deferred
--- setup() assigns _G.MiniKeymap, so the global would be nil here; require works
--- immediately (mini.nvim is eagerly added) and map_multistep needs no setup().
-require("mini.keymap").map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" }, { buffer = true })
+local mini_keymap = require("mini.keymap")
+mini_keymap.map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" }, { buffer = true })
 
 -- <S-CR> = org's structural Enter, context-aware: inside a TABLE row hand off to
 -- org_return (realign / add a row -- it handles tables in its first action and
