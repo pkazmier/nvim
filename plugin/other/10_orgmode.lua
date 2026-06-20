@@ -48,6 +48,13 @@ Config.now(function()
     org_agenda_files = { "~/org/**/*" },
     org_default_notes_file = "~/org/tasks.org",
 
+    -- Disable org's buffer-local Insert <CR> (org_return). It has an upstream bug
+    -- (it vim.eval's the global mini.keymap <CR> expr map -> "E15"), and we don't
+    -- need it: our global <CR> handles newlines/popup, and <S-CR> owns structural
+    -- Enter (calling org_mappings:org_return() as a method, still available). This
+    -- lets the global <CR> apply in org buffers -- no buffer-local copy needed.
+    mappings = { org = { org_return = false } },
+
     -- 4-char keywords for consistent-width badges. List order sets the sort
     -- order under 'todo-state-up' (org has NO custom sort): AGND, NEXT, TODO,
     -- WAIT. AGND is first so it floats to the top of <leader>oM. The price of
@@ -222,7 +229,7 @@ Config.now(function()
   -- The pcall keeps the config working even before the plugin is installed.
   local bullets = require("org-bullets")
   bullets.setup({
-    concealcursor = false, -- keep the icon while the cursor is on the line
+    concealcursor = true, -- keep the icon (not the raw stars) on the cursor line
     symbols = {
       -- one per heading level (cycles): * Meetings, ** date, *** note, ...
       headlines = { "◉", "○", "✸", "✿", "✤", "✜" },
@@ -399,13 +406,14 @@ end
 -- view. Add :agenda: by hand only to a genuine thing-to-raise.
 ----------------------------------------------------------------------------
 
--- Open `path`, add today's dated entry UNDER the top-level "* Meetings"
--- heading (creating that heading if absent), newest first, and drop the
--- cursor into a child line in insert mode -- ready to type immediately.
+-- Open `path`, add today's dated entry as the first child of the top-level
+-- "* Meetings" heading (creating that heading if absent), newest first, and
+-- enter insert mode at the END of the date heading -- from there press <CR>/
+-- <S-CR> for notes, or SPC + a name for an ad-hoc meeting.
 local function start_entry(path)
   vim.cmd("edit " .. vim.fn.fnameescape(path))
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-  local date = os.date("%Y-%m-%d %a")
+  local date_line = "** " .. os.date("%Y-%m-%d %a")
 
   -- locate the "* Meetings" top-level heading (with or without trailing tags)
   local meetings_at
@@ -416,25 +424,21 @@ local function start_entry(path)
     end
   end
 
-  local row
+  local insert_at, new_lines
   if meetings_at then
-    -- new dated entry as the first child of Meetings (level 2 + level 3 note)
-    vim.api.nvim_buf_set_lines(0, meetings_at, meetings_at, false, { "** " .. date, "*** " })
-    row = meetings_at + 2
+    insert_at, new_lines = meetings_at, { date_line }
   else
     -- no Meetings heading yet: create it after the leading #+directives
-    local at = 0
+    insert_at = 0
     for i, line in ipairs(lines) do
-      if line:match("^%s*#%+") or line:match("^%s*$") then
-        at = i
-      else
-        break
-      end
+      if line:match("^%s*#%+") or line:match("^%s*$") then insert_at = i else break end
     end
-    vim.api.nvim_buf_set_lines(0, at, at, false, { "* Meetings", "** " .. date, "*** " })
-    row = at + 3
+    new_lines = { "* Meetings", date_line }
   end
-  vim.api.nvim_win_set_cursor(0, { row, 4 }) -- end of the '*** ' note line
+  vim.api.nvim_buf_set_lines(0, insert_at, insert_at, false, new_lines)
+
+  -- cursor on the date heading (last inserted line); startinsert! -> end of line
+  vim.api.nvim_win_set_cursor(0, { insert_at + #new_lines, 0 })
   vim.cmd("startinsert!")
 end
 
