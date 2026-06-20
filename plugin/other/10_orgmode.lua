@@ -341,6 +341,110 @@ end
 Config.org_grep = function() require("mini.pick").builtin.grep_live({}, { source = { cwd = ORG_ROOT } }) end
 
 ----------------------------------------------------------------------------
+-- TABLE EDITING. nvim-orgmode auto-realigns tables but ships NO cell-to-cell
+-- motion (its <Tab>/<S-Tab> are fold cycling), and its Table:handle_cr() (row
+-- insert) positions the cursor with a racy feedkeys('<Down>') + a separate
+-- vim.schedule('norm! F|' .. '<Right><Right>') -- the two run on the event loop
+-- with no ordering guarantee, so it doesn't reliably land in the first cell
+-- (and the <Right>s are mode-sensitive -- our <S-CR> fires from Normal mode
+-- too). These helpers do it deterministically by parsing the row's '|' columns
+-- ourselves. A reformatted cell renders as "| value ", so a cell's content
+-- starts 2 columns after its left '|': find('|') returns a 1-based byte index
+-- and nvim cursor columns are 0-based, so that column is simply find('|') + 1.
+-- Wired to <S-CR> (after/ftplugin/org.lua) and <Tab>/<S-Tab> (mini.keymap).
+----------------------------------------------------------------------------
+
+-- 1-based byte positions of every '|' on a line.
+local function org_table_pipes(line)
+  local t, i = {}, 0
+  while true do
+    i = line:find("|", i + 1, true)
+    if not i then return t end
+    t[#t + 1] = i
+  end
+end
+
+-- Classify line `lnum`: nil if it is not a table row (or off the buffer), "hr"
+-- for an hline separator (only pipes/dashes/pluses, e.g. |----+----|), else the
+-- line text for a data row. getline() returns "" off the buffer ends, which is
+-- not a table row, so this naturally stops at the table's top/bottom.
+local function org_table_row(lnum)
+  local line = vim.fn.getline(lnum)
+  if not line:find("^%s*|") then return nil end
+  if vim.trim(line):match("^|[-+|]+$") then return "hr" end
+  return line
+end
+
+-- Nearest DATA row in direction `dir` (-1 up / +1 down) from `lnum`, skipping
+-- hline separators; nil at the table edge. Used to wrap cell motion across rows.
+local function org_table_data_row(lnum, dir)
+  local l = lnum + dir
+  while true do
+    local kind = org_table_row(l)
+    if kind == nil then return nil end
+    if kind ~= "hr" then return l end
+    l = l + dir
+  end
+end
+
+-- Add a blank row below the current one, realign, and drop the cursor (in
+-- Insert mode) into its first cell. Insert a bare '|' line: org's parser reads
+-- it as a one-cell row joined to the table, so Table:reformat() pads it out to
+-- the full column set. col('$') is passed so the table node is found whatever
+-- the table's indent (mirrors org's own from_current_node default).
+Config.org_table_new_row = function()
+  local row = vim.fn.line(".")
+  local indent = string.rep(" ", vim.fn.indent(row))
+  vim.api.nvim_buf_set_lines(0, row, row, true, { indent .. "|" })
+  local tbl = require("orgmode.files.elements.table").from_current_node({ row, vim.fn.col("$") })
+  if tbl then tbl:reformat() end
+  local newrow = row + 1
+  local bar = (vim.api.nvim_buf_get_lines(0, newrow - 1, newrow, true)[1] or ""):find("|")
+  vim.api.nvim_win_set_cursor(0, { newrow, bar and bar + 1 or 0 })
+  vim.cmd("startinsert")
+end
+
+-- Move to the next cell (like Emacs <Tab>): at the end of a row, into the next
+-- data row's FIRST cell; at the last cell of the last row, start a new row.
+Config.org_table_next_cell = function()
+  local col, ps = vim.api.nvim_win_get_cursor(0)[2], org_table_pipes(vim.api.nvim_get_current_line())
+  local nextp
+  for _, p in ipairs(ps) do
+    if p - 1 > col then
+      nextp = p
+      break
+    end
+  end
+  -- A cell to the right on this row (the last '|' is the right border, not a cell).
+  if nextp and nextp ~= ps[#ps] then return vim.api.nvim_win_set_cursor(0, { vim.fn.line("."), nextp + 1 }) end
+  -- End of row: into the next data row's first cell, or a fresh row past the last.
+  local nrow = org_table_data_row(vim.fn.line("."), 1)
+  if not nrow then return Config.org_table_new_row() end
+  local first = org_table_pipes(vim.fn.getline(nrow))[1]
+  vim.api.nvim_win_set_cursor(0, { nrow, first and first + 1 or 0 })
+end
+
+-- Move to the previous cell (like Emacs <S-Tab>): at the start of a row, into
+-- the previous data row's LAST cell; no-op at the very first cell of the table.
+Config.org_table_prev_cell = function()
+  local col, ps = vim.api.nvim_win_get_cursor(0)[2], org_table_pipes(vim.api.nvim_get_current_line())
+  local idx
+  for i = #ps, 1, -1 do
+    if ps[i] - 1 < col then
+      idx = i
+      break
+    end
+  end
+  -- A cell to the left on this row (idx 1 is the left border = already first cell).
+  if idx and idx > 1 then return vim.api.nvim_win_set_cursor(0, { vim.fn.line("."), ps[idx - 1] + 1 }) end
+  -- Start of row: into the previous data row's last cell (2nd-to-last '|' = its border).
+  local prow = org_table_data_row(vim.fn.line("."), -1)
+  if not prow then return end
+  local pps = org_table_pipes(vim.fn.getline(prow))
+  if #pps >= 2 then vim.api.nvim_win_set_cursor(0, { prow, pps[#pps - 1] + 1 }) end
+end
+
+----------------------------------------------------------------------------
 -- EVENTS (MiniPick), date-sorted. A flat list of every recurring/dated EVENT
 -- across all files -- defined STRUCTURALLY, no tag required: a headline with NO
 -- todo keyword carrying a plain active timestamp. Birthdays/anniversaries/
@@ -431,7 +535,11 @@ local function start_entry(path)
     -- no Meetings heading yet: create it after the leading #+directives
     insert_at = 0
     for i, line in ipairs(lines) do
-      if line:match("^%s*#%+") or line:match("^%s*$") then insert_at = i else break end
+      if line:match("^%s*#%+") or line:match("^%s*$") then
+        insert_at = i
+      else
+        break
+      end
     end
     new_lines = { "* Meetings", date_line }
   end

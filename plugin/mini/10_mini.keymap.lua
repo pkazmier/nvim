@@ -38,11 +38,23 @@ Config.later(function()
     }
   end
 
+  -- Org tables: <Tab>/<S-Tab> move between cells (org itself has no cell motion
+  -- -- its <Tab>/<S-Tab> are fold cycling). <Tab> on the last cell starts a new
+  -- row. Gated to '|' rows, so outside a table it falls through to the indent
+  -- steps. The cell movers live on Config (plugin/other/10_orgmode.lua, loaded
+  -- AFTER this file), so look them up by name at keypress time, not at setup.
+  local function table_cell(fn)
+    return {
+      condition = function() return vim.bo.filetype == "org" and vim.api.nvim_get_current_line():find("^%s*|") ~= nil end,
+      action = function() return Config[fn] end,
+    }
+  end
+
   -- I really like "jump_after_close" when used with an auto pair plugin. It
   -- makes it trivial to skip after the closing quote/bracket/brace/paren.
   -- stylua: ignore start
-  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", indent_step("do_demote"),  "increase_indent", "jump_after_close" })
-  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", indent_step("do_promote"), "decrease_indent", "jump_before_open" })
+  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", table_cell("org_table_next_cell"), indent_step("do_demote"),  "increase_indent", "jump_after_close" })
+  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", table_cell("org_table_prev_cell"), indent_step("do_promote"), "decrease_indent", "jump_before_open" })
   MiniKeymap.map_multistep("i", "<CR>",    { "pmenu_accept",      "minipairs_cr" })
   MiniKeymap.map_multistep("i", "<BS>",    { "minipairs_bs" })
   -- stylua: ignore end
