@@ -5,17 +5,9 @@
 Config.later(function()
   require("mini.keymap").setup()
 
-  -- Custom multi-step steps for orgmode: <Tab> / <S-Tab> indent / de-indent the
-  -- heading or list item under the cursor in Insert mode (org has no insert-mode
-  -- mapping for this). In org terms "demote" deepens a heading (* -> **, visually
-  -- indents) and "promote" shallows it -- the same actions bound to >> / << in
-  -- Normal mode; on a list item they indent / outdent the item. Gated to those
-  -- two structures so ordinary <Tab> behavior (snippets, indent, pair-jumping)
-  -- is untouched on plain body text.
-  --
-  -- do_promote/do_demote modify the buffer, which an expression mapping forbids
-  -- (see |MiniKeymap.map_multistep()| notes), so each action RETURNS a function
-  -- to be run later as `<Cmd>lua f()<CR>`.
+  -- Org <Tab>/<S-Tab> steps: indent / de-indent the heading or list item under
+  -- the cursor in Insert mode (org has no insert mapping for this; demote/promote
+  -- are >> / << in Normal mode). Gated to org headings/list lines so ordinary
   local function on_org_structure()
     if vim.bo.filetype ~= "org" then return false end
     local line = vim.api.nvim_get_current_line()
@@ -25,27 +17,32 @@ Config.later(function()
       or line:find("^%s*%d+[.)]%s") ~= nil -- ordered list (1. / 1))
   end
 
-  local function org_mappings() return require("orgmode").instance().org_mappings end
+  -- After demote/promote, shift the cursor by the line-length change: org restores
+  -- the ORIGINAL column (winrestview) while the added/removed stars shift the text,
+  -- stranding the cursor among the stars after repeated <Tab>. Capture the cursor
+  -- BEFORE -- promote shortens the line and winrestview clamps a near-end cursor,
+  -- so reading it back would over-shift past the space.
+  local function indent_step(method)
+    return {
+      condition = on_org_structure,
+      action = function()
+        return function()
+          local om = require("orgmode").instance().org_mappings
+          local cur = vim.api.nvim_win_get_cursor(0)
+          local before = #vim.api.nvim_get_current_line()
+          om[method](om)
+          local delta = #vim.api.nvim_get_current_line() - before
+          if delta ~= 0 then vim.api.nvim_win_set_cursor(0, { cur[1], math.max(0, cur[2] + delta) }) end
+        end
+      end,
+    }
+  end
 
-  local orgmode_indent = {
-    condition = on_org_structure,
-    action = function()
-      return function() org_mappings():do_demote() end
-    end,
-  }
-
-  local orgmode_deindent = {
-    condition = on_org_structure,
-    action = function()
-      return function() org_mappings():do_promote() end
-    end,
-  }
-
-  -- stylua: ignore start
   -- I really like "jump_after_close" when used with an auto pair plugin. It
   -- makes it trivial to skip after the closing quote/bracket/brace/paren.
-  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", orgmode_indent,   "increase_indent", "jump_after_close" })
-  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", orgmode_deindent, "decrease_indent", "jump_before_open" })
+  -- stylua: ignore start
+  MiniKeymap.map_multistep("i", "<Tab>",   { "minisnippets_next", indent_step("do_demote"),  "increase_indent", "jump_after_close" })
+  MiniKeymap.map_multistep("i", "<S-Tab>", { "minisnippets_prev", indent_step("do_promote"), "decrease_indent", "jump_before_open" })
   MiniKeymap.map_multistep("i", "<CR>",    { "pmenu_accept",      "minipairs_cr" })
   MiniKeymap.map_multistep("i", "<BS>",    { "minipairs_bs" })
   -- stylua: ignore end
