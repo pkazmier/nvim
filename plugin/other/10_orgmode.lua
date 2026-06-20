@@ -176,6 +176,17 @@ Config.now(function()
     },
   })
 
+  local setup_org_hl_groups = function()
+    vim.api.nvim_set_hl(0, "@org.agenda.header", { link = "MiniStarterSection" })
+    vim.api.nvim_set_hl(0, "@org.agenda.tag", { link = "Special" })
+  end
+
+  setup_org_hl_groups()
+  Config.new_autocmd("ColorScheme", {
+    desc = "Tune the agenda tag hl group to point to Special.",
+    callback = setup_org_hl_groups,
+  })
+
   ----------------------------------------------------------------------------
   -- ICON HEADING BULLETS (optional plugin: nvim-orgmode/org-bullets.nvim).
   -- Replaces the visible star with a per-level icon. Combined with the native
@@ -183,283 +194,287 @@ Config.now(function()
   -- single indented icon. Add the plugin to your plugin manager, e.g. lazy.nvim:
   --   { 'nvim-orgmode/orgmode', dependencies = { 'nvim-orgmode/org-bullets.nvim' } }
   -- The pcall keeps the config working even before the plugin is installed.
-  local ok_bullets, bullets = pcall(require, "org-bullets")
-  if ok_bullets then
-    bullets.setup({
-      concealcursor = false, -- keep the icon while the cursor is on the line
-      symbols = {
-        -- one per heading level (cycles): * Meetings, ** date, *** note, ...
-        headlines = { "◉", "○", "✸", "✿", "✤", "✜" },
-        list = "•",
-        checkboxes = {
-          half = { "", "@org.checkbox.halfchecked" },
-          done = { "✓", "@org.keyword.done" },
-          todo = { "˟", "@org.keyword.todo" },
-        },
+  local bullets = require("org-bullets")
+  bullets.setup({
+    concealcursor = false, -- keep the icon while the cursor is on the line
+    symbols = {
+      -- one per heading level (cycles): * Meetings, ** date, *** note, ...
+      headlines = { "◉", "○", "✸", "✿", "✤", "✜" },
+      list = "•",
+      checkboxes = {
+        half = { "", "@org.checkbox.halfchecked" },
+        done = { "✓", "@org.keyword.done" },
+        todo = { "˟", "@org.keyword.todo" },
       },
-    })
+    },
+  })
+end)
+
+local ORG_ROOT = vim.fn.expand("~/org") .. "/"
+local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
+
+-- CUSTOM ORG COMMANDS. Exposed as Config.org_* here and mapped globally in
+-- plugin/core/13_mappings.lua under <leader>o. They work from any buffer; the
+-- keys chosen there avoid the <leader>o<key> sequences org claims in org files
+-- (e.g. org's buffer-local <leader>oe export -- hence new meeting entry is om).
+
+----------------------------------------------------------------------------
+-- OPEN ITEMS BY TAG (MiniPick). One picker over every tag; pick one (a meeting,
+-- a project...) to list all open items carrying it. AGND (discussion topics)
+-- float to the top via todo-state-up -- your meeting-prep list.
+----------------------------------------------------------------------------
+Config.org_items_by_tag = function()
+  local o = require("orgmode").instance()
+  o.files:load() -- idempotent; ensures the tag list is populated
+  local items = o.files:get_tags()
+  if vim.tbl_isempty(items) then return vim.notify("No tags found", vim.log.levels.WARN) end
+  require("mini.pick").start({
+    source = {
+      name = "Open items by tag",
+      items = items,
+      choose = function(tag)
+        if not tag then return end
+        vim.schedule(function() -- run after the picker closes
+          o.agenda:tags_todo({
+            match_query = tag,
+            todo_only = true,
+            header = "Open items: " .. tag,
+            sorting_strategy = { "todo-state-up", "priority-down" },
+          })
+        end)
+      end,
+    },
+  })
+end
+
+----------------------------------------------------------------------------
+-- AGENDA ITEM CAPTURE. The `a` capture template (in org_capture_templates) is
+-- `* AGND %? %(return Config.org_agenda_tag())`. A capture template can't run an
+-- ASYNC picker, but MiniPick.start() is SYNCHRONOUS -- it blocks and returns the
+-- chosen item -- so it works inside the template's %(...) expansion. A no-op
+-- `choose` makes start() just return the item (no default file-open). Returns
+-- ":tag:" or "" (cancelled). Reached via the capture menu (<leader>oc -> a).
+----------------------------------------------------------------------------
+Config.org_agenda_tag = function()
+  local o = require("orgmode").instance()
+  o.files:load() -- idempotent; populates the tag list
+  local tags = o.files:get_tags()
+  if vim.tbl_isempty(tags) then return "" end
+  local tag = require("mini.pick").start({
+    source = { name = "Agenda item: tag", items = tags, choose = function() end },
+  })
+  return (tag and tag ~= "") and (":" .. tag .. ":") or ""
+end
+
+----------------------------------------------------------------------------
+-- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick).
+-- Items carry the absolute `path`, so mini.pick's default choose/preview open
+-- and preview the file for free; `text` shows the path relative to ~/org.
+Config.org_files = function()
+  local o = require("orgmode").instance()
+  o.files:load() -- idempotent
+  local items = {}
+  for _, p in ipairs(o.files:filenames()) do
+    items[#items + 1] = { text = org_rel(p), path = p }
   end
+  if vim.tbl_isempty(items) then return end
+  require("mini.pick").start({ source = { name = "Org files", items = items } })
+end
 
-  local ORG_ROOT = vim.fn.expand("~/org") .. "/"
-  local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
-
-  -- CUSTOM ORG COMMANDS. Exposed as Config.org_* here and mapped globally in
-  -- plugin/core/13_mappings.lua under <leader>o. They work from any buffer; the
-  -- keys chosen there avoid the <leader>o<key> sequences org claims in org files
-  -- (e.g. org's buffer-local <leader>oe export -- hence new meeting entry is om).
-
-  ----------------------------------------------------------------------------
-  -- OPEN ITEMS BY TAG (MiniPick). One picker over every tag; pick one (a meeting,
-  -- a project...) to list all open items carrying it. AGND (discussion topics)
-  -- float to the top via todo-state-up -- your meeting-prep list.
-  ----------------------------------------------------------------------------
-  Config.org_items_by_tag = function()
-    local o = require("orgmode").instance()
-    o.files:load() -- idempotent; ensures the tag list is populated
-    local items = o.files:get_tags()
-    if vim.tbl_isempty(items) then return vim.notify("No tags found", vim.log.levels.WARN) end
-    require("mini.pick").start({
-      source = {
-        name = "Open items by tag",
-        items = items,
-        choose = function(tag)
-          if not tag then return end
-          vim.schedule(function() -- run after the picker closes
-            o.agenda:tags_todo({
-              match_query = tag,
-              todo_only = true,
-              header = "Open items: " .. tag,
-              sorting_strategy = { "todo-state-up", "priority-down" },
-            })
-          end)
-        end,
-      },
-    })
-  end
-
-  ----------------------------------------------------------------------------
-  -- AGENDA ITEM CAPTURE. The `a` capture template (in org_capture_templates) is
-  -- `* AGND %? %(return Config.org_agenda_tag())`. A capture template can't run an
-  -- ASYNC picker, but MiniPick.start() is SYNCHRONOUS -- it blocks and returns the
-  -- chosen item -- so it works inside the template's %(...) expansion. A no-op
-  -- `choose` makes start() just return the item (no default file-open). Returns
-  -- ":tag:" or "" (cancelled). Reached via the capture menu (<leader>oc -> a).
-  ----------------------------------------------------------------------------
-  Config.org_agenda_tag = function()
-    local o = require("orgmode").instance()
-    o.files:load() -- idempotent; populates the tag list
-    local tags = o.files:get_tags()
-    if vim.tbl_isempty(tags) then return "" end
-    local tag = require("mini.pick").start({
-      source = { name = "Agenda item: tag", items = tags, choose = function() end },
-    })
-    return (tag and tag ~= "") and (":" .. tag .. ":") or ""
-  end
-
-  ----------------------------------------------------------------------------
-  -- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick).
-  -- Items carry the absolute `path`, so mini.pick's default choose/preview open
-  -- and preview the file for free; `text` shows the path relative to ~/org.
-  Config.org_files = function()
-    local o = require("orgmode").instance()
-    o.files:load() -- idempotent
-    local items = {}
-    for _, p in ipairs(o.files:filenames()) do
-      items[#items + 1] = { text = org_rel(p), path = p }
+----------------------------------------------------------------------------
+-- SEARCH ALL HEADLINES (MiniPick). Jump to any heading across every file.
+-- Items carry path + lnum, so default choose jumps and preview shows context.
+Config.org_headlines = function()
+  local o = require("orgmode").instance()
+  o.files:load() -- idempotent
+  local items = {}
+  for _, file in ipairs(o.files:all()) do
+    local short = org_rel(file.filename)
+    for _, h in ipairs(file:get_headlines()) do
+      items[#items + 1] = {
+        text = ("%s  %s"):format(short, h:get_title()),
+        path = file.filename,
+        lnum = h:get_range().start_line,
+      }
     end
-    if vim.tbl_isempty(items) then return end
-    require("mini.pick").start({ source = { name = "Org files", items = items } })
   end
+  if vim.tbl_isempty(items) then return end
+  require("mini.pick").start({ source = { name = "Org headlines", items = items } })
+end
 
-  ----------------------------------------------------------------------------
-  -- SEARCH ALL HEADLINES (MiniPick). Jump to any heading across every file.
-  -- Items carry path + lnum, so default choose jumps and preview shows context.
-  Config.org_headlines = function()
-    local o = require("orgmode").instance()
-    o.files:load() -- idempotent
-    local items = {}
-    for _, file in ipairs(o.files:all()) do
-      local short = org_rel(file.filename)
-      for _, h in ipairs(file:get_headlines()) do
-        items[#items + 1] = {
-          text = ("%s  %s"):format(short, h:get_title()),
-          path = file.filename,
-          lnum = h:get_range().start_line,
-        }
-      end
-    end
-    if vim.tbl_isempty(items) then return end
-    require("mini.pick").start({ source = { name = "Org headlines", items = items } })
+----------------------------------------------------------------------------
+-- SEARCH ALL LINES (MiniPick live grep over ~/org, full text not just
+-- headlines). Needs ripgrep, which mini.pick's grep uses.
+Config.org_grep = function() require("mini.pick").builtin.grep_live({}, { source = { cwd = ORG_ROOT } }) end
+
+----------------------------------------------------------------------------
+-- EVENTS (MiniPick), date-sorted. A flat list of every recurring/dated EVENT
+-- across all files -- defined STRUCTURALLY, no tag required: a headline with NO
+-- todo keyword carrying a plain active timestamp. Birthdays/anniversaries/
+-- appointments use a bare <date>; tasks use SCHEDULED/DEADLINE, so they're
+-- excluded (date:is_none() keeps only active type-NONE stamps). Sorted by next
+-- upcoming occurrence so the soonest is on top. This is the events view a
+-- year-span time-grid can't give (org has no entry-type filter for plain dates).
+----------------------------------------------------------------------------
+Config.org_events = function()
+  local o = require("orgmode").instance()
+  o.files:load() -- idempotent
+  -- next occurrence (today or later) of a yearly event, as a sortable time
+  local function next_occ(ts)
+    local d, t = os.date("*t", ts), os.date("*t")
+    local today = os.time({ year = t.year, month = t.month, day = t.day })
+    local cand = os.time({ year = t.year, month = d.month, day = d.day })
+    if cand < today then cand = os.time({ year = t.year + 1, month = d.month, day = d.day }) end
+    return cand
   end
-
-  ----------------------------------------------------------------------------
-  -- SEARCH ALL LINES (MiniPick live grep over ~/org, full text not just
-  -- headlines). Needs ripgrep, which mini.pick's grep uses.
-  Config.org_grep = function() require("mini.pick").builtin.grep_live({}, { source = { cwd = ORG_ROOT } }) end
-
-  ----------------------------------------------------------------------------
-  -- EVENTS (MiniPick), date-sorted. A flat list of every recurring/dated EVENT
-  -- across all files -- defined STRUCTURALLY, no tag required: a headline with NO
-  -- todo keyword carrying a plain active timestamp. Birthdays/anniversaries/
-  -- appointments use a bare <date>; tasks use SCHEDULED/DEADLINE, so they're
-  -- excluded (date:is_none() keeps only active type-NONE stamps). Sorted by next
-  -- upcoming occurrence so the soonest is on top. This is the events view a
-  -- year-span time-grid can't give (org has no entry-type filter for plain dates).
-  ----------------------------------------------------------------------------
-  Config.org_events = function()
-    local o = require("orgmode").instance()
-    o.files:load() -- idempotent
-    -- next occurrence (today or later) of a yearly event, as a sortable time
-    local function next_occ(ts)
-      local d, t = os.date("*t", ts), os.date("*t")
-      local today = os.time({ year = t.year, month = t.month, day = t.day })
-      local cand = os.time({ year = t.year, month = d.month, day = d.day })
-      if cand < today then cand = os.time({ year = t.year + 1, month = d.month, day = d.day }) end
-      return cand
-    end
-    local items = {}
-    for _, file in ipairs(o.files:all()) do
-      local short = org_rel(file.filename)
-      for _, h in ipairs(file:get_headlines()) do
-        if not h:get_todo() then -- events carry no todo keyword
-          for _, date in ipairs(h:get_all_dates()) do
-            if date:is_none() then -- plain ACTIVE timestamp (excludes SCHEDULED/DEADLINE)
-              local nxt = next_occ(date.timestamp)
-              -- strip a trailing <timestamp> from the title (events keep the date
-              -- on the heading line, so get_title includes it)
-              local title = h:get_title():gsub("%s*<[^>]*>%s*$", "")
-              items[#items + 1] = {
-                text = ("%s  %s  (%s)"):format(os.date("%Y-%m-%d %a", nxt), title, short),
-                path = file.filename,
-                lnum = h:get_range().start_line,
-                _next = nxt,
-              }
-              break -- one row per headline
-            end
+  local items = {}
+  for _, file in ipairs(o.files:all()) do
+    local short = org_rel(file.filename)
+    for _, h in ipairs(file:get_headlines()) do
+      if not h:get_todo() then -- events carry no todo keyword
+        for _, date in ipairs(h:get_all_dates()) do
+          if date:is_none() then -- plain ACTIVE timestamp (excludes SCHEDULED/DEADLINE)
+            local nxt = next_occ(date.timestamp)
+            -- strip a trailing <timestamp> from the title (events keep the date
+            -- on the heading line, so get_title includes it)
+            local title = h:get_title():gsub("%s*<[^>]*>%s*$", "")
+            items[#items + 1] = {
+              text = ("%s  %s  (%s)"):format(os.date("%Y-%m-%d %a", nxt), title, short),
+              path = file.filename,
+              lnum = h:get_range().start_line,
+              _next = nxt,
+            }
+            break -- one row per headline
           end
         end
       end
     end
-    if vim.tbl_isempty(items) then return vim.notify("No events found", vim.log.levels.WARN) end
-    table.sort(items, function(a, b) return a._next < b._next end)
-    require("mini.pick").start({ source = { name = "Events (next first)", items = items } })
+  end
+  if vim.tbl_isempty(items) then return vim.notify("No events found", vim.log.levels.WARN) end
+  table.sort(items, function(a, b) return a._next < b._next end)
+  require("mini.pick").start({ source = { name = "Events (next first)", items = items } })
+end
+
+-- Tag vocabulary, top of e.g. ~/org/tasks.org:
+--   #+TAGS: alice bob staff eng_sync project_x
+
+----------------------------------------------------------------------------
+-- FILE LAYOUT (convention)
+--   ~/org/tasks.org            personal tasks (scheduled, recurring, captured)
+--   ~/org/meetings/<name>.org  one per recurring meeting -- a person's 1:1 or a
+--                              forum -- with #+FILETAGS: <name>
+--   ~/org/adhoc.org            ad-hoc meetings   (tag the date heading :who:)
+--   ~/org/projects/<name>.org  project notes/tasks
+--
+-- No inbox, no refiling: the agenda scans the whole tree and organizes by
+-- TODO state + tags, so a task is found wherever it lives. Type items right
+-- in the meeting file -- they inherit its identity tag, so your actions go to
+-- "Do now", delegations to "Waiting", both still showing in that meeting's
+-- view. Add :agenda: by hand only to a genuine thing-to-raise.
+----------------------------------------------------------------------------
+
+-- Open `path`, add today's dated entry UNDER the top-level "* Meetings"
+-- heading (creating that heading if absent), newest first, and drop the
+-- cursor into a child line in insert mode -- ready to type immediately.
+local function start_entry(path)
+  vim.cmd("edit " .. vim.fn.fnameescape(path))
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local date = os.date("%Y-%m-%d %a")
+
+  -- locate the "* Meetings" top-level heading (with or without trailing tags)
+  local meetings_at
+  for i, line in ipairs(lines) do
+    if line:match("^%*%s+Meetings%s*$") or line:match("^%*%s+Meetings%s+:") then
+      meetings_at = i
+      break
+    end
   end
 
-  -- Tag vocabulary, top of e.g. ~/org/tasks.org:
-  --   #+TAGS: alice bob staff eng_sync project_x
-
-  ----------------------------------------------------------------------------
-  -- FILE LAYOUT (convention)
-  --   ~/org/tasks.org            personal tasks (scheduled, recurring, captured)
-  --   ~/org/meetings/<name>.org  one per recurring meeting -- a person's 1:1 or a
-  --                              forum -- with #+FILETAGS: <name>
-  --   ~/org/adhoc.org            ad-hoc meetings   (tag the date heading :who:)
-  --   ~/org/projects/<name>.org  project notes/tasks
-  --
-  -- No inbox, no refiling: the agenda scans the whole tree and organizes by
-  -- TODO state + tags, so a task is found wherever it lives. Type items right
-  -- in the meeting file -- they inherit its identity tag, so your actions go to
-  -- "Do now", delegations to "Waiting", both still showing in that meeting's
-  -- view. Add :agenda: by hand only to a genuine thing-to-raise.
-  ----------------------------------------------------------------------------
-
-  -- Open `path`, add today's dated entry UNDER the top-level "* Meetings"
-  -- heading (creating that heading if absent), newest first, and drop the
-  -- cursor into a child line in insert mode -- ready to type immediately.
-  local function start_entry(path)
-    vim.cmd("edit " .. vim.fn.fnameescape(path))
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    local date = os.date("%Y-%m-%d %a")
-
-    -- locate the "* Meetings" top-level heading (with or without trailing tags)
-    local meetings_at
+  local row
+  if meetings_at then
+    -- new dated entry as the first child of Meetings (level 2 + level 3 note)
+    vim.api.nvim_buf_set_lines(0, meetings_at, meetings_at, false, { "** " .. date, "*** " })
+    row = meetings_at + 2
+  else
+    -- no Meetings heading yet: create it after the leading #+directives
+    local at = 0
     for i, line in ipairs(lines) do
-      if line:match("^%*%s+Meetings%s*$") or line:match("^%*%s+Meetings%s+:") then
-        meetings_at = i
+      if line:match("^%s*#%+") or line:match("^%s*$") then
+        at = i
+      else
         break
       end
     end
+    vim.api.nvim_buf_set_lines(0, at, at, false, { "* Meetings", "** " .. date, "*** " })
+    row = at + 3
+  end
+  vim.api.nvim_win_set_cursor(0, { row, 4 }) -- end of the '*** ' note line
+  vim.cmd("startinsert!")
+end
 
-    local row
-    if meetings_at then
-      -- new dated entry as the first child of Meetings (level 2 + level 3 note)
-      vim.api.nvim_buf_set_lines(0, meetings_at, meetings_at, false, { "** " .. date, "*** " })
-      row = meetings_at + 2
-    else
-      -- no Meetings heading yet: create it after the leading #+directives
-      local at = 0
-      for i, line in ipairs(lines) do
-        if line:match("^%s*#%+") or line:match("^%s*$") then
-          at = i
-        else
-          break
-        end
-      end
-      vim.api.nvim_buf_set_lines(0, at, at, false, { "* Meetings", "** " .. date, "*** " })
-      row = at + 3
+-- All recurring-meeting logs live in one folder; identity is just the file's
+-- name (no person/forum distinction, no sigil).
+local MEETINGS_DIR = vim.fn.expand("~/org/meetings")
+
+-- Scaffold a brand-new meeting log (#+FILETAGS: <name>), then start its entry.
+-- #+CATEGORY: meeting makes the agenda's left column read "meeting" (a type) for
+-- every item here, instead of the filename -- the specific meeting is still shown
+-- by its filetag.
+local function new_log()
+  vim.ui.input({ prompt = "Meeting name: " }, function(name)
+    if not name or vim.trim(name) == "" then return end
+    local slug = vim.trim(name):gsub("%s+", "_"):gsub("[^%w_]", "")
+    if slug == "" then return vim.notify("Invalid name", vim.log.levels.WARN) end
+    vim.fn.mkdir(MEETINGS_DIR, "p")
+    local path = MEETINGS_DIR .. "/" .. slug .. ".org"
+    if vim.fn.filereadable(path) == 0 then
+      vim.fn.writefile(
+        { "#+TITLE: " .. name, "#+CATEGORY: meeting", "#+FILETAGS: :" .. slug .. ":", "", "* Meetings" },
+        path
+      )
     end
-    vim.api.nvim_win_set_cursor(0, { row, 4 }) -- end of the '*** ' note line
-    vim.cmd("startinsert!")
-  end
+    -- register with the running instance so it appears in the pickers/agenda
+    -- immediately, without a restart or reload
+    require("orgmode").instance().files:add_to_paths(path)
+    start_entry(path)
+  end)
+end
 
-  -- All recurring-meeting logs live in one folder; identity is just the file's
-  -- name (no person/forum distinction, no sigil).
-  local MEETINGS_DIR = vim.fn.expand("~/org/meetings")
-
-  -- Scaffold a brand-new meeting log (#+FILETAGS: <name>), then start its entry.
-  local function new_log()
-    vim.ui.input({ prompt = "Meeting name: " }, function(name)
-      if not name or vim.trim(name) == "" then return end
-      local slug = vim.trim(name):gsub("%s+", "_"):gsub("[^%w_]", "")
-      if slug == "" then return vim.notify("Invalid name", vim.log.levels.WARN) end
-      vim.fn.mkdir(MEETINGS_DIR, "p")
-      local path = MEETINGS_DIR .. "/" .. slug .. ".org"
-      if vim.fn.filereadable(path) == 0 then
-        vim.fn.writefile({ "#+TITLE: " .. name, "#+FILETAGS: :" .. slug .. ":", "", "* Meetings" }, path)
-      end
-      -- register with the running instance so it appears in the pickers/agenda
-      -- immediately, without a restart or reload
-      require("orgmode").instance().files:add_to_paths(path)
-      start_entry(path)
-    end)
-  end
-
-  -- NEW MEETING ENTRY: pick an existing meeting log -- or create one -- then
-  -- insert today's dated heading and start typing at once.
-  Config.org_new_meeting_entry = function()
-    local items = { { text = "＋ New meeting log", is_new = true } } -- "New..." first
-    -- vim.fs.dir is silent on a missing dir (unlike vim.fn.readdir, which prints
-    -- "E484: Can't open file"), so MEETINGS_DIR not existing yet is a harmless
-    -- no-op -- no guard needed. Filter by name only (not the yielded type) to
-    -- stay symlink-tolerant: a symlinked log reports type "link", not "file".
-    for name in vim.fs.dir(MEETINGS_DIR) do
-      if name:match("%.org$") then
-        local p = MEETINGS_DIR .. "/" .. name
-        items[#items + 1] = { text = vim.fn.fnamemodify(p, ":t:r"), path = p }
-      end
+-- NEW MEETING ENTRY: pick an existing meeting log -- or create one -- then
+-- insert today's dated heading and start typing at once.
+Config.org_new_meeting_entry = function()
+  local items = { { text = "＋ New meeting log", is_new = true } } -- "New..." first
+  -- vim.fs.dir is silent on a missing dir (unlike vim.fn.readdir, which prints
+  -- "E484: Can't open file"), so MEETINGS_DIR not existing yet is a harmless
+  -- no-op -- no guard needed. Filter by name only (not the yielded type) to
+  -- stay symlink-tolerant: a symlinked log reports type "link", not "file".
+  for name in vim.fs.dir(MEETINGS_DIR) do
+    if name:match("%.org$") then
+      local p = MEETINGS_DIR .. "/" .. name
+      items[#items + 1] = { text = vim.fn.fnamemodify(p, ":t:r"), path = p }
     end
-    local adhoc = vim.fn.expand("~/org/adhoc.org")
-    if vim.fn.filereadable(adhoc) == 1 then items[#items + 1] = { text = "Ad Hoc meeting", path = adhoc } end
-
-    require("mini.pick").start({
-      source = {
-        name = "New meeting entry",
-        items = items,
-        choose = function(item)
-          if not item then return end
-          vim.schedule(function()
-            if item.is_new then
-              new_log()
-            else
-              start_entry(item.path)
-            end
-          end)
-        end,
-      },
-    })
   end
+  local adhoc = vim.fn.expand("~/org/adhoc.org")
+  if vim.fn.filereadable(adhoc) == 1 then items[#items + 1] = { text = "Ad Hoc meeting", path = adhoc } end
 
-  -- NOTE: org buffer-local mappings (<leader>it, <CR>, <S-CR>) live in
-  -- after/ftplugin/org.lua, which runs after orgmode's own ftplugin so it can
-  -- override org's buffer-local mappings without an autocmd or scheduling.
-end)
+  require("mini.pick").start({
+    source = {
+      name = "New meeting entry",
+      items = items,
+      choose = function(item)
+        if not item then return end
+        vim.schedule(function()
+          if item.is_new then
+            new_log()
+          else
+            start_entry(item.path)
+          end
+        end)
+      end,
+    },
+  })
+end
+
+-- NOTE: org buffer-local mappings (<leader>it, <CR>, <S-CR>) live in
+-- after/ftplugin/org.lua, which runs after orgmode's own ftplugin so it can
+-- override org's buffer-local mappings without an autocmd or scheduling.
