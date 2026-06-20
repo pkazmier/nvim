@@ -48,6 +48,11 @@ Config.now(function()
     org_agenda_files = { "~/org/**/*" },
     org_default_notes_file = "~/org/tasks.org",
 
+    -- Start week on Sunday in calendar widtget and agenda time grid views.
+    calendar_week_start_day = 0,
+    org_agenda_start_on_weekday = 0,
+    org_agenda_block_separator = "",
+
     -- Disable org's buffer-local Insert <CR> (org_return). It has an upstream bug
     -- (it vim.eval's the global mini.keymap <CR> expr map -> "E15"), and we don't
     -- need it: our global <CR> handles newlines/popup, and <S-CR> owns structural
@@ -64,8 +69,7 @@ Config.now(function()
     org_todo_keywords = { "AGND(a)", "NEXT(n)", "TODO(t)", "WAIT(w)", "|", "DONE(d)", "CNCL(c)" },
     org_todo_keyword_faces = org_todo_faces(),
     org_deadline_warning_days = 7,
-    -- No blank line before a new heading -- lets <S-CR> bang out tight lists
-    -- (insert your own blank lines when you want spacing).
+    org_log_into_drawer = "LOGBOOK",
     org_blank_before_new_entry = { heading = false, plain_list_item = false },
     -- org_use_tag_inheritance = true  -- default; filetags flow to headlines
 
@@ -87,7 +91,12 @@ Config.now(function()
     -- If a capture belongs to a person/meeting, add that tag in the capture
     -- buffer with <leader>ot before finalizing (that's tagging, not refiling).
     org_capture_templates = {
-      t = { description = "Task", template = "* TODO %?\n%a", target = "~/org/tasks.org", headline = "Tasks" },
+      -- No %a backlink: nvim-orgmode's %a is a bare [[file:PATH::LINE]] (line
+      -- number only, no headline/ID search), which rots immediately in our
+      -- newest-at-top meeting files. Retrieval here is positional-independent
+      -- anyway -- found by TODO state + tags wherever the item lives -- so the
+      -- durable pointer is a tag (add one with <leader>ot), not a file::line.
+      t = { description = "Task", template = "* TODO %?", target = "~/org/tasks.org", headline = "Tasks" },
       -- Agenda item. %(...) runs at capture time and fuzzy-picks the tag from the
       -- live tag list via a synchronous MiniPick (see Config.org_agenda_tag, which
       -- returns ":tag:" or ""). Top-level -- found by AGND + tag anywhere.
@@ -198,6 +207,9 @@ Config.now(function()
   })
 
   local setup_org_hl_groups = function()
+    vim.api.nvim_set_hl(0, "@org.agenda.day", { link = "Question" })
+    vim.api.nvim_set_hl(0, "@org.agenda.today", { link = "CursorLineNr" })
+    vim.api.nvim_set_hl(0, "@org.agenda.weekend.today", { link = "CursorLineNr" })
     vim.api.nvim_set_hl(0, "@org.agenda.header", { link = "MiniStarterSection" })
     vim.api.nvim_set_hl(0, "@org.agenda.tag", { link = "Special" })
 
