@@ -1,27 +1,14 @@
--- Replace org's buffer-local Insert <CR> (org_return) with a mini.keymap
--- multistep { pmenu_accept, minipairs_cr }. Why a replacement is needed: on any
--- line org itself does not handle, org_return falls back by looking up the GLOBAL
--- mini.keymap <CR> and `vim.eval`-ing its result -- but mini.keymap is an
--- expression map returning a keycode string ("<CR>"), and eval-ing that throws
--- "E15: Invalid expression" (an upstream org bug: it should feed a Lua-callback
--- expr map's return, not eval it). Pre-empting org_return here avoids that.
---
--- We intentionally keep ALL org "structural Enter" off <CR> and on <S-CR>: both
--- adding a heading/item/checkbox AND realigning/extending a table live there. So
--- <CR> stays dead simple -- accept a mini.completion popup item, else a pair-aware
--- newline -- and the global <CR> multistep is untouched for every other buffer.
-local mini_keymap = require("mini.keymap")
-mini_keymap.map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" }, { buffer = true })
-
 -- <S-CR> = org's structural Enter, context-aware: inside a TABLE row hand off to
--- org_return (realign / add a row -- it handles tables in its first action and
--- returns before the broken eval fallback); everywhere else meta_return (add a
--- sibling heading / list item / checkbox, the same method as org's <Leader><CR>).
--- This keeps <CR> simple and replaces the intrusive "every <CR> makes a heading"
--- of org_return_uses_meta_return. Needs a terminal that reports <S-CR> distinctly
--- (kitty keyboard protocol / modifyOtherKeys; Ghostty + Neovim 0.12 do);
--- otherwise it arrives as <CR>.
-vim.keymap.set("i", "<S-CR>", function()
+-- org_return (realign / add a row); everywhere else meta_return (add a sibling
+-- heading / list item / checkbox, the same method as org's <Leader><CR>).
+--
+-- org's own Insert <CR> (org_return) is DISABLED in org.setup, so the global
+-- <CR> multistep applies here -- no buffer-local <CR> needed. <Tab>/<S-Tab>
+-- heading indent lives in plugin/mini/10_mini.keymap.lua (filetype-gated there).
+--
+-- Needs a terminal that reports <S-CR> distinctly (kitty keyboard protocol /
+-- modifyOtherKeys; Ghostty + Neovim 0.12 do); otherwise it arrives as <CR>.
+vim.keymap.set({ "n", "i" }, "<S-CR>", function()
   local org_mappings = require("orgmode").instance().org_mappings
   if vim.api.nvim_get_current_line():find("^%s*|") then
     org_mappings:org_return() -- table row: realign / add row
