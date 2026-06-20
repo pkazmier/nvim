@@ -143,9 +143,16 @@ Config.now(function()
         types = {
           {
             type = "tags_todo",
-            match = "/NEXT|TODO",
+            match = "/NEXT",
             org_agenda_todo_ignore_scheduled = "past", -- VERIFY on your machine
             org_agenda_overriding_header = "Do now",
+            org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
+          },
+          {
+            type = "tags_todo",
+            match = "/TODO",
+            org_agenda_todo_ignore_scheduled = "past", -- VERIFY on your machine
+            org_agenda_overriding_header = "Do later",
             org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
           },
           {
@@ -209,6 +216,7 @@ Config.now(function()
   local setup_org_hl_groups = function()
     vim.api.nvim_set_hl(0, "@org.agenda.day", { link = "Question" })
     vim.api.nvim_set_hl(0, "@org.agenda.today", { link = "CursorLineNr" })
+    vim.api.nvim_set_hl(0, "@org.agenda.scheduled", { link = "SpecialComment" })
     vim.api.nvim_set_hl(0, "@org.agenda.weekend.today", { link = "CursorLineNr" })
     vim.api.nvim_set_hl(0, "@org.agenda.header", { link = "MiniStarterSection" })
     vim.api.nvim_set_hl(0, "@org.agenda.tag", { link = "Special" })
