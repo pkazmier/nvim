@@ -31,6 +31,19 @@ Config.now(function()
 
   local org = require("orgmode")
 
+  -- Todo-keyword colors derived from the CURRENT theme's Diagnostic groups, so
+  -- they track colorscheme switches. Recomputed (and re-applied) on ColorScheme
+  -- via setup_org_hl_groups below.
+  local function org_todo_faces()
+    local fg = function(group) return string.format("#%06x", Config.get_hl(group).fg) end
+    return {
+      AGND = ":weight bold :foreground " .. fg("DiagnosticInfo"),
+      NEXT = ":weight bold :foreground " .. fg("DiagnosticError"),
+      TODO = ":weight bold :foreground " .. fg("DiagnosticWarn"),
+      WAIT = ":weight bold :foreground " .. fg("DiagnosticHint"),
+    }
+  end
+
   org.setup({
     org_agenda_files = { "~/org/**/*" },
     org_default_notes_file = "~/org/tasks.org",
@@ -42,6 +55,7 @@ Config.now(function()
     -- default to the first keyword = AGND -- moot here, since we add keyworded
     -- items via snippets (t/a/w + <C-j>), not org's default insert.
     org_todo_keywords = { "AGND(a)", "NEXT(n)", "TODO(t)", "WAIT(w)", "|", "DONE(d)", "CNCL(c)" },
+    org_todo_keyword_faces = org_todo_faces(),
     org_deadline_warning_days = 7,
     -- No blank line before a new heading -- lets <S-CR> bang out tight lists
     -- (insert your own blank lines when you want spacing).
@@ -179,6 +193,18 @@ Config.now(function()
   local setup_org_hl_groups = function()
     vim.api.nvim_set_hl(0, "@org.agenda.header", { link = "MiniStarterSection" })
     vim.api.nvim_set_hl(0, "@org.agenda.tag", { link = "Special" })
+
+    -- Refresh the todo-keyword faces from the new theme. org reads them from its
+    -- config, so push fresh values with config:extend. Then re-apply -- but org
+    -- applies faces with `hi default` (won't override a set group) AND its own
+    -- ColorScheme handler re-defines them first, so clear the @org.keyword.face.*
+    -- groups before re-defining or the old colors stick.
+    local cfg = require("orgmode.config")
+    cfg:extend({ org_todo_keyword_faces = org_todo_faces() })
+    for keyword in pairs(cfg.org_todo_keyword_faces) do
+      vim.cmd("highlight clear @org.keyword.face." .. keyword:gsub("%-", ""))
+    end
+    require("orgmode.colors.highlights").define_todo_keyword_faces()
   end
 
   setup_org_hl_groups()
