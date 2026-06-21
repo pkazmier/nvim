@@ -24,10 +24,10 @@ Config.now(function()
   --   * NEXT/TODO ...   your action       -> "Do now" + that meeting's view
   --   * WAIT ...        delegated         -> "Waiting" + that meeting's view
   -- AGND is its own keyword (a discussion point is a distinct thing, never also a
-  -- tracked action), kept first in the list so it floats to the top of the
-  -- by-tag view (<leader>oM) -- your meeting-prep list. Add a keyworded item with
-  -- <S-CR> (new heading) then a snippet from snippets/org.json: type t/a/w + <C-j>
-  -- for TODO/AGND/WAIT.
+  -- tracked action); <leader>oM (your meeting-prep list) gives it its own block,
+  -- so it no longer needs to be first in org_todo_keywords to surface. Add a
+  -- keyworded item with <S-CR> (new heading) then a snippet from snippets/org.json:
+  -- type t/a/w + <C-j> for TODO/AGND/WAIT.
 
   local org = require("orgmode")
 
@@ -69,14 +69,22 @@ Config.now(function()
     -- lets the global <CR> apply in org buffers -- no buffer-local copy needed.
     mappings = { org = { org_return = false } },
 
-    -- 4-char keywords for consistent-width badges. List order sets the sort
-    -- order under 'todo-state-up' (org has NO custom sort): AGND, NEXT, TODO,
-    -- WAIT. AGND is first so it floats to the top of <leader>oM. The price of
-    -- first place is that org's structural TODO inserts (iT/it, state-cycling)
-    -- default to the first keyword = AGND -- moot here, since we add keyworded
-    -- items via snippets (t/a/w + <C-j>), not org's default insert.
-    org_todo_keywords = { "AGND(a)", "NEXT(n)", "TODO(t)", "WAIT(w)", "|", "DONE(d)", "CNCL(c)" },
+    -- 4-char keywords for consistent-width badges. List order no longer drives
+    -- retrieval: <leader>oM and the weekly view now split each state into its own
+    -- block, so the old 'todo-state-up' float (which needed AGND first) is moot.
+    -- Order now only sets the fast-access menu order; TODO leads as the everyday
+    -- default, AGND trails as the odd-one-out (a discussion point, never a
+    -- tracked action). Reset target for repeating tasks is pinned explicitly
+    -- below (org_todo_repeat_to_state), NOT inferred from this order.
+    org_todo_keywords = { "TODO(t)", "NEXT(n)", "WAIT(w)", "AGND(a)", "|", "DONE(d)", "CNCL(c)" },
     org_todo_keyword_faces = org_todo_faces(),
+    -- When a repeating task (SCHEDULED/DEADLINE with a +N repeater) is marked
+    -- DONE, org advances the date and resets the keyword. WITHOUT this, it resets
+    -- to the first TODO-type keyword in the list (see TodoState:get_reset_todo) --
+    -- which would land on whatever leads org_todo_keywords. Pin it to TODO so a
+    -- recurrence comes back for re-triage in planning, never auto-promoted to
+    -- NEXT and never (the old bug) flipped to AGND.
+    org_todo_repeat_to_state = "TODO",
     org_deadline_warning_days = 7,
     org_log_into_drawer = "LOGBOOK",
     org_blank_before_new_entry = { heading = false, plain_list_item = false },
@@ -140,6 +148,7 @@ Config.now(function()
         description = "Calendar event",
         template = "* %? %^t",
         target = "~/org/calendar.org",
+        headline = "Events",
       },
     },
 
