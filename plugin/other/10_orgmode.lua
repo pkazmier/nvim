@@ -41,6 +41,8 @@ Config.now(function()
       NEXT = ":weight bold :foreground " .. fg("DiagnosticError"),
       TODO = ":weight bold :foreground " .. fg("DiagnosticWarn"),
       WAIT = ":weight bold :foreground " .. fg("DiagnosticHint"),
+      DONE = ":weight bold :foreground " .. fg("DiagnosticUnnecessary"),
+      CNCL = ":weight bold :foreground " .. fg("DiagnosticUnnecessary"),
     }
   end
 
@@ -135,78 +137,69 @@ Config.now(function()
     },
 
     org_agenda_custom_commands = {
-      -- PERSONAL TODO LIST, two sections split by STATE. AGND items (discussion
-      -- topics) collect under "Discuss" and stay out of "Do now" so nothing you
-      -- must act on is buried under things you only mean to raise.
-      w = {
-        description = "Work list",
+      -- DAILY LIST VIEW: This is the view I use throughout the day after I've
+      -- identified the NEXT items from my planning view.
+      d = {
+        description = "Daily list",
         types = {
+          { type = "agenda", org_agenda_span = "day", org_agenda_overriding_header = "Today" },
           {
             type = "tags_todo",
             match = "/NEXT",
-            org_agenda_todo_ignore_scheduled = "past", -- VERIFY on your machine
+            org_agenda_todo_ignore_scheduled = "past",
             org_agenda_overriding_header = "Do now",
-            org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
+          },
+        },
+      },
+
+      -- DAILY PLANNING VIEW: I use this every morning to identify the tasks
+      -- I want to do today by changing them from TODO to NEXT.
+      p = {
+        description = "Daily planning",
+        types = {
+          { type = "agenda", org_agenda_span = "week", org_agenda_overriding_header = "Week" },
+          {
+            type = "tags_todo",
+            match = "/NEXT",
+            org_agenda_todo_ignore_scheduled = "past",
+            org_agenda_overriding_header = "Do now",
           },
           {
             type = "tags_todo",
             match = "/TODO",
-            org_agenda_todo_ignore_scheduled = "past", -- VERIFY on your machine
+            org_agenda_todo_ignore_scheduled = "past",
             org_agenda_overriding_header = "Do later",
-            org_agenda_sorting_strategy = { "todo-state-up", "priority-down" },
+          },
+        },
+      },
+
+      -- WEEKLY REVIEW: I use this every week to review everything including
+      -- WAIT and AGND task.
+      r = {
+        description = "Weekly review",
+        types = {
+          { type = "agenda", org_agenda_span = 14, org_agenda_overriding_header = "Next 2 weeks" },
+          {
+            type = "tags_todo",
+            match = "/NEXT",
+            org_agenda_todo_ignore_scheduled = "past",
+            org_agenda_overriding_header = "Do now",
+          },
+          {
+            type = "tags_todo",
+            match = "/TODO",
+            org_agenda_todo_ignore_scheduled = "past",
+            org_agenda_overriding_header = "Do later",
+          },
+          {
+            type = "tags_todo",
+            match = "/WAIT",
+            org_agenda_overriding_header = "Waiting / Delegate ",
           },
           {
             type = "tags_todo",
             match = "/AGND",
             org_agenda_overriding_header = "Discuss",
-            org_agenda_sorting_strategy = { "category-up", "priority-down" },
-          },
-        },
-      },
-
-      d = {
-        description = "Today",
-        types = {
-          { type = "agenda", org_agenda_span = "day", org_agenda_overriding_header = "Today" },
-        },
-      },
-
-      g = {
-        description = "Waiting / delegated",
-        types = {
-          {
-            type = "tags_todo",
-            match = "/WAIT",
-            org_agenda_overriding_header = "Waiting on others",
-            org_agenda_sorting_strategy = { "category-up" },
-          },
-        },
-      },
-
-      -- WEEKLY REVIEW: the next two weeks of dated commitments (scheduled items
-      -- + deadlines leading in), then delegated items due for follow-up.
-      --
-      -- "Stale" follow-ups: nvim-orgmode does NOT timestamp WAIT transitions, so
-      -- there's no automatic "days in WAIT". Instead, when you delegate, give the
-      -- item a SCHEDULED follow-up date (when to chase it). This block then shows
-      -- WAIT items whose follow-up is due (scheduled today or earlier) plus any
-      -- WAIT with no date set -- and hides ones you've deferred to a future date.
-      -- (For true age-based staleness, add a :DELEGATED: <date> property when you
-      --  delegate and match e.g.  DELEGATED<="<-7d>"/WAIT  instead.)
-      r = {
-        description = "Weekly review",
-        types = {
-          {
-            type = "agenda",
-            org_agenda_span = 14,
-            org_agenda_overriding_header = "Next 2 weeks (scheduled & deadlines)",
-          },
-          {
-            type = "tags_todo",
-            match = "/WAIT",
-            org_agenda_todo_ignore_scheduled = "past", -- keep due/undated, hide deferred
-            org_agenda_overriding_header = "Follow up (delegated)",
-            org_agenda_sorting_strategy = { "category-up", "priority-down" },
           },
         },
       },
@@ -273,9 +266,22 @@ local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
 
 ----------------------------------------------------------------------------
 -- OPEN ITEMS BY TAG (MiniPick). One picker over every tag; pick one (a meeting,
--- a project...) to list all open items carrying it. AGND (discussion topics)
--- float to the top via todo-state-up -- your meeting-prep list.
+-- a project...) to see all open items carrying it, SPLIT into sections -- AGND
+-- to discuss, WAIT delegated, NEXT/TODO to do -- like the custom agenda views.
+--
+-- A single agenda:tags_todo() call goes through Agenda:open_view, which forces
+-- self.views to one view. The multi-section custom commands instead build
+-- several view objects and assign them all to agenda.views before rendering
+-- (see Agenda:_build_custom_commands upstream). We do the same here, only the
+-- match query (and thus the tag) is chosen dynamically. The query syntax is
+-- "tag/STATE"; '|' ORs todo states, so "<tag>/NEXT|TODO" is one section.
 ----------------------------------------------------------------------------
+local ORG_TAG_SECTIONS = {
+  { suffix = "/AGND", header = "Discuss" },
+  { suffix = "/NEXT|TODO", header = "To do" },
+  { suffix = "/WAIT", header = "Waiting / Delegated" },
+}
+
 Config.org_items_by_tag = function()
   local o = require("orgmode").instance()
   o.files:load() -- idempotent; ensures the tag list is populated
@@ -288,12 +294,26 @@ Config.org_items_by_tag = function()
       choose = function(tag)
         if not tag then return end
         vim.schedule(function() -- run after the picker closes
-          o.agenda:tags_todo({
-            match_query = tag,
-            todo_only = true,
-            header = "Open items: " .. tag,
-            sorting_strategy = { "todo-state-up", "priority-down" },
-          })
+          local agenda = o.agenda
+          local AgendaTypes = require("orgmode.agenda.types")
+          local views = {}
+          for i, section in ipairs(ORG_TAG_SECTIONS) do
+            -- id set => prepare()/redraw() skip the interactive "Match:" prompt
+            -- (these are fixed custom views); files/filters/highlighter are the
+            -- per-instance objects open_view would otherwise inject for us.
+            views[#views + 1] = AgendaTypes.tags_todo:new({
+              match_query = tag .. section.suffix,
+              todo_only = true,
+              header = ("%s: %s"):format(section.header, tag),
+              id = ("org_items_by_tag_%d"):format(i),
+              files = agenda.files,
+              agenda_filter = agenda.filters,
+              highlighter = agenda.highlighter,
+              sorting_strategy = { "priority-down" },
+            })
+          end
+          agenda.views = views
+          agenda:prepare_and_render()
         end)
       end,
     },
