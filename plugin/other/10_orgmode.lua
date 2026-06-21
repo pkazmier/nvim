@@ -55,6 +55,13 @@ Config.now(function()
     org_agenda_start_on_weekday = 0,
     org_agenda_block_separator = "",
 
+    -- Drop empty sections from any multi-block view -- the weekly review (r) and
+    -- the by-tag view (<leader>oM). org skips a block's header+body when it has
+    -- an `id` (true of every custom-command block, and we set one per by-tag
+    -- block) and resolves to zero headlines. The time-grid `agenda` block is
+    -- unaffected (no hide logic there) so the calendar always shows.
+    org_agenda_hide_empty_blocks = true,
+
     -- Disable org's buffer-local Insert <CR> (org_return). It has an upstream bug
     -- (it vim.eval's the global mini.keymap <CR> expr map -> "E15"), and we don't
     -- need it: our global <CR> handles newlines/popup, and <S-CR> owns structural
