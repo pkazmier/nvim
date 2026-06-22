@@ -1,3 +1,6 @@
+vim.opt_local.wrap = true
+vim.opt_local.spell = true
+
 -- <S-CR> = org's structural Enter, context-aware: in a TABLE row add/realign a
 -- row; everywhere else meta_return (add a sibling heading / list item / checkbox,
 -- the same method as org's <Leader><CR>).
