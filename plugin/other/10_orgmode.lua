@@ -24,8 +24,8 @@ Config.now(function()
   --   * NEXT/TODO ...   your action       -> "Do now" + that meeting's view
   --   * WAIT ...        delegated         -> "Waiting" + that meeting's view
   -- AGND is its own keyword (a discussion point is a distinct thing, never also a
-  -- tracked action); <leader>oM (your meeting-prep list) gives it its own block,
-  -- so it no longer needs to be first in org_todo_keywords to surface. Add a
+  -- tracked action); the custom agenda views give it its own block, so it no
+  -- longer needs to be first in org_todo_keywords to surface. Add a
   -- keyworded item with <S-CR> (new heading) then a snippet from snippets/org.json:
   -- type t/a/w + <C-j> for TODO/AGND/WAIT.
 
@@ -63,7 +63,7 @@ Config.now(function()
     mappings = { org = { org_return = false } },
 
     -- 4-char keywords for consistent-width badges. List order no longer drives
-    -- retrieval: <leader>oM and the weekly view now split each state into its own
+    -- retrieval: the custom agenda views now split each state into its own
     -- block, so the old 'todo-state-up' float (which needed AGND first) is moot.
     -- Order now only sets the fast-access menu order; TODO leads as the everyday
     -- default, AGND trails as the odd-one-out (a discussion point, never a
@@ -107,12 +107,12 @@ Config.now(function()
       -- anyway -- found by TODO state + tags wherever the item lives -- so the
       -- durable pointer is a tag (add one with <leader>ot), not a file::line.
       t = { description = "Task", template = "* TODO %?", target = "~/org/tasks.org", headline = "Tasks" },
-      -- Agenda item. %(...) runs at capture time and fuzzy-picks the tag from the
-      -- live tag list via a synchronous MiniPick (see Config.org_agenda_tag, which
-      -- returns ":tag:" or ""). Top-level -- found by AGND + tag anywhere.
+      -- Agenda item. Add the meeting/person tag in the capture buffer with
+      -- <leader>ot (native org_set_tags, which completes against the live tag
+      -- list) before finalizing. Top-level -- found by AGND + tag anywhere.
       a = {
         description = "Agenda item",
-        template = "* AGND %? %(return Config.org_agenda_tag())",
+        template = "* AGND %?",
         target = "~/org/tasks.org",
       },
       -- Scheduled / recurring task: a dated TODO. %^t opens the calendar widget;
@@ -134,9 +134,9 @@ Config.now(function()
       },
       -- Calendar event: a birthday / anniversary / holiday. A plain heading (NO
       -- todo keyword) with the active timestamp ON the heading line; %^t picks the
-      -- date, add +1y in the buffer for the usual yearly recurrence. No tag needed
-      -- -- Config.org_events() (<leader>oE) finds events structurally (no-todo
-      -- headline + plain active timestamp).
+      -- date, add +1y in the buffer for the usual yearly recurrence. No tag needed.
+      -- These collect under "* Events" in calendar.org -- open that file to view
+      -- them (also surfaced in the agenda time grid when within its span).
       c = {
         description = "Calendar event",
         template = "* %? %^t",
@@ -208,12 +208,43 @@ Config.now(function()
           {
             type = "tags_todo",
             match = "/WAIT",
-            org_agenda_overriding_header = "Waiting / Delegate ",
+            org_agenda_overriding_header = "Waiting / delegated",
           },
           {
             type = "tags_todo",
             match = "/AGND",
             org_agenda_overriding_header = "Discuss",
+          },
+        },
+      },
+
+      -- MEETING VIEW: every open item split into the three states, with NO date
+      -- filtering so the whole backlog sits in the buffer. Press / in the agenda
+      -- to filter by a person/meeting tag -- completion is over the tags actually
+      -- present in the buffer (case-sensitive). Replaces the old <leader>oM
+      -- MiniPick picker: same three sections, but pure built-in. Open via the
+      -- agenda menu (<leader>oa -> v), then / to filter. Priority-sorted within
+      -- each section.
+      v = {
+        description = "Meeting view",
+        types = {
+          {
+            type = "tags_todo",
+            match = "/AGND",
+            org_agenda_sorting_strategy = { "priority-down" },
+            org_agenda_overriding_header = "Discuss",
+          },
+          {
+            type = "tags_todo",
+            match = "/NEXT|TODO",
+            org_agenda_sorting_strategy = { "priority-down" },
+            org_agenda_overriding_header = "To do",
+          },
+          {
+            type = "tags_todo",
+            match = "/WAIT",
+            org_agenda_sorting_strategy = { "priority-down" },
+            org_agenda_overriding_header = "Waiting / delegated",
           },
         },
       },
@@ -277,81 +308,6 @@ local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
 -- plugin/core/13_mappings.lua under <leader>o. They work from any buffer; the
 -- keys chosen there avoid the <leader>o<key> sequences org claims in org files
 -- (e.g. org's buffer-local <leader>oe export -- hence new meeting entry is om).
-
-----------------------------------------------------------------------------
--- OPEN ITEMS BY TAG (MiniPick). One picker over every tag; pick one (a meeting,
--- a project...) to see all open items carrying it, SPLIT into sections -- AGND
--- to discuss, WAIT delegated, NEXT/TODO to do -- like the custom agenda views.
---
--- A single agenda:tags_todo() call goes through Agenda:open_view, which forces
--- self.views to one view. The multi-section custom commands instead build
--- several view objects and assign them all to agenda.views before rendering
--- (see Agenda:_build_custom_commands upstream). We do the same here, only the
--- match query (and thus the tag) is chosen dynamically. The query syntax is
--- "tag/STATE"; '|' ORs todo states, so "<tag>/NEXT|TODO" is one section.
-----------------------------------------------------------------------------
-local ORG_TAG_SECTIONS = {
-  { suffix = "/AGND", header = "Discuss" },
-  { suffix = "/NEXT|TODO", header = "To do" },
-  { suffix = "/WAIT", header = "Waiting / Delegated" },
-}
-
-Config.org_items_by_tag = function()
-  local o = require("orgmode").instance()
-  o.files:load() -- idempotent; ensures the tag list is populated
-  local items = o.files:get_tags()
-  if vim.tbl_isempty(items) then return vim.notify("No tags found", vim.log.levels.WARN) end
-  require("mini.pick").start({
-    source = {
-      name = "Open items by tag",
-      items = items,
-      choose = function(tag)
-        if not tag then return end
-        vim.schedule(function() -- run after the picker closes
-          local agenda = o.agenda
-          local AgendaTypes = require("orgmode.agenda.types")
-          local views = {}
-          for i, section in ipairs(ORG_TAG_SECTIONS) do
-            -- id set => prepare()/redraw() skip the interactive "Match:" prompt
-            -- (these are fixed custom views); files/filters/highlighter are the
-            -- per-instance objects open_view would otherwise inject for us.
-            views[#views + 1] = AgendaTypes.tags_todo:new({
-              match_query = tag .. section.suffix,
-              todo_only = true,
-              header = ("%s: %s"):format(section.header, tag),
-              id = ("org_items_by_tag_%d"):format(i),
-              files = agenda.files,
-              agenda_filter = agenda.filters,
-              highlighter = agenda.highlighter,
-              sorting_strategy = { "priority-down" },
-            })
-          end
-          agenda.views = views
-          agenda:prepare_and_render()
-        end)
-      end,
-    },
-  })
-end
-
-----------------------------------------------------------------------------
--- AGENDA ITEM CAPTURE. The `a` capture template (in org_capture_templates) is
--- `* AGND %? %(return Config.org_agenda_tag())`. A capture template can't run an
--- ASYNC picker, but MiniPick.start() is SYNCHRONOUS -- it blocks and returns the
--- chosen item -- so it works inside the template's %(...) expansion. A no-op
--- `choose` makes start() just return the item (no default file-open). Returns
--- ":tag:" or "" (cancelled). Reached via the capture menu (<leader>oc -> a).
-----------------------------------------------------------------------------
-Config.org_agenda_tag = function()
-  local o = require("orgmode").instance()
-  o.files:load() -- idempotent; populates the tag list
-  local tags = o.files:get_tags()
-  if vim.tbl_isempty(tags) then return "" end
-  local tag = require("mini.pick").start({
-    source = { name = "Agenda item: tag", items = tags, choose = function() end },
-  })
-  return (tag and tag ~= "") and (":" .. tag .. ":") or ""
-end
 
 ----------------------------------------------------------------------------
 -- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick).
@@ -496,54 +452,6 @@ Config.org_table_prev_cell = function()
   if not prow then return end
   local pps = org_table_pipes(vim.fn.getline(prow))
   if #pps >= 2 then vim.api.nvim_win_set_cursor(0, { prow, pps[#pps - 1] + 1 }) end
-end
-
-----------------------------------------------------------------------------
--- EVENTS (MiniPick), date-sorted. A flat list of every recurring/dated EVENT
--- across all files -- defined STRUCTURALLY, no tag required: a headline with NO
--- todo keyword carrying a plain active timestamp. Birthdays/anniversaries/
--- appointments use a bare <date>; tasks use SCHEDULED/DEADLINE, so they're
--- excluded (date:is_none() keeps only active type-NONE stamps). Sorted by next
--- upcoming occurrence so the soonest is on top. This is the events view a
--- year-span time-grid can't give (org has no entry-type filter for plain dates).
-----------------------------------------------------------------------------
-Config.org_events = function()
-  local o = require("orgmode").instance()
-  o.files:load() -- idempotent
-  -- next occurrence (today or later) of a yearly event, as a sortable time
-  local function next_occ(ts)
-    local d, t = os.date("*t", ts), os.date("*t")
-    local today = os.time({ year = t.year, month = t.month, day = t.day })
-    local cand = os.time({ year = t.year, month = d.month, day = d.day })
-    if cand < today then cand = os.time({ year = t.year + 1, month = d.month, day = d.day }) end
-    return cand
-  end
-  local items = {}
-  for _, file in ipairs(o.files:all()) do
-    local short = org_rel(file.filename)
-    for _, h in ipairs(file:get_headlines()) do
-      if not h:get_todo() then -- events carry no todo keyword
-        for _, date in ipairs(h:get_all_dates()) do
-          if date:is_none() then -- plain ACTIVE timestamp (excludes SCHEDULED/DEADLINE)
-            local nxt = next_occ(date.timestamp)
-            -- strip a trailing <timestamp> from the title (events keep the date
-            -- on the heading line, so get_title includes it)
-            local title = h:get_title():gsub("%s*<[^>]*>%s*$", "")
-            items[#items + 1] = {
-              text = ("%s  %s  (%s)"):format(os.date("%Y-%m-%d %a", nxt), title, short),
-              path = file.filename,
-              lnum = h:get_range().start_line,
-              _next = nxt,
-            }
-            break -- one row per headline
-          end
-        end
-      end
-    end
-  end
-  if vim.tbl_isempty(items) then return vim.notify("No events found", vim.log.levels.WARN) end
-  table.sort(items, function(a, b) return a._next < b._next end)
-  require("mini.pick").start({ source = { name = "Events (next first)", items = items } })
 end
 
 -- Tag vocabulary, top of e.g. ~/org/tasks.org:
