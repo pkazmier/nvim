@@ -310,18 +310,16 @@ local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
 -- (e.g. org's buffer-local <leader>oe export -- hence new meeting entry is om).
 
 ----------------------------------------------------------------------------
--- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick).
--- Items carry the absolute `path`, so mini.pick's default choose/preview open
--- and preview the file for free; `text` shows the path relative to ~/org.
+-- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick). builtin.files takes no glob
+-- filter, so drive ripgrep through builtin.cli instead: --glob '*.org' lists
+-- only org files -- which excludes *.org_archive (a different extension) -- and
+-- rg emits paths relative to source.cwd, so the list reads as ~/org-relative
+-- and mini.pick's default choose/preview open them for free.
 Config.org_files = function()
-  local o = require("orgmode").instance()
-  o.files:load() -- idempotent
-  local items = {}
-  for _, p in ipairs(o.files:filenames()) do
-    items[#items + 1] = { text = org_rel(p), path = p }
-  end
-  if vim.tbl_isempty(items) then return end
-  require("mini.pick").start({ source = { name = "Org files", items = items } })
+  require("mini.pick").builtin.cli(
+    { command = { "rg", "--files", "--glob", "*.org", "--color=never" } },
+    { source = { name = "Org files", cwd = ORG_ROOT } }
+  )
 end
 
 ----------------------------------------------------------------------------
