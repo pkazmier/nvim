@@ -85,10 +85,10 @@ Config.now(function()
     -- org_use_tag_inheritance = true  -- default; filetags flow to headlines
 
     -- Heading aesthetics (native, no plugin):
-    org_hide_leading_stars = true, -- show only the last star per heading
+    org_hide_leading_stars = false,
     org_startup_indented = true, -- virtual-indent content under its heading
     org_ellipsis = " ⤵", -- nicer fold marker than '...'
-    -- org_hide_emphasis_markers = true, -- hide the * / / _ around bold/italic
+    org_hide_emphasis_markers = true, -- hide the * / / _ around bold/italic
 
     -- Tag alignment, applied when org aligns tags (e.g. <leader>ot / set-tags):
     -- NEGATIVE = right-align so tags END at column |value| (default -80).
