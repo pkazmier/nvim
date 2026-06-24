@@ -314,15 +314,25 @@ local function org_rel(p) return (p:gsub("^" .. vim.pesc(ORG_ROOT), "")) end
 
 ----------------------------------------------------------------------------
 -- OPEN ANY ORG FILE FROM ANYWHERE (MiniPick). builtin.files takes no glob
--- filter, so drive ripgrep through builtin.cli instead: --glob '*.org' lists
--- only org files -- which excludes *.org_archive (a different extension) -- and
--- rg emits paths relative to source.cwd, so the list reads as ~/org-relative
--- and mini.pick's default choose/preview open them for free.
+-- filter, so drive ripgrep through builtin.cli: --glob '*.org' lists only org
+-- files (excluding *.org_archive, a different extension). The postprocess turns
+-- each rg path into a pretty item -- basename without .org, underscores to
+-- spaces (meetings/pete_kazmier.org -> "pete kazmier") -- so item.text is what's
+-- SHOWN and matched, while item.path (absolute) drives default open/preview.
 Config.org_files = function()
-  require("mini.pick").builtin.cli(
-    { command = { "rg", "--files", "--glob", "*.org", "--color=never" } },
-    { source = { name = "Org files", cwd = ORG_ROOT } }
-  )
+  require("mini.pick").builtin.cli({
+    command = { "rg", "--files", "--glob", "*.org", "--color=never" },
+    postprocess = function(paths)
+      local items = {}
+      for _, p in ipairs(paths) do
+        if p ~= "" then
+          local name = vim.fn.fnamemodify(p, ":t:r"):gsub("_", " ")
+          items[#items + 1] = { text = name, path = ORG_ROOT .. p }
+        end
+      end
+      return items
+    end,
+  }, { source = { name = "Org files", cwd = ORG_ROOT } })
 end
 
 ----------------------------------------------------------------------------
