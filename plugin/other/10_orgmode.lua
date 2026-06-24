@@ -54,6 +54,7 @@ Config.now(function()
     calendar_week_start_day = 0,
     org_agenda_start_on_weekday = 0,
     org_agenda_block_separator = "",
+    win_split_mode = "auto",
 
     -- Disable org's buffer-local Insert <CR> (org_return). It has an upstream bug
     -- (it vim.eval's the global mini.keymap <CR> expr map -> "E15"), and we don't
