@@ -210,11 +210,13 @@ Config.now(function()
             type = "tags_todo",
             match = "/WAIT",
             org_agenda_overriding_header = "Waiting / delegated",
+            org_agenda_sorting_strategy = { "tag-up", "priority-down" },
           },
           {
             type = "tags_todo",
             match = "/AGND",
             org_agenda_overriding_header = "Discuss",
+            org_agenda_sorting_strategy = { "tag-up", "priority-down" },
           },
         },
       },
