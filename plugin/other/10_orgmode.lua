@@ -115,6 +115,7 @@ Config.now(function()
         description = "Agenda item",
         template = "* AGND %?",
         target = "~/org/tasks.org",
+        headline = "Tasks",
       },
       -- Scheduled / recurring task: a dated TODO. %^t opens the calendar widget;
       -- for a recurring task, add a repeater (e.g. +1w / +1m) inside the <> in the
