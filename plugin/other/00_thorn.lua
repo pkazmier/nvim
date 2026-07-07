@@ -7,8 +7,8 @@ Config.now(function()
   require("thorn").setup({
     on_highlights = function(hl, p)
       hl.LeapLabel = { fg = p.bg, bg = p.orange, bold = true }
-      hl.MiniStatuslineDirectory = { bg = p.statusbar.bg, fg = p.gray }
-      hl.MiniStatuslineFilename = { bg = p.statusbar.bg, fg = p.gray, bold = true }
+      hl.MiniStatuslineDirectory = { bg = p.statusbar.bg, fg = p.fg }
+      hl.MiniStatuslineFilename = { bg = p.statusbar.bg, fg = p.fg, bold = true }
       hl.RenderMarkdownTableHead = { fg = p.green_5 }
       hl.RenderMarkdownTableRow = { fg = p.green_5 }
       hl["@markup.strong"] = { fg = p.green_2, bold = true }
