@@ -40,11 +40,11 @@
                         (functions.get_hl hl-name) fallback-hl-info)]
         (assert hl-info
                 "Must set one of 'Title', '@markup.heading', '@markup.heading.N', or '@markup.heading.N.markdown'")
-        (local hl-spec {})
-        (when hl-info.fg (set hl-spec.fg hl-info.fg))
-        (when hl-info.bg (set hl-spec.bg hl-info.bg))
-        (when hl-info.bold (set hl-spec.bold true))
-        (when hl-info.italic (set hl-spec.italic true))
+        ;; nil-valued keys simply don't appear in the constructed table
+        (local hl-spec {:fg hl-info.fg
+                        :bg hl-info.bg
+                        :bold hl-info.bold
+                        :italic hl-info.italic})
         (vim.api.nvim_set_hl 0 (.. :RenderMarkdownH lvl) hl-spec)
         (set hl-spec.reverse true)
         (vim.api.nvim_set_hl 0 (.. :RenderMarkdownH lvl :Bg) hl-spec))))

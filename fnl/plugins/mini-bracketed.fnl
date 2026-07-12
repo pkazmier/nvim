@@ -12,8 +12,7 @@
 (with-later! ; mini.bracketed
   (local bracketed (require :mini.bracketed))
   (bracketed.setup)
-  (local suffixes
-         (vim.tbl_map (fn [v] v.suffix) (vim.tbl_values bracketed.config)))
+  (local suffixes (icollect [_ v (pairs bracketed.config)] v.suffix))
   ;; Better mini.bracketed mappings, see comment in `gen_hydra_brackets`
   ;; definition within `config/functions.fnl`.
   (local functions (require :config.functions))

@@ -123,7 +123,7 @@
               dir (if (> n 1)
                       (.. (table.concat parts sep 1 (- n 1)) sep)
                       "")
-              hl (or (and vim.bo.modified args.modified_hl) args.filename_hl)
+              hl (if vim.bo.modified args.modified_hl args.filename_hl)
               file-hl (if hl (.. "%#" hl "#") "")
               modified (if vim.bo.modified " [+]" "")]
           (.. dir file-hl (. parts n) modified)))))

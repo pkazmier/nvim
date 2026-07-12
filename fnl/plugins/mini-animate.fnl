@@ -12,7 +12,6 @@
                       ;; Enable animation when moving horizontally within the
                       ;; same line as long as the jump is more than 30 cols. By
                       ;; default, animation is disabled when moving horizontally.
-                      {:predicate (fn [dest]
-                                    (let [(rows cols) (unpack dest)]
-                                      (or (> (math.abs rows) 1)
-                                          (> (math.abs cols) 30))))})}}))
+                      {:predicate (fn [[rows cols]]
+                                    (or (> (math.abs rows) 1)
+                                        (> (math.abs cols) 30)))})}}))

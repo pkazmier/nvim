@@ -55,7 +55,7 @@
                     :plugins.mini-pairs
                     :plugins.mini-pick
                     :plugins.mini-splitjoin
-                    ;; :plugins.mini-statuscolumn
+                    :plugins.mini-statuscolumn
                     :plugins.mini-surround
                     :plugins.mini-trailspace
                     :plugins.mini-visits

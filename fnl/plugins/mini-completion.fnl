@@ -9,7 +9,7 @@
                      :mappings {:force_fallback ""}})
 
   (fn on-attach [args]
-    (tset (. vim.bo args.buf) :omnifunc "v:lua.MiniCompletion.completefunc_lsp"))
+    (tset vim.bo args.buf :omnifunc "v:lua.MiniCompletion.completefunc_lsp"))
 
   (local autocmds (require :config.autocmds))
   (autocmds.new :LspAttach {:callback on-attach})

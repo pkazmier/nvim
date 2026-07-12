@@ -37,12 +37,14 @@
     (fn fg [group]
       (string.format "#%06x" (. (functions.get_hl group) :fg)))
 
-    {:AGND (.. ":weight bold :foreground " (fg :DiagnosticInfo))
-     :NEXT (.. ":weight bold :foreground " (fg :DiagnosticError))
-     :TODO (.. ":weight bold :foreground " (fg :DiagnosticWarn))
-     :WAIT (.. ":weight bold :foreground " (fg :DiagnosticHint))
-     :DONE (.. ":weight bold :foreground " (fg :DiagnosticUnnecessary))
-     :CNCL (.. ":weight bold :foreground " (fg :DiagnosticUnnecessary))})
+    (collect [keyword group (pairs {:AGND :DiagnosticInfo
+                                    :NEXT :DiagnosticError
+                                    :TODO :DiagnosticWarn
+                                    :WAIT :DiagnosticHint
+                                    :DONE :DiagnosticUnnecessary
+                                    :CNCL :DiagnosticUnnecessary})]
+      keyword
+      (.. ":weight bold :foreground " (fg group))))
 
   (org.setup {:org_agenda_files ["~/org/**/*"]
               :org_default_notes_file "~/org/tasks.org"
@@ -272,12 +274,10 @@
   (let [pick (require :mini.pick)]
     (pick.builtin.cli {:command [:rg :--files :--glob :*.org :--color=never]
                        :postprocess (fn [paths]
-                                      (local items [])
-                                      (each [_ p (ipairs paths)]
+                                      (icollect [_ p (ipairs paths)]
                                         (when (not= p "")
                                           (let [name (: (vim.fn.fnamemodify p ":t:r") :gsub "_" " ")]
-                                            (table.insert items {:text name :path (.. ORG-ROOT p)}))))
-                                      items)}
+                                            {:text name :path (.. ORG-ROOT p)}))))}
                       {:source {:name "Org files" :cwd ORG-ROOT}})))
 
 ;; ---------------------------------------------------------------------------
@@ -329,35 +329,36 @@
 ;; "* Meetings" heading (creating that heading if absent), newest first, and
 ;; enter insert mode at the END of the date heading -- from there press <CR>/
 ;; <S-CR> for notes, or SPC + a name for an ad-hoc meeting.
+;;
+;; Index of the last line in the leading run of #+directives / blank lines --
+;; where a "* Meetings" heading belongs when the file doesn't have one yet.
+(fn directive-prefix-end [lines]
+  (var last 0)
+  (var stop false)
+  (each [i line (ipairs lines) &until stop]
+    (if (or (line:match "^%s*#%+") (line:match "^%s*$"))
+        (set last i)
+        (set stop true)))
+  last)
+
 (fn start-entry [path]
   (vim.cmd (.. "edit " (vim.fn.fnameescape path)))
   (local lines (vim.api.nvim_buf_get_lines 0 0 -1 false))
   (local date-line (.. "** " (os.date "%Y-%m-%d %a")))
   ;; locate the "* Meetings" top-level heading (with or without trailing tags)
-  (var meetings-at nil)
-  (each [i line (ipairs lines) &until meetings-at]
-    (when (or (line:match "^%*%s+Meetings%s*$")
-              (line:match "^%*%s+Meetings%s+:"))
-      (set meetings-at i)))
-  (var insert-at nil)
-  (var new-lines nil)
-  (if meetings-at
-      (do
-        (set insert-at meetings-at)
-        (set new-lines [date-line]))
-      (do
-        ;; no Meetings heading yet: create it after the leading #+directives
-        (set insert-at 0)
-        (var stop false)
-        (each [i line (ipairs lines) &until stop]
-          (if (or (line:match "^%s*#%+") (line:match "^%s*$"))
-              (set insert-at i)
-              (set stop true)))
-        (set new-lines ["* Meetings" date-line])))
-  (vim.api.nvim_buf_set_lines 0 insert-at insert-at false new-lines)
-  ;; cursor on the date heading (last inserted line); startinsert! -> end of line
-  (vim.api.nvim_win_set_cursor 0 [(+ insert-at (length new-lines)) 0])
-  (vim.cmd :startinsert!))
+  (local meetings-at (accumulate [found nil i line (ipairs lines) &until found]
+                       (if (or (line:match "^%*%s+Meetings%s*$")
+                               (line:match "^%*%s+Meetings%s+:"))
+                           i
+                           found)))
+  (let [(insert-at new-lines) (if meetings-at
+                                  (values meetings-at [date-line])
+                                  (values (directive-prefix-end lines)
+                                          ["* Meetings" date-line]))]
+    (vim.api.nvim_buf_set_lines 0 insert-at insert-at false new-lines)
+    ;; cursor on the date heading (last inserted line); startinsert! -> end of line
+    (vim.api.nvim_win_set_cursor 0 [(+ insert-at (length new-lines)) 0])
+    (vim.cmd :startinsert!)))
 
 ;; All recurring-meeting logs live in one folder; identity is just the file's
 ;; name (no person/forum distinction, no sigil).
@@ -398,16 +399,17 @@
 ;; NEW MEETING ENTRY: pick an existing meeting log -- or create one -- then
 ;; insert today's dated heading and start typing at once.
 (fn new-meeting-entry []
-  ;; "New..." first
-  (local items [{:text "＋ New meeting log" :is_new true}])
   ;; vim.fs.dir is silent on a missing dir (unlike vim.fn.readdir, which prints
   ;; "E484: Can't open file"), so MEETINGS-DIR not existing yet is a harmless
   ;; no-op -- no guard needed. Filter by name only (not the yielded type) to
   ;; stay symlink-tolerant: a symlinked log reports type "link", not "file".
-  (each [name (vim.fs.dir MEETINGS-DIR)]
-    (when (name:match "%.org$")
-      (let [p (.. MEETINGS-DIR "/" name)]
-        (table.insert items {:text (vim.fn.fnamemodify p ":t:r") :path p}))))
+  ;; The "New..." item seeds the accumulator so it lists first.
+  (local items
+         (icollect [name (vim.fs.dir MEETINGS-DIR)
+                    &into [{:text "＋ New meeting log" :is_new true}]]
+           (when (name:match "%.org$")
+             (let [p (.. MEETINGS-DIR "/" name)]
+               {:text (vim.fn.fnamemodify p ":t:r") :path p}))))
   (local adhoc (vim.fn.expand "~/org/adhoc.org"))
   (when (= (vim.fn.filereadable adhoc) 1)
     (table.insert items {:text "Ad Hoc meeting" :path adhoc}))

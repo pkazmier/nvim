@@ -22,16 +22,12 @@
     (local ids {})
 
     (fn format-request-status [ev]
-      (local name (or ev.data.adapter.formatted_name ev.data.adapter.name))
-      (var msg (.. name " " ev.data.interaction " request..."))
-      (var level :INFO)
-      (var hl-group :DiagnosticInfo)
-      (when ev.data.status
-        (set msg (.. msg ev.data.status))
-        (when (not= ev.data.status :success)
-          (set level :ERROR)
-          (set hl-group :DiagnosticError)))
-      (values msg level hl-group))
+      (let [name (or ev.data.adapter.formatted_name ev.data.adapter.name)
+            status ev.data.status
+            msg (.. name " " ev.data.interaction " request..." (or status ""))]
+        (if (and status (not= status :success))
+            (values msg :ERROR :DiagnosticError)
+            (values msg :INFO :DiagnosticInfo))))
 
     (local autocmds (require :config.autocmds))
     (autocmds.new :User
@@ -43,10 +39,9 @@
                   {:pattern :CodeCompanionRequestFinished
                    :callback (fn [ev]
                                (local (msg level hl-group) (format-request-status ev))
-                               (var mini-id (. ids ev.data.id))
-                               (if mini-id
-                                   (do
-                                     (tset ids ev.data.id nil)
-                                     (notify.update mini-id {: msg : level :hl_group hl-group}))
-                                   (set mini-id (notify.add msg level hl-group)))
+                               (local existing (. ids ev.data.id))
+                               (local mini-id (or existing (notify.add msg level hl-group)))
+                               (when existing
+                                 (tset ids ev.data.id nil)
+                                 (notify.update existing {: msg : level :hl_group hl-group}))
                                (vim.defer_fn (fn [] (notify.remove mini-id)) 5000))})))

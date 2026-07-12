@@ -23,7 +23,7 @@
 (fn remove-pinned [action force]
   (let [bufremove (require :mini.bufremove)]
     (each [_ buf-id (ipairs (vim.api.nvim_list_bufs))]
-      (when (and (. (. vim.bo buf-id) :buflisted) (not (. pinned buf-id)))
+      (when (and (. vim.bo buf-id :buflisted) (not (. pinned buf-id)))
         ((. bufremove action) buf-id force)))))
 
 ;; Forget a buffer's pinned state when it's removed.

@@ -27,12 +27,14 @@
                     :rust true})
 
 ;; Return true if the current buffer is supposed to have a map.
-;; 1. User has explicitly enabled it via buf-toggle
-;; 2. Filetype of buffer is in the auto-enable table
+;; vim.b.minimap_disable is a tri-state: false = explicitly enabled via
+;; buf-toggle, true = explicitly disabled, nil = defer to the filetype
+;; auto-enable table.
 (fn should-be-enabled? []
-  (let [disabled vim.b.minimap_disable
-        enabled-explicitly (= vim.b.minimap_disable false)]
-    (or enabled-explicitly (and (. auto-enable vim.bo.filetype) (not disabled)))))
+  (case vim.b.minimap_disable
+    false true
+    true false
+    _ (. auto-enable vim.bo.filetype)))
 
 ;; Toggle the global visibility of the map. If it is currently shown, then
 ;; hide it. If it is not, then show it if the current buffer is supposed to

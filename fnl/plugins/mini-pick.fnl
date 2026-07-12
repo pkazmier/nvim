@@ -35,7 +35,7 @@
          (fn show-with-modified-marker [buf-id items query]
            (pick.default_show buf-id items query {:show_icons true})
            (each [i item (ipairs items)]
-             (when (. (. vim.bo item.bufnr) :modified)
+             (when (. vim.bo item.bufnr :modified)
                (add-modified-marker buf-id (- i 1)))))
 
          (pick.builtin.buffers local-opts {:source {:show show-with-modified-marker}})))
@@ -164,15 +164,16 @@
 
 (fn H.highlight-keywords [bufnr]
   (local ns-id (vim.api.nvim_create_namespace :kaz-keywords))
-  (local keywords {})
-  (each [_ keyword (ipairs [:TODO :FIXME :HACK :NOTE])]
-    (tset keywords (.. " " keyword ":") (H.keyword-to-hl-groups keyword)))
+  (local keywords (collect [_ keyword (ipairs [:TODO :FIXME :HACK :NOTE])]
+                    (.. " " keyword ":")
+                    (H.keyword-to-hl-groups keyword)))
   (local lines (vim.api.nvim_buf_get_lines bufnr 0 -1 false))
   (local extmark-opts {:hl_mode :combine :priority 201})
   (each [row line (ipairs lines)]
     (each [word hl-group (pairs keywords)]
       (let [(start-idx end-idx) (line:find word)]
-        (when (and start-idx end-idx)
+        ;; find returns both indices or neither, so one check suffices
+        (when start-idx
           ;; Highlights the keyword
           (set extmark-opts.hl_group hl-group.keyword)
           (set extmark-opts.end_row (- row 1))
