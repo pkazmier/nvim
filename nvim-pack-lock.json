@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "boo-berry.nvim": {
+      "rev": "b3889b3a95afb7894ef42e59ed18e665e3613de6",
+      "src": "https://github.com/booberrytheme/boo-berry.nvim"
+    },
     "catppuccin": {
       "rev": "beaf41a30c26fd7d6c386d383155cbd65dd554cd",
       "src": "https://github.com/catppuccin/nvim"
@@ -28,6 +32,11 @@
       "rev": "790afe9dd085aa04eccd1da3626c5fa05c620e53",
       "src": "https://github.com/sainnhe/gruvbox-material"
     },
+    "hotpot.nvim": {
+      "rev": "e2717e481aba24721a6257378da0dad694d8dbff",
+      "src": "https://github.com/rktjmp/hotpot.nvim",
+      "version": "2.0.0 - 3.0.0"
+    },
     "image.nvim": {
       "rev": "446a8a5cc7a3eae3185ee0c697732c32a5547a0b",
       "src": "https://github.com/3rd/image.nvim"
@@ -44,6 +53,10 @@
       "rev": "43a7dcb6f3ce8e52b8caf3fde6313480b56776e4",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
+    "lume": {
+      "rev": "90e195dc574aa680594983566a396446e6b12b1b",
+      "src": "https://github.com/danfry1/lume"
+    },
     "mason.nvim": {
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/williamboman/mason.nvim"
@@ -53,7 +66,7 @@
       "src": "https://github.com/mellow-theme/mellow.nvim"
     },
     "mini.nvim": {
-      "rev": "9b935c218ddba02e5dc75c94f90143bce1f7c646",
+      "rev": "d74190c1528aaf12ba5f3a29d03524c6b81e18b3",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neovim-ayu": {
@@ -86,6 +99,18 @@
       "rev": "1549a64e293446ec84c15d062d0dc9bd8aa04ed7",
       "src": "https://github.com/uhs-robert/oasis.nvim"
     },
+    "oil.nvim": {
+      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "org-bullets.nvim": {
+      "rev": "503fe053550879cc202086a40454e46a87c41ddb",
+      "src": "https://github.com/nvim-orgmode/org-bullets.nvim"
+    },
+    "orgmode": {
+      "rev": "f32a06d4b5399dad8bf0478c772bf6c513f02dcf",
+      "src": "https://github.com/nvim-orgmode/orgmode"
+    },
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -101,6 +126,10 @@
     "rose-pine": {
       "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
       "src": "https://github.com/rose-pine/neovim"
+    },
+    "thorn.nvim": {
+      "rev": "3653d1508e605fe87ec174e8c2ad0f36ce9844f3",
+      "src": "https://github.com/jpwol/thorn.nvim"
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",

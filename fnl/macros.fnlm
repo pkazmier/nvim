@@ -1,0 +1,57 @@
+;; ===========================================================================
+;; macros.fnlm -- compile-time macros
+;; ===========================================================================
+;;
+;; Import the ones you need at the top of a module:
+;;   (import-macros {: set! : with-later! : with-now!} :macros)
+;;
+;; Macros expand at compile time (on save), so they cost nothing at runtime.
+;; Only things that genuinely benefit from compile-time behaviour live here:
+;;   - `set!`         unquotes the option NAME so you don't quote it as a string
+;;   - `with-now!`/etc. wrap the body in a thunk so you don't type (fn [] ...)
+;; Plain helpers (map/L/C, ...) have no compile-time need -- keep them as
+;; ordinary functions in a `require`-d module instead.
+;;
+;; NAMING: the body-taking macros use the `with-` prefix so fnlfmt body-indents
+;; their bodies (fnlfmt only body-indents built-in specials + names matching
+;; `^with-`/`^def`). The `!` bang (side effect) is kept -- fnlfmt matches on
+;; prefix, so `with-later!` still triggers correct indentation.
+
+;; (set! number true)  =>  vim.opt.number = true
+;; (set! wrap)         =>  vim.opt.wrap  = true   (value defaults to true)
+(fn set! [name value]
+  `(tset vim.opt ,(tostring name) ,(if (= nil value) true value)))
+
+;; Buffer-local variant, handy in after/ftplugin/*.fnl:
+;; (set-local! expandtab false)  =>  vim.opt_local.expandtab = false
+(fn set-local! [name value]
+  `(tset vim.opt_local ,(tostring name) ,(if (= nil value) true value)))
+
+;; (with-now! body...)   =>  loader.now(function() body... end)
+(fn with-now! [...]
+  `((. (require :config.loader) :now) (fn [] ,...)))
+
+;; (with-later! body...) =>  loader.later(function() body... end)
+(fn with-later! [...]
+  `((. (require :config.loader) :later) (fn [] ,...)))
+
+;; (with-now-if-args! body...) => loader.now_if_args(function() body... end)
+;; (now when a file was opened directly, later otherwise)
+(fn with-now-if-args! [...]
+  `((. (require :config.loader) :now_if_args) (fn [] ,...)))
+
+;; (with-event! :BufReadPost body...) => loader.on_event("BufReadPost", function() body... end)
+(fn with-event! [event ...]
+  `((. (require :config.loader) :on_event) ,event (fn [] ,...)))
+
+;; (with-filetype! :lua body...) => loader.on_filetype("lua", function() body... end)
+(fn with-filetype! [ft ...]
+  `((. (require :config.loader) :on_filetype) ,ft (fn [] ,...)))
+
+{: set!
+ : set-local!
+ : with-now!
+ : with-later!
+ : with-now-if-args!
+ : with-event!
+ : with-filetype!}
