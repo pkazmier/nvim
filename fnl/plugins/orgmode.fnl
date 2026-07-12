@@ -3,6 +3,7 @@
 ;; ---------------------------------------------------------------------------
 (import-macros {: with-now!} :macros)
 
+;; fnlfmt: skip
 (with-now! ; orgmode
   (vim.pack.add [{:src "https://github.com/nvim-orgmode/orgmode"}
                  {:src "https://github.com/nvim-orgmode/org-bullets.nvim"}])
@@ -46,170 +47,171 @@
       keyword
       (.. ":weight bold :foreground " (fg group))))
 
-  (org.setup {:org_agenda_files ["~/org/**/*"]
-              :org_default_notes_file "~/org/tasks.org"
-              ;; Start week on Sunday in calendar widget and agenda time grid views.
-              :calendar_week_start_day 0
-              :org_agenda_start_on_weekday 0
-              :org_agenda_block_separator ""
-              :win_split_mode :auto
-              ;; 4-char keywords for consistent-width badges. List order no longer drives
-              ;; retrieval: the custom agenda views now split each state into its own
-              ;; block, so the old 'todo-state-up' float (which needed AGND first) is moot.
-              ;; Order now only sets the fast-access menu order; TODO leads as the everyday
-              ;; default, AGND trails as the odd-one-out (a discussion point, never a
-              ;; tracked action). Reset target for repeating tasks is pinned explicitly
-              ;; below (org_todo_repeat_to_state), NOT inferred from this order.
-              :org_todo_keywords ["TODO(t)"
-                                  "NEXT(n)"
-                                  "WAIT(w)"
-                                  "AGND(a)"
-                                  "|"
-                                  "DONE(d)"
-                                  "CNCL(c)"]
-              :org_todo_keyword_faces (org-todo-faces)
-              ;; When a repeating task (SCHEDULED/DEADLINE with a +N repeater) is marked
-              ;; DONE, org advances the date and resets the keyword. WITHOUT this, it resets
-              ;; to the first TODO-type keyword in the list (see TodoState:get_reset_todo) --
-              ;; which would land on whatever leads org_todo_keywords. Pin it to TODO so a
-              ;; recurrence comes back for re-triage in planning, never auto-promoted to
-              ;; NEXT and never (the old bug) flipped to AGND.
-              :org_todo_repeat_to_state :TODO
-              :org_deadline_warning_days 7
-              :org_log_into_drawer :LOGBOOK
-              :org_blank_before_new_entry {:heading false
-                                           :plain_list_item false}
-              ;; org_use_tag_inheritance = true  -- default; filetags flow to headlines
-              ;;
-              ;; Heading aesthetics (native, no plugin):
-              :org_hide_leading_stars false
-              ;; virtual-indent content under its heading
-              :org_startup_indented true
-              ;; nicer fold marker than '...'
-              :org_ellipsis " ⤵"
-              ;; hide the * / / _ around bold/italic
-              :org_hide_emphasis_markers true
-              ;; Tag alignment, applied when org aligns tags (e.g. <leader>ot / set-tags):
-              ;; NEGATIVE = right-align so tags END at column |value| (default -80).
-              ;; POSITIVE = tags START at that absolute column.
-              ;; Lower the magnitude to pull tags closer to the title (e.g. -60).
-              :org_tags_column 0
-              ;; Quick-capture for when you're NOT already typing in a meeting file.
-              ;; Lands in tasks.org and stays there -- no refiling. Location is irrelevant
-              ;; to retrieval; the agenda finds it by TODO state + tags wherever it lives.
-              ;; If a capture belongs to a person/meeting, add that tag in the capture
-              ;; buffer with <leader>ot before finalizing (that's tagging, not refiling).
-              :org_capture_templates {;; No %a backlink: nvim-orgmode's %a is a bare [[file:PATH::LINE]] (line
-                                      ;; number only, no headline/ID search), which rots immediately in our
-                                      ;; newest-at-top meeting files. Retrieval here is positional-independent
-                                      ;; anyway -- found by TODO state + tags wherever the item lives -- so the
-                                      ;; durable pointer is a tag (add one with <leader>ot), not a file::line.
-                                      :t {:description :Task
-                                          :template "* TODO %?"
-                                          :target "~/org/tasks.org"
-                                          :headline :Tasks}
-                                      ;; Agenda item. Add the meeting/person tag in the capture buffer with
-                                      ;; <leader>ot (native org_set_tags, which completes against the live tag
-                                      ;; list) before finalizing. Top-level -- found by AGND + tag anywhere.
-                                      :a {:description "Agenda item"
-                                          :template "* AGND %?"
-                                          :target "~/org/tasks.org"
-                                          :headline :Tasks}
-                                      ;; Scheduled / recurring task: a dated TODO. %^t opens the calendar widget;
-                                      ;; for a recurring task, add a repeater (e.g. +1w / +1m) inside the <> in the
-                                      ;; capture buffer before finalizing. (One template covers both.)
-                                      :s {:description "Scheduled task"
-                                          :template "* TODO %?\nSCHEDULED: %^t"
-                                          :target "~/org/tasks.org"
-                                          :headline :Tasks}
-                                      ;; Deadline task: due-by date. Shows with a lead-in warning in the agenda
-                                      ;; (org_deadline_warning_days) and in the weekly review (r).
-                                      :d {:description "Deadline task"
-                                          :template "* TODO %?\nDEADLINE: %^t"
-                                          :target "~/org/tasks.org"
-                                          :headline :Tasks}
-                                      ;; Calendar event: a birthday / anniversary / holiday. A plain heading (NO
-                                      ;; todo keyword) with the active timestamp ON the heading line; %^t picks the
-                                      ;; date, add +1y in the buffer for the usual yearly recurrence. No tag needed.
-                                      ;; These collect under "* Events" in calendar.org -- open that file to view
-                                      ;; them (also surfaced in the agenda time grid when within its span).
-                                      :c {:description "Calendar event"
-                                          :template "* %? %^t"
-                                          :target "~/org/calendar.org"
-                                          :headline :Events}}
-              :org_agenda_custom_commands {;; DAILY LIST VIEW: This is the view I use throughout the day after I've
-                                           ;; identified the NEXT items from my planning view.
-                                           :d {:description "Daily list"
-                                               :types [{:type :agenda
-                                                        :org_agenda_span :day
-                                                        :org_agenda_overriding_header :Today}
-                                                       {:type :tags_todo
-                                                        :match :/NEXT
-                                                        :org_agenda_todo_ignore_deadlines :far
-                                                        :org_agenda_todo_ignore_scheduled :past
-                                                        :org_agenda_overriding_header "Do now"}]}
-                                           ;; DAILY PLANNING VIEW: I use this every morning to identify the tasks
-                                           ;; I want to do today by changing them from TODO to NEXT.
-                                           :p {:description "Daily planning"
-                                               :types [{:type :agenda
-                                                        :org_agenda_span :week
-                                                        :org_agenda_overriding_header :Week}
-                                                       {:type :tags_todo
-                                                        :match :/NEXT
-                                                        :org_agenda_todo_ignore_deadlines :far
-                                                        :org_agenda_todo_ignore_scheduled :past
-                                                        :org_agenda_overriding_header "Do now"}
-                                                       {:type :tags_todo
-                                                        :match :/TODO
-                                                        :org_agenda_todo_ignore_deadlines :far
-                                                        :org_agenda_todo_ignore_scheduled :past
-                                                        :org_agenda_overriding_header "Do later"}]}
-                                           ;; WEEKLY REVIEW: I use this every week to review everything including
-                                           ;; WAIT and AGND task.
-                                           :r {:description "Weekly review"
-                                               :types [{:type :agenda
-                                                        :org_agenda_span 14
-                                                        :org_agenda_overriding_header "Next 2 weeks"}
-                                                       {:type :tags_todo
-                                                        :match :/NEXT
-                                                        :org_agenda_todo_ignore_deadlines :far
-                                                        :org_agenda_todo_ignore_scheduled :past
-                                                        :org_agenda_overriding_header "Do now"}
-                                                       {:type :tags_todo
-                                                        :match :/TODO
-                                                        :org_agenda_todo_ignore_deadlines :far
-                                                        :org_agenda_todo_ignore_scheduled :past
-                                                        :org_agenda_overriding_header "Do later"}
-                                                       {:type :tags_todo
-                                                        :match :/WAIT
-                                                        :org_agenda_overriding_header "Waiting / delegated"
-                                                        :org_agenda_sorting_strategy [:tag-up
-                                                                                      :priority-down]}
-                                                       {:type :tags_todo
-                                                        :match :/AGND
-                                                        :org_agenda_overriding_header :Discuss
-                                                        :org_agenda_sorting_strategy [:tag-up
-                                                                                      :priority-down]}]}
-                                           ;; MEETING VIEW: every open item split into the three states, with NO date
-                                           ;; filtering so the whole backlog sits in the buffer. Press / in the agenda
-                                           ;; to filter by a person/meeting tag -- completion is over the tags actually
-                                           ;; present in the buffer (case-sensitive). Replaces the old <leader>oM
-                                           ;; MiniPick picker: same three sections, but pure built-in. Open via the
-                                           ;; agenda menu (<leader>oa -> v), then / to filter. Priority-sorted within
-                                           ;; each section.
-                                           :v {:description "Meeting view"
-                                               :types [{:type :tags_todo
-                                                        :match :/AGND
-                                                        :org_agenda_sorting_strategy [:priority-down]
-                                                        :org_agenda_overriding_header :Discuss}
-                                                       {:type :tags_todo
-                                                        :match :/NEXT|TODO
-                                                        :org_agenda_sorting_strategy [:priority-down]
-                                                        :org_agenda_overriding_header "To do"}
-                                                       {:type :tags_todo
-                                                        :match :/WAIT
-                                                        :org_agenda_sorting_strategy [:priority-down]
-                                                        :org_agenda_overriding_header "Waiting / delegated"}]}}})
+  (org.setup
+    {:org_agenda_files ["~/org/**/*"]
+     :org_default_notes_file "~/org/tasks.org"
+     ;; Start week on Sunday in calendar widget and agenda time grid views.
+     :calendar_week_start_day 0
+     :org_agenda_start_on_weekday 0
+     :org_agenda_block_separator ""
+     :win_split_mode :auto
+     ;; 4-char keywords for consistent-width badges. List order no longer drives
+     ;; retrieval: the custom agenda views now split each state into its own
+     ;; block, so the old 'todo-state-up' float (which needed AGND first) is moot.
+     ;; Order now only sets the fast-access menu order; TODO leads as the everyday
+     ;; default, AGND trails as the odd-one-out (a discussion point, never a
+     ;; tracked action). Reset target for repeating tasks is pinned explicitly
+     ;; below (org_todo_repeat_to_state), NOT inferred from this order.
+     :org_todo_keywords ["TODO(t)"
+                         "NEXT(n)"
+                         "WAIT(w)"
+                         "AGND(a)"
+                         "|"
+                         "DONE(d)"
+                         "CNCL(c)"]
+     :org_todo_keyword_faces (org-todo-faces)
+     ;; When a repeating task (SCHEDULED/DEADLINE with a +N repeater) is marked
+     ;; DONE, org advances the date and resets the keyword. WITHOUT this, it resets
+     ;; to the first TODO-type keyword in the list (see TodoState:get_reset_todo) --
+     ;; which would land on whatever leads org_todo_keywords. Pin it to TODO so a
+     ;; recurrence comes back for re-triage in planning, never auto-promoted to
+     ;; NEXT and never (the old bug) flipped to AGND.
+     :org_todo_repeat_to_state :TODO
+     :org_deadline_warning_days 7
+     :org_log_into_drawer :LOGBOOK
+     :org_blank_before_new_entry {:heading false
+                                  :plain_list_item false}
+     ;; org_use_tag_inheritance = true  -- default; filetags flow to headlines
+     ;;
+     ;; Heading aesthetics (native, no plugin):
+     :org_hide_leading_stars false
+     ;; virtual-indent content under its heading
+     :org_startup_indented true
+     ;; nicer fold marker than '...'
+     :org_ellipsis " ⤵"
+     ;; hide the * / / _ around bold/italic
+     :org_hide_emphasis_markers true
+     ;; Tag alignment, applied when org aligns tags (e.g. <leader>ot / set-tags):
+     ;; NEGATIVE = right-align so tags END at column |value| (default -80).
+     ;; POSITIVE = tags START at that absolute column.
+     ;; Lower the magnitude to pull tags closer to the title (e.g. -60).
+     :org_tags_column 0
+     ;; Quick-capture for when you're NOT already typing in a meeting file.
+     ;; Lands in tasks.org and stays there -- no refiling. Location is irrelevant
+     ;; to retrieval; the agenda finds it by TODO state + tags wherever it lives.
+     ;; If a capture belongs to a person/meeting, add that tag in the capture
+     ;; buffer with <leader>ot before finalizing (that's tagging, not refiling).
+     :org_capture_templates
+     {;; No %a backlink: nvim-orgmode's %a is a bare [[file:PATH::LINE]] (line
+      ;; number only, no headline/ID search), which rots immediately in our
+      ;; newest-at-top meeting files. Retrieval here is positional-independent
+      ;; anyway -- found by TODO state + tags wherever the item lives -- so the
+      ;; durable pointer is a tag (add one with <leader>ot), not a file::line.
+      :t {:description :Task
+          :template "* TODO %?"
+          :target "~/org/tasks.org"
+          :headline :Tasks}
+      ;; Agenda item. Add the meeting/person tag in the capture buffer with
+      ;; <leader>ot (native org_set_tags, which completes against the live tag
+      ;; list) before finalizing. Top-level -- found by AGND + tag anywhere.
+      :a {:description "Agenda item"
+          :template "* AGND %?"
+          :target "~/org/tasks.org"
+          :headline :Tasks}
+      ;; Scheduled / recurring task: a dated TODO. %^t opens the calendar widget;
+      ;; for a recurring task, add a repeater (e.g. +1w / +1m) inside the <> in the
+      ;; capture buffer before finalizing. (One template covers both.)
+      :s {:description "Scheduled task"
+          :template "* TODO %?\nSCHEDULED: %^t"
+          :target "~/org/tasks.org"
+          :headline :Tasks}
+      ;; Deadline task: due-by date. Shows with a lead-in warning in the agenda
+      ;; (org_deadline_warning_days) and in the weekly review (r).
+      :d {:description "Deadline task"
+          :template "* TODO %?\nDEADLINE: %^t"
+          :target "~/org/tasks.org"
+          :headline :Tasks}
+      ;; Calendar event: a birthday / anniversary / holiday. A plain heading (NO
+      ;; todo keyword) with the active timestamp ON the heading line; %^t picks the
+      ;; date, add +1y in the buffer for the usual yearly recurrence. No tag needed.
+      ;; These collect under "* Events" in calendar.org -- open that file to view
+      ;; them (also surfaced in the agenda time grid when within its span).
+      :c {:description "Calendar event"
+          :template "* %? %^t"
+          :target "~/org/calendar.org"
+          :headline :Events}}
+     :org_agenda_custom_commands
+     {;; DAILY LIST VIEW: This is the view I use throughout the day after I've
+      ;; identified the NEXT items from my planning view.
+      :d {:description "Daily list"
+          :types [{:type :agenda
+                   :org_agenda_span :day
+                   :org_agenda_overriding_header :Today}
+                  {:type :tags_todo
+                   :match :/NEXT
+                   :org_agenda_todo_ignore_deadlines :far
+                   :org_agenda_todo_ignore_scheduled :past
+                   :org_agenda_overriding_header "Do now"}]}
+      ;; DAILY PLANNING VIEW: I use this every morning to identify the tasks
+      ;; I want to do today by changing them from TODO to NEXT.
+      :p {:description "Daily planning"
+          :types [{:type :agenda
+                   :org_agenda_span :week
+                   :org_agenda_overriding_header :Week}
+                  {:type :tags_todo
+                   :match :/NEXT
+                   :org_agenda_todo_ignore_deadlines :far
+                   :org_agenda_todo_ignore_scheduled :past
+                   :org_agenda_overriding_header "Do now"}
+                  {:type :tags_todo
+                   :match :/TODO
+                   :org_agenda_todo_ignore_deadlines :far
+                   :org_agenda_todo_ignore_scheduled :past
+                   :org_agenda_overriding_header "Do later"}]}
+      ;; WEEKLY REVIEW: I use this every week to review everything including
+      ;; WAIT and AGND task.
+      :r {:description "Weekly review"
+          :types [{:type :agenda
+                   :org_agenda_span 14
+                   :org_agenda_overriding_header "Next 2 weeks"}
+                  {:type :tags_todo
+                   :match :/NEXT
+                   :org_agenda_todo_ignore_deadlines :far
+                   :org_agenda_todo_ignore_scheduled :past
+                   :org_agenda_overriding_header "Do now"}
+                  {:type :tags_todo
+                   :match :/TODO
+                   :org_agenda_todo_ignore_deadlines :far
+                   :org_agenda_todo_ignore_scheduled :past
+                   :org_agenda_overriding_header "Do later"}
+                  {:type :tags_todo
+                   :match :/WAIT
+                   :org_agenda_overriding_header "Waiting / delegated"
+                   :org_agenda_sorting_strategy [:tag-up :priority-down]}
+                  {:type :tags_todo
+                   :match :/AGND
+                   :org_agenda_overriding_header :Discuss
+                   :org_agenda_sorting_strategy [:tag-up :priority-down]}]}
+      ;; MEETING VIEW: every open item split into the three states, with NO date
+      ;; filtering so the whole backlog sits in the buffer. Press / in the agenda
+      ;; to filter by a person/meeting tag -- completion is over the tags actually
+      ;; present in the buffer (case-sensitive). Replaces the old <leader>oM
+      ;; MiniPick picker: same three sections, but pure built-in. Open via the
+      ;; agenda menu (<leader>oa -> v), then / to filter. Priority-sorted within
+      ;; each section.
+      :v {:description "Meeting view"
+          :types [{:type :tags_todo
+                   :match :/AGND
+                   :org_agenda_sorting_strategy [:priority-down]
+                   :org_agenda_overriding_header :Discuss}
+                  {:type :tags_todo
+                   :match :/NEXT|TODO
+                   :org_agenda_sorting_strategy [:priority-down]
+                   :org_agenda_overriding_header "To do"}
+                  {:type :tags_todo
+                   :match :/WAIT
+                   :org_agenda_sorting_strategy [:priority-down]
+                   :org_agenda_overriding_header "Waiting / delegated"}]}}})
 
   (fn setup-org-hl-groups []
     (vim.api.nvim_set_hl 0 "@org.agenda.day" {:link :Question})
