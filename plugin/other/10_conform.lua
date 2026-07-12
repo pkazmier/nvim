@@ -16,6 +16,7 @@ Config.later(function()
     -- stylua: ignore
     formatters_by_ft = {
       css        = { "prettierd" },
+      fennel     = { "fnlfmt"},
       html       = { "prettierd" },
       javascript = { "prettierd" },
       json       = { "prettierd" },

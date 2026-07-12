@@ -7,6 +7,7 @@ Config.later(function()
 
   -- All language servers are expected to be installed with 'mason.vnim'
   vim.lsp.enable({
+    "fennel_ls",
     "gopls",
     "lua_ls",
     "basedpyright",

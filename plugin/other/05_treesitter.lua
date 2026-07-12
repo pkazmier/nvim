@@ -4,7 +4,7 @@
 
 Config.now_if_args(function()
   local ts_update = function() vim.cmd("TSUpdate") end
-  Config.on_packchanged("tree-sitter", { "update" }, ts_udpate, "Update tree-sitter parsers")
+  Config.on_packchanged("tree-sitter", { "update" }, ts_update, "Update tree-sitter parsers")
 
   vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main", load = true },
@@ -15,6 +15,7 @@ Config.now_if_args(function()
   local ensure_languages = {
     "bash",
     "css",
+    "fennel",
     "go",
     "helm",
     "html",
@@ -35,11 +36,17 @@ Config.now_if_args(function()
   }
 
   require("nvim-treesitter").install(ensure_languages)
-  local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
-  vim.list_extend(filetypes, { "markdown", "pandoc" })
+
+  -- Let the markdown parser handle pandoc buffers too.
+  vim.treesitter.language.register("markdown", { "pandoc" })
+
+  -- Start treesitter for any buffer whose filetype has an installed parser.
+  -- Deliberately NOT a precomputed filetype list: that raced with
+  -- nvim-treesitter's (main) filetype registration and silently dropped
+  -- just-installed parsers such as fennel from the pattern, so they never got
+  -- highlighted. `pcall` no-ops on filetypes that have no parser.
   Config.new_autocmd("FileType", {
-    pattern = filetypes,
-    callback = function(ev) vim.treesitter.start(ev.buf) end,
+    callback = function(ev) pcall(vim.treesitter.start, ev.buf) end,
   })
 
   -- Display context when current block is off-screen
