@@ -2,6 +2,7 @@
 
 (set-local! wrap)
 (set-local! spell)
+(set vim.b.minicursorword_disable true)
 
 ;; Add a blank row below the current one, realign, and drop the cursor (in
 ;; Insert mode) into its first cell. Insert a bare '|' line: org's parser reads
