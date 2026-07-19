@@ -33,6 +33,7 @@
 (set! listchars {:extends "…" :precedes "…" :tab "  " :nbsp "␣"})
 (set! pumborder :rounded)
 (set! pumheight 10)
+(set! scrolloff 10)
 (set! shiftround)
 (set! shiftwidth 2)
 (set! shortmess :FOSWICaco)
