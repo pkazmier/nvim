@@ -4,6 +4,11 @@
     "body": "TODO ",
     "description": "Insert todo item"
   },
+  "NEXT": {
+    "prefix": "n",
+    "body": "NEXT ",
+    "description": "Insert next item"
+  },
   "AGND": {
     "prefix": "a",
     "body": "AGND ",
@@ -13,5 +18,10 @@
     "prefix": "w",
     "body": "WAIT ",
     "description": "Insert wait item"
+  },
+  "AmazonConnect": {
+    "prefix": "ac",
+    "body": "Amazon Connect",
+    "description": "Insert 'Amazon Connect'"
   }
 }
