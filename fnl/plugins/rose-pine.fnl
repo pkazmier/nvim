@@ -76,15 +76,14 @@
   (tset highlight-groups "@markup.heading"            {:fg :iris :bold true})
   (tset highlight-groups "@markup.italic"             {:fg :subtle :italic true})
   (tset highlight-groups "@markup.strong"             {:fg :subtle :bold true})
-  (rose-pine.setup {:enable {:legacy_highlights false}
-                    :groups {:h1 :rose
-                             :h2 :love
-                             :h3 :foam
-                             :h4 :pine
-                             :h5 :iris
-                             :h6 :gold}
-                    :highlight_groups highlight-groups
-                    :palette {:main {;; I think rose-pine's default pine color is simply too
-                                     ;; dark, so I use rose-pine's moon variant of pine.
-                                     :pine "#3e8fb0"}}
-                    :styles {:italic false}}))
+
+  (let [colors [:rose :love :foam :pine :iris :gold]
+        heading-groups (collect [idx color (ipairs colors)] (.. :h idx) color)]
+    (rose-pine.setup {:enable {:legacy_highlights false}
+                      :groups heading-groups
+                      :highlight_groups highlight-groups
+                      :palette {:main 
+                                {;; I think rose-pine's default pine color is simply too
+                                 ;; dark, so I use rose-pine's moon variant of pine.
+                                 :pine "#3e8fb0"}}
+                      :styles {:italic false}})))

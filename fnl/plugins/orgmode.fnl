@@ -2,6 +2,7 @@
 ;; orgmode
 ;; ---------------------------------------------------------------------------
 (import-macros {: with-now!} :macros)
+(local functions (require :config.functions))
 
 ;; fnlfmt: skip
 (with-now! ; orgmode
@@ -38,12 +39,12 @@
     (fn fg [group]
       (string.format "#%06x" (. (functions.get_hl group) :fg)))
 
-    (collect [keyword group (pairs {:AGND :DiagnosticInfo
-                                    :NEXT :DiagnosticError
+    (collect [keyword group (pairs {:AGND :DiagnosticWarn
+                                    :NEXT :DiagnosticWarn
                                     :TODO :DiagnosticWarn
-                                    :WAIT :DiagnosticHint
-                                    :DONE :DiagnosticUnnecessary
-                                    :CNCL :DiagnosticUnnecessary})]
+                                    :WAIT :DiagnosticWarn
+                                    :DONE :DiagnosticWarn
+                                    :CNCL :DiagnosticWarn})]
       keyword
       (.. ":weight bold :foreground " (fg group))))
 
@@ -220,6 +221,20 @@
     (vim.api.nvim_set_hl 0 "@org.agenda.weekend.today" {:link :CursorLineNr})
     (vim.api.nvim_set_hl 0 "@org.agenda.header" {:link :MiniStarterSection})
     (vim.api.nvim_set_hl 0 "@org.agenda.tag" {:link :Special})
+
+    ;; Map org headlines to the same colors as their corresponding markdown
+    ;; brethren. I do this as most themes I use already setup the markdown
+    ;; headings, so we just use those values for our org headlines, but we
+    ;; don't make them bold or italic by design because any headline can also
+    ;; be a TODO in org mode and I would not want tasks to be emphasized
+    ;; anymore than they already are.
+    (for [lvl 1 6]
+      (let [fallback (functions.get_hl :Title)
+            hl-info (or (functions.get_hl (.. "@markup.heading." lvl :.markdown))
+                        (functions.get_hl (.. "@markup.heading." lvl))
+                        fallback)]
+        (vim.api.nvim_set_hl 0 (.. "@org.headline.level" lvl) {:fg hl-info.fg})))
+
     ;; Refresh the todo-keyword faces from the new theme. org reads them from its
     ;; config, so push fresh values with config:extend. Then re-apply -- but org
     ;; applies faces with `hi default` (won't override a set group) AND its own
