@@ -42,13 +42,21 @@
 ;;
 ;; Needs a terminal that reports <S-CR> distinctly (kitty keyboard protocol /
 ;; modifyOtherKeys; Ghostty + Neovim 0.12 do); otherwise it arrives as <CR>.
+
+;; fnlfmt: skip
 (fn structural-cr []
-  (if (: (vim.api.nvim_get_current_line) :find "^%s*|")
-      (org-table-new-row)
-      ;; new heading / list item / checkbox
-      (let [org (require :orgmode)
-            o (org.instance)]
-        (o.org_mappings:meta_return))))
+  (when (not= 0 (vim.fn.pumvisible))
+    (vim.api.nvim_feedkeys
+      (vim.api.nvim_replace_termcodes :<C-e> true false true)
+      :n false))
+  (vim.schedule 
+    (fn []
+      (if (: (vim.api.nvim_get_current_line) :find "^%s*|")
+          (org-table-new-row)
+          ;; new heading / list item / checkbox
+          (let [org (require :orgmode)
+                o (org.instance)]
+            (o.org_mappings:meta_return))))))
 
 (vim.keymap.set [:n :i] :<S-CR> structural-cr
                 {:buffer true
