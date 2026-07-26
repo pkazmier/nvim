@@ -43,9 +43,9 @@
           :MiniStatuslineFilename      {:fg :love :bg :love :blend 10 :bold true}
           :MiniStatuslineFilenameModified {:fg :love :bg :love :blend 10 :bold true}
           :MiniStatuslineInactive      {:fg :subtle :bg :surface :blend 100 :bold false}
-          :MiniStatuslineModeCommand   {:fg :base :bg :gold :bold true}
-          :MiniStatuslineModeInsert    {:fg :base :bg :rose :bold true}
-          :MiniStatuslineModeNormal    {:fg :base :bg :love :bold true}
+          :MiniStatuslineModeCommand   {:fg :base :bg :love :bold true}
+          :MiniStatuslineModeInsert    {:fg :base :bg :foam :bold true}
+          :MiniStatuslineModeNormal    {:fg :base :bg :rose :bold true}
           :MiniStatuslineModeOther     {:fg :base :bg :gold :bold true}
           :MiniStatuslineModeReplace   {:fg :base :bg :pine :bold true}
           :MiniStatuslineModeVisual    {:fg :base :bg :iris :bold true}
