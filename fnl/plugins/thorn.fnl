@@ -1,10 +1,10 @@
 ;; ---------------------------------------------------------------------------
 ;; thorn colorscheme
 ;; ---------------------------------------------------------------------------
-(import-macros {: with-now!} :macros)
+(import-macros {: with-later!} :macros)
 
 ;; fnlfmt: skip
-(with-now! ; thorn
+(with-later! ; thorn
   (vim.pack.add [{:src "https://github.com/jpwol/thorn.nvim"}])
   (local thorn (require :thorn))
   (thorn.setup {:on_highlights (fn [hl p]
@@ -15,4 +15,5 @@
                                  (set hl.RenderMarkdownTableRow  {:fg p.green_5})
                                  (tset hl "@markup.strong"       {:fg p.green_2 :bold true})
                                  (tset hl "@markup.italic"       {:fg p.green_2 :italic true}))})
-  (vim.cmd.colorscheme :thorn))
+  ;(vim.cmd.colorscheme :thorn)
+  )
