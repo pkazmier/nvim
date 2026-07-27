@@ -19,7 +19,7 @@
      {;; Hide passwords
       :censor {:pattern "password: ()%S+()" :group "" :extmark_opts censor-extmark-opts}
       ;; Hex colors
-      :hex_color (hipatterns.gen_highlighter.hex_color {:style :inline :inline_text " "})
+      :hex_color (hipatterns.gen_highlighter.hex_color {:style :inline :inline_text " "})
       ;; TODO/FIXME/HACK/NOTE
       :fixme {:pattern "() FIXME():" :group :MiniHipatternsFixme}
       :hack {:pattern "() HACK():" :group :MiniHipatternsHack}
