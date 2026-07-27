@@ -49,7 +49,7 @@
     (vim.api.nvim_feedkeys
       (vim.api.nvim_replace_termcodes :<C-e> true false true)
       :n false))
-  (vim.schedule 
+  (vim.schedule
     (fn []
       (if (: (vim.api.nvim_get_current_line) :find "^%s*|")
           (org-table-new-row)

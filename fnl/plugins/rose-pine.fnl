@@ -82,7 +82,7 @@
     (rose-pine.setup {:enable {:legacy_highlights false}
                       :groups heading-groups
                       :highlight_groups highlight-groups
-                      :palette {:main 
+                      :palette {:main
                                 {;; I think rose-pine's default pine color is simply too
                                  ;; dark, so I use rose-pine's moon variant of pine.
                                  :pine "#3e8fb0"}}
