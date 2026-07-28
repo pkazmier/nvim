@@ -10,27 +10,27 @@
   (local highlight-groups
          {:Added                       {:fg :pine}
           :Comment                     {:fg :muted :italic true}
-          :FloatTitle                  {:fg :love}
+          :FloatTitle                  {:fg :foam}
           :LineNr                      {:fg :highlight_med}
           :MiniClueDescGroup           {:fg :iris}
-          :MiniClueNextKey             {:fg :foam :bold true}
+          :MiniClueNextKey             {:fg :love :bold true}
           :MiniClueSeparator           {:fg :highlight_med}
-          :MiniClueTitle               {:fg :love}
+          :MiniClueTitle               {:fg :foam}
           ;; Bold current line only
           :MiniFilesCursorLine         {:fg :text :bg :overlay :bold true}
           :MiniFilesDirectory          {:fg :foam :bold false}
           :MiniFilesFile               {:fg :subtle}
           :MiniFilesTitle              {:fg :subtle}
-          :MiniFilesTitleFocused       {:fg :love}
+          :MiniFilesTitleFocused       {:fg :foam}
           :MiniIndentscopeSymbol       {:fg :pine}
           ;; Tone down the brightness of the foreground
           :MiniMapNormal               {:fg :subtle}
-          :MiniPickBorderText          {:fg :love :bold true}
+          :MiniPickBorderText          {:fg :foam :bold true}
           :MiniPickMatchCurrent        {:fg :text :bg :overlay :bold true}
           :MiniPickMatchMarked         {:fg :text :bg :love :blend 30}
           :MiniPickMatchRanges         {:fg :rose :bold false}
           :MiniPickNormal              {:fg :subtle}
-          :MiniPickPromptPrefix        {:fg :love :bold true}
+          :MiniPickPromptPrefix        {:fg :foam :bold true}
           :MiniStarterFooter           {:fg :muted :italic true}
           :MiniStarterHeader           {:fg :love :bold true}
           :MiniStarterInactive         {:fg :muted :italic false}
@@ -38,16 +38,16 @@
           :MiniStarterItemPrefix       {:fg :foam :bold true}
           :MiniStarterQuery            {:fg :gold}
           :MiniStarterSection          {:fg :iris :bold true}
-          :MiniStatuslineDevinfo       {:fg :love :bg :love :blend 30}
-          :MiniStatuslineDirectory     {:fg :love :bg :love :blend 10}
-          :MiniStatuslineFilename      {:fg :love :bg :love :blend 10 :bold true}
-          :MiniStatuslineFilenameModified {:fg :love :bg :love :blend 10 :bold true}
+          :MiniStatuslineDevinfo       {:fg :iris :bg :iris :blend 30}
+          :MiniStatuslineDirectory     {:fg :iris :bg :iris :blend 10}
+          :MiniStatuslineFilename      {:fg :iris :bg :iris :blend 10 :bold true}
+          :MiniStatuslineFilenameModified {:fg :iris :bg :iris :blend 10 :bold true}
           :MiniStatuslineInactive      {:fg :subtle :bg :surface :blend 100 :bold false}
-          :MiniStatuslineModeCommand   {:fg :base :bg :love :bold true}
+          :MiniStatuslineModeCommand   {:fg :base :bg :pine :bold true}
           :MiniStatuslineModeInsert    {:fg :base :bg :foam :bold true}
-          :MiniStatuslineModeNormal    {:fg :base :bg :rose :bold true}
+          :MiniStatuslineModeNormal    {:fg :base :bg :love :bold true}
           :MiniStatuslineModeOther     {:fg :base :bg :gold :bold true}
-          :MiniStatuslineModeReplace   {:fg :base :bg :pine :bold true}
+          :MiniStatuslineModeReplace   {:fg :base :bg :rose :bold true}
           :MiniStatuslineModeVisual    {:fg :base :bg :iris :bold true}
           :PmenuBorder                 {:fg :muted}
           :PmenuMatch                  {:fg :rose :bold false}
