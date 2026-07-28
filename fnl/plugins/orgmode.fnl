@@ -39,12 +39,12 @@
     (fn fg [group]
       (string.format "#%06x" (. (functions.get_hl group) :fg)))
 
-    (collect [keyword group (pairs {:AGND :DiagnosticWarn
-                                    :NEXT :DiagnosticWarn
-                                    :TODO :DiagnosticWarn
-                                    :WAIT :DiagnosticWarn
-                                    :DONE :DiagnosticWarn
-                                    :CNCL :DiagnosticWarn})]
+    (collect [keyword group (pairs {:AGND :DiagnosticError
+                                    :NEXT :DiagnosticError
+                                    :TODO :DiagnosticError
+                                    :WAIT :DiagnosticError
+                                    :DONE :DiagnosticUnnecessary
+                                    :CNCL :DiagnosticUnnecessary})]
       keyword
       (.. ":weight bold :foreground " (fg group))))
 
