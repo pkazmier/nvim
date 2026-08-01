@@ -1,10 +1,10 @@
 ;; ---------------------------------------------------------------------------
 ;; rose pine colorscheme
 ;; ---------------------------------------------------------------------------
-(import-macros {: with-now!} :macros)
+(import-macros {: with-later!} :macros)
 
 ;; fnlfmt: skip
-(with-now! ; rose-pine
+(with-later! ; rose-pine
   (vim.pack.add [{:src "https://github.com/rose-pine/neovim" :name :rose-pine}])
   (local rose-pine (require :rose-pine))
   (local highlight-groups
@@ -87,4 +87,5 @@
                                  ;; dark, so I use rose-pine's moon variant of pine.
                                  :pine "#3e8fb0"}}
                       :styles {:italic false}}))
-  (vim.cmd.colorscheme :rose-pine-dawn))
+  ;; (vim.cmd.colorscheme :rose-pine-dawn)
+  )

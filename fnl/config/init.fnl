@@ -17,6 +17,7 @@
                     :plugins.mini-starter
                     :plugins.mini-statusline
                     :plugins.mini-tabline
+                    :plugins.cendre
                     :plugins.ui2
                     :plugins.orgmode
                     ;; now-if-args (now if a file opened, else later)
@@ -54,6 +55,7 @@
                     :plugins.mini-pairs
                     :plugins.mini-pick
                     :plugins.mini-splitjoin
+                    :plugins.mini-statuscolumn
                     :plugins.mini-surround
                     :plugins.mini-trailspace
                     :plugins.mini-visits
