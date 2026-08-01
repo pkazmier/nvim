@@ -2,8 +2,19 @@
 ;; Fennel buffer-local settings
 ;; ---------------------------------------------------------------------------
 
+(local ai (require :mini.ai))
+
 ;; Comment with the conventional double semicolon
 (set vim.bo.commentstring ";; %s")
+
+;; fnlfmt: skip
+(let [lisp-arg (ai.gen_spec.argument 
+                 {:separator "%s+"
+                  :exclude_regions ["%b\"\""
+                                    "%b()"
+                                    "%b[]"
+                                    "%b{}"]})]
+  (set vim.b.miniai_config {:custom_textobjects {:a lisp-arg}}))
 
 ;; Customize 'mini.splitjoin' for lisp syntax: arguments are separated by
 ;; whitespace instead of commas, and brackets stay glued to the first/last
