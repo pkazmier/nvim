@@ -11,6 +11,7 @@
     {:background :hard
      :on_highlights (fn [hl c]
                       (set hl.PmenuBorder                 {:fg c.bg3 :bg c.bg_deep})
+                      ;; (set hl.PmenuBorder                 {:fg c.bg3 :bg c.bg1})
                       (set hl.PmenuMatch                  {:fg c.ember :bold true})
                       (set hl.Pmenu                       {:fg c.fg :bg c.bg_deep})
                       (set hl.PmenuKind                   {:bg c.bg_deep})
@@ -23,7 +24,7 @@
                       (set hl.MiniClueDescSingle          {:fg c.fg})
                       (set hl.MiniClueNextKey             {:fg c.ember})
                       (set hl.MiniClueNextKeyWithPostkeys {:fg c.sap})
-                      (set hl.MiniClueSeparator           {:fg c.gutter})
+                      (set hl.MiniClueSeparator           {:fg c.bg3})
 
                       (set hl.MiniCmdlinePeekLineNr       {:fg c.ember})
                       (set hl.MiniCmdlinePeekSign         {:fg c.info})
@@ -75,8 +76,10 @@
                       (set hl.MiniStatuslineDevInfo       {:fg c.fg :bg c.bg3})
                       (set hl.MiniStatuslineFileInfo      {:fg c.fg :bg c.bg3})
                       (set hl.MiniStatuslineDirectory     {:fg c.fg_dim :bg c.bg2})
-                      (set hl.MiniStatuslineFilename      {:fg c.fg_dim :bg c.bg2 :bold true})
-                      (set hl.MiniStatuslineFilenameModified {:fg c.fg_dim :bg c.bg2 :bold true})
+                      (set hl.MiniStatuslineFilename      {:fg c.fg_dim :bg c.bg2 })
+                      (set hl.MiniStatuslineFilenameModified {:fg c.fg_dim :bg c.bg2 })
+;;                       (set hl.MiniStatuslineFilename      {:fg c.fg_dim :bg c.bg2 :bold true})
+;;                       (set hl.MiniStatuslineFilenameModified {:fg c.fg_dim :bg c.bg2 :bold true})
                       (set hl.MiniStatuslineInactive      {:fg c.comment :bg c.bg2})
 
                       (set hl.MiniTablineFill             {:bg c.bg2})
@@ -95,9 +98,9 @@
                       (set hl.PmenuMatch                  {:fg c.ember})
                       (set hl.PmenuSel                    {:fg c.fg :bg c.bg2 :bold true})
                       (set hl.MiniClueDescSingle          {:fg c.fg_dim})
-                      (set hl.MiniFilesCursorLine         {:fg c.fg :bg c.bg2 :bold true})
+                      (set hl.MiniFilesCursorLine         {:bg c.bg2 :bold true})
                       (set hl.MiniPickMatchRanges         {:fg c.ember})
-                      (set hl.MiniPickMatchCurrent        {:fg c.fg :bg c.bg2 :bold true})
+                      (set hl.MiniPickMatchCurrent        {:bg c.bg2 :bold true})
 
                       (set hl.MiniStatuscolumnSep         {:fg c.bg3})
                       (set hl.MiniStatuscolumnSepCursor   {:fg c.cinder})
