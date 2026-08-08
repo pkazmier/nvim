@@ -23,6 +23,17 @@
                         (set hl.MiniStatuscolumnSep            {:fg c.bg3})
                         (set hl.MiniStatuscolumnSepCursor      {:fg c.cinder})
 
+                        (set hl.RenderMarkdownCode             {:bg c.bg_deep})
+                        (set hl.RenderMarkdownCodeBorder       {:bg c.bg1})
+                        (set hl.RenderMarkdownCodeInline       {:fg c.sap :bg c.bg_deep})
+                        (set hl.RenderMarkdownTableHead        {:fg c.bg3})
+                        (set hl.RenderMarkdownTableRow         {:fg c.bg3})
+                        (set hl.RenderMarkdownBullet           {:fg c.ember})
+                        (set hl.RenderMarkdownChecked          {:fg c.sap})
+                        (set hl.RenderMarkdownTodo             {:fg c.frost})
+                        (tset hl "@markup.strong"              {:fg c.cinder :bold true})
+                        (tset hl "@markup.italic"              {:fg c.cinder :italic true})
+
                         (when transparent
                           (set hl.PmenuBorder {:fg c.bg5})
                           (set hl.Pmenu       {:fg c.fg})
