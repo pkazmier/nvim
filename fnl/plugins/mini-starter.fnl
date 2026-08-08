@@ -37,6 +37,7 @@
                            {:name "Update plugins" :action "lua vim.pack.update()" :section :Actions}
                            {:name "Visited files"  :action "Pick visit_paths"      :section :Actions}
                            {:name "Quit Neovim"    :action :qall                   :section :Actions}]]
+                  :query_updaters "abcdefghijklmnopqrstuvwxyz0123456789_."
                   :header banner
                   :footer fortune
                   }))
