@@ -14,6 +14,9 @@
       {:background :hard
        :transparent transparent
        :on_highlights (fn [hl c]
+                        (set hl.LeapLabel                      {:fg c.ember :bold true})
+                        (set hl.LeapBackdrop                   {:fg c.gutter})
+
                         ;; I have customized mini.statusline to allow me to
                         ;; style the filename and directory separately as well
                         ;; as whether or not the filename has been modified.
@@ -40,4 +43,5 @@
                           (set hl.PmenuKind   {:fg c.frost})
                           (set hl.PmenuExtra  {:fg c.fg_dim})))}))
 
-  (vim.cmd.colorscheme :cendre))
+  ;; (vim.cmd.colorscheme :cendre)
+  )
