@@ -38,6 +38,8 @@
                         (tset hl "@markup.italic"              {:fg c.cinder :italic true})
 
                         (when transparent
+                          (set hl.CursorLine  {:bg "NONE"})
+                          (set hl.Folded      {:fg c.comment})
                           (set hl.PmenuBorder {:fg c.bg5})
                           (set hl.Pmenu       {:fg c.fg})
                           (set hl.PmenuKind   {:fg c.frost})
