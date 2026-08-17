@@ -18,6 +18,7 @@
                     :plugins.mini-statusline
                     :plugins.mini-tabline
                     :plugins.cendre
+                    :plugins.sora
                     :plugins.ui2
                     :plugins.orgmode
                     ;; now-if-args (now if a file opened, else later)
