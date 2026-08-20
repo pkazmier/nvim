@@ -37,4 +37,5 @@
                           (set hl.PmenuKind   {:fg c.purple})
                           (set hl.PmenuExtra  {:fg c.fg_dim}))
                           )}))
-(vim.cmd.colorscheme :sora))
+;; (vim.cmd.colorscheme :sora)
+)

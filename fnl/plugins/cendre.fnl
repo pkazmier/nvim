@@ -45,5 +45,5 @@
                           (set hl.PmenuKind   {:fg c.frost})
                           (set hl.PmenuExtra  {:fg c.fg_dim})))}))
 
-  ;; (vim.cmd.colorscheme :cendre)
+  (vim.cmd.colorscheme :cendre)
   )
