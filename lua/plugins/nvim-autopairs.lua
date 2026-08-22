@@ -1,0 +1,14 @@
+-- ---------------------------------------------------------------------------
+-- nvim-autopairs
+-- ---------------------------------------------------------------------------
+
+-- TODO: Remove plugin entirely if mini.pairs evaluation goes well
+-- local loader = require("config.loader")
+--
+-- loader.later(function()
+--   vim.pack.add({ { src = "https://github.com/windwp/nvim-autopairs" } }, { load = true })
+--   require("nvim-autopairs").setup({
+--     map_cr = false,
+--     map_bs = false,
+--   })
+-- end)
