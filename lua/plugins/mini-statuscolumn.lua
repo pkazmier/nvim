@@ -14,5 +14,4 @@ loader.later(function()
   }
   ms.setup({ content = ms.gen_content.main(spec) })
   vim.api.nvim_set_hl(0, "Folded", { link = "Normal" })
-  vim.api.nvim_set_hl(0, "MiniStatuscolumnSepCursor", { link = "LineNr" })
 end)

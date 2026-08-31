@@ -28,7 +28,6 @@ loader.now(function()
 
       -- Unreleased mini module
       hl.MiniStatuscolumnSep            = { fg = c.guide }
-      hl.MiniStatuscolumnSepCursor      = { fg = c.guide }
 
       if transparent then
         hl.CursorLine  = { bg = "NONE" }
