@@ -116,6 +116,7 @@ map("n",   L"fg",       C"Pick grep_live_align",                               "
 map("n",   L"fG",       C"Pick grep_align pattern='<cword>'",                  "Grep current word")
 map("n",   L"fh",       C"Pick help",                                          "Help tags")
 map("n",   L"fH",       C"Pick hl_groups",                                     "Highlight groups")
+map("n",   L"fk",       C"Pick keymaps",                                       "Keymaps")
 map("n",   L"fl",       C"Pick buf_lines scope='all' preserve_order=true",     "Lines (all)")
 map("n",   L"fL",       C"Pick buf_lines scope='current' preserve_order=true", "Lines (buf)")
 map("n",   L"fm",       C"Pick git_hunks",                                     "Modified hunks (all)")
