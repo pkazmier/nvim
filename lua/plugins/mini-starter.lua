@@ -47,6 +47,10 @@ loader.now(function()
     },
     query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_.",
     header = banner,
-    footer = fortune,
+    -- footer = fortune,
+    footer = [[
+The single biggest problem in communication
+is the illusion that it has taken place.
+                      --George Bernard Shaw]],
   })
 end)
