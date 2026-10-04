@@ -41,6 +41,7 @@ loader.now(function()
       {
         { name = "Mason",          action = "Mason",                  section = "Actions" },
         { name = "Update plugins", action = "lua vim.pack.update()",  section = "Actions" },
+        { name = "New Meeting",    action = "ZkNewMeeting",           section = "Actions" },
         { name = "Visited files",  action = "Pick visit_paths",       section = "Actions" },
         { name = "Quit Neovim",    action = "qall",                   section = "Actions" },
       },

@@ -1,0 +1,7 @@
+{
+  "AmazonConnect": {
+    "prefix": "ac",
+    "body": "Amazon Connect",
+    "description": "Insert 'Amazon Connect'"
+  }
+}

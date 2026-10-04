@@ -25,7 +25,7 @@ local plugins = {
   "plugins.cendre",
   "plugins.sora",
   "plugins.ui2",
-  "plugins.orgmode",
+  "plugins.zk",
 
   -- now-if-args (now if a file opened, else later)
   "plugins.mini-map",

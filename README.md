@@ -44,8 +44,7 @@ Below is an overview of the directory structure:
 ```txt
 .
 ├── after                          # Sourced last (`:h after-directory`)
-│   ├── ftplugin/                  # Configurations for filetypes
-│   └── syntax/                    # Syntax tweaks (orgagenda)
+│   └── ftplugin/                  # Configurations for filetypes
 ├── colors/                        # Personal color schemes
 ├── indent/                        # Indent rules (fennel)
 ├── init.lua                       # Entry point: bootstraps mini, loads config

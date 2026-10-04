@@ -31,8 +31,8 @@ M.leader_group_clues = {
   { mode = {"n", "x"}, keys = L"g",  desc = "+Git" },
   { mode = {"n", "x"}, keys = L"l",  desc = "+Language" },
   { mode = "n",        keys = L"m",  desc = "+Map" },
-  { mode = "n",        keys = L"o",  desc = "+Org" },
-  { mode = "n",        keys = L"O",  desc = "+Other" },
+  { mode = "n",        keys = L"n",  desc = "+Notes" },
+  { mode = "n",        keys = L"o",  desc = "+Other" },
   { mode = "n",        keys = L"s",  desc = "+Session" },
   { mode = "n",        keys = L"v",  desc = "+Visits" },
   { mode = "n",        keys = L"w",  desc = "+Window" },
@@ -121,6 +121,7 @@ map("n",   L"fl",       C"Pick buf_lines scope='all' preserve_order=true",     "
 map("n",   L"fL",       C"Pick buf_lines scope='current' preserve_order=true", "Lines (buf)")
 map("n",   L"fm",       C"Pick git_hunks",                                     "Modified hunks (all)")
 map("n",   L"fM",       C"Pick git_hunks path='%'",                            "Modified hunks (buf)")
+map("n",   L"fn",       C"ZkNotes { sort = { 'created' } }",                   "Search")
 map("n",   L"fr",       C"Pick resume",                                        "Resume picker")
 map("n",   L"fR",       C"Pick lsp_align scope='references'",                  "References (LSP)")
 map("n",   L"fs",       C"Pick lsp_align scope='workspace_symbol'",            "Symbols workspace")
@@ -176,21 +177,27 @@ map("n",   L"mt",       E("plugins.mini-map", "toggle()"),                     "
 map("n",   L"mT",       E("plugins.mini-map", "buf_toggle()"),                 "Toggle map (buf)")
 
 -- ---------------------------------------------------------------------------
--- Org
+-- Notes
 -- ---------------------------------------------------------------------------
 
-map("n",   L"of",       E("plugins.orgmode", "files()"),                       "Open org file")
-map("n",   L"oh",       E("plugins.orgmode", "headlines()"),                   "Search headlines")
-map("n",   L"om",       E("plugins.orgmode", "new_meeting_entry()"),           "New meeting entry")
-map("n",   L"o/",       E("plugins.orgmode", "grep()"),                        "Grep all lines")
+map("n",   L"nb",       C"ZkBacklinks",                                        "Backlink picker")
+map("n",   L"nd",       C"ZkCd",                                               "Change directory")
+map("n",   L"nl",       C"ZkLinks",                                            "Link picker")
+map("n",   L"nm",       C"ZkFullTextSearch",                                   "Search (FTS)")
+map("n",   L"nn",       C"ZkNew { title = vim.fn.input('Title: ')}",           "New note")
+map("n",   L"nN",       C"ZkNewMeeting",                                       "New meeting note")
+map("n",   L"np",       C"ZkPriorMeetings",                                    "Prior meetings")
+map("n",   L"nr",       C"ZkIndex",                                            "Refresh index")
+map("n",   L"ns",       C"ZkNotes { sort = { 'created' } }",                   "Search")
+map("n",   L"nt",       C"ZkTags",                                             "Tags")
 
 -- ---------------------------------------------------------------------------
 -- Other
 -- ---------------------------------------------------------------------------
 
-map("n",   L"Oa",       C"Mason",                                              "Open Mason")
-map("n",   L"Os",       C"lua MiniStarter.open()",                             "Open MiniStarter")
-map("n",   L"Ou",       C"lua vim.pack.update()",                              "Update plugins")
+map("n",   L"oa",       C"Mason",                                              "Open Mason")
+map("n",   L"os",       C"lua MiniStarter.open()",                             "Open MiniStarter")
+map("n",   L"ou",       C"lua vim.pack.update()",                              "Update plugins")
 
 -- ---------------------------------------------------------------------------
 -- Session
