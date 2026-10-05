@@ -121,7 +121,6 @@ map("n",   L"fl",       C"Pick buf_lines scope='all' preserve_order=true",     "
 map("n",   L"fL",       C"Pick buf_lines scope='current' preserve_order=true", "Lines (buf)")
 map("n",   L"fm",       C"Pick git_hunks",                                     "Modified hunks (all)")
 map("n",   L"fM",       C"Pick git_hunks path='%'",                            "Modified hunks (buf)")
-map("n",   L"fn",       C"ZkNotes { sort = { 'created' } }",                   "Search")
 map("n",   L"fr",       C"Pick resume",                                        "Resume picker")
 map("n",   L"fR",       C"Pick lsp_align scope='references'",                  "References (LSP)")
 map("n",   L"fs",       C"Pick lsp_align scope='workspace_symbol'",            "Symbols workspace")
@@ -182,8 +181,8 @@ map("n",   L"mT",       E("plugins.mini-map", "buf_toggle()"),                 "
 
 map("n",   L"nb",       C"ZkBacklinks",                                        "Backlink picker")
 map("n",   L"nd",       C"ZkCd",                                               "Change directory")
+map("n",   L"nf",       C"ZkLiveSearch",                                       "Full-text search")
 map("n",   L"nl",       C"ZkLinks",                                            "Link picker")
-map("n",   L"nm",       C"ZkFullTextSearch",                                   "Search (FTS)")
 map("n",   L"nn",       C"ZkNew { title = vim.fn.input('Title: ')}",           "New note")
 map("n",   L"nN",       C"ZkNewMeeting",                                       "New meeting note")
 map("n",   L"np",       C"ZkPriorMeetings",                                    "Prior meetings")
